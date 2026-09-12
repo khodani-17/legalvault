@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { get } from "@vercel/blob";
 
 import { prisma } from "@/lib/prisma";
 import { createAuditLog } from "@/lib/audit";
@@ -22,7 +21,9 @@ function sanitizeDownloadFilename(
   return sanitized.slice(0, 255);
 }
 
-function encodeRFC5987(value: string): string {
+function encodeRFC5987(
+  value: string,
+): string {
   return encodeURIComponent(value)
     .replace(/['()]/g, escape)
     .replace(/\*/g, "%2A");
@@ -41,31 +42,45 @@ export async function GET(
     return financeAccess.response;
   }
 
-  const { user } = financeAccess;
-  const { id } = await context.params;
+  const { user } =
+    financeAccess;
+
+  const { id } =
+    await context.params;
 
   if (!id || id.length > 100) {
     return NextResponse.json(
       {
-        error: "Finance document not found.",
+        error:
+          "Finance document not found.",
       },
-      { status: 404 },
+      {
+        status: 404,
+      },
     );
   }
 
   try {
-    // ----------------------------------------------------------
+    // ========================================================
     // CURRENT ACTIVE FINANCE USER
-    // ----------------------------------------------------------
+    // ========================================================
 
     const currentUser =
       await prisma.user.findFirst({
         where: {
-          id: user.id,
-          firmId: user.firmId,
-          status: "ACTIVE",
-          role: "FINANCE",
+          id:
+            user.id,
+
+          firmId:
+            user.firmId,
+
+          status:
+            "ACTIVE",
+
+          role:
+            "FINANCE",
         },
+
         select: {
           id: true,
           firmId: true,
@@ -75,23 +90,31 @@ export async function GET(
     if (!currentUser) {
       return NextResponse.json(
         {
-          error: "Finance document not found.",
+          error:
+            "Finance document not found.",
         },
-        { status: 404 },
+        {
+          status: 404,
+        },
       );
     }
 
-    // ----------------------------------------------------------
+    // ========================================================
     // FINANCE DOCUMENT
-    // ----------------------------------------------------------
+    // ========================================================
 
     const financeDocument =
       await prisma.financeDocument.findFirst({
         where: {
           id,
-          firmId: currentUser.firmId,
-          deletedAt: null,
+
+          firmId:
+            currentUser.firmId,
+
+          deletedAt:
+            null,
         },
+
         select: {
           id: true,
           name: true,
@@ -106,56 +129,32 @@ export async function GET(
     if (!financeDocument) {
       return NextResponse.json(
         {
-          error: "Finance document not found.",
+          error:
+            "Finance document not found.",
         },
-        { status: 404 },
+        {
+          status: 404,
+        },
       );
     }
 
-    // ----------------------------------------------------------
-    // STORAGE PATH SECURITY
-    // ----------------------------------------------------------
+    // ========================================================
+    // STORAGE KEY VALIDATION
+    // ========================================================
 
-    const storageRoot = path.resolve(
-      process.cwd(),
-      "storage",
-    );
-
-    const normalizedStorageKey =
+    const storageKey =
       financeDocument.storageKey
         .replace(/\\/g, "/")
         .replace(/^\/+/, "");
 
     if (
-      !normalizedStorageKey ||
-      normalizedStorageKey.includes("\0")
-    ) {
-      return NextResponse.json(
-        {
-          error:
-            "Finance document is unavailable.",
-        },
-        { status: 404 },
-      );
-    }
-
-    const storagePath = path.resolve(
-      storageRoot,
-      ...normalizedStorageKey.split("/"),
-    );
-
-    const relativePath = path.relative(
-      storageRoot,
-      storagePath,
-    );
-
-    // Must remain inside the storage root.
-    if (
-      relativePath.startsWith("..") ||
-      path.isAbsolute(relativePath)
+      !storageKey ||
+      storageKey.includes("\0") ||
+      storageKey.includes("..") ||
+      storageKey.startsWith("/")
     ) {
       console.error(
-        "Finance document storage path escaped storage root:",
+        "Finance document has invalid Blob storage key:",
         financeDocument.id,
       );
 
@@ -164,44 +163,78 @@ export async function GET(
           error:
             "Finance document is unavailable.",
         },
-        { status: 404 },
-      );
-    }
-
-    // ----------------------------------------------------------
-    // FILESYSTEM VALIDATION
-    // ----------------------------------------------------------
-
-    let fileStat;
-
-    try {
-      fileStat = await fs.stat(storagePath);
-    } catch {
-      return NextResponse.json(
         {
-          error:
-            "Finance document is unavailable.",
+          status: 404,
         },
-        { status: 404 },
       );
     }
 
-    if (!fileStat.isFile()) {
-      return NextResponse.json(
-        {
-          error:
-            "Finance document is unavailable.",
-        },
-        { status: 404 },
-      );
-    }
+    // ========================================================
+    // FIRM STORAGE ISOLATION
+    // ========================================================
 
-    // Database size must match the actual file size.
-    const expectedSize =
-      Number(financeDocument.size);
+    const expectedPrefix =
+      `${currentUser.firmId}/finance/`;
 
     if (
-      !Number.isSafeInteger(expectedSize) ||
+      !storageKey.startsWith(
+        expectedPrefix,
+      )
+    ) {
+      console.error(
+        "Finance document storage isolation violation:",
+        financeDocument.id,
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "Finance document is unavailable.",
+        },
+        {
+          status: 404,
+        },
+      );
+    }
+
+    // ========================================================
+    // GET PRIVATE BLOB
+    // ========================================================
+
+    const blob =
+      await get(
+        storageKey,
+        {
+          access:
+            "private",
+        },
+      );
+
+    if (!blob) {
+      return NextResponse.json(
+        {
+          error:
+            "Finance document is unavailable.",
+        },
+        {
+          status: 404,
+        },
+      );
+    }
+
+    // ========================================================
+    // SIZE VALIDATION
+    // ========================================================
+
+    const expectedSize =
+      Number(
+        financeDocument.size,
+      );
+
+    if (
+      !Number.isSafeInteger(
+        expectedSize,
+      ) ||
       expectedSize < 0
     ) {
       console.error(
@@ -214,50 +247,15 @@ export async function GET(
           error:
             "Finance document is unavailable.",
         },
-        { status: 404 },
-      );
-    }
-
-    if (fileStat.size !== expectedSize) {
-      console.error(
-        "Finance document size mismatch:",
-        financeDocument.id,
-      );
-
-      return NextResponse.json(
         {
-          error:
-            "Finance document is unavailable.",
+          status: 404,
         },
-        { status: 404 },
       );
     }
 
-    // ----------------------------------------------------------
-    // READ FILE
-    // ----------------------------------------------------------
-
-    const fileBuffer =
-      await fs.readFile(storagePath);
-
-    if (fileBuffer.length !== expectedSize) {
-      console.error(
-        "Finance document read size mismatch:",
-        financeDocument.id,
-      );
-
-      return NextResponse.json(
-        {
-          error:
-            "Finance document is unavailable.",
-        },
-        { status: 404 },
-      );
-    }
-
-    // ----------------------------------------------------------
-    // SAFE DOWNLOAD FILENAME
-    // ----------------------------------------------------------
+    // ========================================================
+    // DOWNLOAD STREAM
+    // ========================================================
 
     const filename =
       sanitizeDownloadFilename(
@@ -269,24 +267,37 @@ export async function GET(
     const encodedFilename =
       encodeRFC5987(filename);
 
-    // ----------------------------------------------------------
+    // ========================================================
     // AUDIT
-    // ----------------------------------------------------------
+    // ========================================================
 
     try {
       await createAuditLog({
-        firmId: currentUser.firmId,
-        userId: currentUser.id,
-        action: "DOWNLOAD",
-        entityType: "FinanceDocument",
-        entityId: financeDocument.id,
+        firmId:
+          currentUser.firmId,
+
+        userId:
+          currentUser.id,
+
+        action:
+          "DOWNLOAD",
+
+        entityType:
+          "FinanceDocument",
+
+        entityId:
+          financeDocument.id,
+
         description:
           `Finance document "${financeDocument.name}" was downloaded.`,
+
         metadata: {
           mimeType:
             financeDocument.mimeType,
+
           extension:
             financeDocument.extension,
+
           size:
             financeDocument.size.toString(),
         },
@@ -298,21 +309,22 @@ export async function GET(
       );
     }
 
-    // ----------------------------------------------------------
+    // ========================================================
     // RESPONSE
-    // ----------------------------------------------------------
+    // ========================================================
 
     return new NextResponse(
-      new Uint8Array(fileBuffer),
+      blob.stream,
       {
         status: 200,
+
         headers: {
           "Content-Type":
             financeDocument.mimeType ||
             "application/octet-stream",
 
           "Content-Length":
-            String(fileBuffer.length),
+            String(expectedSize),
 
           "Content-Disposition":
             `attachment; filename="${filename.replace(/"/g, "")}"; filename*=UTF-8''${encodedFilename}`,
@@ -339,7 +351,9 @@ export async function GET(
         error:
           "Unable to download Finance document.",
       },
-      { status: 500 },
+      {
+        status: 500,
+      },
     );
   }
 }
