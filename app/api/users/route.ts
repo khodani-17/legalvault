@@ -24,8 +24,9 @@ import { requirePermission } from "@/lib/permissions-server";
  * Security:
  * - Users are restricted to the authenticated user's firm.
  * - Only ACTIVE users may access this endpoint.
- * - A user cannot create another user with a role more
- *   privileged than their own role.
+ * - ADMIN may create normal firm users, including DIRECTOR.
+ * - ADMIN cannot create SUPER_ADMIN.
+ * - ADMIN cannot create FINANCE users.
  * - SUPER_ADMIN is reserved for SUPER_ADMIN.
  * - FINANCE is a restricted security role.
  * - Only SUPER_ADMIN, MANAGING_PARTNER, PARTNER, and DIRECTOR
@@ -40,12 +41,14 @@ import { requirePermission } from "@/lib/permissions-server";
 //
 // Higher number = greater administrative authority.
 //
-// SUPER_ADMIN may manage all roles.
-// Other roles cannot create users above their own level.
+// ADMIN is treated as a firm user-management administrator.
+// This means ADMIN can create firm users, including senior
+// operational roles such as DIRECTOR.
 //
-// FINANCE is intentionally kept outside the normal hierarchy.
-// It is a restricted functional/security role, not a lower
-// administrative role.
+// This does NOT give ADMIN the permissions of those roles.
+//
+// FINANCE is intentionally outside the normal hierarchy.
+// It is a restricted functional/security role.
 //
 // ============================================================
 
@@ -66,19 +69,30 @@ const ROLE_LEVEL: Record<UserRole, number> = {
 // ROLE ASSIGNMENT SECURITY
 // ============================================================
 //
-// FINANCE is a restricted role.
+// SUPER_ADMIN
+// - May assign any role.
 //
-// Only:
+// ADMIN
+// - May create normal firm users.
+// - May create DIRECTOR.
+// - May create PARTNER.
+// - May create MANAGING_PARTNER.
+// - May create ATTORNEY.
+// - May create ADMIN.
+// - May create CANDIDATE_ATTORNEY.
+// - May create PARALEGAL.
+// - May create LEGAL_SECRETARY.
+// - Cannot create SUPER_ADMIN.
+// - Cannot create FINANCE.
+//
+// FINANCE
+// - Cannot create users through this endpoint.
+//
+// FINANCE creation
 // - SUPER_ADMIN
 // - MANAGING_PARTNER
 // - PARTNER
 // - DIRECTOR
-//
-// may create a FINANCE user.
-//
-// This prevents lower-level users such as ADMIN, ATTORNEY,
-// CANDIDATE_ATTORNEY, PARALEGAL, or LEGAL_SECRETARY from
-// manually submitting role=FINANCE to the API.
 //
 // ============================================================
 
@@ -86,13 +100,32 @@ function canAssignRole(
   actorRole: UserRole,
   targetRole: UserRole
 ): boolean {
+  // ----------------------------------------------------------
+  // SUPER_ADMIN
+  // ----------------------------------------------------------
+  //
   // SUPER_ADMIN may assign any role.
+  //
   if (actorRole === UserRole.SUPER_ADMIN) {
     return true;
   }
 
+  // ----------------------------------------------------------
+  // SUPER_ADMIN PROTECTION
+  // ----------------------------------------------------------
+  //
+  // No non-SUPER_ADMIN user may create another SUPER_ADMIN.
+  //
+  if (targetRole === UserRole.SUPER_ADMIN) {
+    return false;
+  }
+
+  // ----------------------------------------------------------
+  // FINANCE ROLE PROTECTION
+  // ----------------------------------------------------------
+  //
   // FINANCE is a restricted security role.
-  // Only senior management may create Finance users.
+  //
   if (targetRole === UserRole.FINANCE) {
     return (
       actorRole === UserRole.MANAGING_PARTNER ||
@@ -101,13 +134,42 @@ function canAssignRole(
     );
   }
 
-  // Finance users cannot create or manage users
-  // through the normal user-management hierarchy.
+  // ----------------------------------------------------------
+  // FINANCE USERS
+  // ----------------------------------------------------------
+  //
+  // Finance users cannot create or manage users through the
+  // normal user-management hierarchy.
+  //
   if (actorRole === UserRole.FINANCE) {
     return false;
   }
 
-  // Normal role hierarchy.
+  // ----------------------------------------------------------
+  // ADMIN
+  // ----------------------------------------------------------
+  //
+  // ADMIN is the firm's user-management administrator.
+  //
+  // At this point:
+  //
+  // - targetRole cannot be SUPER_ADMIN
+  // - targetRole cannot be FINANCE
+  //
+  // because those cases were already handled above.
+  //
+  // Therefore ADMIN may create any remaining firm role.
+  //
+  if (actorRole === UserRole.ADMIN) {
+    return true;
+  }
+
+  // ----------------------------------------------------------
+  // NORMAL ROLE HIERARCHY
+  // ----------------------------------------------------------
+  //
+  // Senior roles may create roles at or below their own level.
+  //
   return (
     ROLE_LEVEL[targetRole] <=
     ROLE_LEVEL[actorRole]
@@ -346,12 +408,22 @@ export async function POST(
         role
       )
     ) {
+      let errorMessage =
+        "You cannot create a user with this role.";
+
+      if (role === UserRole.FINANCE) {
+        errorMessage =
+          "You are not authorised to create a Finance user.";
+      }
+
+      if (role === UserRole.SUPER_ADMIN) {
+        errorMessage =
+          "You are not authorised to create a Super Admin user.";
+      }
+
       return NextResponse.json(
         {
-          error:
-            role === UserRole.FINANCE
-              ? "You are not authorised to create a Finance user."
-              : "You cannot create a user with a role more privileged than your own.",
+          error: errorMessage,
         },
         {
           status: 403,
