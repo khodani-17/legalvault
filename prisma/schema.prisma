@@ -1,0 +1,710 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["partialIndexes"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Firm {
+  id                 String   @id @default(cuid())
+  referenceNumber    String   @unique
+  name               String
+  registrationNumber String?
+  email              String?
+  phone              String?
+  address            String?
+  logoUrl            String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  auditLogs        AuditLog[]
+  clients          Client[]
+  deadlines        Deadline[]
+  documents        Document[]
+  financeDocuments FinanceDocument[]
+  financeFolders   FinanceFolder[]
+  folders          Folder[]
+  matters          Matter[]
+  accessRequests   MatterAccessRequest[]
+  notifications    Notification[]
+  payments         Payment[]
+  subscription     Subscription?
+  tasks            Task[]
+  users            User[]
+
+  // Legal Intake / Conflict Checking
+  conflictChecks ConflictCheck[]
+  matterIntakes  MatterIntake[]
+
+  @@index([name])
+}
+
+model Subscription {
+  id                     String             @id @default(cuid())
+  firmId                 String             @unique
+  plan                   SubscriptionPlan   @default(TRIAL)
+  status                 SubscriptionStatus @default(PENDING_PAYMENT)
+  currentPeriodStart     DateTime?
+  currentPeriodEnd       DateTime?
+  trialEndsAt            DateTime?
+  cancelledAt            DateTime?
+  cancelAtPeriodEnd      Boolean            @default(false)
+  provider               String?
+  providerCustomerId     String?
+  providerSubscriptionId String?
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+
+  payments Payment[]
+  firm     Firm      @relation(fields: [firmId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([providerCustomerId])
+  @@index([providerSubscriptionId])
+}
+
+model Payment {
+  id                    String        @id @default(cuid())
+  firmId                String
+  subscriptionId        String
+  amount                Decimal       @db.Decimal(12, 2)
+  currency              String        @default("ZAR")
+  status                PaymentStatus @default(PENDING)
+  paymentReference      String        @unique
+  receiptNumber         String        @unique
+  provider              String        @default("PAYFAST")
+  providerTransactionId String?
+  providerPaymentId     String?       @unique
+  paymentMethod         String?
+  paidAt                DateTime?
+  receiptEmail          String?
+  receiptSentAt         DateTime?
+  receiptSendError      String?
+  metadata              Json?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  firm         Firm         @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@index([firmId])
+  @@index([subscriptionId])
+  @@index([status])
+  @@index([provider])
+  @@index([providerTransactionId])
+  @@index([paidAt])
+  @@index([firmId, createdAt])
+}
+
+model User {
+  id           String     @id @default(cuid())
+  firmId       String
+  name         String
+  email        String     @unique
+  passwordHash String?
+  role         UserRole   @default(LEGAL_SECRETARY)
+  status       UserStatus @default(ACTIVE)
+  avatarUrl    String?
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  auditLogs                AuditLog[]
+  assignedDeadlines        Deadline[]            @relation("AssignedDeadlines")
+  completedDeadlines       Deadline[]            @relation("CompletedDeadlines")
+  createdDeadlines         Deadline[]            @relation("CreatedDeadlines")
+  uploadedDocuments        Document[]            @relation("UploadedDocuments")
+  uploadedFinanceDocuments FinanceDocument[]     @relation("UploadedFinanceDocuments")
+  matterAccessRequests     MatterAccessRequest[] @relation("MatterAccessRequester")
+  reviewedAccessRequests   MatterAccessRequest[] @relation("MatterAccessReviewer")
+  matters                  MatterUser[]
+  notifications            Notification[]
+  passwordResetTokens      PasswordResetToken[]
+  assignedTasks            Task[]                @relation("AssignedTasks")
+  createdTasks             Task[]                @relation("CreatedTasks")
+
+  // Legal Intake / Conflict Checking
+  assignedMatterIntakes        MatterIntake[]  @relation("AssignedMatterIntakes")
+  createdMatterIntakes         MatterIntake[]  @relation("CreatedMatterIntakes")
+  conflictCheckedMatterIntakes MatterIntake[]  @relation("ConflictCheckedMatterIntakes")
+  performedConflictChecks      ConflictCheck[] @relation("PerformedConflictChecks")
+  reviewedConflictChecks       ConflictCheck[] @relation("ReviewedConflictChecks")
+
+  firm Firm @relation(fields: [firmId], references: [id], onDelete: Cascade)
+
+  @@index([firmId])
+  @@index([firmId, role])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Client {
+  id              String     @id @default(cuid())
+  firmId          String
+  referenceNumber String
+  type            ClientType @default(INDIVIDUAL)
+  name            String
+  email           String?
+  phone           String?
+  idNumber        String?
+  address         String?
+  notes           String?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  firm    Firm     @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  matters Matter[]
+
+  // Legal Intake / Conflict Checking
+  matterIntakes  MatterIntake[]
+  conflictChecks ConflictCheck[]
+
+  @@unique([firmId, referenceNumber])
+  @@index([firmId])
+  @@index([firmId, name])
+}
+
+model Matter {
+  id              String       @id @default(cuid())
+  firmId          String
+  clientId        String
+  intakeId        String?      @unique
+  referenceNumber String
+  title           String
+  description     String?
+  practiceArea    String?
+  status          MatterStatus @default(OPEN)
+  openedAt        DateTime     @default(now())
+  closedAt        DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  deadlines      Deadline[]
+  documents      Document[]
+  folders        Folder[]
+  client         Client                @relation(fields: [clientId], references: [id])
+  firm           Firm                  @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  accessRequests MatterAccessRequest[]
+  users          MatterUser[]
+  tasks          Task[]
+
+  // Matter created from Legal Intake
+  intake MatterIntake? @relation("ConvertedMatterIntake", fields: [intakeId], references: [id])
+
+  @@unique([firmId, referenceNumber])
+  @@index([clientId])
+  @@index([firmId])
+  @@index([firmId, status])
+}
+
+model MatterUser {
+  id          String   @id @default(cuid())
+  matterId    String
+  userId      String
+  canView     Boolean  @default(true)
+  canUpload   Boolean  @default(false)
+  canDownload Boolean  @default(false)
+  canDelete   Boolean  @default(false)
+  canManage   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  matter Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([matterId, userId])
+  @@index([userId])
+}
+
+model MatterAccessRequest {
+  id              String              @id @default(cuid())
+  firmId          String
+  matterId        String
+  requesterId     String
+  reviewedById    String?
+  reason          String
+  status          AccessRequestStatus @default(PENDING)
+  reviewerComment String?
+  reviewedAt      DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  firm       Firm   @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  matter     Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  requester  User   @relation("MatterAccessRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  reviewedBy User?  @relation("MatterAccessReviewer", fields: [reviewedById], references: [id])
+
+  @@unique([matterId, requesterId], map: "MatterAccessRequest_pending_unique", where: raw("(status = 'PENDING'::\"AccessRequestStatus\")"))
+  @@index([firmId])
+  @@index([matterId])
+  @@index([requesterId])
+  @@index([reviewedById])
+  @@index([firmId, status])
+}
+
+model Folder {
+  id             String   @id @default(cuid())
+  firmId         String
+  matterId       String
+  parentFolderId String?
+  name           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  documents    Document[]
+  firm         Firm       @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  matter       Matter     @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  parentFolder Folder?    @relation("FolderHierarchy", fields: [parentFolderId], references: [id], onDelete: Cascade)
+  childFolders Folder[]   @relation("FolderHierarchy")
+
+  @@index([firmId])
+  @@index([matterId])
+  @@index([parentFolderId])
+}
+
+model Document {
+  id              String         @id @default(cuid())
+  firmId          String
+  matterId        String
+  folderId        String?
+  referenceNumber String
+  name            String
+  originalName    String
+  mimeType        String
+  extension       String
+  size            BigInt
+  storageKey      String         @unique
+  status          DocumentStatus @default(ACTIVE)
+  currentVersion  Int            @default(1)
+  category        String?
+  tags            String[]       @default([])
+  uploadedById    String
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  deletedAt       DateTime?
+
+  firm       Firm              @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  folder     Folder?           @relation(fields: [folderId], references: [id])
+  matter     Matter            @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  uploadedBy User              @relation("UploadedDocuments", fields: [uploadedById], references: [id])
+  versions   DocumentVersion[]
+
+  @@unique([firmId, referenceNumber])
+  @@index([firmId])
+  @@index([folderId])
+  @@index([matterId])
+  @@index([status])
+}
+
+model DocumentVersion {
+  id           String   @id @default(cuid())
+  documentId   String
+  version      Int
+  storageKey   String
+  size         BigInt
+  uploadedById String
+  changeNote   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  extension    String
+  mimeType     String
+  originalName String
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, version])
+  @@index([documentId])
+}
+
+model FinanceFolder {
+  id             String   @id @default(cuid())
+  firmId         String
+  parentFolderId String?
+  name           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  documents    FinanceDocument[]
+  firm         Firm              @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  parentFolder FinanceFolder?    @relation("FinanceFolderHierarchy", fields: [parentFolderId], references: [id], onDelete: Cascade)
+  childFolders FinanceFolder[]   @relation("FinanceFolderHierarchy")
+
+  @@unique([firmId, parentFolderId, name], map: "FinanceFolder_parent_name_unique", where: raw("(\"parentFolderId\" IS NOT NULL)"))
+  @@unique([firmId, name], map: "FinanceFolder_root_name_unique", where: raw("(\"parentFolderId\" IS NULL)"))
+  @@index([firmId])
+  @@index([parentFolderId])
+  @@index([firmId, name])
+}
+
+model FinanceDocument {
+  id           String    @id @default(cuid())
+  firmId       String
+  name         String
+  originalName String
+  mimeType     String
+  extension    String
+  size         BigInt
+  storageKey   String    @unique
+  uploadedById String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+  folderId     String?
+
+  firm       Firm           @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  folder     FinanceFolder? @relation(fields: [folderId], references: [id])
+  uploadedBy User           @relation("UploadedFinanceDocuments", fields: [uploadedById], references: [id])
+
+  @@index([firmId])
+  @@index([folderId])
+  @@index([uploadedById])
+  @@index([firmId, createdAt])
+}
+
+model Task {
+  id           String       @id @default(cuid())
+  firmId       String
+  matterId     String?
+  title        String
+  description  String?
+  status       TaskStatus   @default(TODO)
+  priority     TaskPriority @default(MEDIUM)
+  assignedToId String?
+  createdById  String
+  dueDate      DateTime?
+  completedAt  DateTime?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  assignedTo User?   @relation("AssignedTasks", fields: [assignedToId], references: [id])
+  createdBy  User    @relation("CreatedTasks", fields: [createdById], references: [id])
+  firm       Firm    @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  matter     Matter? @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@index([assignedToId])
+  @@index([firmId])
+  @@index([matterId])
+  @@index([status])
+}
+
+model Deadline {
+  id              String           @id @default(cuid())
+  firmId          String
+  matterId        String
+  title           String
+  description     String?
+  type            DeadlineType
+  priority        DeadlinePriority @default(MEDIUM)
+  status          DeadlineStatus   @default(PENDING)
+  dueDate         DateTime
+  assignedToId    String?
+  createdById     String
+  isCalculated    Boolean          @default(false)
+  sourceDate      DateTime?
+  calculationNote String?
+  completedAt     DateTime?
+  completedById   String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  assignedTo  User?  @relation("AssignedDeadlines", fields: [assignedToId], references: [id])
+  completedBy User?  @relation("CompletedDeadlines", fields: [completedById], references: [id])
+  createdBy   User   @relation("CreatedDeadlines", fields: [createdById], references: [id])
+  firm        Firm   @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  matter      Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@index([firmId])
+  @@index([matterId])
+  @@index([assignedToId])
+  @@index([createdById])
+  @@index([dueDate])
+  @@index([firmId, dueDate])
+  @@index([firmId, status])
+  @@index([matterId, dueDate])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  firmId    String
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  firm Firm @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([firmId])
+  @@index([userId, isRead])
+}
+
+model AuditLog {
+  id          String      @id @default(cuid())
+  firmId      String
+  userId      String
+  action      AuditAction
+  entityType  String
+  entityId    String?
+  description String?
+  ipAddress   String?
+  userAgent   String?
+  metadata    Json?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  firm Firm @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([entityType, entityId])
+  @@index([firmId, createdAt])
+  @@index([firmId])
+  @@index([userId])
+}
+
+model MatterIntake {
+  id                    String              @id @default(cuid())
+  firmId                String
+  prospectiveClientName String
+  clientId              String?
+  email                 String?
+  phone                 String?
+  practiceArea          String?
+  description           String?
+  opposingParties       String[]            @default([])
+  relatedParties        String[]            @default([])
+  source                String?
+  priority              IntakePriority      @default(MEDIUM)
+  conflictCheckRequired Boolean             @default(true)
+  conflictStatus        ConflictCheckStatus @default(NOT_CHECKED)
+  status                IntakeStatus        @default(NEW)
+  assignedToId          String?
+  createdById            String
+  conflictCheckedAt     DateTime?
+  conflictCheckedById   String?
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+
+  firm              Firm    @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  client            Client? @relation(fields: [clientId], references: [id])
+  assignedTo        User?   @relation("AssignedMatterIntakes", fields: [assignedToId], references: [id])
+  createdBy         User    @relation("CreatedMatterIntakes", fields: [createdById], references: [id])
+  conflictCheckedBy User?   @relation("ConflictCheckedMatterIntakes", fields: [conflictCheckedById], references: [id])
+
+  conflictChecks  ConflictCheck[]
+  convertedMatter Matter?         @relation("ConvertedMatterIntake")
+
+  @@index([firmId])
+  @@index([firmId, status])
+  @@index([firmId, conflictStatus])
+  @@index([firmId, priority])
+  @@index([assignedToId])
+  @@index([clientId])
+  @@index([createdAt])
+}
+
+model ConflictCheck {
+  id               String              @id @default(cuid())
+  firmId           String
+  intakeId         String?
+  clientId         String?
+  checkedById      String
+  reviewedById     String?
+  status           ConflictCheckStatus @default(NOT_CHECKED)
+  searchTerms      String[]            @default([])
+  matchedMatterIds String[]            @default([])
+  matchedClientIds String[]            @default([])
+  notes            String?
+  reviewedAt       DateTime?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  firm       Firm          @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  intake     MatterIntake? @relation(fields: [intakeId], references: [id], onDelete: Cascade)
+  client     Client?       @relation(fields: [clientId], references: [id])
+  checkedBy  User          @relation("PerformedConflictChecks", fields: [checkedById], references: [id])
+  reviewedBy User?         @relation("ReviewedConflictChecks", fields: [reviewedById], references: [id])
+
+  @@index([firmId])
+  @@index([intakeId])
+  @@index([clientId])
+  @@index([checkedById])
+  @@index([reviewedById])
+  @@index([firmId, status])
+  @@index([createdAt])
+}
+
+enum SubscriptionPlan {
+  TRIAL
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  PAST_DUE
+  SUSPENDED
+  CANCELLED
+  PENDING_PAYMENT
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum AuditAction {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+  DOWNLOAD
+  UPLOAD
+  LOGIN
+  LOGOUT
+  SHARE
+  ARCHIVE
+  RESTORE
+}
+
+enum ClientType {
+  INDIVIDUAL
+  COMPANY
+  TRUST
+  GOVERNMENT
+  OTHER
+}
+
+enum DocumentStatus {
+  ACTIVE
+  ARCHIVED
+  DELETED
+}
+
+enum MatterStatus {
+  OPEN
+  PENDING
+  CLOSED
+  ARCHIVED
+}
+
+enum NotificationType {
+  TASK
+  DOCUMENT
+  MATTER
+  SYSTEM
+  SECURITY
+  DEADLINE
+}
+
+enum AccessRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum DeadlineType {
+  COURT_DATE
+  FILING_DEADLINE
+  PRESCRIPTION_DATE
+  NOTICE_PERIOD
+  CONSULTATION
+  DISCOVERY_DEADLINE
+  OPPOSING_PARTY_DEADLINE
+  INTERNAL_REVIEW
+}
+
+enum DeadlinePriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum DeadlineStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  OVERDUE
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  MANAGING_PARTNER
+  PARTNER
+  DIRECTOR
+  ATTORNEY
+  CANDIDATE_ATTORNEY
+  PARALEGAL
+  LEGAL_SECRETARY
+  ADMIN
+  FINANCE
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum IntakeStatus {
+  NEW
+  CONFLICT_CHECK_PENDING
+  CONFLICT_REVIEW
+  APPROVED
+  REJECTED
+  CONVERTED
+  CLOSED
+}
+
+enum ConflictCheckStatus {
+  NOT_CHECKED
+  CLEAR
+  POTENTIAL_CONFLICT
+  CONFLICT_DETECTED
+  REQUIRES_REVIEW
+}
+
+enum IntakePriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
