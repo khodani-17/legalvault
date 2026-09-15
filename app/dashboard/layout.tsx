@@ -12,6 +12,7 @@ import {
   WalletCards,
   BarChart3,
   Settings,
+  Mail,
 } from "lucide-react";
 
 import { auth } from "@/auth";
@@ -122,24 +123,26 @@ export default async function DashboardLayout({
     "dashboard.view",
   );
 
+  const canViewAudit = hasPermission(
+    role,
+    "audit.view",
+  );
+
+  const canViewBusinessIntelligence =
+    canViewDashboard;
+
+  const canViewCalendar =
+    hasPermission(role, "tasks.view") ||
+    hasPermission(role, "deadlines.view");
+
   const canViewClients = hasPermission(
     role,
     "clients.view",
   );
 
-  const canViewMatters = hasPermission(
+  const canViewCorrespondence = hasPermission(
     role,
-    "matters.view",
-  );
-
-  const canViewDocuments = hasPermission(
-    role,
-    "documents.view",
-  );
-
-  const canViewTasks = hasPermission(
-    role,
-    "tasks.view",
+    "correspondence.view",
   );
 
   const canViewDeadlines = hasPermission(
@@ -147,20 +150,24 @@ export default async function DashboardLayout({
     "deadlines.view",
   );
 
-  // Calendar is based on the existing Tasks and
-  // Deadlines systems. No separate calendar permission
-  // is required.
-  const canViewCalendar =
-    canViewTasks || canViewDeadlines;
+  const canViewDocuments = hasPermission(
+    role,
+    "documents.view",
+  );
+
+  const canViewMatters = hasPermission(
+    role,
+    "matters.view",
+  );
+
+  const canViewTasks = hasPermission(
+    role,
+    "tasks.view",
+  );
 
   const canViewUsers = hasPermission(
     role,
     "users.view",
-  );
-
-  const canViewAudit = hasPermission(
-    role,
-    "audit.view",
   );
 
   // ----------------------------------------------------------
@@ -203,21 +210,25 @@ export default async function DashboardLayout({
 
                 <div className="space-y-1">
 
-                  {/* DASHBOARD */}
+                  {/* ------------------------------------------------
+                      AUDIT TRAIL
+                  ------------------------------------------------ */}
 
-                  {canViewDashboard && (
+                  {canViewAudit && (
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/audit"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
                     >
-                      <LayoutDashboard className="h-5 w-5 shrink-0" />
-                      Dashboard
+                      <ShieldCheck className="h-5 w-5 shrink-0" />
+                      Audit Trail
                     </Link>
                   )}
 
-                  {/* BUSINESS INTELLIGENCE */}
+                  {/* ------------------------------------------------
+                      BUSINESS INTELLIGENCE
+                  ------------------------------------------------ */}
 
-                  {canViewDashboard && (
+                  {canViewBusinessIntelligence && (
                     <Link
                       href="/dashboard/business-intelligence"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
@@ -227,7 +238,23 @@ export default async function DashboardLayout({
                     </Link>
                   )}
 
-                  {/* CLIENTS */}
+                  {/* ------------------------------------------------
+                      CALENDAR
+                  ------------------------------------------------ */}
+
+                  {canViewCalendar && (
+                    <Link
+                      href="/dashboard/calendar"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                    >
+                      <CalendarDays className="h-5 w-5 shrink-0" />
+                      Calendar
+                    </Link>
+                  )}
+
+                  {/* ------------------------------------------------
+                      CLIENTS
+                  ------------------------------------------------ */}
 
                   {canViewClients && (
                     <Link
@@ -239,43 +266,37 @@ export default async function DashboardLayout({
                     </Link>
                   )}
 
-                  {/* MATTERS */}
+                  {/* ------------------------------------------------
+                      CORRESPONDENCE
+                  ------------------------------------------------ */}
 
-                  {canViewMatters && (
+                  {canViewCorrespondence && (
                     <Link
-                      href="/dashboard/matters"
+                      href="/dashboard/correspondence"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
                     >
-                      <BriefcaseBusiness className="h-5 w-5 shrink-0" />
-                      Matters
+                      <Mail className="h-5 w-5 shrink-0" />
+                      Correspondence
                     </Link>
                   )}
 
-                  {/* DOCUMENTS */}
+                  {/* ------------------------------------------------
+                      DASHBOARD
+                  ------------------------------------------------ */}
 
-                  {canViewDocuments && (
+                  {canViewDashboard && (
                     <Link
-                      href="/dashboard/documents"
+                      href="/dashboard"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
                     >
-                      <FileText className="h-5 w-5 shrink-0" />
-                      Documents
+                      <LayoutDashboard className="h-5 w-5 shrink-0" />
+                      Dashboard
                     </Link>
                   )}
 
-                  {/* TASKS */}
-
-                  {canViewTasks && (
-                    <Link
-                      href="/dashboard/tasks"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
-                    >
-                      <CheckSquare className="h-5 w-5 shrink-0" />
-                      Tasks
-                    </Link>
-                  )}
-
-                  {/* DEADLINES */}
+                  {/* ------------------------------------------------
+                      DEADLINES
+                  ------------------------------------------------ */}
 
                   {canViewDeadlines && (
                     <Link
@@ -287,51 +308,23 @@ export default async function DashboardLayout({
                     </Link>
                   )}
 
-                  {/* LEGAL CALENDAR */}
+                  {/* ------------------------------------------------
+                      DOCUMENTS
+                  ------------------------------------------------ */}
 
-                  {canViewCalendar && (
+                  {canViewDocuments && (
                     <Link
-                      href="/dashboard/calendar"
+                      href="/dashboard/documents"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
                     >
-                      <CalendarDays className="h-5 w-5 shrink-0" />
-                      Legal Calendar
+                      <FileText className="h-5 w-5 shrink-0" />
+                      Documents
                     </Link>
                   )}
 
-                  {/* USERS */}
-
-                  {canViewUsers && (
-                    <Link
-                      href="/dashboard/users"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
-                    >
-                      <Users className="h-5 w-5 shrink-0" />
-                      Users
-                    </Link>
-                  )}
-
-                  {/* FIRM PROFILE */}
-
-                  <Link
-                    href="/dashboard/firm"
-                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
-                  >
-                    <Building2 className="h-5 w-5 shrink-0" />
-                    Firm Profile
-                  </Link>
-
-                  {/* SETTINGS */}
-
-                  <Link
-                    href="/dashboard/settings"
-                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
-                  >
-                    <Settings className="h-5 w-5 shrink-0" />
-                    Settings
-                  </Link>
-
-                  {/* FINANCE */}
+                  {/* ------------------------------------------------
+                      FINANCE
+                  ------------------------------------------------ */}
 
                   {isFinanceUser && (
                     <Link
@@ -343,15 +336,69 @@ export default async function DashboardLayout({
                     </Link>
                   )}
 
-                  {/* AUDIT TRAIL */}
+                  {/* ------------------------------------------------
+                      FIRM PROFILE
+                  ------------------------------------------------ */}
 
-                  {canViewAudit && (
+                  <Link
+                    href="/dashboard/firm"
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                  >
+                    <Building2 className="h-5 w-5 shrink-0" />
+                    Firm Profile
+                  </Link>
+
+                  {/* ------------------------------------------------
+                      MATTERS
+                  ------------------------------------------------ */}
+
+                  {canViewMatters && (
                     <Link
-                      href="/dashboard/audit"
+                      href="/dashboard/matters"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
                     >
-                      <ShieldCheck className="h-5 w-5 shrink-0" />
-                      Audit Trail
+                      <BriefcaseBusiness className="h-5 w-5 shrink-0" />
+                      Matters
+                    </Link>
+                  )}
+
+                  {/* ------------------------------------------------
+                      SETTINGS
+                  ------------------------------------------------ */}
+
+                  <Link
+                    href="/dashboard/settings"
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                  >
+                    <Settings className="h-5 w-5 shrink-0" />
+                    Settings
+                  </Link>
+
+                  {/* ------------------------------------------------
+                      TASKS
+                  ------------------------------------------------ */}
+
+                  {canViewTasks && (
+                    <Link
+                      href="/dashboard/tasks"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                    >
+                      <CheckSquare className="h-5 w-5 shrink-0" />
+                      Tasks
+                    </Link>
+                  )}
+
+                  {/* ------------------------------------------------
+                      USERS
+                  ------------------------------------------------ */}
+
+                  {canViewUsers && (
+                    <Link
+                      href="/dashboard/users"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                    >
+                      <Users className="h-5 w-5 shrink-0" />
+                      Users
                     </Link>
                   )}
 
