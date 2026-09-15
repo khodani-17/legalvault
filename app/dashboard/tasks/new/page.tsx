@@ -16,6 +16,36 @@ type Matter = {
   referenceNumber: string | null;
 };
 
+type Correspondence = {
+  id: string;
+  direction: "INCOMING" | "OUTGOING";
+  correspondenceDate: string;
+  sender: string;
+  recipient: string;
+  subject: string;
+  type: string;
+  status: string;
+  responseRequired: boolean;
+  responseDeadline: string | null;
+  notes: string | null;
+  client: {
+    id: string;
+    name: string;
+    referenceNumber: string;
+  } | null;
+  matter: {
+    id: string;
+    title: string;
+    referenceNumber: string | null;
+  } | null;
+  responsibleUser: {
+    id: string;
+    name: string | null;
+    email: string;
+    role: string;
+  } | null;
+};
+
 type FormState = {
   matterId: string;
   title: string;
@@ -40,13 +70,57 @@ const initialForm: FormState = {
 
 const onBehalfRoles = ["DIRECTOR", "MANAGING_PARTNER"];
 
+function formatDateForInput(value: string | null | undefined) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toISOString().slice(0, 10);
+}
+
+function formatDisplayDate(value: string | null | undefined) {
+  if (!value) {
+    return "—";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
+  }
+
+  return new Intl.DateTimeFormat("en-ZA", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+}
+
+function getCorrespondenceTypeLabel(type: string) {
+  return type
+    .replaceAll("_", " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
 export default function NewTaskPage() {
   const router = useRouter();
 
   const [form, setForm] = useState<FormState>(initialForm);
   const [users, setUsers] = useState<User[]>([]);
   const [matters, setMatters] = useState<Matter[]>([]);
+  const [correspondence, setCorrespondence] =
+    useState<Correspondence | null>(null);
+
   const [loading, setLoading] = useState(true);
+  const [loadingCorrespondence, setLoadingCorrespondence] =
+    useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -56,14 +130,37 @@ export default function NewTaskPage() {
         setLoading(true);
         setError("");
 
-        const [usersResponse, mattersResponse] = await Promise.all([
+        const correspondenceId =
+          typeof window !== "undefined"
+            ? new URLSearchParams(window.location.search).get(
+                "correspondenceId"
+              )
+            : null;
+
+        const requests = [
           fetch("/api/users", {
             cache: "no-store",
           }),
           fetch("/api/matters", {
             cache: "no-store",
           }),
-        ]);
+        ];
+
+        if (correspondenceId) {
+          setLoadingCorrespondence(true);
+
+          requests.push(
+            fetch(`/api/correspondence/${correspondenceId}`, {
+              cache: "no-store",
+            })
+          );
+        }
+
+        const responses = await Promise.all(requests);
+
+        const usersResponse = responses[0];
+        const mattersResponse = responses[1];
+        const correspondenceResponse = responses[2];
 
         if (!usersResponse.ok) {
           throw new Error("Unable to load firm users.");
@@ -78,6 +175,95 @@ export default function NewTaskPage() {
 
         setUsers(usersData.users ?? []);
         setMatters(mattersData.matters ?? []);
+
+        if (correspondenceResponse) {
+          if (!correspondenceResponse.ok) {
+            const correspondenceData =
+              await correspondenceResponse.json().catch(() => null);
+
+            throw new Error(
+              correspondenceData?.error ||
+                "Unable to load the correspondence."
+            );
+          }
+
+          const correspondenceData =
+            await correspondenceResponse.json();
+
+          const loadedCorrespondence =
+            correspondenceData.correspondence ??
+            correspondenceData.data ??
+            correspondenceData;
+
+          setCorrespondence(loadedCorrespondence);
+
+          if (loadedCorrespondence) {
+            const matter =
+              loadedCorrespondence.matter ?? null;
+
+            const correspondenceTitle =
+              loadedCorrespondence.subject?.trim()
+                ? `Respond to correspondence: ${loadedCorrespondence.subject.trim()}`
+                : "Follow up on legal correspondence";
+
+            const correspondenceDescription = [
+              "Task created from Legal Correspondence Centre.",
+              "",
+              `Correspondence type: ${getCorrespondenceTypeLabel(
+                loadedCorrespondence.type
+              )}`,
+              `Direction: ${
+                loadedCorrespondence.direction === "INCOMING"
+                  ? "Incoming"
+                  : "Outgoing"
+              }`,
+              `Date: ${formatDisplayDate(
+                loadedCorrespondence.correspondenceDate
+              )}`,
+              `From: ${loadedCorrespondence.sender}`,
+              `To: ${loadedCorrespondence.recipient}`,
+              `Subject: ${loadedCorrespondence.subject}`,
+              loadedCorrespondence.client?.name
+                ? `Client: ${loadedCorrespondence.client.name}`
+                : null,
+              matter?.title
+                ? `Matter: ${
+                    matter.referenceNumber
+                      ? `${matter.referenceNumber} — ${matter.title}`
+                      : matter.title
+                  }`
+                : null,
+              loadedCorrespondence.responseRequired
+                ? `Response required: Yes${
+                    loadedCorrespondence.responseDeadline
+                      ? ` — deadline ${formatDisplayDate(
+                          loadedCorrespondence.responseDeadline
+                        )}`
+                      : ""
+                  }`
+                : "Response required: No",
+              loadedCorrespondence.notes?.trim()
+                ? `Correspondence notes: ${loadedCorrespondence.notes.trim()}`
+                : null,
+              "",
+              `Correspondence ID: ${loadedCorrespondence.id}`,
+            ]
+              .filter(Boolean)
+              .join("\n");
+
+            setForm((current) => ({
+              ...current,
+              matterId: matter?.id ?? "",
+              title: correspondenceTitle,
+              description: correspondenceDescription,
+              dueDate: formatDateForInput(
+                loadedCorrespondence.responseDeadline
+              ),
+              assignedToId:
+                loadedCorrespondence.responsibleUser?.id ?? "",
+            }));
+          }
+        }
       } catch (err) {
         setError(
           err instanceof Error
@@ -86,6 +272,7 @@ export default function NewTaskPage() {
         );
       } finally {
         setLoading(false);
+        setLoadingCorrespondence(false);
       }
     }
 
@@ -93,7 +280,9 @@ export default function NewTaskPage() {
   }, []);
 
   const delegationUsers = useMemo(() => {
-    return users.filter((user) => onBehalfRoles.includes(user.role));
+    return users.filter((user) =>
+      onBehalfRoles.includes(user.role)
+    );
   }, [users]);
 
   function updateField<K extends keyof FormState>(
@@ -106,7 +295,9 @@ export default function NewTaskPage() {
     }));
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
     setError("");
@@ -117,7 +308,9 @@ export default function NewTaskPage() {
     }
 
     if (!form.assignedToId) {
-      setError("Please select the employee who will receive the task.");
+      setError(
+        "Please select the employee who will receive the task."
+      );
       return;
     }
 
@@ -190,6 +383,136 @@ export default function NewTaskPage() {
         <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
           {error}
         </div>
+      )}
+
+      {loadingCorrespondence && (
+        <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800">
+          Loading correspondence details...
+        </div>
+      )}
+
+      {correspondence && (
+        <section className="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">
+                Created from Correspondence
+              </p>
+
+              <h2 className="mt-1 text-lg font-semibold text-gray-900">
+                {correspondence.subject}
+              </h2>
+
+              <p className="mt-1 text-sm text-gray-600">
+                The task below has been pre-filled from this
+                correspondence. You can still edit the task before
+                delegating it.
+              </p>
+            </div>
+
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-blue-700">
+              {correspondence.direction === "INCOMING"
+                ? "Incoming"
+                : "Outgoing"}
+            </span>
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="rounded-lg border bg-white p-4">
+              <p className="text-xs font-medium text-gray-500">
+                Sender
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-900">
+                {correspondence.sender}
+              </p>
+            </div>
+
+            <div className="rounded-lg border bg-white p-4">
+              <p className="text-xs font-medium text-gray-500">
+                Recipient
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-900">
+                {correspondence.recipient}
+              </p>
+            </div>
+
+            <div className="rounded-lg border bg-white p-4">
+              <p className="text-xs font-medium text-gray-500">
+                Correspondence Date
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-900">
+                {formatDisplayDate(
+                  correspondence.correspondenceDate
+                )}
+              </p>
+            </div>
+
+            <div className="rounded-lg border bg-white p-4">
+              <p className="text-xs font-medium text-gray-500">
+                Type
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-900">
+                {getCorrespondenceTypeLabel(
+                  correspondence.type
+                )}
+              </p>
+            </div>
+
+            {correspondence.client && (
+              <div className="rounded-lg border bg-white p-4">
+                <p className="text-xs font-medium text-gray-500">
+                  Client
+                </p>
+                <p className="mt-1 text-sm font-medium text-gray-900">
+                  {correspondence.client.name}
+                </p>
+
+                {correspondence.client.referenceNumber && (
+                  <p className="mt-1 text-xs text-gray-500">
+                    {correspondence.client.referenceNumber}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {correspondence.matter && (
+              <div className="rounded-lg border bg-white p-4">
+                <p className="text-xs font-medium text-gray-500">
+                  Matter
+                </p>
+                <p className="mt-1 text-sm font-medium text-gray-900">
+                  {correspondence.matter.referenceNumber
+                    ? `${correspondence.matter.referenceNumber} — ${correspondence.matter.title}`
+                    : correspondence.matter.title}
+                </p>
+              </div>
+            )}
+
+            <div className="rounded-lg border bg-white p-4">
+              <p className="text-xs font-medium text-gray-500">
+                Response Required
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-900">
+                {correspondence.responseRequired
+                  ? "Yes"
+                  : "No"}
+              </p>
+            </div>
+
+            {correspondence.responseDeadline && (
+              <div className="rounded-lg border bg-white p-4">
+                <p className="text-xs font-medium text-gray-500">
+                  Response Deadline
+                </p>
+                <p className="mt-1 text-sm font-medium text-gray-900">
+                  {formatDisplayDate(
+                    correspondence.responseDeadline
+                  )}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
       )}
 
       <form
@@ -266,10 +589,18 @@ export default function NewTaskPage() {
                     event.target.value
                   )
                 }
-                rows={6}
+                rows={8}
                 placeholder="Explain what needs to be done, relevant documents to review, expected outcome, or any special instructions."
                 className="w-full rounded-lg border px-3 py-2.5"
               />
+
+              {correspondence && (
+                <p className="mt-1 text-xs text-gray-500">
+                  The correspondence details have been included
+                  automatically. You can add or edit instructions
+                  before delegating the task.
+                </p>
+              )}
             </div>
           </div>
         </section>
@@ -315,6 +646,18 @@ export default function NewTaskPage() {
                 secretary, administrator, or other staff member
                 responsible for completing the task.
               </p>
+
+              {correspondence?.responsibleUser && (
+                <p className="mt-2 rounded-md bg-gray-50 p-2 text-xs text-gray-600">
+                  The correspondence currently has{" "}
+                  <strong>
+                    {correspondence.responsibleUser.name ||
+                      correspondence.responsibleUser.email}
+                  </strong>{" "}
+                  assigned as the responsible employee. You can
+                  change the task assignee above if necessary.
+                </p>
+              )}
             </div>
 
             <div>
@@ -374,6 +717,14 @@ export default function NewTaskPage() {
                 }
                 className="w-full rounded-lg border px-3 py-2.5"
               />
+
+              {correspondence?.responseDeadline && (
+                <p className="mt-1 text-xs text-gray-500">
+                  Pre-filled from the correspondence response
+                  deadline. You can change it if the task needs
+                  an earlier internal deadline.
+                </p>
+              )}
             </div>
 
             <div>
@@ -432,6 +783,40 @@ export default function NewTaskPage() {
           </label>
         </section>
 
+        {correspondence && (
+          <section className="rounded-xl border border-amber-200 bg-amber-50 p-6">
+            <h2 className="text-sm font-semibold text-amber-900">
+              Correspondence Workflow
+            </h2>
+
+            <div className="mt-3 space-y-2 text-sm text-amber-800">
+              <p>
+                This task is being created from a correspondence
+                record.
+              </p>
+
+              <p>
+                The task will remain a separate task record with
+                its own permissions, updates, reports and audit
+                history.
+              </p>
+
+              <p>
+                Linking the task to a matter does not
+                automatically grant the assigned employee access
+                to that matter.
+              </p>
+
+              <p>
+                Correspondence ID:{" "}
+                <span className="font-mono text-xs">
+                  {correspondence.id}
+                </span>
+              </p>
+            </div>
+          </section>
+        )}
+
         <section className="rounded-xl border bg-gray-50 p-6">
           <h2 className="text-sm font-semibold">
             How task delegation works
@@ -441,18 +826,29 @@ export default function NewTaskPage() {
             <p>
               1. Delegate the task to an employee.
             </p>
+
             <p>
               2. The employee completes the work and can add
               updates or request assistance.
             </p>
+
             <p>
               3. If reporting is required, the employee submits
               a report back.
             </p>
+
             <p>
               4. The Director or Managing Partner reviews the
               report and accepts it or sends it back.
             </p>
+
+            {correspondence && (
+              <p>
+                5. The task remains connected to the originating
+                correspondence through its matter/context
+                information and can be tracked separately.
+              </p>
+            )}
           </div>
         </section>
 
@@ -468,7 +864,7 @@ export default function NewTaskPage() {
 
           <button
             type="submit"
-            disabled={saving}
+            disabled={saving || loadingCorrespondence}
             className="rounded-lg bg-black px-5 py-2.5 text-sm font-medium text-white disabled:opacity-50"
           >
             {saving ? "Delegating..." : "Delegate Task"}
