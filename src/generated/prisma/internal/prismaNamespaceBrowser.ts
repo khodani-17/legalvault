@@ -66,11 +66,15 @@ export const ModelName = {
   FinanceFolder: 'FinanceFolder',
   FinanceDocument: 'FinanceDocument',
   Task: 'Task',
+  TaskNote: 'TaskNote',
+  TaskReport: 'TaskReport',
+  TaskAssistanceRequest: 'TaskAssistanceRequest',
+  TaskActivity: 'TaskActivity',
   Deadline: 'Deadline',
   Notification: 'Notification',
   AuditLog: 'AuditLog',
-  MatterIntake: 'MatterIntake',
-  ConflictCheck: 'ConflictCheck'
+  ConflictCheck: 'ConflictCheck',
+  MatterIntake: 'MatterIntake'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -114,12 +118,12 @@ export const SubscriptionScalarFieldEnum = {
   currentPeriodEnd: 'currentPeriodEnd',
   trialEndsAt: 'trialEndsAt',
   cancelledAt: 'cancelledAt',
-  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
   provider: 'provider',
   providerCustomerId: 'providerCustomerId',
   providerSubscriptionId: 'providerSubscriptionId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  cancelAtPeriodEnd: 'cancelAtPeriodEnd'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
@@ -200,7 +204,6 @@ export const MatterScalarFieldEnum = {
   id: 'id',
   firmId: 'firmId',
   clientId: 'clientId',
-  intakeId: 'intakeId',
   referenceNumber: 'referenceNumber',
   title: 'title',
   description: 'description',
@@ -209,7 +212,8 @@ export const MatterScalarFieldEnum = {
   openedAt: 'openedAt',
   closedAt: 'closedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  intakeId: 'intakeId'
 } as const
 
 export type MatterScalarFieldEnum = (typeof MatterScalarFieldEnum)[keyof typeof MatterScalarFieldEnum]
@@ -345,13 +349,75 @@ export const TaskScalarFieldEnum = {
   priority: 'priority',
   assignedToId: 'assignedToId',
   createdById: 'createdById',
+  delegatedById: 'delegatedById',
+  delegatedOnBehalfOfId: 'delegatedOnBehalfOfId',
   dueDate: 'dueDate',
   completedAt: 'completedAt',
+  requiresReport: 'requiresReport',
+  reportSubmittedAt: 'reportSubmittedAt',
+  reportReviewedAt: 'reportReviewedAt',
+  reportOutcome: 'reportOutcome',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const TaskNoteScalarFieldEnum = {
+  id: 'id',
+  taskId: 'taskId',
+  authorId: 'authorId',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskNoteScalarFieldEnum = (typeof TaskNoteScalarFieldEnum)[keyof typeof TaskNoteScalarFieldEnum]
+
+
+export const TaskReportScalarFieldEnum = {
+  id: 'id',
+  taskId: 'taskId',
+  submittedById: 'submittedById',
+  outcome: 'outcome',
+  report: 'report',
+  nextAction: 'nextAction',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote'
+} as const
+
+export type TaskReportScalarFieldEnum = (typeof TaskReportScalarFieldEnum)[keyof typeof TaskReportScalarFieldEnum]
+
+
+export const TaskAssistanceRequestScalarFieldEnum = {
+  id: 'id',
+  taskId: 'taskId',
+  requestedById: 'requestedById',
+  reason: 'reason',
+  response: 'response',
+  status: 'status',
+  respondedAt: 'respondedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskAssistanceRequestScalarFieldEnum = (typeof TaskAssistanceRequestScalarFieldEnum)[keyof typeof TaskAssistanceRequestScalarFieldEnum]
+
+
+export const TaskActivityScalarFieldEnum = {
+  id: 'id',
+  taskId: 'taskId',
+  userId: 'userId',
+  action: 'action',
+  description: 'description',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type TaskActivityScalarFieldEnum = (typeof TaskActivityScalarFieldEnum)[keyof typeof TaskActivityScalarFieldEnum]
 
 
 export const DeadlineScalarFieldEnum = {
@@ -411,6 +477,26 @@ export const AuditLogScalarFieldEnum = {
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+export const ConflictCheckScalarFieldEnum = {
+  id: 'id',
+  firmId: 'firmId',
+  intakeId: 'intakeId',
+  clientId: 'clientId',
+  checkedById: 'checkedById',
+  reviewedById: 'reviewedById',
+  status: 'status',
+  searchTerms: 'searchTerms',
+  matchedMatterIds: 'matchedMatterIds',
+  matchedClientIds: 'matchedClientIds',
+  notes: 'notes',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConflictCheckScalarFieldEnum = (typeof ConflictCheckScalarFieldEnum)[keyof typeof ConflictCheckScalarFieldEnum]
+
+
 export const MatterIntakeScalarFieldEnum = {
   id: 'id',
   firmId: 'firmId',
@@ -436,26 +522,6 @@ export const MatterIntakeScalarFieldEnum = {
 } as const
 
 export type MatterIntakeScalarFieldEnum = (typeof MatterIntakeScalarFieldEnum)[keyof typeof MatterIntakeScalarFieldEnum]
-
-
-export const ConflictCheckScalarFieldEnum = {
-  id: 'id',
-  firmId: 'firmId',
-  intakeId: 'intakeId',
-  clientId: 'clientId',
-  checkedById: 'checkedById',
-  reviewedById: 'reviewedById',
-  status: 'status',
-  searchTerms: 'searchTerms',
-  matchedMatterIds: 'matchedMatterIds',
-  matchedClientIds: 'matchedClientIds',
-  notes: 'notes',
-  reviewedAt: 'reviewedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ConflictCheckScalarFieldEnum = (typeof ConflictCheckScalarFieldEnum)[keyof typeof ConflictCheckScalarFieldEnum]
 
 
 export const SortOrder = {

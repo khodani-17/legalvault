@@ -3,10 +3,16 @@ import { prisma } from "@/lib/prisma";
 import { createAuditLog } from "@/lib/audit";
 import { requirePermission } from "@/lib/permissions-server";
 import { createNotification } from "@/lib/notifications";
+import {
+  validateDelegationAuthority,
+  isManagementRole,
+  canDelegateTaskRole,
+} from "@/lib/task-authorization";
 
 // =====================================================
 // GET /api/tasks
-// Get tasks belonging to the logged-in user's firm
+// Get tasks accessible to the logged-in user
+//
 // Optional:
 // ?matterId=...
 // ?status=...
@@ -79,7 +85,8 @@ export async function GET(request: Request) {
     // QUERY PARAMETERS
     // =====================================================
 
-    const { searchParams } = new URL(request.url);
+    const { searchParams } =
+      new URL(request.url);
 
     const matterId =
       searchParams.get("matterId")?.trim() || null;
@@ -88,12 +95,51 @@ export async function GET(request: Request) {
       searchParams.get("status")?.trim() || null;
 
     // =====================================================
+    // TASK ACCESS FILTER
+    // =====================================================
+    //
+    // Management roles may see the firm's task workload.
+    //
+    // Other employees only see tasks connected to them:
+    //
+    // - assigned to them
+    // - created by them
+    // - delegated by them
+    // - delegated on behalf of them
+    //
+    // This prevents employees from browsing unrelated
+    // colleagues' tasks simply because they have tasks.view.
+    // =====================================================
+
+    const taskRelationshipFilter =
+      isManagementRole(user.role)
+        ? {}
+        : {
+            OR: [
+              {
+                assignedToId: user.id,
+              },
+              {
+                createdById: user.id,
+              },
+              {
+                delegatedById: user.id,
+              },
+              {
+                delegatedOnBehalfOfId: user.id,
+              },
+            ],
+          };
+
+    // =====================================================
     // GET TASKS
     // =====================================================
 
     const tasks = await prisma.task.findMany({
       where: {
         firmId,
+
+        ...taskRelationshipFilter,
 
         ...(matterId
           ? {
@@ -122,6 +168,29 @@ export async function GET(request: Request) {
         completedAt: true,
         createdAt: true,
         updatedAt: true,
+
+        requiresReport: true,
+        reportSubmittedAt: true,
+        reportReviewedAt: true,
+        reportOutcome: true,
+
+        delegatedBy: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+          },
+        },
+
+        delegatedOnBehalfOf: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+          },
+        },
 
         matter: {
           select: {
@@ -183,6 +252,10 @@ export async function GET(request: Request) {
     // =====================================================
 
     return NextResponse.json({
+      currentUser: {
+        id: user.id,
+        role: user.role,
+      },
       tasks,
     });
   } catch (error) {
@@ -204,7 +277,7 @@ export async function GET(request: Request) {
 
 // =====================================================
 // POST /api/tasks
-// Create a new task
+// Delegate a new task
 // =====================================================
 
 export async function POST(request: Request) {
@@ -271,6 +344,22 @@ export async function POST(request: Request) {
     }
 
     // =====================================================
+    // VERIFY DELEGATION AUTHORITY
+    // =====================================================
+
+    if (!canDelegateTaskRole(user.role)) {
+      return NextResponse.json(
+        {
+          error:
+            "You do not have authority to delegate tasks.",
+        },
+        {
+          status: 403,
+        }
+      );
+    }
+
+    // =====================================================
     // REQUEST BODY
     // =====================================================
 
@@ -288,6 +377,10 @@ export async function POST(request: Request) {
         }
       );
     }
+
+    // =====================================================
+    // BASIC TASK DATA
+    // =====================================================
 
     const title = String(
       body.title || ""
@@ -315,9 +408,15 @@ export async function POST(request: Request) {
       body.priority || "MEDIUM"
     ).trim();
 
-    const status = String(
-      body.status || "TODO"
-    ).trim();
+    // =====================================================
+    // SECURITY RULE:
+    // EVERY NEW DELEGATED TASK STARTS AS TODO.
+    //
+    // Completion/cancellation must happen through the
+    // appropriate task workflow after delegation.
+    // =====================================================
+
+    const status = "TODO";
 
     const dueDateValue = String(
       body.dueDate || ""
@@ -326,6 +425,47 @@ export async function POST(request: Request) {
     const dueDate = dueDateValue
       ? new Date(dueDateValue)
       : null;
+
+    // =====================================================
+    // DELEGATION DATA
+    // =====================================================
+
+    const delegatedOnBehalfOfIdValue =
+      String(
+        body.delegatedOnBehalfOfId || ""
+      ).trim();
+
+    const delegatedOnBehalfOfId =
+      delegatedOnBehalfOfIdValue || null;
+
+    const requiresReport =
+      body.requiresReport === true ||
+      body.requiresReport === "true";
+
+    // =====================================================
+    // VALIDATE DELEGATION AUTHORITY
+    // =====================================================
+
+    const delegationAuthority =
+      await validateDelegationAuthority({
+        actorId: user.id,
+        firmId,
+        onBehalfOfId:
+          delegatedOnBehalfOfId,
+      });
+
+    if (!delegationAuthority.allowed) {
+      return NextResponse.json(
+        {
+          error:
+            delegationAuthority.reason ||
+            "You are not authorized to delegate this task.",
+        },
+        {
+          status: 403,
+        }
+      );
+    }
 
     // =====================================================
     // VALIDATION
@@ -342,17 +482,23 @@ export async function POST(request: Request) {
       );
     }
 
-    const validStatuses = [
-      "TODO",
-      "IN_PROGRESS",
-      "COMPLETED",
-      "CANCELLED",
-    ];
-
-    if (!validStatuses.includes(status)) {
+    if (title.length > 200) {
       return NextResponse.json(
         {
-          error: "Invalid task status.",
+          error:
+            "Task title cannot exceed 200 characters.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    if (description.length > 10000) {
+      return NextResponse.json(
+        {
+          error:
+            "Task instructions cannot exceed 10,000 characters.",
         },
         {
           status: 400,
@@ -394,6 +540,12 @@ export async function POST(request: Request) {
 
     // =====================================================
     // VERIFY MATTER
+    // =====================================================
+    //
+    // Linking a task to a matter DOES NOT grant the
+    // assigned employee MatterUser access.
+    //
+    // Matter permissions remain separate.
     // =====================================================
 
     if (matterId) {
@@ -440,6 +592,7 @@ export async function POST(request: Request) {
             id: true,
             firmId: true,
             status: true,
+            name: true,
           },
         });
 
@@ -457,82 +610,162 @@ export async function POST(request: Request) {
     }
 
     // =====================================================
-    // CREATE TASK
+    // CREATE TASK + ACTIVITY
     // =====================================================
 
-    const task = await prisma.task.create({
-      data: {
-        firmId,
+    const task = await prisma.$transaction(
+      async (tx) => {
+        const createdTask =
+          await tx.task.create({
+            data: {
+              firmId,
+              matterId,
 
-        matterId,
+              title,
 
-        title,
+              description:
+                description || null,
 
-        description:
-          description || null,
+              status: "TODO",
 
-        status: status as
-          | "TODO"
-          | "IN_PROGRESS"
-          | "COMPLETED"
-          | "CANCELLED",
+              priority: priority as
+                | "LOW"
+                | "MEDIUM"
+                | "HIGH"
+                | "URGENT",
 
-        priority: priority as
-          | "LOW"
-          | "MEDIUM"
-          | "HIGH"
-          | "URGENT",
+              assignedToId,
 
-        assignedToId,
+              createdById:
+                user.id,
 
-        createdById: user.id,
+              delegatedById:
+                user.id,
 
-        dueDate,
+              delegatedOnBehalfOfId,
 
-        completedAt:
-          status === "COMPLETED"
-            ? new Date()
-            : null,
-      },
+              requiresReport,
 
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        status: true,
-        priority: true,
-        dueDate: true,
-        completedAt: true,
-        createdAt: true,
-        updatedAt: true,
+              dueDate,
 
-        matter: {
-          select: {
-            id: true,
-            referenceNumber: true,
-            title: true,
+              completedAt: null,
+            },
+
+            select: {
+              id: true,
+              title: true,
+              description: true,
+              status: true,
+              priority: true,
+              dueDate: true,
+              completedAt: true,
+              createdAt: true,
+              updatedAt: true,
+
+              requiresReport: true,
+              reportSubmittedAt: true,
+              reportReviewedAt: true,
+              reportOutcome: true,
+
+              delegatedBy: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                  role: true,
+                },
+              },
+
+              delegatedOnBehalfOf: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                  role: true,
+                },
+              },
+
+              matter: {
+                select: {
+                  id: true,
+                  referenceNumber: true,
+                  title: true,
+                },
+              },
+
+              assignedTo: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                  role: true,
+                },
+              },
+
+              createdBy: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                  role: true,
+                },
+              },
+            },
+          });
+
+        // =================================================
+        // TASK ACTIVITY
+        // =================================================
+
+        await tx.taskActivity.create({
+          data: {
+            taskId:
+              createdTask.id,
+
+            userId:
+              user.id,
+
+            action:
+              "TASK_DELEGATED",
+
+            description:
+              delegatedOnBehalfOfId
+                ? `Task "${createdTask.title}" was delegated to ${
+                    createdTask.assignedTo?.name ||
+                    "the assigned employee"
+                  } on behalf of ${
+                    createdTask
+                      .delegatedOnBehalfOf
+                      ?.name ||
+                    "the Director"
+                  }.`
+                : `Task "${createdTask.title}" was delegated by ${user.name}.`,
+
+            metadata: {
+              taskId:
+                createdTask.id,
+
+              assignedToId:
+                createdTask.assignedTo?.id ??
+                null,
+
+              delegatedById:
+                user.id,
+
+              delegatedOnBehalfOfId,
+
+              requiresReport,
+
+              matterId:
+                createdTask.matter?.id ??
+                null,
+            },
           },
-        },
+        });
 
-        assignedTo: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            role: true,
-          },
-        },
-
-        createdBy: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            role: true,
-          },
-        },
-      },
-    });
+        return createdTask;
+      }
+    );
 
     // =====================================================
     // AUDIT LOG
@@ -540,44 +773,85 @@ export async function POST(request: Request) {
 
     await createAuditLog({
       request,
+
       firmId,
-      userId: user.id,
-      action: "CREATE",
-      entityType: "Task",
-      entityId: task.id,
+
+      userId:
+        user.id,
+
+      action:
+        "CREATE",
+
+      entityType:
+        "Task",
+
+      entityId:
+        task.id,
+
       description:
-        `Created task: ${task.title}`,
+        `Delegated task: ${task.title}`,
+
       metadata: {
-        taskId: task.id,
-        taskTitle: task.title,
-        description: task.description,
-        status: task.status,
-        priority: task.priority,
+        taskId:
+          task.id,
+
+        taskTitle:
+          task.title,
+
+        description:
+          task.description,
+
+        status:
+          task.status,
+
+        priority:
+          task.priority,
+
         matterId:
-          task.matter?.id ?? null,
+          task.matter?.id ??
+          null,
+
         matterReference:
-          task.matter?.referenceNumber ?? null,
+          task.matter?.referenceNumber ??
+          null,
+
         assignedToId:
-          task.assignedTo?.id ?? null,
+          task.assignedTo?.id ??
+          null,
+
         assignedToName:
-          task.assignedTo?.name ?? null,
-        dueDate: task.dueDate,
-        completedAt: task.completedAt,
+          task.assignedTo?.name ??
+          null,
+
+        delegatedById:
+          task.delegatedBy?.id ??
+          null,
+
+        delegatedByName:
+          task.delegatedBy?.name ??
+          null,
+
+        delegatedOnBehalfOfId:
+          task.delegatedOnBehalfOf?.id ??
+          null,
+
+        delegatedOnBehalfOfName:
+          task.delegatedOnBehalfOf?.name ??
+          null,
+
+        requiresReport:
+          task.requiresReport,
+
+        dueDate:
+          task.dueDate,
+
+        completedAt:
+          task.completedAt,
       },
     });
 
     // =====================================================
     // NOTIFICATION
-    // =====================================================
-    //
-    // Notify the assigned user when a new task is
-    // assigned to them.
-    //
-    // Do not notify the creator when they assign a task
-    // to themselves.
-    //
-    // Notification errors must NEVER cause the task
-    // creation itself to fail.
     // =====================================================
 
     try {
@@ -585,16 +859,41 @@ export async function POST(request: Request) {
         task.assignedTo?.id &&
         task.assignedTo.id !== user.id
       ) {
+        let message =
+          `You have been assigned the task "${task.title}".`;
+
+        if (
+          task.matter?.referenceNumber
+        ) {
+          message +=
+            ` Matter: ${task.matter.referenceNumber}.`;
+        }
+
+        if (task.requiresReport) {
+          message +=
+            " A report back is required.";
+        }
+
+        if (
+          task.delegatedOnBehalfOf?.name
+        ) {
+          message +=
+            ` Delegated on behalf of ${task.delegatedOnBehalfOf.name}.`;
+        }
+
         await createNotification({
           firmId,
-          userId: task.assignedTo.id,
-          type: "TASK",
-          title: "New task assigned",
-          message:
-            `You have been assigned the task "${task.title}".` +
-            (task.matter?.referenceNumber
-              ? ` Matter: ${task.matter.referenceNumber}.`
-              : ""),
+
+          userId:
+            task.assignedTo.id,
+
+          type:
+            "TASK",
+
+          title:
+            "New task delegated",
+
+          message,
         });
       }
     } catch (notificationError) {
@@ -625,7 +924,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        error: "Failed to create task.",
+        error:
+          "Failed to create task.",
       },
       {
         status: 500,

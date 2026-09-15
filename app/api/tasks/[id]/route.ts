@@ -3,12 +3,12 @@ import { prisma } from "@/lib/prisma";
 import { createAuditLog } from "@/lib/audit";
 import { requirePermission } from "@/lib/permissions-server";
 import { createNotification } from "@/lib/notifications";
-
-type RouteContext = {
-  params: Promise<{
-    id: string;
-  }>;
-};
+import {
+  canAccessTask,
+  canUpdateTask,
+  getActiveTaskUser,
+  isManagementRole,
+} from "@/lib/task-authorization";
 
 const ALLOWED_STATUSES = [
   "TODO",
@@ -24,643 +24,817 @@ const ALLOWED_PRIORITIES = [
   "URGENT",
 ] as const;
 
-// =====================================================
-// GET /api/tasks/[id]
-// =====================================================
+type RouteContext = {
+  params: Promise<{ id: string }>;
+};
+
+function isValidStatus(
+  value: unknown,
+): value is (typeof ALLOWED_STATUSES)[number] {
+  return (
+    typeof value === "string" &&
+    ALLOWED_STATUSES.includes(
+      value as (typeof ALLOWED_STATUSES)[number],
+    )
+  );
+}
+
+function isValidPriority(
+  value: unknown,
+): value is (typeof ALLOWED_PRIORITIES)[number] {
+  return (
+    typeof value === "string" &&
+    ALLOWED_PRIORITIES.includes(
+      value as (typeof ALLOWED_PRIORITIES)[number],
+    )
+  );
+}
+
+function parseOptionalDate(value: unknown): Date | null | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if (value === null || value === "") {
+    return null;
+  }
+
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  const parsed = new Date(value);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return undefined;
+  }
+
+  return parsed;
+}
 
 export async function GET(
   request: Request,
-  { params }: RouteContext
+  context: RouteContext,
 ) {
+  const permission = await requirePermission("tasks.view");
+
+  if (!permission.authorized) {
+    return permission.response;
+  }
+
   try {
-    const authorization =
-      await requirePermission("tasks.view");
+    const session = permission.session;
 
-    if (!authorization.authorized) {
-      return authorization.response;
-    }
-
-    const session = authorization.session;
-    const { id } = await params;
-
-    // Verify that the authenticated user is still active
-    // and belongs to the same firm.
-    const user = await prisma.user.findFirst({
-      where: {
-        id: session.user.id,
-        firmId: session.user.firmId,
-        status: "ACTIVE",
-      },
-      select: {
-        id: true,
-        firmId: true,
-      },
-    });
-
-    if (!user) {
+    if (!session.user?.id || !session.user.firmId) {
       return NextResponse.json(
-        {
-          error:
-            "User account is inactive or invalid.",
-        },
-        { status: 403 }
+        { error: "Unauthorized" },
+        { status: 401 },
       );
     }
 
-    // Tenant boundary:
-    // The task must belong to the authenticated user's firm.
+    const { id } = await context.params;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Task ID is required" },
+        { status: 400 },
+      );
+    }
+
+    const user = await getActiveTaskUser(
+      session.user.id,
+      session.user.firmId,
+    );
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "Active user account not found" },
+        { status: 403 },
+      );
+    }
+
+    const authorization = await canAccessTask({
+      taskId: id,
+      userId: user.id,
+      firmId: user.firmId,
+    });
+
+    if (!authorization.allowed) {
+      return NextResponse.json(
+        {
+          error:
+            authorization.reason ??
+            "You are not authorized to access this task",
+        },
+        { status: 403 },
+      );
+    }
+
     const task = await prisma.task.findFirst({
       where: {
         id,
         firmId: user.firmId,
       },
-      include: {
+      select: {
+        id: true,
+        firmId: true,
+        title: true,
+        description: true,
+        status: true,
+        priority: true,
+        dueDate: true,
+        completedAt: true,
+        createdAt: true,
+        updatedAt: true,
+
+        requiresReport: true,
+        reportSubmittedAt: true,
+        reportReviewedAt: true,
+        reportOutcome: true,
+
         matter: {
-          include: {
-            client: true,
+          select: {
+            id: true,
+            title: true,
+            client: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
-        assignedTo: true,
-        createdBy: true,
+
+        assignedTo: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+          },
+        },
+
+        createdBy: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+          },
+        },
+
+        delegatedBy: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+          },
+        },
+
+        delegatedOnBehalfOf: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+          },
+        },
+
+        reports: {
+          orderBy: {
+            submittedAt: "desc",
+          },
+          select: {
+            id: true,
+            submittedById: true,
+            outcome: true,
+            report: true,
+            nextAction: true,
+            submittedAt: true,
+            reviewedAt: true,
+            reviewedById: true,
+            reviewNote: true,
+            submittedBy: {
+              select: {
+                id: true,
+                name: true,
+                role: true,
+              },
+            },
+            reviewedBy: {
+              select: {
+                id: true,
+                name: true,
+                role: true,
+              },
+            },
+          },
+        },
+
+        assistanceRequests: {
+          orderBy: {
+            createdAt: "desc",
+          },
+          select: {
+            id: true,
+            requestedById: true,
+            reason: true,
+            response: true,
+            status: true,
+            respondedAt: true,
+            createdAt: true,
+            updatedAt: true,
+            requestedBy: {
+              select: {
+                id: true,
+                name: true,
+                role: true,
+              },
+            },
+          },
+        },
       },
     });
 
     if (!task) {
       return NextResponse.json(
-        {
-          error: "Task not found.",
-        },
-        { status: 404 }
+        { error: "Task not found" },
+        { status: 404 },
       );
     }
 
     await createAuditLog({
-      request,
       firmId: user.firmId,
       userId: user.id,
       action: "READ",
-      entityType: "Task",
+      entityType: "TASK",
       entityId: task.id,
-      description: `Viewed task ${task.title}.`,
-      metadata: {
-        taskId: task.id,
-        taskTitle: task.title,
-        status: task.status,
-        priority: task.priority,
-        matterId: task.matterId,
-        matterReference:
-          task.matter?.referenceNumber ?? null,
-        assignedToId: task.assignedToId,
-        createdById: task.createdById,
-      },
+      description: `Viewed task "${task.title}"`,
+      request,
     });
 
     return NextResponse.json({
+      success: true,
       task,
     });
   } catch (error) {
-    console.error(
-      "GET TASK ERROR:",
-      error
-    );
+    console.error("GET /api/tasks/[id] error:", error);
 
     return NextResponse.json(
-      {
-        error: "Failed to load task.",
-      },
-      {
-        status: 500,
-      }
+      { error: "Failed to load task" },
+      { status: 500 },
     );
   }
 }
 
-// =====================================================
-// PATCH /api/tasks/[id]
-// Update task
-// =====================================================
-
 export async function PATCH(
   request: Request,
-  { params }: RouteContext
+  context: RouteContext,
 ) {
-  try {
-    const authorization =
-      await requirePermission("tasks.update");
+  const permission = await requirePermission("tasks.update");
 
-    if (!authorization.authorized) {
-      return authorization.response;
+  if (!permission.authorized) {
+    return permission.response;
+  }
+
+  try {
+    const session = permission.session;
+
+    if (!session.user?.id || !session.user.firmId) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 },
+      );
     }
 
-    const session = authorization.session;
-    const { id } = await params;
+    const { id } = await context.params;
 
-    // Verify authenticated user is active and belongs
-    // to the same firm.
-    const user = await prisma.user.findFirst({
-      where: {
-        id: session.user.id,
-        firmId: session.user.firmId,
-        status: "ACTIVE",
-      },
-      select: {
-        id: true,
-        firmId: true,
-      },
-    });
+    if (!id) {
+      return NextResponse.json(
+        { error: "Task ID is required" },
+        { status: 400 },
+      );
+    }
+
+    const user = await getActiveTaskUser(
+      session.user.id,
+      session.user.firmId,
+    );
 
     if (!user) {
       return NextResponse.json(
+        { error: "Active user account not found" },
+        { status: 403 },
+      );
+    }
+
+    const authorization = await canUpdateTask({
+      taskId: id,
+      userId: user.id,
+      firmId: user.firmId,
+    });
+
+    if (!authorization.allowed) {
+      return NextResponse.json(
         {
           error:
-            "User account is inactive or invalid.",
+            authorization.reason ??
+            "You are not authorized to update this task",
         },
-        {
-          status: 403,
-        }
+        { status: 403 },
       );
     }
 
-    // Tenant boundary:
-    // Never retrieve a task without verifying its firm.
-    const existingTask =
-      await prisma.task.findFirst({
-        where: {
-          id,
-          firmId: user.firmId,
-        },
-      });
-
-    if (!existingTask) {
-      return NextResponse.json(
-        {
-          error: "Task not found.",
-        },
-        {
-          status: 404,
-        }
-      );
-    }
-
-    let body: Record<string, unknown>;
-
-    try {
-      body = await request.json();
-    } catch {
-      return NextResponse.json(
-        {
-          error: "Invalid request body.",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    const data: {
-      title?: string;
-      description?: string | null;
-      status?:
-        | "TODO"
-        | "IN_PROGRESS"
-        | "COMPLETED"
-        | "CANCELLED";
-      priority?:
-        | "LOW"
-        | "MEDIUM"
-        | "HIGH"
-        | "URGENT";
-      assignedToId?: string | null;
-      matterId?: string | null;
-      dueDate?: Date | null;
-      completedAt?: Date | null;
-    } = {};
-
-    // -------------------------------------------------
-    // TITLE
-    // -------------------------------------------------
-
-    if (body.title !== undefined) {
-      const title = String(body.title).trim();
-
-      if (!title) {
-        return NextResponse.json(
-          {
-            error: "Task title is required.",
-          },
-          {
-            status: 400,
-          }
-        );
-      }
-
-      data.title = title;
-    }
-
-    // -------------------------------------------------
-    // DESCRIPTION
-    // -------------------------------------------------
-
-    if (body.description !== undefined) {
-      const description = String(
-        body.description || ""
-      ).trim();
-
-      data.description =
-        description || null;
-    }
-
-    // -------------------------------------------------
-    // STATUS
-    // -------------------------------------------------
-
-    if (body.status !== undefined) {
-      if (
-        !ALLOWED_STATUSES.includes(
-          body.status as (typeof ALLOWED_STATUSES)[number]
-        )
-      ) {
-        return NextResponse.json(
-          {
-            error: "Invalid task status.",
-          },
-          {
-            status: 400,
-          }
-        );
-      }
-
-      data.status =
-        body.status as (typeof ALLOWED_STATUSES)[number];
-
-      if (body.status === "COMPLETED") {
-        data.completedAt = new Date();
-      } else {
-        data.completedAt = null;
-      }
-    }
-
-    // -------------------------------------------------
-    // PRIORITY
-    // -------------------------------------------------
-
-    if (body.priority !== undefined) {
-      if (
-        !ALLOWED_PRIORITIES.includes(
-          body.priority as (typeof ALLOWED_PRIORITIES)[number]
-        )
-      ) {
-        return NextResponse.json(
-          {
-            error: "Invalid task priority.",
-          },
-          {
-            status: 400,
-          }
-        );
-      }
-
-      data.priority =
-        body.priority as (typeof ALLOWED_PRIORITIES)[number];
-    }
-
-    // -------------------------------------------------
-    // ASSIGNED USER
-    // -------------------------------------------------
-
-    if (body.assignedToId !== undefined) {
-      if (!body.assignedToId) {
-        data.assignedToId = null;
-      } else {
-        const assignedUser =
-          await prisma.user.findFirst({
-            where: {
-              id: String(body.assignedToId),
-              firmId: user.firmId,
-              status: "ACTIVE",
-            },
-            select: {
-              id: true,
-            },
-          });
-
-        if (!assignedUser) {
-          return NextResponse.json(
-            {
-              error:
-                "The selected user is not an active user of your firm.",
-            },
-            {
-              status: 403,
-            }
-          );
-        }
-
-        data.assignedToId =
-          assignedUser.id;
-      }
-    }
-
-    // -------------------------------------------------
-    // MATTER
-    // -------------------------------------------------
-
-    if (body.matterId !== undefined) {
-      if (!body.matterId) {
-        data.matterId = null;
-      } else {
-        const matter =
-          await prisma.matter.findFirst({
-            where: {
-              id: String(body.matterId),
-              firmId: user.firmId,
-            },
-            select: {
-              id: true,
-            },
-          });
-
-        if (!matter) {
-          return NextResponse.json(
-            {
-              error:
-                "The selected matter does not belong to your firm.",
-            },
-            {
-              status: 403,
-            }
-          );
-        }
-
-        data.matterId = matter.id;
-      }
-    }
-
-    // -------------------------------------------------
-    // DUE DATE
-    // -------------------------------------------------
-
-    if (body.dueDate !== undefined) {
-      if (!body.dueDate) {
-        data.dueDate = null;
-      } else {
-        const parsedDate =
-          new Date(String(body.dueDate));
-
-        if (
-          Number.isNaN(
-            parsedDate.getTime()
-          )
-        ) {
-          return NextResponse.json(
-            {
-              error: "Invalid due date.",
-            },
-            {
-              status: 400,
-            }
-          );
-        }
-
-        data.dueDate = parsedDate;
-      }
-    }
-
-    // -------------------------------------------------
-    // UPDATE
-    // -------------------------------------------------
-
-    const updatedTask =
-      await prisma.$transaction(
-        async (tx) => {
-          const task =
-            await tx.task.update({
-              where: {
-                id: existingTask.id,
-              },
-              data,
-              include: {
-                matter: {
-                  include: {
-                    client: true,
-                  },
-                },
-                assignedTo: true,
-                createdBy: true,
-              },
-            });
-
-          return task;
-        }
-      );
-
-    // -------------------------------------------------
-    // AUDIT CHANGES
-    // -------------------------------------------------
-
-    const changes: Record<
-      string,
-      {
-        previous: unknown;
-        new: unknown;
-      }
-    > = {};
-
-    if (data.title !== undefined) {
-      changes.title = {
-        previous: existingTask.title,
-        new: updatedTask.title,
-      };
-    }
-
-    if (
-      data.description !== undefined
-    ) {
-      changes.description = {
-        previous:
-          existingTask.description,
-        new: updatedTask.description,
-      };
-    }
-
-    if (data.status !== undefined) {
-      changes.status = {
-        previous: existingTask.status,
-        new: updatedTask.status,
-      };
-    }
-
-    if (data.priority !== undefined) {
-      changes.priority = {
-        previous:
-          existingTask.priority,
-        new: updatedTask.priority,
-      };
-    }
-
-    if (
-      data.assignedToId !== undefined
-    ) {
-      changes.assignedToId = {
-        previous:
-          existingTask.assignedToId,
-        new: updatedTask.assignedToId,
-      };
-    }
-
-    if (data.matterId !== undefined) {
-      changes.matterId = {
-        previous:
-          existingTask.matterId,
-        new: updatedTask.matterId,
-      };
-    }
-
-    if (data.dueDate !== undefined) {
-      changes.dueDate = {
-        previous:
-          existingTask.dueDate,
-        new: updatedTask.dueDate,
-      };
-    }
-
-    if (
-      data.completedAt !== undefined
-    ) {
-      changes.completedAt = {
-        previous:
-          existingTask.completedAt,
-        new: updatedTask.completedAt,
-      };
-    }
-
-    await createAuditLog({
-      request,
-      firmId: user.firmId,
-      userId: user.id,
-      action: "UPDATE",
-      entityType: "Task",
-      entityId: updatedTask.id,
-      description:
-        `Updated task ${updatedTask.title}.`,
-      metadata: {
-        taskId: updatedTask.id,
-        taskTitle: updatedTask.title,
-        changes,
+    const existingTask = await prisma.task.findFirst({
+      where: {
+        id,
+        firmId: user.firmId,
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        status: true,
+        priority: true,
+        assignedToId: true,
+        matterId: true,
+        dueDate: true,
+        completedAt: true,
+        requiresReport: true,
+        delegatedById: true,
+        delegatedOnBehalfOfId: true,
       },
     });
 
-    // =================================================
-    // NOTIFICATIONS
-    // =================================================
-    //
-    // Notification failures must NEVER cause the task
-    // update itself to fail.
-    //
-    // Notifications are generated only for meaningful
-    // task events:
-    //
-    // 1. Task assigned/reassigned
-    // 2. Task completed
-    //
-    // Ordinary edits do not generate notifications.
-    // =================================================
+    if (!existingTask) {
+      return NextResponse.json(
+        { error: "Task not found" },
+        { status: 404 },
+      );
+    }
 
-    try {
-      const assignmentChanged =
-        data.assignedToId !== undefined &&
-        existingTask.assignedToId !==
-          updatedTask.assignedToId;
+    const body = await request.json();
 
-      const completedNow =
-        existingTask.status !== "COMPLETED" &&
-        updatedTask.status === "COMPLETED";
+    const {
+      title,
+      description,
+      status,
+      priority,
+      assignedToId,
+      matterId,
+      dueDate,
+      requiresReport,
+    } = body;
 
-      // -------------------------------------------------
-      // TASK ASSIGNED / REASSIGNED
-      // -------------------------------------------------
+    if (
+      title !== undefined &&
+      (typeof title !== "string" ||
+        title.trim().length === 0 ||
+        title.trim().length > 200)
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Title must be between 1 and 200 characters",
+        },
+        { status: 400 },
+      );
+    }
 
+    if (
+      description !== undefined &&
+      description !== null &&
+      (typeof description !== "string" ||
+        description.length > 10000)
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Description must not exceed 10,000 characters",
+        },
+        { status: 400 },
+      );
+    }
+
+    if (
+      status !== undefined &&
+      !isValidStatus(status)
+    ) {
+      return NextResponse.json(
+        { error: "Invalid task status" },
+        { status: 400 },
+      );
+    }
+
+    if (
+      priority !== undefined &&
+      !isValidPriority(priority)
+    ) {
+      return NextResponse.json(
+        { error: "Invalid task priority" },
+        { status: 400 },
+      );
+    }
+
+    if (
+      requiresReport !== undefined &&
+      typeof requiresReport !== "boolean"
+    ) {
+      return NextResponse.json(
+        { error: "requiresReport must be a boolean" },
+        { status: 400 },
+      );
+    }
+
+    const parsedDueDate = parseOptionalDate(dueDate);
+
+    if (
+      dueDate !== undefined &&
+      parsedDueDate === undefined
+    ) {
+      return NextResponse.json(
+        { error: "Invalid due date" },
+        { status: 400 },
+      );
+    }
+
+    if (
+      assignedToId !== undefined &&
+      assignedToId !== null
+    ) {
       if (
-        assignmentChanged &&
-        updatedTask.assignedTo?.id &&
-        updatedTask.assignedTo.id !== user.id
+        typeof assignedToId !== "string" ||
+        assignedToId.trim().length === 0
       ) {
+        return NextResponse.json(
+          { error: "Invalid assigned user" },
+          { status: 400 },
+        );
+      }
+
+      const assignedUser = await prisma.user.findFirst({
+        where: {
+          id: assignedToId,
+          firmId: user.firmId,
+          status: "ACTIVE",
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      });
+
+      if (!assignedUser) {
+        return NextResponse.json(
+          {
+            error:
+              "Assigned user does not exist or is not active",
+          },
+          { status: 400 },
+        );
+      }
+    }
+
+    if (
+      matterId !== undefined &&
+      matterId !== null
+    ) {
+      if (
+        typeof matterId !== "string" ||
+        matterId.trim().length === 0
+      ) {
+        return NextResponse.json(
+          { error: "Invalid matter" },
+          { status: 400 },
+        );
+      }
+
+      const matter = await prisma.matter.findFirst({
+        where: {
+          id: matterId,
+          firmId: user.firmId,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (!matter) {
+        return NextResponse.json(
+          {
+            error:
+              "Matter does not exist in this firm",
+          },
+          { status: 400 },
+        );
+      }
+    }
+
+    const nextStatus =
+      status !== undefined
+        ? status
+        : existingTask.status;
+
+    const nextAssignedToId =
+      assignedToId !== undefined
+        ? assignedToId
+        : existingTask.assignedToId;
+
+    const nextRequiresReport =
+      requiresReport !== undefined
+        ? requiresReport
+        : existingTask.requiresReport;
+
+    const isCompleting =
+      nextStatus === "COMPLETED" &&
+      existingTask.status !== "COMPLETED";
+
+    const isReopening =
+      nextStatus !== "COMPLETED" &&
+      existingTask.status === "COMPLETED";
+
+    const updatedTask = await prisma.$transaction(
+      async (tx) => {
+        const task = await tx.task.update({
+          where: {
+            id: existingTask.id,
+          },
+          data: {
+            ...(title !== undefined
+              ? { title: title.trim() }
+              : {}),
+
+            ...(description !== undefined
+              ? {
+                  description:
+                    description === null
+                      ? null
+                      : description.trim(),
+                }
+              : {}),
+
+            ...(status !== undefined
+              ? {
+                  status,
+                  completedAt:
+                    status === "COMPLETED"
+                      ? existingTask.completedAt ??
+                        new Date()
+                      : null,
+                }
+              : {}),
+
+            ...(priority !== undefined
+              ? { priority }
+              : {}),
+
+            ...(assignedToId !== undefined
+              ? { assignedToId }
+              : {}),
+
+            ...(matterId !== undefined
+              ? { matterId }
+              : {}),
+
+            ...(dueDate !== undefined
+              ? { dueDate: parsedDueDate ?? null }
+              : {}),
+
+            ...(requiresReport !== undefined
+              ? { requiresReport }
+              : {}),
+          },
+
+          select: {
+            id: true,
+            firmId: true,
+            title: true,
+            description: true,
+            status: true,
+            priority: true,
+            assignedToId: true,
+            matterId: true,
+            dueDate: true,
+            completedAt: true,
+            requiresReport: true,
+            reportSubmittedAt: true,
+            reportReviewedAt: true,
+            reportOutcome: true,
+            createdAt: true,
+            updatedAt: true,
+
+            matter: {
+              select: {
+                id: true,
+                title: true,
+                client: {
+                  select: {
+                    id: true,
+                    name: true,
+                  },
+                },
+              },
+            },
+
+            assignedTo: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+              },
+            },
+
+            createdBy: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+              },
+            },
+
+            delegatedBy: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+              },
+            },
+
+            delegatedOnBehalfOf: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+              },
+            },
+          },
+        });
+
+        await tx.taskActivity.create({
+          data: {
+            taskId: task.id,
+            userId: user.id,
+            action: "TASK_UPDATED",
+            description: `Task "${task.title}" was updated`,
+            metadata: {
+              previousStatus: existingTask.status,
+              newStatus: task.status,
+              previousPriority: existingTask.priority,
+              newPriority: task.priority,
+              previousAssignedToId:
+                existingTask.assignedToId,
+              newAssignedToId: task.assignedToId,
+              previousMatterId:
+                existingTask.matterId,
+              newMatterId: task.matterId,
+              previousRequiresReport:
+                existingTask.requiresReport,
+              newRequiresReport:
+                task.requiresReport,
+              isCompleting,
+              isReopening,
+            },
+          },
+        });
+
+        return task;
+      },
+    );
+
+    await createAuditLog({
+      firmId: user.firmId,
+      userId: user.id,
+      action: "UPDATE",
+      entityType: "TASK",
+      entityId: updatedTask.id,
+      description: `Updated task "${updatedTask.title}"`,
+      metadata: {
+        previousStatus: existingTask.status,
+        newStatus: updatedTask.status,
+        previousPriority: existingTask.priority,
+        newPriority: updatedTask.priority,
+        previousAssignedToId:
+          existingTask.assignedToId,
+        newAssignedToId:
+          updatedTask.assignedToId,
+        previousMatterId:
+          existingTask.matterId,
+        newMatterId:
+          updatedTask.matterId,
+        previousRequiresReport:
+          existingTask.requiresReport,
+        newRequiresReport:
+          updatedTask.requiresReport,
+        delegatedById:
+          updatedTask.delegatedBy?.id ?? null,
+        delegatedOnBehalfOfId:
+          updatedTask.delegatedOnBehalfOf?.id ?? null,
+      },
+      request,
+    });
+
+    /*
+     * Notify a newly assigned employee.
+     */
+    if (
+      updatedTask.assignedToId &&
+      updatedTask.assignedToId !==
+        existingTask.assignedToId
+    ) {
+      try {
         await createNotification({
           firmId: user.firmId,
-          userId: updatedTask.assignedTo.id,
+          userId: updatedTask.assignedToId,
           type: "TASK",
-          title:
-            existingTask.assignedToId
-              ? "Task reassigned"
-              : "New task assigned",
-          message:
-            existingTask.assignedToId
-              ? `The task "${updatedTask.title}" has been reassigned to you.`
-              : `You have been assigned the task "${updatedTask.title}".`,
+          title: "Task assigned to you",
+          message: `You have been assigned the task "${updatedTask.title}".`,
         });
+      } catch (notificationError) {
+        console.error(
+          "Task assignment notification failed:",
+          notificationError,
+        );
       }
+    }
 
-      // -------------------------------------------------
-      // TASK COMPLETED
-      // -------------------------------------------------
-
-      if (completedNow) {
-        const notifiedUserIds =
-          new Set<string>();
-
-        // Notify the assigned user if another user
-        // completed the task.
-        if (
-          updatedTask.assignedTo?.id &&
-          updatedTask.assignedTo.id !== user.id
-        ) {
-          await createNotification({
-            firmId: user.firmId,
-            userId: updatedTask.assignedTo.id,
-            type: "TASK",
-            title: "Task completed",
-            message:
-              `The task "${updatedTask.title}" has been marked as completed.` +
-              (updatedTask.matter?.referenceNumber
-                ? ` Matter: ${updatedTask.matter.referenceNumber}.`
-                : ""),
-          });
-
-          notifiedUserIds.add(
-            updatedTask.assignedTo.id
-          );
-        }
-
-        // Notify the creator when someone else completes
-        // the task.
-        //
-        // If the creator is also the assignee, the
-        // assignee notification above already covers them.
-        if (
-          updatedTask.createdBy?.id &&
-          updatedTask.createdBy.id !== user.id &&
-          !notifiedUserIds.has(
-            updatedTask.createdBy.id
-          )
-        ) {
-          await createNotification({
-            firmId: user.firmId,
-            userId: updatedTask.createdBy.id,
-            type: "TASK",
-            title: "Task completed",
-            message:
-              `The task "${updatedTask.title}" that you created has been completed.` +
-              (updatedTask.matter?.referenceNumber
-                ? ` Matter: ${updatedTask.matter.referenceNumber}.`
-                : ""),
-          });
-        }
+    /*
+     * Notify the assigned employee when a task is completed.
+     */
+    if (
+      isCompleting &&
+      updatedTask.assignedToId &&
+      updatedTask.assignedToId !== user.id
+    ) {
+      try {
+        await createNotification({
+          firmId: user.firmId,
+          userId: updatedTask.assignedToId,
+          type: "TASK",
+          title: "Task completed",
+          message: `The task "${updatedTask.title}" has been marked as completed.`,
+        });
+      } catch (notificationError) {
+        console.error(
+          "Task completion notification failed:",
+          notificationError,
+        );
       }
-    } catch (notificationError) {
-      console.error(
-        "TASK NOTIFICATION ERROR:",
-        notificationError
-      );
+    }
+
+    /*
+     * Notify the task creator when the task is completed.
+     */
+    if (
+      isCompleting &&
+      updatedTask.createdBy &&
+      updatedTask.createdBy.id !== user.id
+    ) {
+      try {
+        await createNotification({
+          firmId: user.firmId,
+          userId: updatedTask.createdBy.id,
+          type: "TASK",
+          title: "Task completed",
+          message: `The task "${updatedTask.title}" has been marked as completed.`,
+        });
+      } catch (notificationError) {
+        console.error(
+          "Task creator notification failed:",
+          notificationError,
+        );
+      }
+    }
+
+    /*
+     * Notify the represented Director/Managing Partner if
+     * someone else changes the task.
+     */
+    if (
+      updatedTask.delegatedOnBehalfOf &&
+      updatedTask.delegatedOnBehalfOf.id !== user.id &&
+      updatedTask.delegatedOnBehalfOf.id !==
+        updatedTask.assignedToId
+    ) {
+      try {
+        await createNotification({
+          firmId: user.firmId,
+          userId: updatedTask.delegatedOnBehalfOf.id,
+          type: "TASK",
+          title: "Delegated task updated",
+          message: `The delegated task "${updatedTask.title}" has been updated.`,
+        });
+      } catch (notificationError) {
+        console.error(
+          "Delegated task notification failed:",
+          notificationError,
+        );
+      }
     }
 
     return NextResponse.json({
@@ -668,138 +842,130 @@ export async function PATCH(
       task: updatedTask,
     });
   } catch (error) {
-    console.error(
-      "UPDATE TASK ERROR:",
-      error
-    );
+    console.error("PATCH /api/tasks/[id] error:", error);
 
     return NextResponse.json(
-      {
-        error: "Failed to update task.",
-      },
-      {
-        status: 500,
-      }
+      { error: "Failed to update task" },
+      { status: 500 },
     );
   }
 }
 
-// =====================================================
-// DELETE /api/tasks/[id]
-// =====================================================
-
 export async function DELETE(
   request: Request,
-  { params }: RouteContext
+  context: RouteContext,
 ) {
-  try {
-    const authorization =
-      await requirePermission(
-        "tasks.delete"
-      );
+  const permission = await requirePermission("tasks.delete");
 
-    if (!authorization.authorized) {
-      return authorization.response;
+  if (!permission.authorized) {
+    return permission.response;
+  }
+
+  try {
+    const session = permission.session;
+
+    if (!session.user?.id || !session.user.firmId) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 },
+      );
     }
 
-    const session = authorization.session;
-    const { id } = await params;
+    const { id } = await context.params;
 
-    // Verify authenticated user is active and belongs
-    // to the same firm.
-    const user = await prisma.user.findFirst({
-      where: {
-        id: session.user.id,
-        firmId: session.user.firmId,
-        status: "ACTIVE",
-      },
-      select: {
-        id: true,
-        firmId: true,
-      },
-    });
+    if (!id) {
+      return NextResponse.json(
+        { error: "Task ID is required" },
+        { status: 400 },
+      );
+    }
+
+    const user = await getActiveTaskUser(
+      session.user.id,
+      session.user.firmId,
+    );
 
     if (!user) {
       return NextResponse.json(
-        {
-          error:
-            "User account is inactive or invalid.",
-        },
-        {
-          status: 403,
-        }
+        { error: "Active user account not found" },
+        { status: 403 },
       );
     }
 
-    // Tenant boundary:
-    // A task from another firm is invisible.
+    const authorization = await canUpdateTask({
+      taskId: id,
+      userId: user.id,
+      firmId: user.firmId,
+    });
+
+    if (!authorization.allowed) {
+      return NextResponse.json(
+        {
+          error:
+            authorization.reason ??
+            "You are not authorized to delete this task",
+        },
+        { status: 403 },
+      );
+    }
+
     const task = await prisma.task.findFirst({
       where: {
         id,
         firmId: user.firmId,
       },
+      select: {
+        id: true,
+        title: true,
+        assignedToId: true,
+        createdById: true,
+        delegatedById: true,
+        delegatedOnBehalfOfId: true,
+      },
     });
 
     if (!task) {
       return NextResponse.json(
-        {
-          error: "Task not found.",
-        },
-        {
-          status: 404,
-        }
+        { error: "Task not found" },
+        { status: 404 },
       );
     }
 
-    await prisma.$transaction(
-      async (tx) => {
-        await tx.task.delete({
-          where: {
-            id: task.id,
-          },
-        });
-      }
-    );
+    await prisma.$transaction(async (tx) => {
+      await tx.task.delete({
+        where: {
+          id: task.id,
+        },
+      });
+    });
 
     await createAuditLog({
-      request,
       firmId: user.firmId,
       userId: user.id,
       action: "DELETE",
-      entityType: "Task",
+      entityType: "TASK",
       entityId: task.id,
-      description:
-        `Deleted task ${task.title}.`,
+      description: `Deleted task "${task.title}"`,
       metadata: {
-        taskId: task.id,
-        taskTitle: task.title,
-        status: task.status,
-        priority: task.priority,
-        assignedToId:
-          task.assignedToId,
-        matterId: task.matterId,
-        dueDate: task.dueDate,
-        completedAt:
-          task.completedAt,
+        assignedToId: task.assignedToId,
+        createdById: task.createdById,
+        delegatedById: task.delegatedById,
+        delegatedOnBehalfOfId:
+          task.delegatedOnBehalfOfId,
       },
+      request,
     });
 
     return NextResponse.json({
       success: true,
+      message: "Task deleted successfully",
     });
   } catch (error) {
-    console.error(
-      "DELETE TASK ERROR:",
-      error
-    );
+    console.error("DELETE /api/tasks/[id] error:", error);
 
     return NextResponse.json(
-      {
-        error: "Failed to delete task.",
-      },
-      {
-        status: 500,
-      }
+      { error: "Failed to delete task" },
+      { status: 500 },
     );
   }
 }

@@ -224,6 +224,7 @@ export type FirmWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Firm"> | Date | string
   auditLogs?: Prisma.AuditLogListRelationFilter
   clients?: Prisma.ClientListRelationFilter
+  conflictChecks?: Prisma.ConflictCheckListRelationFilter
   deadlines?: Prisma.DeadlineListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   financeDocuments?: Prisma.FinanceDocumentListRelationFilter
@@ -231,13 +232,12 @@ export type FirmWhereInput = {
   folders?: Prisma.FolderListRelationFilter
   matters?: Prisma.MatterListRelationFilter
   accessRequests?: Prisma.MatterAccessRequestListRelationFilter
+  intakes?: Prisma.MatterIntakeListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   tasks?: Prisma.TaskListRelationFilter
   users?: Prisma.UserListRelationFilter
-  conflictChecks?: Prisma.ConflictCheckListRelationFilter
-  matterIntakes?: Prisma.MatterIntakeListRelationFilter
 }
 
 export type FirmOrderByWithRelationInput = {
@@ -253,6 +253,7 @@ export type FirmOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   clients?: Prisma.ClientOrderByRelationAggregateInput
+  conflictChecks?: Prisma.ConflictCheckOrderByRelationAggregateInput
   deadlines?: Prisma.DeadlineOrderByRelationAggregateInput
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   financeDocuments?: Prisma.FinanceDocumentOrderByRelationAggregateInput
@@ -260,13 +261,12 @@ export type FirmOrderByWithRelationInput = {
   folders?: Prisma.FolderOrderByRelationAggregateInput
   matters?: Prisma.MatterOrderByRelationAggregateInput
   accessRequests?: Prisma.MatterAccessRequestOrderByRelationAggregateInput
+  intakes?: Prisma.MatterIntakeOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
-  conflictChecks?: Prisma.ConflictCheckOrderByRelationAggregateInput
-  matterIntakes?: Prisma.MatterIntakeOrderByRelationAggregateInput
 }
 
 export type FirmWhereUniqueInput = Prisma.AtLeast<{
@@ -285,6 +285,7 @@ export type FirmWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Firm"> | Date | string
   auditLogs?: Prisma.AuditLogListRelationFilter
   clients?: Prisma.ClientListRelationFilter
+  conflictChecks?: Prisma.ConflictCheckListRelationFilter
   deadlines?: Prisma.DeadlineListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   financeDocuments?: Prisma.FinanceDocumentListRelationFilter
@@ -292,13 +293,12 @@ export type FirmWhereUniqueInput = Prisma.AtLeast<{
   folders?: Prisma.FolderListRelationFilter
   matters?: Prisma.MatterListRelationFilter
   accessRequests?: Prisma.MatterAccessRequestListRelationFilter
+  intakes?: Prisma.MatterIntakeListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   tasks?: Prisma.TaskListRelationFilter
   users?: Prisma.UserListRelationFilter
-  conflictChecks?: Prisma.ConflictCheckListRelationFilter
-  matterIntakes?: Prisma.MatterIntakeListRelationFilter
 }, "id" | "referenceNumber">
 
 export type FirmOrderByWithAggregationInput = {
@@ -346,6 +346,7 @@ export type FirmCreateInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -353,13 +354,12 @@ export type FirmCreateInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateInput = {
@@ -375,6 +375,7 @@ export type FirmUncheckedCreateInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -382,13 +383,12 @@ export type FirmUncheckedCreateInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUpdateInput = {
@@ -404,6 +404,7 @@ export type FirmUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -411,13 +412,12 @@ export type FirmUpdateInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateInput = {
@@ -433,6 +433,7 @@ export type FirmUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -440,13 +441,12 @@ export type FirmUncheckedUpdateInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateManyInput = {
@@ -740,20 +740,6 @@ export type FirmUpdateOneRequiredWithoutAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FirmUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.FirmUpdateWithoutAuditLogsInput>, Prisma.FirmUncheckedUpdateWithoutAuditLogsInput>
 }
 
-export type FirmCreateNestedOneWithoutMatterIntakesInput = {
-  create?: Prisma.XOR<Prisma.FirmCreateWithoutMatterIntakesInput, Prisma.FirmUncheckedCreateWithoutMatterIntakesInput>
-  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutMatterIntakesInput
-  connect?: Prisma.FirmWhereUniqueInput
-}
-
-export type FirmUpdateOneRequiredWithoutMatterIntakesNestedInput = {
-  create?: Prisma.XOR<Prisma.FirmCreateWithoutMatterIntakesInput, Prisma.FirmUncheckedCreateWithoutMatterIntakesInput>
-  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutMatterIntakesInput
-  upsert?: Prisma.FirmUpsertWithoutMatterIntakesInput
-  connect?: Prisma.FirmWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.FirmUpdateToOneWithWhereWithoutMatterIntakesInput, Prisma.FirmUpdateWithoutMatterIntakesInput>, Prisma.FirmUncheckedUpdateWithoutMatterIntakesInput>
-}
-
 export type FirmCreateNestedOneWithoutConflictChecksInput = {
   create?: Prisma.XOR<Prisma.FirmCreateWithoutConflictChecksInput, Prisma.FirmUncheckedCreateWithoutConflictChecksInput>
   connectOrCreate?: Prisma.FirmCreateOrConnectWithoutConflictChecksInput
@@ -766,6 +752,20 @@ export type FirmUpdateOneRequiredWithoutConflictChecksNestedInput = {
   upsert?: Prisma.FirmUpsertWithoutConflictChecksInput
   connect?: Prisma.FirmWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.FirmUpdateToOneWithWhereWithoutConflictChecksInput, Prisma.FirmUpdateWithoutConflictChecksInput>, Prisma.FirmUncheckedUpdateWithoutConflictChecksInput>
+}
+
+export type FirmCreateNestedOneWithoutIntakesInput = {
+  create?: Prisma.XOR<Prisma.FirmCreateWithoutIntakesInput, Prisma.FirmUncheckedCreateWithoutIntakesInput>
+  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutIntakesInput
+  connect?: Prisma.FirmWhereUniqueInput
+}
+
+export type FirmUpdateOneRequiredWithoutIntakesNestedInput = {
+  create?: Prisma.XOR<Prisma.FirmCreateWithoutIntakesInput, Prisma.FirmUncheckedCreateWithoutIntakesInput>
+  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutIntakesInput
+  upsert?: Prisma.FirmUpsertWithoutIntakesInput
+  connect?: Prisma.FirmWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FirmUpdateToOneWithWhereWithoutIntakesInput, Prisma.FirmUpdateWithoutIntakesInput>, Prisma.FirmUncheckedUpdateWithoutIntakesInput>
 }
 
 export type FirmCreateWithoutSubscriptionInput = {
@@ -781,6 +781,7 @@ export type FirmCreateWithoutSubscriptionInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -788,12 +789,11 @@ export type FirmCreateWithoutSubscriptionInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutSubscriptionInput = {
@@ -809,6 +809,7 @@ export type FirmUncheckedCreateWithoutSubscriptionInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -816,12 +817,11 @@ export type FirmUncheckedCreateWithoutSubscriptionInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutSubscriptionInput = {
@@ -853,6 +853,7 @@ export type FirmUpdateWithoutSubscriptionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -860,12 +861,11 @@ export type FirmUpdateWithoutSubscriptionInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutSubscriptionInput = {
@@ -881,6 +881,7 @@ export type FirmUncheckedUpdateWithoutSubscriptionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -888,12 +889,11 @@ export type FirmUncheckedUpdateWithoutSubscriptionInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutPaymentsInput = {
@@ -909,6 +909,7 @@ export type FirmCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -916,12 +917,11 @@ export type FirmCreateWithoutPaymentsInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutPaymentsInput = {
@@ -937,6 +937,7 @@ export type FirmUncheckedCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -944,12 +945,11 @@ export type FirmUncheckedCreateWithoutPaymentsInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutPaymentsInput = {
@@ -981,6 +981,7 @@ export type FirmUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -988,12 +989,11 @@ export type FirmUpdateWithoutPaymentsInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutPaymentsInput = {
@@ -1009,6 +1009,7 @@ export type FirmUncheckedUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -1016,12 +1017,11 @@ export type FirmUncheckedUpdateWithoutPaymentsInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutUsersInput = {
@@ -1037,6 +1037,7 @@ export type FirmCreateWithoutUsersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -1044,12 +1045,11 @@ export type FirmCreateWithoutUsersInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutUsersInput = {
@@ -1065,6 +1065,7 @@ export type FirmUncheckedCreateWithoutUsersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -1072,12 +1073,11 @@ export type FirmUncheckedCreateWithoutUsersInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutUsersInput = {
@@ -1109,6 +1109,7 @@ export type FirmUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -1116,12 +1117,11 @@ export type FirmUpdateWithoutUsersInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutUsersInput = {
@@ -1137,6 +1137,7 @@ export type FirmUncheckedUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -1144,12 +1145,11 @@ export type FirmUncheckedUpdateWithoutUsersInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutClientsInput = {
@@ -1164,6 +1164,7 @@ export type FirmCreateWithoutClientsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -1171,13 +1172,12 @@ export type FirmCreateWithoutClientsInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutClientsInput = {
@@ -1192,6 +1192,7 @@ export type FirmUncheckedCreateWithoutClientsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -1199,13 +1200,12 @@ export type FirmUncheckedCreateWithoutClientsInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutClientsInput = {
@@ -1236,6 +1236,7 @@ export type FirmUpdateWithoutClientsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -1243,13 +1244,12 @@ export type FirmUpdateWithoutClientsInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutClientsInput = {
@@ -1264,6 +1264,7 @@ export type FirmUncheckedUpdateWithoutClientsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -1271,13 +1272,12 @@ export type FirmUncheckedUpdateWithoutClientsInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutMattersInput = {
@@ -1293,19 +1293,19 @@ export type FirmCreateWithoutMattersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutMattersInput = {
@@ -1321,19 +1321,19 @@ export type FirmUncheckedCreateWithoutMattersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutMattersInput = {
@@ -1365,19 +1365,19 @@ export type FirmUpdateWithoutMattersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutMattersInput = {
@@ -1393,19 +1393,19 @@ export type FirmUncheckedUpdateWithoutMattersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutAccessRequestsInput = {
@@ -1421,19 +1421,19 @@ export type FirmCreateWithoutAccessRequestsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutAccessRequestsInput = {
@@ -1449,19 +1449,19 @@ export type FirmUncheckedCreateWithoutAccessRequestsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutAccessRequestsInput = {
@@ -1493,19 +1493,19 @@ export type FirmUpdateWithoutAccessRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutAccessRequestsInput = {
@@ -1521,19 +1521,19 @@ export type FirmUncheckedUpdateWithoutAccessRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutFoldersInput = {
@@ -1549,19 +1549,19 @@ export type FirmCreateWithoutFoldersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutFoldersInput = {
@@ -1577,19 +1577,19 @@ export type FirmUncheckedCreateWithoutFoldersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutFoldersInput = {
@@ -1621,19 +1621,19 @@ export type FirmUpdateWithoutFoldersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutFoldersInput = {
@@ -1649,19 +1649,19 @@ export type FirmUncheckedUpdateWithoutFoldersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutDocumentsInput = {
@@ -1677,19 +1677,19 @@ export type FirmCreateWithoutDocumentsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutDocumentsInput = {
@@ -1705,19 +1705,19 @@ export type FirmUncheckedCreateWithoutDocumentsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutDocumentsInput = {
@@ -1749,19 +1749,19 @@ export type FirmUpdateWithoutDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutDocumentsInput = {
@@ -1777,19 +1777,19 @@ export type FirmUncheckedUpdateWithoutDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutFinanceFoldersInput = {
@@ -1805,19 +1805,19 @@ export type FirmCreateWithoutFinanceFoldersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutFinanceFoldersInput = {
@@ -1833,19 +1833,19 @@ export type FirmUncheckedCreateWithoutFinanceFoldersInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutFinanceFoldersInput = {
@@ -1877,19 +1877,19 @@ export type FirmUpdateWithoutFinanceFoldersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutFinanceFoldersInput = {
@@ -1905,19 +1905,19 @@ export type FirmUncheckedUpdateWithoutFinanceFoldersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutFinanceDocumentsInput = {
@@ -1933,19 +1933,19 @@ export type FirmCreateWithoutFinanceDocumentsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutFinanceDocumentsInput = {
@@ -1961,19 +1961,19 @@ export type FirmUncheckedCreateWithoutFinanceDocumentsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutFinanceDocumentsInput = {
@@ -2005,19 +2005,19 @@ export type FirmUpdateWithoutFinanceDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutFinanceDocumentsInput = {
@@ -2033,19 +2033,19 @@ export type FirmUncheckedUpdateWithoutFinanceDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutTasksInput = {
@@ -2061,6 +2061,7 @@ export type FirmCreateWithoutTasksInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -2068,12 +2069,11 @@ export type FirmCreateWithoutTasksInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutTasksInput = {
@@ -2089,6 +2089,7 @@ export type FirmUncheckedCreateWithoutTasksInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -2096,12 +2097,11 @@ export type FirmUncheckedCreateWithoutTasksInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutTasksInput = {
@@ -2133,6 +2133,7 @@ export type FirmUpdateWithoutTasksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -2140,12 +2141,11 @@ export type FirmUpdateWithoutTasksInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutTasksInput = {
@@ -2161,6 +2161,7 @@ export type FirmUncheckedUpdateWithoutTasksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -2168,12 +2169,11 @@ export type FirmUncheckedUpdateWithoutTasksInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutDeadlinesInput = {
@@ -2189,19 +2189,19 @@ export type FirmCreateWithoutDeadlinesInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutDeadlinesInput = {
@@ -2217,19 +2217,19 @@ export type FirmUncheckedCreateWithoutDeadlinesInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
   financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutDeadlinesInput = {
@@ -2261,19 +2261,19 @@ export type FirmUpdateWithoutDeadlinesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutDeadlinesInput = {
@@ -2289,19 +2289,19 @@ export type FirmUncheckedUpdateWithoutDeadlinesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutNotificationsInput = {
@@ -2317,6 +2317,7 @@ export type FirmCreateWithoutNotificationsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -2324,12 +2325,11 @@ export type FirmCreateWithoutNotificationsInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutNotificationsInput = {
@@ -2345,6 +2345,7 @@ export type FirmUncheckedCreateWithoutNotificationsInput = {
   updatedAt?: Date | string
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -2352,12 +2353,11 @@ export type FirmUncheckedCreateWithoutNotificationsInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutNotificationsInput = {
@@ -2389,6 +2389,7 @@ export type FirmUpdateWithoutNotificationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -2396,12 +2397,11 @@ export type FirmUpdateWithoutNotificationsInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutNotificationsInput = {
@@ -2417,6 +2417,7 @@ export type FirmUncheckedUpdateWithoutNotificationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -2424,12 +2425,11 @@ export type FirmUncheckedUpdateWithoutNotificationsInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutAuditLogsInput = {
@@ -2444,6 +2444,7 @@ export type FirmCreateWithoutAuditLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
@@ -2451,13 +2452,12 @@ export type FirmCreateWithoutAuditLogsInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutAuditLogsInput = {
@@ -2472,6 +2472,7 @@ export type FirmUncheckedCreateWithoutAuditLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
@@ -2479,13 +2480,12 @@ export type FirmUncheckedCreateWithoutAuditLogsInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutAuditLogsInput = {
@@ -2516,6 +2516,7 @@ export type FirmUpdateWithoutAuditLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
@@ -2523,13 +2524,12 @@ export type FirmUpdateWithoutAuditLogsInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutAuditLogsInput = {
@@ -2544,6 +2544,7 @@ export type FirmUncheckedUpdateWithoutAuditLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
   financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
@@ -2551,141 +2552,12 @@ export type FirmUncheckedUpdateWithoutAuditLogsInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
-}
-
-export type FirmCreateWithoutMatterIntakesInput = {
-  id?: string
-  referenceNumber: string
-  name: string
-  registrationNumber?: string | null
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  logoUrl?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
-  clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
-  deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
-  documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
-  financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
-  financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
-  folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
-  matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
-  accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
-  payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
-  users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
-}
-
-export type FirmUncheckedCreateWithoutMatterIntakesInput = {
-  id?: string
-  referenceNumber: string
-  name: string
-  registrationNumber?: string | null
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  logoUrl?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
-  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
-  deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
-  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
-  financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
-  financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
-  folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
-  matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
-  accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
-  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
-}
-
-export type FirmCreateOrConnectWithoutMatterIntakesInput = {
-  where: Prisma.FirmWhereUniqueInput
-  create: Prisma.XOR<Prisma.FirmCreateWithoutMatterIntakesInput, Prisma.FirmUncheckedCreateWithoutMatterIntakesInput>
-}
-
-export type FirmUpsertWithoutMatterIntakesInput = {
-  update: Prisma.XOR<Prisma.FirmUpdateWithoutMatterIntakesInput, Prisma.FirmUncheckedUpdateWithoutMatterIntakesInput>
-  create: Prisma.XOR<Prisma.FirmCreateWithoutMatterIntakesInput, Prisma.FirmUncheckedCreateWithoutMatterIntakesInput>
-  where?: Prisma.FirmWhereInput
-}
-
-export type FirmUpdateToOneWithWhereWithoutMatterIntakesInput = {
-  where?: Prisma.FirmWhereInput
-  data: Prisma.XOR<Prisma.FirmUpdateWithoutMatterIntakesInput, Prisma.FirmUncheckedUpdateWithoutMatterIntakesInput>
-}
-
-export type FirmUpdateWithoutMatterIntakesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
-  clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
-  deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
-  documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
-  financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
-  financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
-  folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
-  matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
-  accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
-  payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
-  subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
-  users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
-}
-
-export type FirmUncheckedUpdateWithoutMatterIntakesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
-  clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
-  deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
-  documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
-  financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
-  financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
-  folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
-  matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
-  accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
-  payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
-  users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutConflictChecksInput = {
@@ -2708,12 +2580,12 @@ export type FirmCreateWithoutConflictChecksInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutConflictChecksInput = {
@@ -2736,12 +2608,12 @@ export type FirmUncheckedCreateWithoutConflictChecksInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutConflictChecksInput = {
@@ -2780,12 +2652,12 @@ export type FirmUpdateWithoutConflictChecksInput = {
   folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutConflictChecksInput = {
@@ -2808,12 +2680,140 @@ export type FirmUncheckedUpdateWithoutConflictChecksInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
-  matterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
+}
+
+export type FirmCreateWithoutIntakesInput = {
+  id?: string
+  referenceNumber: string
+  name: string
+  registrationNumber?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
+  clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
+  deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
+  financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
+  financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
+  folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
+  matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
+  accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
+  users?: Prisma.UserCreateNestedManyWithoutFirmInput
+}
+
+export type FirmUncheckedCreateWithoutIntakesInput = {
+  id?: string
+  referenceNumber: string
+  name: string
+  registrationNumber?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
+  deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
+  financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
+  financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
+  folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
+  matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+}
+
+export type FirmCreateOrConnectWithoutIntakesInput = {
+  where: Prisma.FirmWhereUniqueInput
+  create: Prisma.XOR<Prisma.FirmCreateWithoutIntakesInput, Prisma.FirmUncheckedCreateWithoutIntakesInput>
+}
+
+export type FirmUpsertWithoutIntakesInput = {
+  update: Prisma.XOR<Prisma.FirmUpdateWithoutIntakesInput, Prisma.FirmUncheckedUpdateWithoutIntakesInput>
+  create: Prisma.XOR<Prisma.FirmCreateWithoutIntakesInput, Prisma.FirmUncheckedCreateWithoutIntakesInput>
+  where?: Prisma.FirmWhereInput
+}
+
+export type FirmUpdateToOneWithWhereWithoutIntakesInput = {
+  where?: Prisma.FirmWhereInput
+  data: Prisma.XOR<Prisma.FirmUpdateWithoutIntakesInput, Prisma.FirmUncheckedUpdateWithoutIntakesInput>
+}
+
+export type FirmUpdateWithoutIntakesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
+  deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
+  financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
+  financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
+  folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
+  matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
+  users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+}
+
+export type FirmUncheckedUpdateWithoutIntakesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
+  deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
+  financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
+  financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
+  folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
+  matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 
@@ -2824,6 +2824,7 @@ export type FirmUncheckedUpdateWithoutConflictChecksInput = {
 export type FirmCountOutputType = {
   auditLogs: number
   clients: number
+  conflictChecks: number
   deadlines: number
   documents: number
   financeDocuments: number
@@ -2831,17 +2832,17 @@ export type FirmCountOutputType = {
   folders: number
   matters: number
   accessRequests: number
+  intakes: number
   notifications: number
   payments: number
   tasks: number
   users: number
-  conflictChecks: number
-  matterIntakes: number
 }
 
 export type FirmCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   auditLogs?: boolean | FirmCountOutputTypeCountAuditLogsArgs
   clients?: boolean | FirmCountOutputTypeCountClientsArgs
+  conflictChecks?: boolean | FirmCountOutputTypeCountConflictChecksArgs
   deadlines?: boolean | FirmCountOutputTypeCountDeadlinesArgs
   documents?: boolean | FirmCountOutputTypeCountDocumentsArgs
   financeDocuments?: boolean | FirmCountOutputTypeCountFinanceDocumentsArgs
@@ -2849,12 +2850,11 @@ export type FirmCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   folders?: boolean | FirmCountOutputTypeCountFoldersArgs
   matters?: boolean | FirmCountOutputTypeCountMattersArgs
   accessRequests?: boolean | FirmCountOutputTypeCountAccessRequestsArgs
+  intakes?: boolean | FirmCountOutputTypeCountIntakesArgs
   notifications?: boolean | FirmCountOutputTypeCountNotificationsArgs
   payments?: boolean | FirmCountOutputTypeCountPaymentsArgs
   tasks?: boolean | FirmCountOutputTypeCountTasksArgs
   users?: boolean | FirmCountOutputTypeCountUsersArgs
-  conflictChecks?: boolean | FirmCountOutputTypeCountConflictChecksArgs
-  matterIntakes?: boolean | FirmCountOutputTypeCountMatterIntakesArgs
 }
 
 /**
@@ -2879,6 +2879,13 @@ export type FirmCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.
  */
 export type FirmCountOutputTypeCountClientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ClientWhereInput
+}
+
+/**
+ * FirmCountOutputType without action
+ */
+export type FirmCountOutputTypeCountConflictChecksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConflictCheckWhereInput
 }
 
 /**
@@ -2933,6 +2940,13 @@ export type FirmCountOutputTypeCountAccessRequestsArgs<ExtArgs extends runtime.T
 /**
  * FirmCountOutputType without action
  */
+export type FirmCountOutputTypeCountIntakesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatterIntakeWhereInput
+}
+
+/**
+ * FirmCountOutputType without action
+ */
 export type FirmCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NotificationWhereInput
 }
@@ -2958,20 +2972,6 @@ export type FirmCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.UserWhereInput
 }
 
-/**
- * FirmCountOutputType without action
- */
-export type FirmCountOutputTypeCountConflictChecksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConflictCheckWhereInput
-}
-
-/**
- * FirmCountOutputType without action
- */
-export type FirmCountOutputTypeCountMatterIntakesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MatterIntakeWhereInput
-}
-
 
 export type FirmSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2986,6 +2986,7 @@ export type FirmSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   auditLogs?: boolean | Prisma.Firm$auditLogsArgs<ExtArgs>
   clients?: boolean | Prisma.Firm$clientsArgs<ExtArgs>
+  conflictChecks?: boolean | Prisma.Firm$conflictChecksArgs<ExtArgs>
   deadlines?: boolean | Prisma.Firm$deadlinesArgs<ExtArgs>
   documents?: boolean | Prisma.Firm$documentsArgs<ExtArgs>
   financeDocuments?: boolean | Prisma.Firm$financeDocumentsArgs<ExtArgs>
@@ -2993,13 +2994,12 @@ export type FirmSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   folders?: boolean | Prisma.Firm$foldersArgs<ExtArgs>
   matters?: boolean | Prisma.Firm$mattersArgs<ExtArgs>
   accessRequests?: boolean | Prisma.Firm$accessRequestsArgs<ExtArgs>
+  intakes?: boolean | Prisma.Firm$intakesArgs<ExtArgs>
   notifications?: boolean | Prisma.Firm$notificationsArgs<ExtArgs>
   payments?: boolean | Prisma.Firm$paymentsArgs<ExtArgs>
   subscription?: boolean | Prisma.Firm$subscriptionArgs<ExtArgs>
   tasks?: boolean | Prisma.Firm$tasksArgs<ExtArgs>
   users?: boolean | Prisma.Firm$usersArgs<ExtArgs>
-  conflictChecks?: boolean | Prisma.Firm$conflictChecksArgs<ExtArgs>
-  matterIntakes?: boolean | Prisma.Firm$matterIntakesArgs<ExtArgs>
   _count?: boolean | Prisma.FirmCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["firm"]>
 
@@ -3046,6 +3046,7 @@ export type FirmOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type FirmInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   auditLogs?: boolean | Prisma.Firm$auditLogsArgs<ExtArgs>
   clients?: boolean | Prisma.Firm$clientsArgs<ExtArgs>
+  conflictChecks?: boolean | Prisma.Firm$conflictChecksArgs<ExtArgs>
   deadlines?: boolean | Prisma.Firm$deadlinesArgs<ExtArgs>
   documents?: boolean | Prisma.Firm$documentsArgs<ExtArgs>
   financeDocuments?: boolean | Prisma.Firm$financeDocumentsArgs<ExtArgs>
@@ -3053,13 +3054,12 @@ export type FirmInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   folders?: boolean | Prisma.Firm$foldersArgs<ExtArgs>
   matters?: boolean | Prisma.Firm$mattersArgs<ExtArgs>
   accessRequests?: boolean | Prisma.Firm$accessRequestsArgs<ExtArgs>
+  intakes?: boolean | Prisma.Firm$intakesArgs<ExtArgs>
   notifications?: boolean | Prisma.Firm$notificationsArgs<ExtArgs>
   payments?: boolean | Prisma.Firm$paymentsArgs<ExtArgs>
   subscription?: boolean | Prisma.Firm$subscriptionArgs<ExtArgs>
   tasks?: boolean | Prisma.Firm$tasksArgs<ExtArgs>
   users?: boolean | Prisma.Firm$usersArgs<ExtArgs>
-  conflictChecks?: boolean | Prisma.Firm$conflictChecksArgs<ExtArgs>
-  matterIntakes?: boolean | Prisma.Firm$matterIntakesArgs<ExtArgs>
   _count?: boolean | Prisma.FirmCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FirmIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3070,6 +3070,7 @@ export type $FirmPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     clients: Prisma.$ClientPayload<ExtArgs>[]
+    conflictChecks: Prisma.$ConflictCheckPayload<ExtArgs>[]
     deadlines: Prisma.$DeadlinePayload<ExtArgs>[]
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     financeDocuments: Prisma.$FinanceDocumentPayload<ExtArgs>[]
@@ -3077,13 +3078,12 @@ export type $FirmPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     folders: Prisma.$FolderPayload<ExtArgs>[]
     matters: Prisma.$MatterPayload<ExtArgs>[]
     accessRequests: Prisma.$MatterAccessRequestPayload<ExtArgs>[]
+    intakes: Prisma.$MatterIntakePayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
     subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
-    conflictChecks: Prisma.$ConflictCheckPayload<ExtArgs>[]
-    matterIntakes: Prisma.$MatterIntakePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3492,6 +3492,7 @@ export interface Prisma__FirmClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   auditLogs<T extends Prisma.Firm$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clients<T extends Prisma.Firm$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conflictChecks<T extends Prisma.Firm$conflictChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$conflictChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConflictCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deadlines<T extends Prisma.Firm$deadlinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$deadlinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeadlinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Firm$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   financeDocuments<T extends Prisma.Firm$financeDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$financeDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinanceDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3499,13 +3500,12 @@ export interface Prisma__FirmClient<T, Null = never, ExtArgs extends runtime.Typ
   folders<T extends Prisma.Firm$foldersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$foldersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FolderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   matters<T extends Prisma.Firm$mattersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$mattersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accessRequests<T extends Prisma.Firm$accessRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$accessRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterAccessRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  intakes<T extends Prisma.Firm$intakesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Firm$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.Firm$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscription<T extends Prisma.Firm$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tasks<T extends Prisma.Firm$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Firm$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  conflictChecks<T extends Prisma.Firm$conflictChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$conflictChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConflictCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  matterIntakes<T extends Prisma.Firm$matterIntakesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$matterIntakesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3986,6 +3986,30 @@ export type Firm$clientsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
+ * Firm.conflictChecks
+ */
+export type Firm$conflictChecksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConflictCheck
+   */
+  select?: Prisma.ConflictCheckSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ConflictCheck
+   */
+  omit?: Prisma.ConflictCheckOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConflictCheckInclude<ExtArgs> | null
+  where?: Prisma.ConflictCheckWhereInput
+  orderBy?: Prisma.ConflictCheckOrderByWithRelationInput | Prisma.ConflictCheckOrderByWithRelationInput[]
+  cursor?: Prisma.ConflictCheckWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConflictCheckScalarFieldEnum | Prisma.ConflictCheckScalarFieldEnum[]
+}
+
+/**
  * Firm.deadlines
  */
 export type Firm$deadlinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4154,6 +4178,30 @@ export type Firm$accessRequestsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * Firm.intakes
+ */
+export type Firm$intakesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MatterIntake
+   */
+  select?: Prisma.MatterIntakeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MatterIntake
+   */
+  omit?: Prisma.MatterIntakeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatterIntakeInclude<ExtArgs> | null
+  where?: Prisma.MatterIntakeWhereInput
+  orderBy?: Prisma.MatterIntakeOrderByWithRelationInput | Prisma.MatterIntakeOrderByWithRelationInput[]
+  cursor?: Prisma.MatterIntakeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatterIntakeScalarFieldEnum | Prisma.MatterIntakeScalarFieldEnum[]
+}
+
+/**
  * Firm.notifications
  */
 export type Firm$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4266,54 +4314,6 @@ export type Firm$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
-}
-
-/**
- * Firm.conflictChecks
- */
-export type Firm$conflictChecksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConflictCheck
-   */
-  select?: Prisma.ConflictCheckSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConflictCheck
-   */
-  omit?: Prisma.ConflictCheckOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConflictCheckInclude<ExtArgs> | null
-  where?: Prisma.ConflictCheckWhereInput
-  orderBy?: Prisma.ConflictCheckOrderByWithRelationInput | Prisma.ConflictCheckOrderByWithRelationInput[]
-  cursor?: Prisma.ConflictCheckWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConflictCheckScalarFieldEnum | Prisma.ConflictCheckScalarFieldEnum[]
-}
-
-/**
- * Firm.matterIntakes
- */
-export type Firm$matterIntakesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MatterIntake
-   */
-  select?: Prisma.MatterIntakeSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MatterIntake
-   */
-  omit?: Prisma.MatterIntakeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MatterIntakeInclude<ExtArgs> | null
-  where?: Prisma.MatterIntakeWhereInput
-  orderBy?: Prisma.MatterIntakeOrderByWithRelationInput | Prisma.MatterIntakeOrderByWithRelationInput[]
-  cursor?: Prisma.MatterIntakeWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MatterIntakeScalarFieldEnum | Prisma.MatterIntakeScalarFieldEnum[]
 }
 
 /**

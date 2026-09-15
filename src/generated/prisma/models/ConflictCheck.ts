@@ -242,11 +242,11 @@ export type ConflictCheckWhereInput = {
   reviewedAt?: Prisma.DateTimeNullableFilter<"ConflictCheck"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ConflictCheck"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ConflictCheck"> | Date | string
-  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
-  intake?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
-  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
   checkedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  intake?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
+  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
 }
 
 export type ConflictCheckOrderByWithRelationInput = {
@@ -264,11 +264,11 @@ export type ConflictCheckOrderByWithRelationInput = {
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  firm?: Prisma.FirmOrderByWithRelationInput
-  intake?: Prisma.MatterIntakeOrderByWithRelationInput
-  client?: Prisma.ClientOrderByWithRelationInput
   checkedBy?: Prisma.UserOrderByWithRelationInput
   reviewedBy?: Prisma.UserOrderByWithRelationInput
+  client?: Prisma.ClientOrderByWithRelationInput
+  intake?: Prisma.MatterIntakeOrderByWithRelationInput
+  firm?: Prisma.FirmOrderByWithRelationInput
 }
 
 export type ConflictCheckWhereUniqueInput = Prisma.AtLeast<{
@@ -289,11 +289,11 @@ export type ConflictCheckWhereUniqueInput = Prisma.AtLeast<{
   reviewedAt?: Prisma.DateTimeNullableFilter<"ConflictCheck"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ConflictCheck"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ConflictCheck"> | Date | string
-  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
-  intake?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
-  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
   checkedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  intake?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
+  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
 }, "id">
 
 export type ConflictCheckOrderByWithAggregationInput = {
@@ -346,11 +346,11 @@ export type ConflictCheckCreateInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
-  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
-  checkedBy: Prisma.UserCreateNestedOneWithoutPerformedConflictChecksInput
+  checkedBy: Prisma.UserCreateNestedOneWithoutCheckedConflictChecksInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedConflictChecksInput
+  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
+  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
+  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
 }
 
 export type ConflictCheckUncheckedCreateInput = {
@@ -380,11 +380,11 @@ export type ConflictCheckUpdateInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
-  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
-  checkedBy?: Prisma.UserUpdateOneRequiredWithoutPerformedConflictChecksNestedInput
+  checkedBy?: Prisma.UserUpdateOneRequiredWithoutCheckedConflictChecksNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedConflictChecksNestedInput
+  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
+  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
 }
 
 export type ConflictCheckUncheckedUpdateInput = {
@@ -673,6 +673,37 @@ export type ConflictCheckUncheckedUpdateManyWithoutClientNestedInput = {
   deleteMany?: Prisma.ConflictCheckScalarWhereInput | Prisma.ConflictCheckScalarWhereInput[]
 }
 
+export type ConflictCheckCreatesearchTermsInput = {
+  set: string[]
+}
+
+export type ConflictCheckCreatematchedMatterIdsInput = {
+  set: string[]
+}
+
+export type ConflictCheckCreatematchedClientIdsInput = {
+  set: string[]
+}
+
+export type EnumConflictCheckStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ConflictCheckStatus
+}
+
+export type ConflictCheckUpdatesearchTermsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type ConflictCheckUpdatematchedMatterIdsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type ConflictCheckUpdatematchedClientIdsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type ConflictCheckCreateNestedManyWithoutIntakeInput = {
   create?: Prisma.XOR<Prisma.ConflictCheckCreateWithoutIntakeInput, Prisma.ConflictCheckUncheckedCreateWithoutIntakeInput> | Prisma.ConflictCheckCreateWithoutIntakeInput[] | Prisma.ConflictCheckUncheckedCreateWithoutIntakeInput[]
   connectOrCreate?: Prisma.ConflictCheckCreateOrConnectWithoutIntakeInput | Prisma.ConflictCheckCreateOrConnectWithoutIntakeInput[]
@@ -715,33 +746,6 @@ export type ConflictCheckUncheckedUpdateManyWithoutIntakeNestedInput = {
   deleteMany?: Prisma.ConflictCheckScalarWhereInput | Prisma.ConflictCheckScalarWhereInput[]
 }
 
-export type ConflictCheckCreatesearchTermsInput = {
-  set: string[]
-}
-
-export type ConflictCheckCreatematchedMatterIdsInput = {
-  set: string[]
-}
-
-export type ConflictCheckCreatematchedClientIdsInput = {
-  set: string[]
-}
-
-export type ConflictCheckUpdatesearchTermsInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
-export type ConflictCheckUpdatematchedMatterIdsInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
-export type ConflictCheckUpdatematchedClientIdsInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
 export type ConflictCheckCreateWithoutFirmInput = {
   id?: string
   status?: $Enums.ConflictCheckStatus
@@ -752,10 +756,10 @@ export type ConflictCheckCreateWithoutFirmInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
-  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
-  checkedBy: Prisma.UserCreateNestedOneWithoutPerformedConflictChecksInput
+  checkedBy: Prisma.UserCreateNestedOneWithoutCheckedConflictChecksInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedConflictChecksInput
+  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
+  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
 }
 
 export type ConflictCheckUncheckedCreateWithoutFirmInput = {
@@ -830,10 +834,10 @@ export type ConflictCheckCreateWithoutCheckedByInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
-  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedConflictChecksInput
+  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
+  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
+  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
 }
 
 export type ConflictCheckUncheckedCreateWithoutCheckedByInput = {
@@ -872,10 +876,10 @@ export type ConflictCheckCreateWithoutReviewedByInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
+  checkedBy: Prisma.UserCreateNestedOneWithoutCheckedConflictChecksInput
   client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
-  checkedBy: Prisma.UserCreateNestedOneWithoutPerformedConflictChecksInput
+  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
+  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
 }
 
 export type ConflictCheckUncheckedCreateWithoutReviewedByInput = {
@@ -946,10 +950,10 @@ export type ConflictCheckCreateWithoutClientInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
-  checkedBy: Prisma.UserCreateNestedOneWithoutPerformedConflictChecksInput
+  checkedBy: Prisma.UserCreateNestedOneWithoutCheckedConflictChecksInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedConflictChecksInput
+  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConflictChecksInput
+  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
 }
 
 export type ConflictCheckUncheckedCreateWithoutClientInput = {
@@ -1004,10 +1008,10 @@ export type ConflictCheckCreateWithoutIntakeInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
-  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
-  checkedBy: Prisma.UserCreateNestedOneWithoutPerformedConflictChecksInput
+  checkedBy: Prisma.UserCreateNestedOneWithoutCheckedConflictChecksInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedConflictChecksInput
+  client?: Prisma.ClientCreateNestedOneWithoutConflictChecksInput
+  firm: Prisma.FirmCreateNestedOneWithoutConflictChecksInput
 }
 
 export type ConflictCheckUncheckedCreateWithoutIntakeInput = {
@@ -1078,10 +1082,10 @@ export type ConflictCheckUpdateWithoutFirmInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
-  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
-  checkedBy?: Prisma.UserUpdateOneRequiredWithoutPerformedConflictChecksNestedInput
+  checkedBy?: Prisma.UserUpdateOneRequiredWithoutCheckedConflictChecksNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedConflictChecksNestedInput
+  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
+  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
 }
 
 export type ConflictCheckUncheckedUpdateWithoutFirmInput = {
@@ -1158,10 +1162,10 @@ export type ConflictCheckUpdateWithoutCheckedByInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
-  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedConflictChecksNestedInput
+  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
+  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
 }
 
 export type ConflictCheckUncheckedUpdateWithoutCheckedByInput = {
@@ -1206,10 +1210,10 @@ export type ConflictCheckUpdateWithoutReviewedByInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
+  checkedBy?: Prisma.UserUpdateOneRequiredWithoutCheckedConflictChecksNestedInput
   client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
-  checkedBy?: Prisma.UserUpdateOneRequiredWithoutPerformedConflictChecksNestedInput
+  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
 }
 
 export type ConflictCheckUncheckedUpdateWithoutReviewedByInput = {
@@ -1270,10 +1274,10 @@ export type ConflictCheckUpdateWithoutClientInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
-  checkedBy?: Prisma.UserUpdateOneRequiredWithoutPerformedConflictChecksNestedInput
+  checkedBy?: Prisma.UserUpdateOneRequiredWithoutCheckedConflictChecksNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedConflictChecksNestedInput
+  intake?: Prisma.MatterIntakeUpdateOneWithoutConflictChecksNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
 }
 
 export type ConflictCheckUncheckedUpdateWithoutClientInput = {
@@ -1334,10 +1338,10 @@ export type ConflictCheckUpdateWithoutIntakeInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
-  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
-  checkedBy?: Prisma.UserUpdateOneRequiredWithoutPerformedConflictChecksNestedInput
+  checkedBy?: Prisma.UserUpdateOneRequiredWithoutCheckedConflictChecksNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedConflictChecksNestedInput
+  client?: Prisma.ClientUpdateOneWithoutConflictChecksNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutConflictChecksNestedInput
 }
 
 export type ConflictCheckUncheckedUpdateWithoutIntakeInput = {
@@ -1389,11 +1393,11 @@ export type ConflictCheckSelect<ExtArgs extends runtime.Types.Extensions.Interna
   reviewedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
-  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
   checkedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.ConflictCheck$reviewedByArgs<ExtArgs>
+  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
+  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["conflictCheck"]>
 
 export type ConflictCheckSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1411,11 +1415,11 @@ export type ConflictCheckSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   reviewedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
-  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
   checkedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.ConflictCheck$reviewedByArgs<ExtArgs>
+  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
+  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["conflictCheck"]>
 
 export type ConflictCheckSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1433,11 +1437,11 @@ export type ConflictCheckSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   reviewedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
-  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
   checkedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.ConflictCheck$reviewedByArgs<ExtArgs>
+  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
+  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["conflictCheck"]>
 
 export type ConflictCheckSelectScalar = {
@@ -1459,35 +1463,35 @@ export type ConflictCheckSelectScalar = {
 
 export type ConflictCheckOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firmId" | "intakeId" | "clientId" | "checkedById" | "reviewedById" | "status" | "searchTerms" | "matchedMatterIds" | "matchedClientIds" | "notes" | "reviewedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["conflictCheck"]>
 export type ConflictCheckInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
-  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
   checkedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.ConflictCheck$reviewedByArgs<ExtArgs>
+  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
+  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
 }
 export type ConflictCheckIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
-  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
   checkedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.ConflictCheck$reviewedByArgs<ExtArgs>
+  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
+  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
 }
 export type ConflictCheckIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
-  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
   checkedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.ConflictCheck$reviewedByArgs<ExtArgs>
+  client?: boolean | Prisma.ConflictCheck$clientArgs<ExtArgs>
+  intake?: boolean | Prisma.ConflictCheck$intakeArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
 }
 
 export type $ConflictCheckPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ConflictCheck"
   objects: {
-    firm: Prisma.$FirmPayload<ExtArgs>
-    intake: Prisma.$MatterIntakePayload<ExtArgs> | null
-    client: Prisma.$ClientPayload<ExtArgs> | null
     checkedBy: Prisma.$UserPayload<ExtArgs>
     reviewedBy: Prisma.$UserPayload<ExtArgs> | null
+    client: Prisma.$ClientPayload<ExtArgs> | null
+    intake: Prisma.$MatterIntakePayload<ExtArgs> | null
+    firm: Prisma.$FirmPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1898,11 +1902,11 @@ readonly fields: ConflictCheckFieldRefs;
  */
 export interface Prisma__ConflictCheckClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  firm<T extends Prisma.FirmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FirmDefaultArgs<ExtArgs>>): Prisma.Prisma__FirmClient<runtime.Types.Result.GetResult<Prisma.$FirmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  intake<T extends Prisma.ConflictCheck$intakeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConflictCheck$intakeArgs<ExtArgs>>): Prisma.Prisma__MatterIntakeClient<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  client<T extends Prisma.ConflictCheck$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConflictCheck$clientArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   checkedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviewedBy<T extends Prisma.ConflictCheck$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConflictCheck$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  client<T extends Prisma.ConflictCheck$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConflictCheck$clientArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  intake<T extends Prisma.ConflictCheck$intakeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConflictCheck$intakeArgs<ExtArgs>>): Prisma.Prisma__MatterIntakeClient<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  firm<T extends Prisma.FirmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FirmDefaultArgs<ExtArgs>>): Prisma.Prisma__FirmClient<runtime.Types.Result.GetResult<Prisma.$FirmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2347,22 +2351,22 @@ export type ConflictCheckDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * ConflictCheck.intake
+ * ConflictCheck.reviewedBy
  */
-export type ConflictCheck$intakeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ConflictCheck$reviewedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the MatterIntake
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.MatterIntakeSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the MatterIntake
+   * Omit specific fields from the User
    */
-  omit?: Prisma.MatterIntakeOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MatterIntakeInclude<ExtArgs> | null
-  where?: Prisma.MatterIntakeWhereInput
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**
@@ -2385,22 +2389,22 @@ export type ConflictCheck$clientArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * ConflictCheck.reviewedBy
+ * ConflictCheck.intake
  */
-export type ConflictCheck$reviewedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ConflictCheck$intakeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the MatterIntake
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.MatterIntakeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the MatterIntake
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.MatterIntakeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
+  include?: Prisma.MatterIntakeInclude<ExtArgs> | null
+  where?: Prisma.MatterIntakeWhereInput
 }
 
 /**

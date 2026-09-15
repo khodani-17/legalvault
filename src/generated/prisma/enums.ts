@@ -132,6 +132,25 @@ export const TaskStatus = {
 export type TaskStatus = (typeof TaskStatus)[keyof typeof TaskStatus]
 
 
+export const TaskReportOutcome = {
+  COMPLETED: 'COMPLETED',
+  PARTIALLY_COMPLETED: 'PARTIALLY_COMPLETED',
+  UNABLE_TO_COMPLETE: 'UNABLE_TO_COMPLETE',
+  AWAITING_RESPONSE: 'AWAITING_RESPONSE'
+} as const
+
+export type TaskReportOutcome = (typeof TaskReportOutcome)[keyof typeof TaskReportOutcome]
+
+
+export const AssistanceStatus = {
+  PENDING: 'PENDING',
+  RESPONDED: 'RESPONDED',
+  RESOLVED: 'RESOLVED'
+} as const
+
+export type AssistanceStatus = (typeof AssistanceStatus)[keyof typeof AssistanceStatus]
+
+
 export const DeadlineType = {
   COURT_DATE: 'COURT_DATE',
   FILING_DEADLINE: 'FILING_DEADLINE',
@@ -191,19 +210,6 @@ export const UserStatus = {
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
 
-export const IntakeStatus = {
-  NEW: 'NEW',
-  CONFLICT_CHECK_PENDING: 'CONFLICT_CHECK_PENDING',
-  CONFLICT_REVIEW: 'CONFLICT_REVIEW',
-  APPROVED: 'APPROVED',
-  REJECTED: 'REJECTED',
-  CONVERTED: 'CONVERTED',
-  CLOSED: 'CLOSED'
-} as const
-
-export type IntakeStatus = (typeof IntakeStatus)[keyof typeof IntakeStatus]
-
-
 export const ConflictCheckStatus = {
   NOT_CHECKED: 'NOT_CHECKED',
   CLEAR: 'CLEAR',
@@ -223,3 +229,16 @@ export const IntakePriority = {
 } as const
 
 export type IntakePriority = (typeof IntakePriority)[keyof typeof IntakePriority]
+
+
+export const IntakeStatus = {
+  NEW: 'NEW',
+  CONFLICT_CHECK_PENDING: 'CONFLICT_CHECK_PENDING',
+  CONFLICT_REVIEW: 'CONFLICT_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CONVERTED: 'CONVERTED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type IntakeStatus = (typeof IntakeStatus)[keyof typeof IntakeStatus]

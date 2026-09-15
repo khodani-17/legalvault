@@ -28,7 +28,6 @@ export type MatterMinAggregateOutputType = {
   id: string | null
   firmId: string | null
   clientId: string | null
-  intakeId: string | null
   referenceNumber: string | null
   title: string | null
   description: string | null
@@ -38,13 +37,13 @@ export type MatterMinAggregateOutputType = {
   closedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  intakeId: string | null
 }
 
 export type MatterMaxAggregateOutputType = {
   id: string | null
   firmId: string | null
   clientId: string | null
-  intakeId: string | null
   referenceNumber: string | null
   title: string | null
   description: string | null
@@ -54,13 +53,13 @@ export type MatterMaxAggregateOutputType = {
   closedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  intakeId: string | null
 }
 
 export type MatterCountAggregateOutputType = {
   id: number
   firmId: number
   clientId: number
-  intakeId: number
   referenceNumber: number
   title: number
   description: number
@@ -70,6 +69,7 @@ export type MatterCountAggregateOutputType = {
   closedAt: number
   createdAt: number
   updatedAt: number
+  intakeId: number
   _all: number
 }
 
@@ -78,7 +78,6 @@ export type MatterMinAggregateInputType = {
   id?: true
   firmId?: true
   clientId?: true
-  intakeId?: true
   referenceNumber?: true
   title?: true
   description?: true
@@ -88,13 +87,13 @@ export type MatterMinAggregateInputType = {
   closedAt?: true
   createdAt?: true
   updatedAt?: true
+  intakeId?: true
 }
 
 export type MatterMaxAggregateInputType = {
   id?: true
   firmId?: true
   clientId?: true
-  intakeId?: true
   referenceNumber?: true
   title?: true
   description?: true
@@ -104,13 +103,13 @@ export type MatterMaxAggregateInputType = {
   closedAt?: true
   createdAt?: true
   updatedAt?: true
+  intakeId?: true
 }
 
 export type MatterCountAggregateInputType = {
   id?: true
   firmId?: true
   clientId?: true
-  intakeId?: true
   referenceNumber?: true
   title?: true
   description?: true
@@ -120,6 +119,7 @@ export type MatterCountAggregateInputType = {
   closedAt?: true
   createdAt?: true
   updatedAt?: true
+  intakeId?: true
   _all?: true
 }
 
@@ -199,7 +199,6 @@ export type MatterGroupByOutputType = {
   id: string
   firmId: string
   clientId: string
-  intakeId: string | null
   referenceNumber: string
   title: string
   description: string | null
@@ -209,6 +208,7 @@ export type MatterGroupByOutputType = {
   closedAt: Date | null
   createdAt: Date
   updatedAt: Date
+  intakeId: string | null
   _count: MatterCountAggregateOutputType | null
   _min: MatterMinAggregateOutputType | null
   _max: MatterMaxAggregateOutputType | null
@@ -236,7 +236,6 @@ export type MatterWhereInput = {
   id?: Prisma.StringFilter<"Matter"> | string
   firmId?: Prisma.StringFilter<"Matter"> | string
   clientId?: Prisma.StringFilter<"Matter"> | string
-  intakeId?: Prisma.StringNullableFilter<"Matter"> | string | null
   referenceNumber?: Prisma.StringFilter<"Matter"> | string
   title?: Prisma.StringFilter<"Matter"> | string
   description?: Prisma.StringNullableFilter<"Matter"> | string | null
@@ -246,22 +245,22 @@ export type MatterWhereInput = {
   closedAt?: Prisma.DateTimeNullableFilter<"Matter"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Matter"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Matter"> | Date | string
+  intakeId?: Prisma.StringNullableFilter<"Matter"> | string | null
   deadlines?: Prisma.DeadlineListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   folders?: Prisma.FolderListRelationFilter
-  client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
-  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
   accessRequests?: Prisma.MatterAccessRequestListRelationFilter
   users?: Prisma.MatterUserListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
-  intake?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
+  client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
+  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
+  convertedMatter?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
 }
 
 export type MatterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   firmId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
-  intakeId?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceNumber?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -271,15 +270,16 @@ export type MatterOrderByWithRelationInput = {
   closedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrderInput | Prisma.SortOrder
   deadlines?: Prisma.DeadlineOrderByRelationAggregateInput
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   folders?: Prisma.FolderOrderByRelationAggregateInput
-  client?: Prisma.ClientOrderByWithRelationInput
-  firm?: Prisma.FirmOrderByWithRelationInput
   accessRequests?: Prisma.MatterAccessRequestOrderByRelationAggregateInput
   users?: Prisma.MatterUserOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
-  intake?: Prisma.MatterIntakeOrderByWithRelationInput
+  client?: Prisma.ClientOrderByWithRelationInput
+  firm?: Prisma.FirmOrderByWithRelationInput
+  convertedMatter?: Prisma.MatterIntakeOrderByWithRelationInput
 }
 
 export type MatterWhereUniqueInput = Prisma.AtLeast<{
@@ -303,19 +303,18 @@ export type MatterWhereUniqueInput = Prisma.AtLeast<{
   deadlines?: Prisma.DeadlineListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   folders?: Prisma.FolderListRelationFilter
-  client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
-  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
   accessRequests?: Prisma.MatterAccessRequestListRelationFilter
   users?: Prisma.MatterUserListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
-  intake?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
+  client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
+  firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
+  convertedMatter?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
 }, "id" | "intakeId" | "firmId_referenceNumber">
 
 export type MatterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   firmId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
-  intakeId?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceNumber?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -325,6 +324,7 @@ export type MatterOrderByWithAggregationInput = {
   closedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MatterCountOrderByAggregateInput
   _max?: Prisma.MatterMaxOrderByAggregateInput
   _min?: Prisma.MatterMinOrderByAggregateInput
@@ -337,7 +337,6 @@ export type MatterScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Matter"> | string
   firmId?: Prisma.StringWithAggregatesFilter<"Matter"> | string
   clientId?: Prisma.StringWithAggregatesFilter<"Matter"> | string
-  intakeId?: Prisma.StringNullableWithAggregatesFilter<"Matter"> | string | null
   referenceNumber?: Prisma.StringWithAggregatesFilter<"Matter"> | string
   title?: Prisma.StringWithAggregatesFilter<"Matter"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Matter"> | string | null
@@ -347,6 +346,7 @@ export type MatterScalarWhereWithAggregatesInput = {
   closedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Matter"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Matter"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Matter"> | Date | string
+  intakeId?: Prisma.StringNullableWithAggregatesFilter<"Matter"> | string | null
 }
 
 export type MatterCreateInput = {
@@ -363,19 +363,18 @@ export type MatterCreateInput = {
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -385,6 +384,7 @@ export type MatterUncheckedCreateInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
@@ -407,19 +407,18 @@ export type MatterUpdateInput = {
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -429,6 +428,7 @@ export type MatterUncheckedUpdateInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
@@ -441,7 +441,6 @@ export type MatterCreateManyInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -451,6 +450,7 @@ export type MatterCreateManyInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
 }
 
 export type MatterUpdateManyMutationInput = {
@@ -470,7 +470,6 @@ export type MatterUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -480,6 +479,7 @@ export type MatterUncheckedUpdateManyInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MatterListRelationFilter = {
@@ -501,7 +501,6 @@ export type MatterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firmId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
-  intakeId?: Prisma.SortOrder
   referenceNumber?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -511,13 +510,13 @@ export type MatterCountOrderByAggregateInput = {
   closedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrder
 }
 
 export type MatterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firmId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
-  intakeId?: Prisma.SortOrder
   referenceNumber?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -527,13 +526,13 @@ export type MatterMaxOrderByAggregateInput = {
   closedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrder
 }
 
 export type MatterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firmId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
-  intakeId?: Prisma.SortOrder
   referenceNumber?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -543,6 +542,7 @@ export type MatterMinOrderByAggregateInput = {
   closedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrder
 }
 
 export type MatterScalarRelationFilter = {
@@ -729,36 +729,36 @@ export type MatterUpdateOneRequiredWithoutDeadlinesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MatterUpdateToOneWithWhereWithoutDeadlinesInput, Prisma.MatterUpdateWithoutDeadlinesInput>, Prisma.MatterUncheckedUpdateWithoutDeadlinesInput>
 }
 
-export type MatterCreateNestedOneWithoutIntakeInput = {
-  create?: Prisma.XOR<Prisma.MatterCreateWithoutIntakeInput, Prisma.MatterUncheckedCreateWithoutIntakeInput>
-  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutIntakeInput
+export type MatterCreateNestedOneWithoutConvertedMatterInput = {
+  create?: Prisma.XOR<Prisma.MatterCreateWithoutConvertedMatterInput, Prisma.MatterUncheckedCreateWithoutConvertedMatterInput>
+  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutConvertedMatterInput
   connect?: Prisma.MatterWhereUniqueInput
 }
 
-export type MatterUncheckedCreateNestedOneWithoutIntakeInput = {
-  create?: Prisma.XOR<Prisma.MatterCreateWithoutIntakeInput, Prisma.MatterUncheckedCreateWithoutIntakeInput>
-  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutIntakeInput
+export type MatterUncheckedCreateNestedOneWithoutConvertedMatterInput = {
+  create?: Prisma.XOR<Prisma.MatterCreateWithoutConvertedMatterInput, Prisma.MatterUncheckedCreateWithoutConvertedMatterInput>
+  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutConvertedMatterInput
   connect?: Prisma.MatterWhereUniqueInput
 }
 
-export type MatterUpdateOneWithoutIntakeNestedInput = {
-  create?: Prisma.XOR<Prisma.MatterCreateWithoutIntakeInput, Prisma.MatterUncheckedCreateWithoutIntakeInput>
-  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutIntakeInput
-  upsert?: Prisma.MatterUpsertWithoutIntakeInput
+export type MatterUpdateOneWithoutConvertedMatterNestedInput = {
+  create?: Prisma.XOR<Prisma.MatterCreateWithoutConvertedMatterInput, Prisma.MatterUncheckedCreateWithoutConvertedMatterInput>
+  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutConvertedMatterInput
+  upsert?: Prisma.MatterUpsertWithoutConvertedMatterInput
   disconnect?: Prisma.MatterWhereInput | boolean
   delete?: Prisma.MatterWhereInput | boolean
   connect?: Prisma.MatterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MatterUpdateToOneWithWhereWithoutIntakeInput, Prisma.MatterUpdateWithoutIntakeInput>, Prisma.MatterUncheckedUpdateWithoutIntakeInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MatterUpdateToOneWithWhereWithoutConvertedMatterInput, Prisma.MatterUpdateWithoutConvertedMatterInput>, Prisma.MatterUncheckedUpdateWithoutConvertedMatterInput>
 }
 
-export type MatterUncheckedUpdateOneWithoutIntakeNestedInput = {
-  create?: Prisma.XOR<Prisma.MatterCreateWithoutIntakeInput, Prisma.MatterUncheckedCreateWithoutIntakeInput>
-  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutIntakeInput
-  upsert?: Prisma.MatterUpsertWithoutIntakeInput
+export type MatterUncheckedUpdateOneWithoutConvertedMatterNestedInput = {
+  create?: Prisma.XOR<Prisma.MatterCreateWithoutConvertedMatterInput, Prisma.MatterUncheckedCreateWithoutConvertedMatterInput>
+  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutConvertedMatterInput
+  upsert?: Prisma.MatterUpsertWithoutConvertedMatterInput
   disconnect?: Prisma.MatterWhereInput | boolean
   delete?: Prisma.MatterWhereInput | boolean
   connect?: Prisma.MatterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MatterUpdateToOneWithWhereWithoutIntakeInput, Prisma.MatterUpdateWithoutIntakeInput>, Prisma.MatterUncheckedUpdateWithoutIntakeInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MatterUpdateToOneWithWhereWithoutConvertedMatterInput, Prisma.MatterUpdateWithoutConvertedMatterInput>, Prisma.MatterUncheckedUpdateWithoutConvertedMatterInput>
 }
 
 export type MatterCreateWithoutFirmInput = {
@@ -775,17 +775,16 @@ export type MatterCreateWithoutFirmInput = {
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutFirmInput = {
   id?: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -795,6 +794,7 @@ export type MatterUncheckedCreateWithoutFirmInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
@@ -836,7 +836,6 @@ export type MatterScalarWhereInput = {
   id?: Prisma.StringFilter<"Matter"> | string
   firmId?: Prisma.StringFilter<"Matter"> | string
   clientId?: Prisma.StringFilter<"Matter"> | string
-  intakeId?: Prisma.StringNullableFilter<"Matter"> | string | null
   referenceNumber?: Prisma.StringFilter<"Matter"> | string
   title?: Prisma.StringFilter<"Matter"> | string
   description?: Prisma.StringNullableFilter<"Matter"> | string | null
@@ -846,6 +845,7 @@ export type MatterScalarWhereInput = {
   closedAt?: Prisma.DateTimeNullableFilter<"Matter"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Matter"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Matter"> | Date | string
+  intakeId?: Prisma.StringNullableFilter<"Matter"> | string | null
 }
 
 export type MatterCreateWithoutClientInput = {
@@ -862,17 +862,16 @@ export type MatterCreateWithoutClientInput = {
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutClientInput = {
   id?: string
   firmId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -882,6 +881,7 @@ export type MatterUncheckedCreateWithoutClientInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
@@ -930,18 +930,17 @@ export type MatterCreateWithoutUsersInput = {
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutUsersInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -951,6 +950,7 @@ export type MatterUncheckedCreateWithoutUsersInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
@@ -988,18 +988,17 @@ export type MatterUpdateWithoutUsersInput = {
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1009,6 +1008,7 @@ export type MatterUncheckedUpdateWithoutUsersInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
@@ -1030,18 +1030,17 @@ export type MatterCreateWithoutAccessRequestsInput = {
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutAccessRequestsInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -1051,6 +1050,7 @@ export type MatterUncheckedCreateWithoutAccessRequestsInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
@@ -1088,18 +1088,17 @@ export type MatterUpdateWithoutAccessRequestsInput = {
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutAccessRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1109,6 +1108,7 @@ export type MatterUncheckedUpdateWithoutAccessRequestsInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
@@ -1129,19 +1129,18 @@ export type MatterCreateWithoutFoldersInput = {
   updatedAt?: Date | string
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutFoldersInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -1151,6 +1150,7 @@ export type MatterUncheckedCreateWithoutFoldersInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
@@ -1187,19 +1187,18 @@ export type MatterUpdateWithoutFoldersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutFoldersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1209,6 +1208,7 @@ export type MatterUncheckedUpdateWithoutFoldersInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
@@ -1229,19 +1229,18 @@ export type MatterCreateWithoutDocumentsInput = {
   updatedAt?: Date | string
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutDocumentsInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -1251,6 +1250,7 @@ export type MatterUncheckedCreateWithoutDocumentsInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
@@ -1287,19 +1287,18 @@ export type MatterUpdateWithoutDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1309,6 +1308,7 @@ export type MatterUncheckedUpdateWithoutDocumentsInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
@@ -1330,18 +1330,17 @@ export type MatterCreateWithoutTasksInput = {
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutTasksInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -1351,6 +1350,7 @@ export type MatterUncheckedCreateWithoutTasksInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
@@ -1388,18 +1388,17 @@ export type MatterUpdateWithoutTasksInput = {
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1409,6 +1408,7 @@ export type MatterUncheckedUpdateWithoutTasksInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
@@ -1429,19 +1429,18 @@ export type MatterCreateWithoutDeadlinesInput = {
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
-  intake?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
 
 export type MatterUncheckedCreateWithoutDeadlinesInput = {
   id?: string
   firmId: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -1451,6 +1450,7 @@ export type MatterUncheckedCreateWithoutDeadlinesInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
@@ -1487,19 +1487,18 @@ export type MatterUpdateWithoutDeadlinesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutDeadlinesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1509,6 +1508,7 @@ export type MatterUncheckedUpdateWithoutDeadlinesInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
@@ -1516,7 +1516,7 @@ export type MatterUncheckedUpdateWithoutDeadlinesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
 }
 
-export type MatterCreateWithoutIntakeInput = {
+export type MatterCreateWithoutConvertedMatterInput = {
   id?: string
   referenceNumber: string
   title: string
@@ -1530,14 +1530,14 @@ export type MatterCreateWithoutIntakeInput = {
   deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
   documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
-  client: Prisma.ClientCreateNestedOneWithoutMattersInput
-  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
 }
 
-export type MatterUncheckedCreateWithoutIntakeInput = {
+export type MatterUncheckedCreateWithoutConvertedMatterInput = {
   id?: string
   firmId: string
   clientId: string
@@ -1558,23 +1558,23 @@ export type MatterUncheckedCreateWithoutIntakeInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
 }
 
-export type MatterCreateOrConnectWithoutIntakeInput = {
+export type MatterCreateOrConnectWithoutConvertedMatterInput = {
   where: Prisma.MatterWhereUniqueInput
-  create: Prisma.XOR<Prisma.MatterCreateWithoutIntakeInput, Prisma.MatterUncheckedCreateWithoutIntakeInput>
+  create: Prisma.XOR<Prisma.MatterCreateWithoutConvertedMatterInput, Prisma.MatterUncheckedCreateWithoutConvertedMatterInput>
 }
 
-export type MatterUpsertWithoutIntakeInput = {
-  update: Prisma.XOR<Prisma.MatterUpdateWithoutIntakeInput, Prisma.MatterUncheckedUpdateWithoutIntakeInput>
-  create: Prisma.XOR<Prisma.MatterCreateWithoutIntakeInput, Prisma.MatterUncheckedCreateWithoutIntakeInput>
+export type MatterUpsertWithoutConvertedMatterInput = {
+  update: Prisma.XOR<Prisma.MatterUpdateWithoutConvertedMatterInput, Prisma.MatterUncheckedUpdateWithoutConvertedMatterInput>
+  create: Prisma.XOR<Prisma.MatterCreateWithoutConvertedMatterInput, Prisma.MatterUncheckedCreateWithoutConvertedMatterInput>
   where?: Prisma.MatterWhereInput
 }
 
-export type MatterUpdateToOneWithWhereWithoutIntakeInput = {
+export type MatterUpdateToOneWithWhereWithoutConvertedMatterInput = {
   where?: Prisma.MatterWhereInput
-  data: Prisma.XOR<Prisma.MatterUpdateWithoutIntakeInput, Prisma.MatterUncheckedUpdateWithoutIntakeInput>
+  data: Prisma.XOR<Prisma.MatterUpdateWithoutConvertedMatterInput, Prisma.MatterUncheckedUpdateWithoutConvertedMatterInput>
 }
 
-export type MatterUpdateWithoutIntakeInput = {
+export type MatterUpdateWithoutConvertedMatterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1588,14 +1588,14 @@ export type MatterUpdateWithoutIntakeInput = {
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
 }
 
-export type MatterUncheckedUpdateWithoutIntakeInput = {
+export type MatterUncheckedUpdateWithoutConvertedMatterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1619,7 +1619,6 @@ export type MatterUncheckedUpdateWithoutIntakeInput = {
 export type MatterCreateManyFirmInput = {
   id?: string
   clientId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -1629,6 +1628,7 @@ export type MatterCreateManyFirmInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
 }
 
 export type MatterUpdateWithoutFirmInput = {
@@ -1645,17 +1645,16 @@ export type MatterUpdateWithoutFirmInput = {
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutFirmInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1665,6 +1664,7 @@ export type MatterUncheckedUpdateWithoutFirmInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
@@ -1676,7 +1676,6 @@ export type MatterUncheckedUpdateWithoutFirmInput = {
 export type MatterUncheckedUpdateManyWithoutFirmInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1686,12 +1685,12 @@ export type MatterUncheckedUpdateManyWithoutFirmInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MatterCreateManyClientInput = {
   id?: string
   firmId: string
-  intakeId?: string | null
   referenceNumber: string
   title: string
   description?: string | null
@@ -1701,6 +1700,7 @@ export type MatterCreateManyClientInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  intakeId?: string | null
 }
 
 export type MatterUpdateWithoutClientInput = {
@@ -1717,17 +1717,16 @@ export type MatterUpdateWithoutClientInput = {
   deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
-  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
-  intake?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
 
 export type MatterUncheckedUpdateWithoutClientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1737,6 +1736,7 @@ export type MatterUncheckedUpdateWithoutClientInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
@@ -1748,7 +1748,6 @@ export type MatterUncheckedUpdateWithoutClientInput = {
 export type MatterUncheckedUpdateManyWithoutClientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firmId?: Prisma.StringFieldUpdateOperationsInput | string
-  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1758,6 +1757,7 @@ export type MatterUncheckedUpdateManyWithoutClientInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1840,7 +1840,6 @@ export type MatterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   id?: boolean
   firmId?: boolean
   clientId?: boolean
-  intakeId?: boolean
   referenceNumber?: boolean
   title?: boolean
   description?: boolean
@@ -1850,15 +1849,16 @@ export type MatterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   closedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  intakeId?: boolean
   deadlines?: boolean | Prisma.Matter$deadlinesArgs<ExtArgs>
   documents?: boolean | Prisma.Matter$documentsArgs<ExtArgs>
   folders?: boolean | Prisma.Matter$foldersArgs<ExtArgs>
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
   accessRequests?: boolean | Prisma.Matter$accessRequestsArgs<ExtArgs>
   users?: boolean | Prisma.Matter$usersArgs<ExtArgs>
   tasks?: boolean | Prisma.Matter$tasksArgs<ExtArgs>
-  intake?: boolean | Prisma.Matter$intakeArgs<ExtArgs>
+  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
+  convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
   _count?: boolean | Prisma.MatterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["matter"]>
 
@@ -1866,7 +1866,6 @@ export type MatterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   firmId?: boolean
   clientId?: boolean
-  intakeId?: boolean
   referenceNumber?: boolean
   title?: boolean
   description?: boolean
@@ -1876,16 +1875,16 @@ export type MatterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   closedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  intakeId?: boolean
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.Matter$intakeArgs<ExtArgs>
+  convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
 }, ExtArgs["result"]["matter"]>
 
 export type MatterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   firmId?: boolean
   clientId?: boolean
-  intakeId?: boolean
   referenceNumber?: boolean
   title?: boolean
   description?: boolean
@@ -1895,16 +1894,16 @@ export type MatterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   closedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  intakeId?: boolean
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.Matter$intakeArgs<ExtArgs>
+  convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
 }, ExtArgs["result"]["matter"]>
 
 export type MatterSelectScalar = {
   id?: boolean
   firmId?: boolean
   clientId?: boolean
-  intakeId?: boolean
   referenceNumber?: boolean
   title?: boolean
   description?: boolean
@@ -1914,30 +1913,31 @@ export type MatterSelectScalar = {
   closedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  intakeId?: boolean
 }
 
-export type MatterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firmId" | "clientId" | "intakeId" | "referenceNumber" | "title" | "description" | "practiceArea" | "status" | "openedAt" | "closedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["matter"]>
+export type MatterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firmId" | "clientId" | "referenceNumber" | "title" | "description" | "practiceArea" | "status" | "openedAt" | "closedAt" | "createdAt" | "updatedAt" | "intakeId", ExtArgs["result"]["matter"]>
 export type MatterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   deadlines?: boolean | Prisma.Matter$deadlinesArgs<ExtArgs>
   documents?: boolean | Prisma.Matter$documentsArgs<ExtArgs>
   folders?: boolean | Prisma.Matter$foldersArgs<ExtArgs>
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
   accessRequests?: boolean | Prisma.Matter$accessRequestsArgs<ExtArgs>
   users?: boolean | Prisma.Matter$usersArgs<ExtArgs>
   tasks?: boolean | Prisma.Matter$tasksArgs<ExtArgs>
-  intake?: boolean | Prisma.Matter$intakeArgs<ExtArgs>
+  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
+  convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
   _count?: boolean | Prisma.MatterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MatterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.Matter$intakeArgs<ExtArgs>
+  convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
 }
 export type MatterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
-  intake?: boolean | Prisma.Matter$intakeArgs<ExtArgs>
+  convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
 }
 
 export type $MatterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1946,18 +1946,22 @@ export type $MatterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     deadlines: Prisma.$DeadlinePayload<ExtArgs>[]
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     folders: Prisma.$FolderPayload<ExtArgs>[]
-    client: Prisma.$ClientPayload<ExtArgs>
-    firm: Prisma.$FirmPayload<ExtArgs>
     accessRequests: Prisma.$MatterAccessRequestPayload<ExtArgs>[]
     users: Prisma.$MatterUserPayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
-    intake: Prisma.$MatterIntakePayload<ExtArgs> | null
+    client: Prisma.$ClientPayload<ExtArgs>
+    firm: Prisma.$FirmPayload<ExtArgs>
+    /**
+     * * Application-facing relation.
+     *    * Existing intake routes use:
+     *    * intake.convertedMatter
+     */
+    convertedMatter: Prisma.$MatterIntakePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     firmId: string
     clientId: string
-    intakeId: string | null
     referenceNumber: string
     title: string
     description: string | null
@@ -1967,6 +1971,7 @@ export type $MatterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     closedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    intakeId: string | null
   }, ExtArgs["result"]["matter"]>
   composites: {}
 }
@@ -2364,12 +2369,12 @@ export interface Prisma__MatterClient<T, Null = never, ExtArgs extends runtime.T
   deadlines<T extends Prisma.Matter$deadlinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$deadlinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeadlinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Matter$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   folders<T extends Prisma.Matter$foldersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$foldersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FolderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  client<T extends Prisma.ClientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  firm<T extends Prisma.FirmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FirmDefaultArgs<ExtArgs>>): Prisma.Prisma__FirmClient<runtime.Types.Result.GetResult<Prisma.$FirmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   accessRequests<T extends Prisma.Matter$accessRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$accessRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterAccessRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Matter$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.Matter$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  intake<T extends Prisma.Matter$intakeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$intakeArgs<ExtArgs>>): Prisma.Prisma__MatterIntakeClient<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  client<T extends Prisma.ClientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  firm<T extends Prisma.FirmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FirmDefaultArgs<ExtArgs>>): Prisma.Prisma__FirmClient<runtime.Types.Result.GetResult<Prisma.$FirmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  convertedMatter<T extends Prisma.Matter$convertedMatterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$convertedMatterArgs<ExtArgs>>): Prisma.Prisma__MatterIntakeClient<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2402,7 +2407,6 @@ export interface MatterFieldRefs {
   readonly id: Prisma.FieldRef<"Matter", 'String'>
   readonly firmId: Prisma.FieldRef<"Matter", 'String'>
   readonly clientId: Prisma.FieldRef<"Matter", 'String'>
-  readonly intakeId: Prisma.FieldRef<"Matter", 'String'>
   readonly referenceNumber: Prisma.FieldRef<"Matter", 'String'>
   readonly title: Prisma.FieldRef<"Matter", 'String'>
   readonly description: Prisma.FieldRef<"Matter", 'String'>
@@ -2412,6 +2416,7 @@ export interface MatterFieldRefs {
   readonly closedAt: Prisma.FieldRef<"Matter", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Matter", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Matter", 'DateTime'>
+  readonly intakeId: Prisma.FieldRef<"Matter", 'String'>
 }
     
 
@@ -2957,9 +2962,9 @@ export type Matter$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
- * Matter.intake
+ * Matter.convertedMatter
  */
-export type Matter$intakeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Matter$convertedMatterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the MatterIntake
    */

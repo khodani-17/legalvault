@@ -93,6 +93,26 @@ export type FinanceDocument = Prisma.FinanceDocumentModel
  */
 export type Task = Prisma.TaskModel
 /**
+ * Model TaskNote
+ * 
+ */
+export type TaskNote = Prisma.TaskNoteModel
+/**
+ * Model TaskReport
+ * 
+ */
+export type TaskReport = Prisma.TaskReportModel
+/**
+ * Model TaskAssistanceRequest
+ * 
+ */
+export type TaskAssistanceRequest = Prisma.TaskAssistanceRequestModel
+/**
+ * Model TaskActivity
+ * 
+ */
+export type TaskActivity = Prisma.TaskActivityModel
+/**
  * Model Deadline
  * 
  */
@@ -108,12 +128,12 @@ export type Notification = Prisma.NotificationModel
  */
 export type AuditLog = Prisma.AuditLogModel
 /**
- * Model MatterIntake
- * 
- */
-export type MatterIntake = Prisma.MatterIntakeModel
-/**
  * Model ConflictCheck
  * 
  */
 export type ConflictCheck = Prisma.ConflictCheckModel
+/**
+ * Model MatterIntake
+ * 
+ */
+export type MatterIntake = Prisma.MatterIntakeModel
