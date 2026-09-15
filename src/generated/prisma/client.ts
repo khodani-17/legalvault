@@ -152,6 +152,16 @@ export type Notification = Prisma.NotificationModel
  */
 export type AuditLog = Prisma.AuditLogModel
 /**
+ * Model Correspondence
+ * 
+ */
+export type Correspondence = Prisma.CorrespondenceModel
+/**
+ * Model CorrespondenceAttachment
+ * 
+ */
+export type CorrespondenceAttachment = Prisma.CorrespondenceAttachmentModel
+/**
  * Model ConflictCheck
  * 
  */

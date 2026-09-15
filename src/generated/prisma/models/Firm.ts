@@ -238,6 +238,8 @@ export type FirmWhereInput = {
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   tasks?: Prisma.TaskListRelationFilter
   users?: Prisma.UserListRelationFilter
+  correspondences?: Prisma.CorrespondenceListRelationFilter
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentListRelationFilter
 }
 
 export type FirmOrderByWithRelationInput = {
@@ -267,6 +269,8 @@ export type FirmOrderByWithRelationInput = {
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
+  correspondences?: Prisma.CorrespondenceOrderByRelationAggregateInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentOrderByRelationAggregateInput
 }
 
 export type FirmWhereUniqueInput = Prisma.AtLeast<{
@@ -299,6 +303,8 @@ export type FirmWhereUniqueInput = Prisma.AtLeast<{
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   tasks?: Prisma.TaskListRelationFilter
   users?: Prisma.UserListRelationFilter
+  correspondences?: Prisma.CorrespondenceListRelationFilter
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentListRelationFilter
 }, "id" | "referenceNumber">
 
 export type FirmOrderByWithAggregationInput = {
@@ -360,6 +366,8 @@ export type FirmCreateInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateInput = {
@@ -389,6 +397,8 @@ export type FirmUncheckedCreateInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUpdateInput = {
@@ -418,6 +428,8 @@ export type FirmUpdateInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateInput = {
@@ -447,6 +459,8 @@ export type FirmUncheckedUpdateInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateManyInput = {
@@ -740,6 +754,34 @@ export type FirmUpdateOneRequiredWithoutAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FirmUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.FirmUpdateWithoutAuditLogsInput>, Prisma.FirmUncheckedUpdateWithoutAuditLogsInput>
 }
 
+export type FirmCreateNestedOneWithoutCorrespondencesInput = {
+  create?: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondencesInput, Prisma.FirmUncheckedCreateWithoutCorrespondencesInput>
+  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutCorrespondencesInput
+  connect?: Prisma.FirmWhereUniqueInput
+}
+
+export type FirmUpdateOneRequiredWithoutCorrespondencesNestedInput = {
+  create?: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondencesInput, Prisma.FirmUncheckedCreateWithoutCorrespondencesInput>
+  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutCorrespondencesInput
+  upsert?: Prisma.FirmUpsertWithoutCorrespondencesInput
+  connect?: Prisma.FirmWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FirmUpdateToOneWithWhereWithoutCorrespondencesInput, Prisma.FirmUpdateWithoutCorrespondencesInput>, Prisma.FirmUncheckedUpdateWithoutCorrespondencesInput>
+}
+
+export type FirmCreateNestedOneWithoutCorrespondenceAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondenceAttachmentsInput, Prisma.FirmUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutCorrespondenceAttachmentsInput
+  connect?: Prisma.FirmWhereUniqueInput
+}
+
+export type FirmUpdateOneRequiredWithoutCorrespondenceAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondenceAttachmentsInput, Prisma.FirmUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  connectOrCreate?: Prisma.FirmCreateOrConnectWithoutCorrespondenceAttachmentsInput
+  upsert?: Prisma.FirmUpsertWithoutCorrespondenceAttachmentsInput
+  connect?: Prisma.FirmWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FirmUpdateToOneWithWhereWithoutCorrespondenceAttachmentsInput, Prisma.FirmUpdateWithoutCorrespondenceAttachmentsInput>, Prisma.FirmUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+}
+
 export type FirmCreateNestedOneWithoutConflictChecksInput = {
   create?: Prisma.XOR<Prisma.FirmCreateWithoutConflictChecksInput, Prisma.FirmUncheckedCreateWithoutConflictChecksInput>
   connectOrCreate?: Prisma.FirmCreateOrConnectWithoutConflictChecksInput
@@ -794,6 +836,8 @@ export type FirmCreateWithoutSubscriptionInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutSubscriptionInput = {
@@ -822,6 +866,8 @@ export type FirmUncheckedCreateWithoutSubscriptionInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutSubscriptionInput = {
@@ -866,6 +912,8 @@ export type FirmUpdateWithoutSubscriptionInput = {
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutSubscriptionInput = {
@@ -894,6 +942,8 @@ export type FirmUncheckedUpdateWithoutSubscriptionInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutPaymentsInput = {
@@ -922,6 +972,8 @@ export type FirmCreateWithoutPaymentsInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutPaymentsInput = {
@@ -950,6 +1002,8 @@ export type FirmUncheckedCreateWithoutPaymentsInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutPaymentsInput = {
@@ -994,6 +1048,8 @@ export type FirmUpdateWithoutPaymentsInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutPaymentsInput = {
@@ -1022,6 +1078,8 @@ export type FirmUncheckedUpdateWithoutPaymentsInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutUsersInput = {
@@ -1050,6 +1108,8 @@ export type FirmCreateWithoutUsersInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutUsersInput = {
@@ -1078,6 +1138,8 @@ export type FirmUncheckedCreateWithoutUsersInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutUsersInput = {
@@ -1122,6 +1184,8 @@ export type FirmUpdateWithoutUsersInput = {
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutUsersInput = {
@@ -1150,6 +1214,8 @@ export type FirmUncheckedUpdateWithoutUsersInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutClientsInput = {
@@ -1178,6 +1244,8 @@ export type FirmCreateWithoutClientsInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutClientsInput = {
@@ -1206,6 +1274,8 @@ export type FirmUncheckedCreateWithoutClientsInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutClientsInput = {
@@ -1250,6 +1320,8 @@ export type FirmUpdateWithoutClientsInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutClientsInput = {
@@ -1278,6 +1350,8 @@ export type FirmUncheckedUpdateWithoutClientsInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutMattersInput = {
@@ -1306,6 +1380,8 @@ export type FirmCreateWithoutMattersInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutMattersInput = {
@@ -1334,6 +1410,8 @@ export type FirmUncheckedCreateWithoutMattersInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutMattersInput = {
@@ -1378,6 +1456,8 @@ export type FirmUpdateWithoutMattersInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutMattersInput = {
@@ -1406,6 +1486,8 @@ export type FirmUncheckedUpdateWithoutMattersInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutAccessRequestsInput = {
@@ -1434,6 +1516,8 @@ export type FirmCreateWithoutAccessRequestsInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutAccessRequestsInput = {
@@ -1462,6 +1546,8 @@ export type FirmUncheckedCreateWithoutAccessRequestsInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutAccessRequestsInput = {
@@ -1506,6 +1592,8 @@ export type FirmUpdateWithoutAccessRequestsInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutAccessRequestsInput = {
@@ -1534,6 +1622,8 @@ export type FirmUncheckedUpdateWithoutAccessRequestsInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutFoldersInput = {
@@ -1562,6 +1652,8 @@ export type FirmCreateWithoutFoldersInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutFoldersInput = {
@@ -1590,6 +1682,8 @@ export type FirmUncheckedCreateWithoutFoldersInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutFoldersInput = {
@@ -1634,6 +1728,8 @@ export type FirmUpdateWithoutFoldersInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutFoldersInput = {
@@ -1662,6 +1758,8 @@ export type FirmUncheckedUpdateWithoutFoldersInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutDocumentsInput = {
@@ -1690,6 +1788,8 @@ export type FirmCreateWithoutDocumentsInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutDocumentsInput = {
@@ -1718,6 +1818,8 @@ export type FirmUncheckedCreateWithoutDocumentsInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutDocumentsInput = {
@@ -1762,6 +1864,8 @@ export type FirmUpdateWithoutDocumentsInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutDocumentsInput = {
@@ -1790,6 +1894,8 @@ export type FirmUncheckedUpdateWithoutDocumentsInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutFinanceFoldersInput = {
@@ -1818,6 +1924,8 @@ export type FirmCreateWithoutFinanceFoldersInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutFinanceFoldersInput = {
@@ -1846,6 +1954,8 @@ export type FirmUncheckedCreateWithoutFinanceFoldersInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutFinanceFoldersInput = {
@@ -1890,6 +2000,8 @@ export type FirmUpdateWithoutFinanceFoldersInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutFinanceFoldersInput = {
@@ -1918,6 +2030,8 @@ export type FirmUncheckedUpdateWithoutFinanceFoldersInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutFinanceDocumentsInput = {
@@ -1946,6 +2060,8 @@ export type FirmCreateWithoutFinanceDocumentsInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutFinanceDocumentsInput = {
@@ -1974,6 +2090,8 @@ export type FirmUncheckedCreateWithoutFinanceDocumentsInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutFinanceDocumentsInput = {
@@ -2018,6 +2136,8 @@ export type FirmUpdateWithoutFinanceDocumentsInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutFinanceDocumentsInput = {
@@ -2046,6 +2166,8 @@ export type FirmUncheckedUpdateWithoutFinanceDocumentsInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutTasksInput = {
@@ -2074,6 +2196,8 @@ export type FirmCreateWithoutTasksInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutTasksInput = {
@@ -2102,6 +2226,8 @@ export type FirmUncheckedCreateWithoutTasksInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutTasksInput = {
@@ -2146,6 +2272,8 @@ export type FirmUpdateWithoutTasksInput = {
   payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutTasksInput = {
@@ -2174,6 +2302,8 @@ export type FirmUncheckedUpdateWithoutTasksInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutDeadlinesInput = {
@@ -2202,6 +2332,8 @@ export type FirmCreateWithoutDeadlinesInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutDeadlinesInput = {
@@ -2230,6 +2362,8 @@ export type FirmUncheckedCreateWithoutDeadlinesInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutDeadlinesInput = {
@@ -2274,6 +2408,8 @@ export type FirmUpdateWithoutDeadlinesInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutDeadlinesInput = {
@@ -2302,6 +2438,8 @@ export type FirmUncheckedUpdateWithoutDeadlinesInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutNotificationsInput = {
@@ -2330,6 +2468,8 @@ export type FirmCreateWithoutNotificationsInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutNotificationsInput = {
@@ -2358,6 +2498,8 @@ export type FirmUncheckedCreateWithoutNotificationsInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutNotificationsInput = {
@@ -2402,6 +2544,8 @@ export type FirmUpdateWithoutNotificationsInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutNotificationsInput = {
@@ -2430,6 +2574,8 @@ export type FirmUncheckedUpdateWithoutNotificationsInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutAuditLogsInput = {
@@ -2458,6 +2604,8 @@ export type FirmCreateWithoutAuditLogsInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutAuditLogsInput = {
@@ -2486,6 +2634,8 @@ export type FirmUncheckedCreateWithoutAuditLogsInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutAuditLogsInput = {
@@ -2530,6 +2680,8 @@ export type FirmUpdateWithoutAuditLogsInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutAuditLogsInput = {
@@ -2558,6 +2710,280 @@ export type FirmUncheckedUpdateWithoutAuditLogsInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
+}
+
+export type FirmCreateWithoutCorrespondencesInput = {
+  id?: string
+  referenceNumber: string
+  name: string
+  registrationNumber?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
+  clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
+  deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
+  financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
+  financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
+  folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
+  matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
+  accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
+  users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
+}
+
+export type FirmUncheckedCreateWithoutCorrespondencesInput = {
+  id?: string
+  referenceNumber: string
+  name: string
+  registrationNumber?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
+  deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
+  financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
+  financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
+  folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
+  matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
+}
+
+export type FirmCreateOrConnectWithoutCorrespondencesInput = {
+  where: Prisma.FirmWhereUniqueInput
+  create: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondencesInput, Prisma.FirmUncheckedCreateWithoutCorrespondencesInput>
+}
+
+export type FirmUpsertWithoutCorrespondencesInput = {
+  update: Prisma.XOR<Prisma.FirmUpdateWithoutCorrespondencesInput, Prisma.FirmUncheckedUpdateWithoutCorrespondencesInput>
+  create: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondencesInput, Prisma.FirmUncheckedCreateWithoutCorrespondencesInput>
+  where?: Prisma.FirmWhereInput
+}
+
+export type FirmUpdateToOneWithWhereWithoutCorrespondencesInput = {
+  where?: Prisma.FirmWhereInput
+  data: Prisma.XOR<Prisma.FirmUpdateWithoutCorrespondencesInput, Prisma.FirmUncheckedUpdateWithoutCorrespondencesInput>
+}
+
+export type FirmUpdateWithoutCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
+  deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
+  financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
+  financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
+  folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
+  matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
+  users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
+}
+
+export type FirmUncheckedUpdateWithoutCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
+  deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
+  financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
+  financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
+  folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
+  matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
+}
+
+export type FirmCreateWithoutCorrespondenceAttachmentsInput = {
+  id?: string
+  referenceNumber: string
+  name: string
+  registrationNumber?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutFirmInput
+  clients?: Prisma.ClientCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutFirmInput
+  deadlines?: Prisma.DeadlineCreateNestedManyWithoutFirmInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutFirmInput
+  financeDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutFirmInput
+  financeFolders?: Prisma.FinanceFolderCreateNestedManyWithoutFirmInput
+  folders?: Prisma.FolderCreateNestedManyWithoutFirmInput
+  matters?: Prisma.MatterCreateNestedManyWithoutFirmInput
+  accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutFirmInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutFirmInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutFirmInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
+  users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+}
+
+export type FirmUncheckedCreateWithoutCorrespondenceAttachmentsInput = {
+  id?: string
+  referenceNumber: string
+  name: string
+  registrationNumber?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutFirmInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutFirmInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutFirmInput
+  deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutFirmInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutFirmInput
+  financeDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutFirmInput
+  financeFolders?: Prisma.FinanceFolderUncheckedCreateNestedManyWithoutFirmInput
+  folders?: Prisma.FolderUncheckedCreateNestedManyWithoutFirmInput
+  matters?: Prisma.MatterUncheckedCreateNestedManyWithoutFirmInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutFirmInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutFirmInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFirmInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutFirmInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+}
+
+export type FirmCreateOrConnectWithoutCorrespondenceAttachmentsInput = {
+  where: Prisma.FirmWhereUniqueInput
+  create: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondenceAttachmentsInput, Prisma.FirmUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+}
+
+export type FirmUpsertWithoutCorrespondenceAttachmentsInput = {
+  update: Prisma.XOR<Prisma.FirmUpdateWithoutCorrespondenceAttachmentsInput, Prisma.FirmUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+  create: Prisma.XOR<Prisma.FirmCreateWithoutCorrespondenceAttachmentsInput, Prisma.FirmUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  where?: Prisma.FirmWhereInput
+}
+
+export type FirmUpdateToOneWithWhereWithoutCorrespondenceAttachmentsInput = {
+  where?: Prisma.FirmWhereInput
+  data: Prisma.XOR<Prisma.FirmUpdateWithoutCorrespondenceAttachmentsInput, Prisma.FirmUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+}
+
+export type FirmUpdateWithoutCorrespondenceAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutFirmNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutFirmNestedInput
+  deadlines?: Prisma.DeadlineUpdateManyWithoutFirmNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutFirmNestedInput
+  financeDocuments?: Prisma.FinanceDocumentUpdateManyWithoutFirmNestedInput
+  financeFolders?: Prisma.FinanceFolderUpdateManyWithoutFirmNestedInput
+  folders?: Prisma.FolderUpdateManyWithoutFirmNestedInput
+  matters?: Prisma.MatterUpdateManyWithoutFirmNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutFirmNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutFirmNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutFirmNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
+  users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+}
+
+export type FirmUncheckedUpdateWithoutCorrespondenceAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutFirmNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutFirmNestedInput
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutFirmNestedInput
+  deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutFirmNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutFirmNestedInput
+  financeDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutFirmNestedInput
+  financeFolders?: Prisma.FinanceFolderUncheckedUpdateManyWithoutFirmNestedInput
+  folders?: Prisma.FolderUncheckedUpdateManyWithoutFirmNestedInput
+  matters?: Prisma.MatterUncheckedUpdateManyWithoutFirmNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutFirmNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutFirmNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFirmNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutFirmNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutConflictChecksInput = {
@@ -2586,6 +3012,8 @@ export type FirmCreateWithoutConflictChecksInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutConflictChecksInput = {
@@ -2614,6 +3042,8 @@ export type FirmUncheckedCreateWithoutConflictChecksInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutConflictChecksInput = {
@@ -2658,6 +3088,8 @@ export type FirmUpdateWithoutConflictChecksInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutConflictChecksInput = {
@@ -2686,6 +3118,8 @@ export type FirmUncheckedUpdateWithoutConflictChecksInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmCreateWithoutIntakesInput = {
@@ -2714,6 +3148,8 @@ export type FirmCreateWithoutIntakesInput = {
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskCreateNestedManyWithoutFirmInput
   users?: Prisma.UserCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutFirmInput
 }
 
 export type FirmUncheckedCreateWithoutIntakesInput = {
@@ -2742,6 +3178,8 @@ export type FirmUncheckedCreateWithoutIntakesInput = {
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutFirmInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutFirmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFirmInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutFirmInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutFirmInput
 }
 
 export type FirmCreateOrConnectWithoutIntakesInput = {
@@ -2786,6 +3224,8 @@ export type FirmUpdateWithoutIntakesInput = {
   subscription?: Prisma.SubscriptionUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutFirmNestedInput
 }
 
 export type FirmUncheckedUpdateWithoutIntakesInput = {
@@ -2814,6 +3254,8 @@ export type FirmUncheckedUpdateWithoutIntakesInput = {
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutFirmNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutFirmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFirmNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutFirmNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutFirmNestedInput
 }
 
 
@@ -2837,6 +3279,8 @@ export type FirmCountOutputType = {
   payments: number
   tasks: number
   users: number
+  correspondences: number
+  correspondenceAttachments: number
 }
 
 export type FirmCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2855,6 +3299,8 @@ export type FirmCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   payments?: boolean | FirmCountOutputTypeCountPaymentsArgs
   tasks?: boolean | FirmCountOutputTypeCountTasksArgs
   users?: boolean | FirmCountOutputTypeCountUsersArgs
+  correspondences?: boolean | FirmCountOutputTypeCountCorrespondencesArgs
+  correspondenceAttachments?: boolean | FirmCountOutputTypeCountCorrespondenceAttachmentsArgs
 }
 
 /**
@@ -2972,6 +3418,20 @@ export type FirmCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * FirmCountOutputType without action
+ */
+export type FirmCountOutputTypeCountCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceWhereInput
+}
+
+/**
+ * FirmCountOutputType without action
+ */
+export type FirmCountOutputTypeCountCorrespondenceAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceAttachmentWhereInput
+}
+
 
 export type FirmSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3000,6 +3460,8 @@ export type FirmSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   subscription?: boolean | Prisma.Firm$subscriptionArgs<ExtArgs>
   tasks?: boolean | Prisma.Firm$tasksArgs<ExtArgs>
   users?: boolean | Prisma.Firm$usersArgs<ExtArgs>
+  correspondences?: boolean | Prisma.Firm$correspondencesArgs<ExtArgs>
+  correspondenceAttachments?: boolean | Prisma.Firm$correspondenceAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.FirmCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["firm"]>
 
@@ -3060,6 +3522,8 @@ export type FirmInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   subscription?: boolean | Prisma.Firm$subscriptionArgs<ExtArgs>
   tasks?: boolean | Prisma.Firm$tasksArgs<ExtArgs>
   users?: boolean | Prisma.Firm$usersArgs<ExtArgs>
+  correspondences?: boolean | Prisma.Firm$correspondencesArgs<ExtArgs>
+  correspondenceAttachments?: boolean | Prisma.Firm$correspondenceAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.FirmCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FirmIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3084,6 +3548,8 @@ export type $FirmPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
+    correspondences: Prisma.$CorrespondencePayload<ExtArgs>[]
+    correspondenceAttachments: Prisma.$CorrespondenceAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3506,6 +3972,8 @@ export interface Prisma__FirmClient<T, Null = never, ExtArgs extends runtime.Typ
   subscription<T extends Prisma.Firm$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tasks<T extends Prisma.Firm$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Firm$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  correspondences<T extends Prisma.Firm$correspondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$correspondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  correspondenceAttachments<T extends Prisma.Firm$correspondenceAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Firm$correspondenceAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondenceAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4314,6 +4782,54 @@ export type Firm$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * Firm.correspondences
+ */
+export type Firm$correspondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Correspondence
+   */
+  select?: Prisma.CorrespondenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Correspondence
+   */
+  omit?: Prisma.CorrespondenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceWhereInput
+  orderBy?: Prisma.CorrespondenceOrderByWithRelationInput | Prisma.CorrespondenceOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceScalarFieldEnum | Prisma.CorrespondenceScalarFieldEnum[]
+}
+
+/**
+ * Firm.correspondenceAttachments
+ */
+export type Firm$correspondenceAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CorrespondenceAttachment
+   */
+  select?: Prisma.CorrespondenceAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CorrespondenceAttachment
+   */
+  omit?: Prisma.CorrespondenceAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceAttachmentInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceAttachmentWhereInput
+  orderBy?: Prisma.CorrespondenceAttachmentOrderByWithRelationInput | Prisma.CorrespondenceAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceAttachmentScalarFieldEnum | Prisma.CorrespondenceAttachmentScalarFieldEnum[]
 }
 
 /**

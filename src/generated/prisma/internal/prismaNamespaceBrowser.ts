@@ -73,6 +73,8 @@ export const ModelName = {
   Deadline: 'Deadline',
   Notification: 'Notification',
   AuditLog: 'AuditLog',
+  Correspondence: 'Correspondence',
+  CorrespondenceAttachment: 'CorrespondenceAttachment',
   ConflictCheck: 'ConflictCheck',
   MatterIntake: 'MatterIntake'
 } as const
@@ -475,6 +477,42 @@ export const AuditLogScalarFieldEnum = {
 } as const
 
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const CorrespondenceScalarFieldEnum = {
+  id: 'id',
+  firmId: 'firmId',
+  matterId: 'matterId',
+  clientId: 'clientId',
+  direction: 'direction',
+  correspondenceDate: 'correspondenceDate',
+  sender: 'sender',
+  recipient: 'recipient',
+  subject: 'subject',
+  type: 'type',
+  status: 'status',
+  responsibleUserId: 'responsibleUserId',
+  responseRequired: 'responseRequired',
+  responseDeadline: 'responseDeadline',
+  notes: 'notes',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CorrespondenceScalarFieldEnum = (typeof CorrespondenceScalarFieldEnum)[keyof typeof CorrespondenceScalarFieldEnum]
+
+
+export const CorrespondenceAttachmentScalarFieldEnum = {
+  id: 'id',
+  firmId: 'firmId',
+  correspondenceId: 'correspondenceId',
+  documentId: 'documentId',
+  addedById: 'addedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CorrespondenceAttachmentScalarFieldEnum = (typeof CorrespondenceAttachmentScalarFieldEnum)[keyof typeof CorrespondenceAttachmentScalarFieldEnum]
 
 
 export const ConflictCheckScalarFieldEnum = {

@@ -35,6 +35,11 @@ export type Permission =
   | "tasks.update"
   | "tasks.delete"
 
+  | "correspondence.view"
+  | "correspondence.create"
+  | "correspondence.update"
+  | "correspondence.delete"
+
   | "deadlines.view"
   | "deadlines.create"
   | "deadlines.update"
@@ -99,6 +104,11 @@ const ROLE_PERMISSIONS: Record<
     "tasks.update",
     "tasks.delete",
 
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
+    "correspondence.delete",
+
     "deadlines.view",
     "deadlines.create",
     "deadlines.update",
@@ -146,6 +156,11 @@ const ROLE_PERMISSIONS: Record<
     "tasks.create",
     "tasks.update",
     "tasks.delete",
+
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
+    "correspondence.delete",
 
     "deadlines.view",
     "deadlines.create",
@@ -195,6 +210,11 @@ const ROLE_PERMISSIONS: Record<
     "tasks.update",
     "tasks.delete",
 
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
+    "correspondence.delete",
+
     "deadlines.view",
     "deadlines.create",
     "deadlines.update",
@@ -243,6 +263,11 @@ const ROLE_PERMISSIONS: Record<
     "tasks.update",
     "tasks.delete",
 
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
+    "correspondence.delete",
+
     "deadlines.view",
     "deadlines.create",
     "deadlines.update",
@@ -287,6 +312,10 @@ const ROLE_PERMISSIONS: Record<
     "tasks.update",
     "tasks.delete",
 
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
+
     "deadlines.view",
     "deadlines.create",
     "deadlines.update",
@@ -313,6 +342,8 @@ const ROLE_PERMISSIONS: Record<
     "tasks.view",
     "tasks.create",
     "tasks.update",
+
+    "correspondence.view",
   ],
 
   // ==========================================================
@@ -337,6 +368,10 @@ const ROLE_PERMISSIONS: Record<
     "tasks.view",
     "tasks.create",
     "tasks.update",
+
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
   ],
 
   // ==========================================================
@@ -361,6 +396,10 @@ const ROLE_PERMISSIONS: Record<
     "tasks.view",
     "tasks.create",
     "tasks.update",
+
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
   ],
 
   // ==========================================================
@@ -406,6 +445,11 @@ const ROLE_PERMISSIONS: Record<
     "tasks.create",
     "tasks.update",
     "tasks.delete",
+
+    "correspondence.view",
+    "correspondence.create",
+    "correspondence.update",
+    "correspondence.delete",
 
     "deadlines.view",
     "deadlines.create",

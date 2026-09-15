@@ -8,23 +8,23 @@ datasource db {
   provider = "postgresql"
 }
 
-/*
-|--------------------------------------------------------------------------
-| FIRM
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | FIRM
+ * |--------------------------------------------------------------------------
+ */
 
 model Firm {
-  id                 String       @id @default(cuid())
-  referenceNumber    String       @unique
+  id                 String   @id @default(cuid())
+  referenceNumber    String   @unique
   name               String
   registrationNumber String?
   email              String?
   phone              String?
   address            String?
   logoUrl            String?
-  createdAt          DateTime     @default(now())
-  updatedAt          DateTime     @updatedAt
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   auditLogs        AuditLog[]
   clients          Client[]
@@ -43,14 +43,17 @@ model Firm {
   tasks            Task[]
   users            User[]
 
+  correspondences           Correspondence[]
+  correspondenceAttachments CorrespondenceAttachment[]
+
   @@index([name])
 }
 
-/*
-|--------------------------------------------------------------------------
-| SUBSCRIPTION
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | SUBSCRIPTION
+ * |--------------------------------------------------------------------------
+ */
 
 model Subscription {
   id                     String             @id @default(cuid())
@@ -76,11 +79,11 @@ model Subscription {
   @@index([providerSubscriptionId])
 }
 
-/*
-|--------------------------------------------------------------------------
-| PAYMENT
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | PAYMENT
+ * |--------------------------------------------------------------------------
+ */
 
 model Payment {
   id                    String        @id @default(cuid())
@@ -115,30 +118,30 @@ model Payment {
   @@index([firmId, createdAt])
 }
 
-/*
-|--------------------------------------------------------------------------
-| USER
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | USER
+ * |--------------------------------------------------------------------------
+ */
 
 model User {
-  id                       String                 @id @default(cuid())
-  firmId                   String
-  name                     String
-  email                    String                 @unique
-  passwordHash             String?
-  role                     UserRole               @default(LEGAL_SECRETARY)
-  status                   UserStatus             @default(ACTIVE)
-  avatarUrl                String?
-  lastLoginAt              DateTime?
-  createdAt                DateTime               @default(now())
-  updatedAt                DateTime               @updatedAt
+  id           String     @id @default(cuid())
+  firmId       String
+  name         String
+  email        String     @unique
+  passwordHash String?
+  role         UserRole   @default(LEGAL_SECRETARY)
+  status       UserStatus @default(ACTIVE)
+  avatarUrl    String?
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   auditLogs AuditLog[]
 
-  assignedDeadlines Deadline[] @relation("AssignedDeadlines")
+  assignedDeadlines  Deadline[] @relation("AssignedDeadlines")
   completedDeadlines Deadline[] @relation("CompletedDeadlines")
-  createdDeadlines Deadline[] @relation("CreatedDeadlines")
+  createdDeadlines   Deadline[] @relation("CreatedDeadlines")
 
   uploadedDocuments        Document[]        @relation("UploadedDocuments")
   uploadedFinanceDocuments FinanceDocument[] @relation("UploadedFinanceDocuments")
@@ -153,8 +156,8 @@ model User {
   checkedConflictChecks  ConflictCheck[] @relation("ConflictCheckCheckedBy")
   reviewedConflictChecks ConflictCheck[] @relation("ConflictCheckReviewedBy")
 
-  matters           MatterUser[]
-  notifications     Notification[]
+  matters             MatterUser[]
+  notifications       Notification[]
   passwordResetTokens PasswordResetToken[]
 
   assignedTasks            Task[] @relation("AssignedTasks")
@@ -168,17 +171,21 @@ model User {
   taskAssistanceRequests TaskAssistanceRequest[] @relation("TaskAssistanceRequests")
   taskActivities         TaskActivity[]          @relation("TaskActivities")
 
+  createdCorrespondences     Correspondence[]           @relation("CreatedCorrespondences")
+  responsibleCorrespondences Correspondence[]           @relation("ResponsibleCorrespondences")
+  correspondenceAttachments  CorrespondenceAttachment[] @relation("CorrespondenceAttachments")
+
   firm Firm @relation(fields: [firmId], references: [id], onDelete: Cascade)
 
   @@index([firmId])
   @@index([firmId, role])
 }
 
-/*
-|--------------------------------------------------------------------------
-| PASSWORD RESET
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | PASSWORD RESET
+ * |--------------------------------------------------------------------------
+ */
 
 model PasswordResetToken {
   id        String   @id @default(cuid())
@@ -193,11 +200,11 @@ model PasswordResetToken {
   @@index([expiresAt])
 }
 
-/*
-|--------------------------------------------------------------------------
-| CLIENT
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | CLIENT
+ * |--------------------------------------------------------------------------
+ */
 
 model Client {
   id              String     @id @default(cuid())
@@ -213,21 +220,23 @@ model Client {
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 
-  firm           Firm           @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  firm           Firm            @relation(fields: [firmId], references: [id], onDelete: Cascade)
   conflictChecks ConflictCheck[]
   matters        Matter[]
   intakes        MatterIntake[]
+
+  correspondences Correspondence[]
 
   @@unique([firmId, referenceNumber])
   @@index([firmId])
   @@index([firmId, name])
 }
 
-/*
-|--------------------------------------------------------------------------
-| MATTER
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | MATTER
+ * |--------------------------------------------------------------------------
+ */
 
 model Matter {
   id              String       @id @default(cuid())
@@ -252,14 +261,11 @@ model Matter {
   users          MatterUser[]
   tasks          Task[]
 
-  client Client @relation(fields: [clientId], references: [id])
-  firm   Firm    @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  correspondences Correspondence[]
 
-  /*
-   * Application-facing relation.
-   * Existing intake routes use:
-   * intake.convertedMatter
-   */
+  client Client @relation(fields: [clientId], references: [id])
+  firm   Firm   @relation(fields: [firmId], references: [id], onDelete: Cascade)
+
   convertedMatter MatterIntake? @relation("ConvertedMatter", fields: [intakeId], references: [id])
 
   @@unique([firmId, referenceNumber])
@@ -268,11 +274,11 @@ model Matter {
   @@index([firmId, status])
 }
 
-/*
-|--------------------------------------------------------------------------
-| MATTER USER ACCESS
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | MATTER USER ACCESS
+ * |--------------------------------------------------------------------------
+ */
 
 model MatterUser {
   id          String   @id @default(cuid())
@@ -293,11 +299,11 @@ model MatterUser {
   @@index([userId])
 }
 
-/*
-|--------------------------------------------------------------------------
-| MATTER ACCESS REQUEST
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | MATTER ACCESS REQUEST
+ * |--------------------------------------------------------------------------
+ */
 
 model MatterAccessRequest {
   id              String              @id @default(cuid())
@@ -312,15 +318,12 @@ model MatterAccessRequest {
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 
-  firm   Firm   @relation(fields: [firmId], references: [id], onDelete: Cascade)
-  matter Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
-
-  requester User @relation("MatterAccessRequester", fields: [requesterId], references: [id], onDelete: Cascade)
-
-  reviewedBy User? @relation("MatterAccessReviewer", fields: [reviewedById], references: [id])
+  firm       Firm   @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  matter     Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  requester  User   @relation("MatterAccessRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  reviewedBy User?  @relation("MatterAccessReviewer", fields: [reviewedById], references: [id])
 
   @@unique([matterId, requesterId], map: "MatterAccessRequest_pending_unique", where: raw("(status = 'PENDING'::\"AccessRequestStatus\")"))
-
   @@index([firmId])
   @@index([matterId])
   @@index([requesterId])
@@ -328,11 +331,11 @@ model MatterAccessRequest {
   @@index([firmId, status])
 }
 
-/*
-|--------------------------------------------------------------------------
-| FOLDER
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | FOLDER
+ * |--------------------------------------------------------------------------
+ */
 
 model Folder {
   id             String   @id @default(cuid())
@@ -356,11 +359,11 @@ model Folder {
   @@index([parentFolderId])
 }
 
-/*
-|--------------------------------------------------------------------------
-| DOCUMENT
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | DOCUMENT
+ * |--------------------------------------------------------------------------
+ */
 
 model Document {
   id              String         @id @default(cuid())
@@ -383,11 +386,13 @@ model Document {
   updatedAt       DateTime       @updatedAt
   deletedAt       DateTime?
 
-  firm       Firm       @relation(fields: [firmId], references: [id], onDelete: Cascade)
-  folder     Folder?    @relation(fields: [folderId], references: [id])
-  matter     Matter     @relation(fields: [matterId], references: [id], onDelete: Cascade)
-  uploadedBy User       @relation("UploadedDocuments", fields: [uploadedById], references: [id])
+  firm       Firm              @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  folder     Folder?           @relation(fields: [folderId], references: [id])
+  matter     Matter            @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  uploadedBy User              @relation("UploadedDocuments", fields: [uploadedById], references: [id])
   versions   DocumentVersion[]
+
+  correspondenceAttachments CorrespondenceAttachment[]
 
   @@unique([firmId, referenceNumber])
   @@index([firmId])
@@ -396,11 +401,11 @@ model Document {
   @@index([status])
 }
 
-/*
-|--------------------------------------------------------------------------
-| DOCUMENT VERSION
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | DOCUMENT VERSION
+ * |--------------------------------------------------------------------------
+ */
 
 model DocumentVersion {
   id           String   @id @default(cuid())
@@ -422,11 +427,11 @@ model DocumentVersion {
   @@index([documentId])
 }
 
-/*
-|--------------------------------------------------------------------------
-| FINANCE FOLDER
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | FINANCE FOLDER
+ * |--------------------------------------------------------------------------
+ */
 
 model FinanceFolder {
   id             String   @id @default(cuid())
@@ -445,32 +450,30 @@ model FinanceFolder {
   childFolders FinanceFolder[] @relation("FinanceFolderHierarchy")
 
   @@unique([firmId, parentFolderId, name], map: "FinanceFolder_parent_name_unique", where: raw("(\"parentFolderId\" IS NOT NULL)"))
-
   @@unique([firmId, name], map: "FinanceFolder_root_name_unique", where: raw("(\"parentFolderId\" IS NULL)"))
-
   @@index([firmId])
   @@index([parentFolderId])
   @@index([firmId, name])
 }
 
-/*
-|--------------------------------------------------------------------------
-| FINANCE DOCUMENT
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | FINANCE DOCUMENT
+ * |--------------------------------------------------------------------------
+ */
 
 model FinanceDocument {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   firmId       String
   name         String
   originalName String
   mimeType     String
   extension    String
   size         BigInt
-  storageKey   String   @unique
+  storageKey   String    @unique
   uploadedById String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
   deletedAt    DateTime?
   folderId     String?
 
@@ -484,44 +487,33 @@ model FinanceDocument {
   @@index([firmId, createdAt])
 }
 
-/*
-|--------------------------------------------------------------------------
-| TASK MANAGEMENT
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | TASK MANAGEMENT
+ * |--------------------------------------------------------------------------
+ */
 
 model Task {
-  id                    String            @id @default(cuid())
-  firmId                String
-  matterId              String?
+  id       String  @id @default(cuid())
+  firmId   String
+  matterId String?
 
-  title                 String
-  description           String?
+  title       String
+  description String?
 
-  status                TaskStatus        @default(TODO)
-  priority              TaskPriority      @default(MEDIUM)
+  status   TaskStatus   @default(TODO)
+  priority TaskPriority @default(MEDIUM)
 
-  assignedToId          String?
-  createdById           String
+  assignedToId String?
+  createdById  String
 
-  /*
-   * Person who physically delegated/created the task.
-   */
-  delegatedById String?
-
-  /*
-   * Director / Managing Partner on whose behalf
-   * the task was delegated.
-   */
+  delegatedById         String?
   delegatedOnBehalfOfId String?
 
   dueDate     DateTime?
   completedAt DateTime?
 
-  /*
-   * Reporting workflow.
-   */
-  requiresReport    Boolean           @default(false)
+  requiresReport    Boolean            @default(false)
   reportSubmittedAt DateTime?
   reportReviewedAt  DateTime?
   reportOutcome     TaskReportOutcome?
@@ -559,11 +551,11 @@ model Task {
   @@index([firmId, dueDate])
 }
 
-/*
-|--------------------------------------------------------------------------
-| TASK NOTES / UPDATES
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | TASK NOTES / UPDATES
+ * |--------------------------------------------------------------------------
+ */
 
 model TaskNote {
   id        String   @id @default(cuid())
@@ -581,14 +573,14 @@ model TaskNote {
   @@index([createdAt])
 }
 
-/*
-|--------------------------------------------------------------------------
-| TASK REPORTS
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | TASK REPORTS
+ * |--------------------------------------------------------------------------
+ */
 
 model TaskReport {
-  id            String            @id @default(cuid())
+  id            String @id @default(cuid())
   taskId        String
   submittedById String
 
@@ -611,14 +603,14 @@ model TaskReport {
   @@index([submittedAt])
 }
 
-/*
-|--------------------------------------------------------------------------
-| TASK ASSISTANCE REQUESTS
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | TASK ASSISTANCE REQUESTS
+ * |--------------------------------------------------------------------------
+ */
 
 model TaskAssistanceRequest {
-  id            String           @id @default(cuid())
+  id            String @id @default(cuid())
   taskId        String
   requestedById String
 
@@ -640,16 +632,16 @@ model TaskAssistanceRequest {
   @@index([createdAt])
 }
 
-/*
-|--------------------------------------------------------------------------
-| TASK HISTORY / ACTIVITY
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | TASK HISTORY / ACTIVITY
+ * |--------------------------------------------------------------------------
+ */
 
 model TaskActivity {
-  id          String   @id @default(cuid())
-  taskId      String
-  userId      String
+  id     String @id @default(cuid())
+  taskId String
+  userId String
 
   action      String
   description String?
@@ -665,16 +657,16 @@ model TaskActivity {
   @@index([createdAt])
 }
 
-/*
-|--------------------------------------------------------------------------
-| DEADLINES
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | DEADLINES
+ * |--------------------------------------------------------------------------
+ */
 
 model Deadline {
-  id              String           @id @default(cuid())
-  firmId          String
-  matterId        String
+  id       String @id @default(cuid())
+  firmId   String
+  matterId String
 
   title       String
   description String?
@@ -718,11 +710,11 @@ model Deadline {
   @@index([matterId, dueDate])
 }
 
-/*
-|--------------------------------------------------------------------------
-| NOTIFICATIONS
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | NOTIFICATIONS
+ * |--------------------------------------------------------------------------
+ */
 
 model Notification {
   id        String           @id @default(cuid())
@@ -743,11 +735,11 @@ model Notification {
   @@index([userId, isRead])
 }
 
-/*
-|--------------------------------------------------------------------------
-| AUDIT LOG
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | AUDIT LOG
+ * |--------------------------------------------------------------------------
+ */
 
 model AuditLog {
   id          String      @id @default(cuid())
@@ -773,14 +765,97 @@ model AuditLog {
   @@index([userId])
 }
 
-/*
-|--------------------------------------------------------------------------
-| CONFLICT CHECK
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | CORRESPONDENCE
+ * |--------------------------------------------------------------------------
+ */
+
+model Correspondence {
+  id       String  @id @default(cuid())
+  firmId   String
+  matterId String?
+  clientId String?
+
+  direction          CorrespondenceDirection
+  correspondenceDate DateTime                @default(now())
+
+  sender    String
+  recipient String
+  subject   String
+
+  type   CorrespondenceType
+  status CorrespondenceStatus @default(RECEIVED)
+
+  responsibleUserId String?
+
+  responseRequired Boolean   @default(false)
+  responseDeadline DateTime?
+
+  notes String?
+
+  createdById String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  firm            Firm    @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  matter          Matter? @relation(fields: [matterId], references: [id], onDelete: SetNull)
+  client          Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  createdBy       User    @relation("CreatedCorrespondences", fields: [createdById], references: [id], onDelete: Restrict)
+  responsibleUser User?   @relation("ResponsibleCorrespondences", fields: [responsibleUserId], references: [id], onDelete: SetNull)
+
+  attachments CorrespondenceAttachment[]
+
+  @@index([firmId])
+  @@index([matterId])
+  @@index([clientId])
+  @@index([responsibleUserId])
+  @@index([createdById])
+  @@index([status])
+  @@index([direction])
+  @@index([type])
+  @@index([correspondenceDate])
+  @@index([responseDeadline])
+  @@index([firmId, status])
+  @@index([firmId, responseDeadline])
+}
+
+/**
+ * |--------------------------------------------------------------------------
+ * | CORRESPONDENCE ATTACHMENT
+ * |--------------------------------------------------------------------------
+ */
+
+model CorrespondenceAttachment {
+  id               String @id @default(cuid())
+  firmId           String
+  correspondenceId String
+  documentId       String
+  addedById        String
+
+  createdAt DateTime @default(now())
+
+  firm           Firm           @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  correspondence Correspondence @relation(fields: [correspondenceId], references: [id], onDelete: Cascade)
+  document       Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  addedBy        User           @relation("CorrespondenceAttachments", fields: [addedById], references: [id], onDelete: Restrict)
+
+  @@unique([correspondenceId, documentId])
+  @@index([firmId])
+  @@index([correspondenceId])
+  @@index([documentId])
+  @@index([addedById])
+}
+
+/**
+ * |--------------------------------------------------------------------------
+ * | CONFLICT CHECK
+ * |--------------------------------------------------------------------------
+ */
 
 model ConflictCheck {
-  id           String              @id @default(cuid())
+  id           String  @id @default(cuid())
   firmId       String
   intakeId     String?
   clientId     String?
@@ -799,15 +874,11 @@ model ConflictCheck {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  checkedBy User @relation("ConflictCheckCheckedBy", fields: [checkedById], references: [id])
-
-  reviewedBy User? @relation("ConflictCheckReviewedBy", fields: [reviewedById], references: [id])
-
-  client Client? @relation(fields: [clientId], references: [id])
-
-  intake MatterIntake? @relation(fields: [intakeId], references: [id], onDelete: Cascade)
-
-  firm Firm @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  checkedBy  User          @relation("ConflictCheckCheckedBy", fields: [checkedById], references: [id])
+  reviewedBy User?         @relation("ConflictCheckReviewedBy", fields: [reviewedById], references: [id])
+  client     Client?       @relation(fields: [clientId], references: [id])
+  intake     MatterIntake? @relation(fields: [intakeId], references: [id], onDelete: Cascade)
+  firm       Firm          @relation(fields: [firmId], references: [id], onDelete: Cascade)
 
   @@index([checkedById])
   @@index([clientId])
@@ -818,33 +889,33 @@ model ConflictCheck {
   @@index([reviewedById])
 }
 
-/*
-|--------------------------------------------------------------------------
-| MATTER INTAKE
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | MATTER INTAKE
+ * |--------------------------------------------------------------------------
+ */
 
 model MatterIntake {
-  id                    String              @id @default(cuid())
-  firmId                String
+  id     String @id @default(cuid())
+  firmId String
 
   prospectiveClientName String
   clientId              String?
 
-  email       String?
-  phone       String?
+  email        String?
+  phone        String?
   practiceArea String?
-  description String?
+  description  String?
 
   opposingParties String[] @default([])
   relatedParties  String[] @default([])
 
   source String?
 
-  priority             IntakePriority      @default(MEDIUM)
-  conflictCheckRequired Boolean            @default(true)
-  conflictStatus       ConflictCheckStatus @default(NOT_CHECKED)
-  status               IntakeStatus        @default(NEW)
+  priority              IntakePriority      @default(MEDIUM)
+  conflictCheckRequired Boolean             @default(true)
+  conflictStatus        ConflictCheckStatus @default(NOT_CHECKED)
+  status                IntakeStatus        @default(NEW)
 
   assignedToId        String?
   createdById         String
@@ -854,29 +925,14 @@ model MatterIntake {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  /*
-   * Existing API relations:
-   *
-   * intake.client
-   * intake.conflictChecks
-   * intake.assignedTo
-   * intake.createdBy
-   * intake.conflictCheckedBy
-   * intake.convertedMatter
-   */
-
   conflictChecks  ConflictCheck[]
-  convertedMatter Matter? @relation("ConvertedMatter")
+  convertedMatter Matter?         @relation("ConvertedMatter")
 
-  assignedTo User? @relation("AssignedMatterIntakes", fields: [assignedToId], references: [id])
-
-  client Client? @relation(fields: [clientId], references: [id])
-
-  conflictCheckedBy User? @relation("ConflictCheckedMatterIntakes", fields: [conflictCheckedById], references: [id])
-
-  createdBy User @relation("CreatedMatterIntakes", fields: [createdById], references: [id])
-
-  firm Firm @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  assignedTo        User?   @relation("AssignedMatterIntakes", fields: [assignedToId], references: [id])
+  client            Client? @relation(fields: [clientId], references: [id])
+  conflictCheckedBy User?   @relation("ConflictCheckedMatterIntakes", fields: [conflictCheckedById], references: [id])
+  createdBy         User    @relation("CreatedMatterIntakes", fields: [createdById], references: [id])
+  firm              Firm    @relation(fields: [firmId], references: [id], onDelete: Cascade)
 
   @@index([assignedToId])
   @@index([clientId])
@@ -887,11 +943,11 @@ model MatterIntake {
   @@index([firmId, status])
 }
 
-/*
-|--------------------------------------------------------------------------
-| ENUMS
-|--------------------------------------------------------------------------
-*/
+/**
+ * |--------------------------------------------------------------------------
+ * | ENUMS
+ * |--------------------------------------------------------------------------
+ */
 
 enum SubscriptionPlan {
   TRIAL
@@ -1065,4 +1121,28 @@ enum IntakeStatus {
   CLOSED
 }
 
+enum CorrespondenceDirection {
+  INCOMING
+  OUTGOING
+}
 
+enum CorrespondenceType {
+  LETTER
+  COURT_NOTICE
+  CLIENT_EMAIL
+  DEMAND
+  NOTICE
+  OPPOSING_ATTORNEY
+  CLIENT_CORRESPONDENCE
+  COURT_CORRESPONDENCE
+  FOLLOW_UP
+  OTHER
+}
+
+enum CorrespondenceStatus {
+  RECEIVED
+  ASSIGNED
+  ACTION_REQUIRED
+  RESPONDED
+  CLOSED
+}

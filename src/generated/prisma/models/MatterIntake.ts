@@ -2245,16 +2245,6 @@ export type MatterIntakeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $MatterIntakePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MatterIntake"
   objects: {
-    /**
-     * * Existing API relations:
-     *    *
-     *    * intake.client
-     *    * intake.conflictChecks
-     *    * intake.assignedTo
-     *    * intake.createdBy
-     *    * intake.conflictCheckedBy
-     *    * intake.convertedMatter
-     */
     conflictChecks: Prisma.$ConflictCheckPayload<ExtArgs>[]
     convertedMatter: Prisma.$MatterPayload<ExtArgs> | null
     assignedTo: Prisma.$UserPayload<ExtArgs> | null

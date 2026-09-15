@@ -242,6 +242,7 @@ export type ClientWhereInput = {
   conflictChecks?: Prisma.ConflictCheckListRelationFilter
   matters?: Prisma.MatterListRelationFilter
   intakes?: Prisma.MatterIntakeListRelationFilter
+  correspondences?: Prisma.CorrespondenceListRelationFilter
 }
 
 export type ClientOrderByWithRelationInput = {
@@ -261,6 +262,7 @@ export type ClientOrderByWithRelationInput = {
   conflictChecks?: Prisma.ConflictCheckOrderByRelationAggregateInput
   matters?: Prisma.MatterOrderByRelationAggregateInput
   intakes?: Prisma.MatterIntakeOrderByRelationAggregateInput
+  correspondences?: Prisma.CorrespondenceOrderByRelationAggregateInput
 }
 
 export type ClientWhereUniqueInput = Prisma.AtLeast<{
@@ -284,6 +286,7 @@ export type ClientWhereUniqueInput = Prisma.AtLeast<{
   conflictChecks?: Prisma.ConflictCheckListRelationFilter
   matters?: Prisma.MatterListRelationFilter
   intakes?: Prisma.MatterIntakeListRelationFilter
+  correspondences?: Prisma.CorrespondenceListRelationFilter
 }, "id" | "firmId_referenceNumber">
 
 export type ClientOrderByWithAggregationInput = {
@@ -338,6 +341,7 @@ export type ClientCreateInput = {
   conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutClientInput
   matters?: Prisma.MatterCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateInput = {
@@ -356,6 +360,7 @@ export type ClientUncheckedCreateInput = {
   conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutClientInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientUpdateInput = {
@@ -374,6 +379,7 @@ export type ClientUpdateInput = {
   conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutClientNestedInput
   matters?: Prisma.MatterUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateInput = {
@@ -392,6 +398,7 @@ export type ClientUncheckedUpdateInput = {
   conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutClientNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateManyInput = {
@@ -568,6 +575,22 @@ export type ClientUpdateOneRequiredWithoutMattersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutMattersInput, Prisma.ClientUpdateWithoutMattersInput>, Prisma.ClientUncheckedUpdateWithoutMattersInput>
 }
 
+export type ClientCreateNestedOneWithoutCorrespondencesInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutCorrespondencesInput, Prisma.ClientUncheckedCreateWithoutCorrespondencesInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutCorrespondencesInput
+  connect?: Prisma.ClientWhereUniqueInput
+}
+
+export type ClientUpdateOneWithoutCorrespondencesNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutCorrespondencesInput, Prisma.ClientUncheckedCreateWithoutCorrespondencesInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutCorrespondencesInput
+  upsert?: Prisma.ClientUpsertWithoutCorrespondencesInput
+  disconnect?: Prisma.ClientWhereInput | boolean
+  delete?: Prisma.ClientWhereInput | boolean
+  connect?: Prisma.ClientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutCorrespondencesInput, Prisma.ClientUpdateWithoutCorrespondencesInput>, Prisma.ClientUncheckedUpdateWithoutCorrespondencesInput>
+}
+
 export type ClientCreateNestedOneWithoutConflictChecksInput = {
   create?: Prisma.XOR<Prisma.ClientCreateWithoutConflictChecksInput, Prisma.ClientUncheckedCreateWithoutConflictChecksInput>
   connectOrCreate?: Prisma.ClientCreateOrConnectWithoutConflictChecksInput
@@ -615,6 +638,7 @@ export type ClientCreateWithoutFirmInput = {
   conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutClientInput
   matters?: Prisma.MatterCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutFirmInput = {
@@ -632,6 +656,7 @@ export type ClientUncheckedCreateWithoutFirmInput = {
   conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutClientInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutFirmInput = {
@@ -693,6 +718,7 @@ export type ClientCreateWithoutMattersInput = {
   firm: Prisma.FirmCreateNestedOneWithoutClientsInput
   conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutMattersInput = {
@@ -710,6 +736,7 @@ export type ClientUncheckedCreateWithoutMattersInput = {
   updatedAt?: Date | string
   conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutMattersInput = {
@@ -743,6 +770,7 @@ export type ClientUpdateWithoutMattersInput = {
   firm?: Prisma.FirmUpdateOneRequiredWithoutClientsNestedInput
   conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutMattersInput = {
@@ -759,6 +787,95 @@ export type ClientUncheckedUpdateWithoutMattersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutClientNestedInput
+  intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientCreateWithoutCorrespondencesInput = {
+  id?: string
+  referenceNumber: string
+  type?: $Enums.ClientType
+  name: string
+  email?: string | null
+  phone?: string | null
+  idNumber?: string | null
+  address?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  firm: Prisma.FirmCreateNestedOneWithoutClientsInput
+  conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutClientInput
+  matters?: Prisma.MatterCreateNestedManyWithoutClientInput
+  intakes?: Prisma.MatterIntakeCreateNestedManyWithoutClientInput
+}
+
+export type ClientUncheckedCreateWithoutCorrespondencesInput = {
+  id?: string
+  firmId: string
+  referenceNumber: string
+  type?: $Enums.ClientType
+  name: string
+  email?: string | null
+  phone?: string | null
+  idNumber?: string | null
+  address?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutClientInput
+  matters?: Prisma.MatterUncheckedCreateNestedManyWithoutClientInput
+  intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientCreateOrConnectWithoutCorrespondencesInput = {
+  where: Prisma.ClientWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientCreateWithoutCorrespondencesInput, Prisma.ClientUncheckedCreateWithoutCorrespondencesInput>
+}
+
+export type ClientUpsertWithoutCorrespondencesInput = {
+  update: Prisma.XOR<Prisma.ClientUpdateWithoutCorrespondencesInput, Prisma.ClientUncheckedUpdateWithoutCorrespondencesInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutCorrespondencesInput, Prisma.ClientUncheckedCreateWithoutCorrespondencesInput>
+  where?: Prisma.ClientWhereInput
+}
+
+export type ClientUpdateToOneWithWhereWithoutCorrespondencesInput = {
+  where?: Prisma.ClientWhereInput
+  data: Prisma.XOR<Prisma.ClientUpdateWithoutCorrespondencesInput, Prisma.ClientUncheckedUpdateWithoutCorrespondencesInput>
+}
+
+export type ClientUpdateWithoutCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  firm?: Prisma.FirmUpdateOneRequiredWithoutClientsNestedInput
+  conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutClientNestedInput
+  matters?: Prisma.MatterUpdateManyWithoutClientNestedInput
+  intakes?: Prisma.MatterIntakeUpdateManyWithoutClientNestedInput
+}
+
+export type ClientUncheckedUpdateWithoutCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firmId?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutClientNestedInput
+  matters?: Prisma.MatterUncheckedUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutClientNestedInput
 }
 
@@ -777,6 +894,7 @@ export type ClientCreateWithoutConflictChecksInput = {
   firm: Prisma.FirmCreateNestedOneWithoutClientsInput
   matters?: Prisma.MatterCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutConflictChecksInput = {
@@ -794,6 +912,7 @@ export type ClientUncheckedCreateWithoutConflictChecksInput = {
   updatedAt?: Date | string
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutClientInput
   intakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutConflictChecksInput = {
@@ -827,6 +946,7 @@ export type ClientUpdateWithoutConflictChecksInput = {
   firm?: Prisma.FirmUpdateOneRequiredWithoutClientsNestedInput
   matters?: Prisma.MatterUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutConflictChecksInput = {
@@ -844,6 +964,7 @@ export type ClientUncheckedUpdateWithoutConflictChecksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   matters?: Prisma.MatterUncheckedUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutIntakesInput = {
@@ -861,6 +982,7 @@ export type ClientCreateWithoutIntakesInput = {
   firm: Prisma.FirmCreateNestedOneWithoutClientsInput
   conflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutClientInput
   matters?: Prisma.MatterCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutIntakesInput = {
@@ -878,6 +1000,7 @@ export type ClientUncheckedCreateWithoutIntakesInput = {
   updatedAt?: Date | string
   conflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutClientInput
   matters?: Prisma.MatterUncheckedCreateNestedManyWithoutClientInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutIntakesInput = {
@@ -911,6 +1034,7 @@ export type ClientUpdateWithoutIntakesInput = {
   firm?: Prisma.FirmUpdateOneRequiredWithoutClientsNestedInput
   conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutClientNestedInput
   matters?: Prisma.MatterUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutIntakesInput = {
@@ -928,6 +1052,7 @@ export type ClientUncheckedUpdateWithoutIntakesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutClientNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateManyFirmInput = {
@@ -959,6 +1084,7 @@ export type ClientUpdateWithoutFirmInput = {
   conflictChecks?: Prisma.ConflictCheckUpdateManyWithoutClientNestedInput
   matters?: Prisma.MatterUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutFirmInput = {
@@ -976,6 +1102,7 @@ export type ClientUncheckedUpdateWithoutFirmInput = {
   conflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutClientNestedInput
   matters?: Prisma.MatterUncheckedUpdateManyWithoutClientNestedInput
   intakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutClientNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateManyWithoutFirmInput = {
@@ -1001,12 +1128,14 @@ export type ClientCountOutputType = {
   conflictChecks: number
   matters: number
   intakes: number
+  correspondences: number
 }
 
 export type ClientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conflictChecks?: boolean | ClientCountOutputTypeCountConflictChecksArgs
   matters?: boolean | ClientCountOutputTypeCountMattersArgs
   intakes?: boolean | ClientCountOutputTypeCountIntakesArgs
+  correspondences?: boolean | ClientCountOutputTypeCountCorrespondencesArgs
 }
 
 /**
@@ -1040,6 +1169,13 @@ export type ClientCountOutputTypeCountIntakesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.MatterIntakeWhereInput
 }
 
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceWhereInput
+}
+
 
 export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1058,6 +1194,7 @@ export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   conflictChecks?: boolean | Prisma.Client$conflictChecksArgs<ExtArgs>
   matters?: boolean | Prisma.Client$mattersArgs<ExtArgs>
   intakes?: boolean | Prisma.Client$intakesArgs<ExtArgs>
+  correspondences?: boolean | Prisma.Client$correspondencesArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["client"]>
 
@@ -1114,6 +1251,7 @@ export type ClientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   conflictChecks?: boolean | Prisma.Client$conflictChecksArgs<ExtArgs>
   matters?: boolean | Prisma.Client$mattersArgs<ExtArgs>
   intakes?: boolean | Prisma.Client$intakesArgs<ExtArgs>
+  correspondences?: boolean | Prisma.Client$correspondencesArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1130,6 +1268,7 @@ export type $ClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     conflictChecks: Prisma.$ConflictCheckPayload<ExtArgs>[]
     matters: Prisma.$MatterPayload<ExtArgs>[]
     intakes: Prisma.$MatterIntakePayload<ExtArgs>[]
+    correspondences: Prisma.$CorrespondencePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1542,6 +1681,7 @@ export interface Prisma__ClientClient<T, Null = never, ExtArgs extends runtime.T
   conflictChecks<T extends Prisma.Client$conflictChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$conflictChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConflictCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   matters<T extends Prisma.Client$mattersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$mattersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   intakes<T extends Prisma.Client$intakesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  correspondences<T extends Prisma.Client$correspondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$correspondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2053,6 +2193,30 @@ export type Client$intakesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.MatterIntakeScalarFieldEnum | Prisma.MatterIntakeScalarFieldEnum[]
+}
+
+/**
+ * Client.correspondences
+ */
+export type Client$correspondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Correspondence
+   */
+  select?: Prisma.CorrespondenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Correspondence
+   */
+  omit?: Prisma.CorrespondenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceWhereInput
+  orderBy?: Prisma.CorrespondenceOrderByWithRelationInput | Prisma.CorrespondenceOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceScalarFieldEnum | Prisma.CorrespondenceScalarFieldEnum[]
 }
 
 /**

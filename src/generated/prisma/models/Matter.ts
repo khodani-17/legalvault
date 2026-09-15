@@ -252,6 +252,7 @@ export type MatterWhereInput = {
   accessRequests?: Prisma.MatterAccessRequestListRelationFilter
   users?: Prisma.MatterUserListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
+  correspondences?: Prisma.CorrespondenceListRelationFilter
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
   firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
   convertedMatter?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
@@ -277,6 +278,7 @@ export type MatterOrderByWithRelationInput = {
   accessRequests?: Prisma.MatterAccessRequestOrderByRelationAggregateInput
   users?: Prisma.MatterUserOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
+  correspondences?: Prisma.CorrespondenceOrderByRelationAggregateInput
   client?: Prisma.ClientOrderByWithRelationInput
   firm?: Prisma.FirmOrderByWithRelationInput
   convertedMatter?: Prisma.MatterIntakeOrderByWithRelationInput
@@ -306,6 +308,7 @@ export type MatterWhereUniqueInput = Prisma.AtLeast<{
   accessRequests?: Prisma.MatterAccessRequestListRelationFilter
   users?: Prisma.MatterUserListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
+  correspondences?: Prisma.CorrespondenceListRelationFilter
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
   firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
   convertedMatter?: Prisma.XOR<Prisma.MatterIntakeNullableScalarRelationFilter, Prisma.MatterIntakeWhereInput> | null
@@ -366,6 +369,7 @@ export type MatterCreateInput = {
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
@@ -391,6 +395,7 @@ export type MatterUncheckedCreateInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterUpdateInput = {
@@ -410,6 +415,7 @@ export type MatterUpdateInput = {
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
@@ -435,6 +441,7 @@ export type MatterUncheckedUpdateInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateManyInput = {
@@ -729,6 +736,22 @@ export type MatterUpdateOneRequiredWithoutDeadlinesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MatterUpdateToOneWithWhereWithoutDeadlinesInput, Prisma.MatterUpdateWithoutDeadlinesInput>, Prisma.MatterUncheckedUpdateWithoutDeadlinesInput>
 }
 
+export type MatterCreateNestedOneWithoutCorrespondencesInput = {
+  create?: Prisma.XOR<Prisma.MatterCreateWithoutCorrespondencesInput, Prisma.MatterUncheckedCreateWithoutCorrespondencesInput>
+  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutCorrespondencesInput
+  connect?: Prisma.MatterWhereUniqueInput
+}
+
+export type MatterUpdateOneWithoutCorrespondencesNestedInput = {
+  create?: Prisma.XOR<Prisma.MatterCreateWithoutCorrespondencesInput, Prisma.MatterUncheckedCreateWithoutCorrespondencesInput>
+  connectOrCreate?: Prisma.MatterCreateOrConnectWithoutCorrespondencesInput
+  upsert?: Prisma.MatterUpsertWithoutCorrespondencesInput
+  disconnect?: Prisma.MatterWhereInput | boolean
+  delete?: Prisma.MatterWhereInput | boolean
+  connect?: Prisma.MatterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MatterUpdateToOneWithWhereWithoutCorrespondencesInput, Prisma.MatterUpdateWithoutCorrespondencesInput>, Prisma.MatterUncheckedUpdateWithoutCorrespondencesInput>
+}
+
 export type MatterCreateNestedOneWithoutConvertedMatterInput = {
   create?: Prisma.XOR<Prisma.MatterCreateWithoutConvertedMatterInput, Prisma.MatterUncheckedCreateWithoutConvertedMatterInput>
   connectOrCreate?: Prisma.MatterCreateOrConnectWithoutConvertedMatterInput
@@ -778,6 +801,7 @@ export type MatterCreateWithoutFirmInput = {
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
@@ -801,6 +825,7 @@ export type MatterUncheckedCreateWithoutFirmInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutFirmInput = {
@@ -865,6 +890,7 @@ export type MatterCreateWithoutClientInput = {
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
 }
@@ -888,6 +914,7 @@ export type MatterUncheckedCreateWithoutClientInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutClientInput = {
@@ -932,6 +959,7 @@ export type MatterCreateWithoutUsersInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
@@ -956,6 +984,7 @@ export type MatterUncheckedCreateWithoutUsersInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutUsersInput = {
@@ -990,6 +1019,7 @@ export type MatterUpdateWithoutUsersInput = {
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
@@ -1014,6 +1044,7 @@ export type MatterUncheckedUpdateWithoutUsersInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateWithoutAccessRequestsInput = {
@@ -1032,6 +1063,7 @@ export type MatterCreateWithoutAccessRequestsInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
@@ -1056,6 +1088,7 @@ export type MatterUncheckedCreateWithoutAccessRequestsInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutAccessRequestsInput = {
@@ -1090,6 +1123,7 @@ export type MatterUpdateWithoutAccessRequestsInput = {
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
@@ -1114,6 +1148,7 @@ export type MatterUncheckedUpdateWithoutAccessRequestsInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateWithoutFoldersInput = {
@@ -1132,6 +1167,7 @@ export type MatterCreateWithoutFoldersInput = {
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
@@ -1156,6 +1192,7 @@ export type MatterUncheckedCreateWithoutFoldersInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutFoldersInput = {
@@ -1190,6 +1227,7 @@ export type MatterUpdateWithoutFoldersInput = {
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
@@ -1214,6 +1252,7 @@ export type MatterUncheckedUpdateWithoutFoldersInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateWithoutDocumentsInput = {
@@ -1232,6 +1271,7 @@ export type MatterCreateWithoutDocumentsInput = {
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
@@ -1256,6 +1296,7 @@ export type MatterUncheckedCreateWithoutDocumentsInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutDocumentsInput = {
@@ -1290,6 +1331,7 @@ export type MatterUpdateWithoutDocumentsInput = {
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
@@ -1314,6 +1356,7 @@ export type MatterUncheckedUpdateWithoutDocumentsInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateWithoutTasksInput = {
@@ -1332,6 +1375,7 @@ export type MatterCreateWithoutTasksInput = {
   folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
@@ -1356,6 +1400,7 @@ export type MatterUncheckedCreateWithoutTasksInput = {
   folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutTasksInput = {
@@ -1390,6 +1435,7 @@ export type MatterUpdateWithoutTasksInput = {
   folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
@@ -1414,6 +1460,7 @@ export type MatterUncheckedUpdateWithoutTasksInput = {
   folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateWithoutDeadlinesInput = {
@@ -1432,6 +1479,7 @@ export type MatterCreateWithoutDeadlinesInput = {
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
   convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
@@ -1456,6 +1504,7 @@ export type MatterUncheckedCreateWithoutDeadlinesInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutDeadlinesInput = {
@@ -1490,6 +1539,7 @@ export type MatterUpdateWithoutDeadlinesInput = {
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
@@ -1514,6 +1564,111 @@ export type MatterUncheckedUpdateWithoutDeadlinesInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
+}
+
+export type MatterCreateWithoutCorrespondencesInput = {
+  id?: string
+  referenceNumber: string
+  title: string
+  description?: string | null
+  practiceArea?: string | null
+  status?: $Enums.MatterStatus
+  openedAt?: Date | string
+  closedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deadlines?: Prisma.DeadlineCreateNestedManyWithoutMatterInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutMatterInput
+  folders?: Prisma.FolderCreateNestedManyWithoutMatterInput
+  accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
+  users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  client: Prisma.ClientCreateNestedOneWithoutMattersInput
+  firm: Prisma.FirmCreateNestedOneWithoutMattersInput
+  convertedMatter?: Prisma.MatterIntakeCreateNestedOneWithoutConvertedMatterInput
+}
+
+export type MatterUncheckedCreateWithoutCorrespondencesInput = {
+  id?: string
+  firmId: string
+  clientId: string
+  referenceNumber: string
+  title: string
+  description?: string | null
+  practiceArea?: string | null
+  status?: $Enums.MatterStatus
+  openedAt?: Date | string
+  closedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  intakeId?: string | null
+  deadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutMatterInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutMatterInput
+  folders?: Prisma.FolderUncheckedCreateNestedManyWithoutMatterInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
+  users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+}
+
+export type MatterCreateOrConnectWithoutCorrespondencesInput = {
+  where: Prisma.MatterWhereUniqueInput
+  create: Prisma.XOR<Prisma.MatterCreateWithoutCorrespondencesInput, Prisma.MatterUncheckedCreateWithoutCorrespondencesInput>
+}
+
+export type MatterUpsertWithoutCorrespondencesInput = {
+  update: Prisma.XOR<Prisma.MatterUpdateWithoutCorrespondencesInput, Prisma.MatterUncheckedUpdateWithoutCorrespondencesInput>
+  create: Prisma.XOR<Prisma.MatterCreateWithoutCorrespondencesInput, Prisma.MatterUncheckedCreateWithoutCorrespondencesInput>
+  where?: Prisma.MatterWhereInput
+}
+
+export type MatterUpdateToOneWithWhereWithoutCorrespondencesInput = {
+  where?: Prisma.MatterWhereInput
+  data: Prisma.XOR<Prisma.MatterUpdateWithoutCorrespondencesInput, Prisma.MatterUncheckedUpdateWithoutCorrespondencesInput>
+}
+
+export type MatterUpdateWithoutCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
+  openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deadlines?: Prisma.DeadlineUpdateManyWithoutMatterNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutMatterNestedInput
+  folders?: Prisma.FolderUpdateManyWithoutMatterNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
+  users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
+  convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
+}
+
+export type MatterUncheckedUpdateWithoutCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firmId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
+  openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutMatterNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutMatterNestedInput
+  folders?: Prisma.FolderUncheckedUpdateManyWithoutMatterNestedInput
+  accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
+  users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateWithoutConvertedMatterInput = {
@@ -1533,6 +1688,7 @@ export type MatterCreateWithoutConvertedMatterInput = {
   accessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceCreateNestedManyWithoutMatterInput
   client: Prisma.ClientCreateNestedOneWithoutMattersInput
   firm: Prisma.FirmCreateNestedOneWithoutMattersInput
 }
@@ -1556,6 +1712,7 @@ export type MatterUncheckedCreateWithoutConvertedMatterInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutMatterInput
   users?: Prisma.MatterUserUncheckedCreateNestedManyWithoutMatterInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutMatterInput
+  correspondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutMatterInput
 }
 
 export type MatterCreateOrConnectWithoutConvertedMatterInput = {
@@ -1591,6 +1748,7 @@ export type MatterUpdateWithoutConvertedMatterInput = {
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
 }
@@ -1614,6 +1772,7 @@ export type MatterUncheckedUpdateWithoutConvertedMatterInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterCreateManyFirmInput = {
@@ -1648,6 +1807,7 @@ export type MatterUpdateWithoutFirmInput = {
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
@@ -1671,6 +1831,7 @@ export type MatterUncheckedUpdateWithoutFirmInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterUncheckedUpdateManyWithoutFirmInput = {
@@ -1720,6 +1881,7 @@ export type MatterUpdateWithoutClientInput = {
   accessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUpdateManyWithoutMatterNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutMattersNestedInput
   convertedMatter?: Prisma.MatterIntakeUpdateOneWithoutConvertedMatterNestedInput
 }
@@ -1743,6 +1905,7 @@ export type MatterUncheckedUpdateWithoutClientInput = {
   accessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutMatterNestedInput
   users?: Prisma.MatterUserUncheckedUpdateManyWithoutMatterNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutMatterNestedInput
+  correspondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutMatterNestedInput
 }
 
 export type MatterUncheckedUpdateManyWithoutClientInput = {
@@ -1772,6 +1935,7 @@ export type MatterCountOutputType = {
   accessRequests: number
   users: number
   tasks: number
+  correspondences: number
 }
 
 export type MatterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1781,6 +1945,7 @@ export type MatterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   accessRequests?: boolean | MatterCountOutputTypeCountAccessRequestsArgs
   users?: boolean | MatterCountOutputTypeCountUsersArgs
   tasks?: boolean | MatterCountOutputTypeCountTasksArgs
+  correspondences?: boolean | MatterCountOutputTypeCountCorrespondencesArgs
 }
 
 /**
@@ -1835,6 +2000,13 @@ export type MatterCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.TaskWhereInput
 }
 
+/**
+ * MatterCountOutputType without action
+ */
+export type MatterCountOutputTypeCountCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceWhereInput
+}
+
 
 export type MatterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1856,6 +2028,7 @@ export type MatterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   accessRequests?: boolean | Prisma.Matter$accessRequestsArgs<ExtArgs>
   users?: boolean | Prisma.Matter$usersArgs<ExtArgs>
   tasks?: boolean | Prisma.Matter$tasksArgs<ExtArgs>
+  correspondences?: boolean | Prisma.Matter$correspondencesArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
   convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
@@ -1924,6 +2097,7 @@ export type MatterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   accessRequests?: boolean | Prisma.Matter$accessRequestsArgs<ExtArgs>
   users?: boolean | Prisma.Matter$usersArgs<ExtArgs>
   tasks?: boolean | Prisma.Matter$tasksArgs<ExtArgs>
+  correspondences?: boolean | Prisma.Matter$correspondencesArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
   convertedMatter?: boolean | Prisma.Matter$convertedMatterArgs<ExtArgs>
@@ -1949,13 +2123,9 @@ export type $MatterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     accessRequests: Prisma.$MatterAccessRequestPayload<ExtArgs>[]
     users: Prisma.$MatterUserPayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
+    correspondences: Prisma.$CorrespondencePayload<ExtArgs>[]
     client: Prisma.$ClientPayload<ExtArgs>
     firm: Prisma.$FirmPayload<ExtArgs>
-    /**
-     * * Application-facing relation.
-     *    * Existing intake routes use:
-     *    * intake.convertedMatter
-     */
     convertedMatter: Prisma.$MatterIntakePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2372,6 +2542,7 @@ export interface Prisma__MatterClient<T, Null = never, ExtArgs extends runtime.T
   accessRequests<T extends Prisma.Matter$accessRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$accessRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterAccessRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Matter$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatterUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.Matter$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  correspondences<T extends Prisma.Matter$correspondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$correspondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   client<T extends Prisma.ClientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   firm<T extends Prisma.FirmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FirmDefaultArgs<ExtArgs>>): Prisma.Prisma__FirmClient<runtime.Types.Result.GetResult<Prisma.$FirmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   convertedMatter<T extends Prisma.Matter$convertedMatterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Matter$convertedMatterArgs<ExtArgs>>): Prisma.Prisma__MatterIntakeClient<runtime.Types.Result.GetResult<Prisma.$MatterIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2959,6 +3130,30 @@ export type Matter$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Matter.correspondences
+ */
+export type Matter$correspondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Correspondence
+   */
+  select?: Prisma.CorrespondenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Correspondence
+   */
+  omit?: Prisma.CorrespondenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceWhereInput
+  orderBy?: Prisma.CorrespondenceOrderByWithRelationInput | Prisma.CorrespondenceOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceScalarFieldEnum | Prisma.CorrespondenceScalarFieldEnum[]
 }
 
 /**

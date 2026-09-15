@@ -333,6 +333,7 @@ export type DocumentWhereInput = {
   matter?: Prisma.XOR<Prisma.MatterScalarRelationFilter, Prisma.MatterWhereInput>
   uploadedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   versions?: Prisma.DocumentVersionListRelationFilter
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentListRelationFilter
 }
 
 export type DocumentOrderByWithRelationInput = {
@@ -360,6 +361,7 @@ export type DocumentOrderByWithRelationInput = {
   matter?: Prisma.MatterOrderByWithRelationInput
   uploadedBy?: Prisma.UserOrderByWithRelationInput
   versions?: Prisma.DocumentVersionOrderByRelationAggregateInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentOrderByRelationAggregateInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -391,6 +393,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   matter?: Prisma.XOR<Prisma.MatterScalarRelationFilter, Prisma.MatterWhereInput>
   uploadedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   versions?: Prisma.DocumentVersionListRelationFilter
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentListRelationFilter
 }, "id" | "storageKey" | "firmId_referenceNumber">
 
 export type DocumentOrderByWithAggregationInput = {
@@ -466,6 +469,7 @@ export type DocumentCreateInput = {
   matter: Prisma.MatterCreateNestedOneWithoutDocumentsInput
   uploadedBy: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
@@ -489,6 +493,7 @@ export type DocumentUncheckedCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUpdateInput = {
@@ -512,6 +517,7 @@ export type DocumentUpdateInput = {
   matter?: Prisma.MatterUpdateOneRequiredWithoutDocumentsNestedInput
   uploadedBy?: Prisma.UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
@@ -535,6 +541,7 @@ export type DocumentUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyInput = {
@@ -912,6 +919,20 @@ export type DocumentUpdateOneRequiredWithoutVersionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutVersionsInput, Prisma.DocumentUpdateWithoutVersionsInput>, Prisma.DocumentUncheckedUpdateWithoutVersionsInput>
 }
 
+export type DocumentCreateNestedOneWithoutCorrespondenceAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCorrespondenceAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCorrespondenceAttachmentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutCorrespondenceAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCorrespondenceAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCorrespondenceAttachmentsInput
+  upsert?: Prisma.DocumentUpsertWithoutCorrespondenceAttachmentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutCorrespondenceAttachmentsInput, Prisma.DocumentUpdateWithoutCorrespondenceAttachmentsInput>, Prisma.DocumentUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+}
+
 export type DocumentCreateWithoutFirmInput = {
   id?: string
   referenceNumber: string
@@ -932,6 +953,7 @@ export type DocumentCreateWithoutFirmInput = {
   matter: Prisma.MatterCreateNestedOneWithoutDocumentsInput
   uploadedBy: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutFirmInput = {
@@ -954,6 +976,7 @@ export type DocumentUncheckedCreateWithoutFirmInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutFirmInput = {
@@ -1027,6 +1050,7 @@ export type DocumentCreateWithoutUploadedByInput = {
   folder?: Prisma.FolderCreateNestedOneWithoutDocumentsInput
   matter: Prisma.MatterCreateNestedOneWithoutDocumentsInput
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutUploadedByInput = {
@@ -1049,6 +1073,7 @@ export type DocumentUncheckedCreateWithoutUploadedByInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutUploadedByInput = {
@@ -1097,6 +1122,7 @@ export type DocumentCreateWithoutMatterInput = {
   folder?: Prisma.FolderCreateNestedOneWithoutDocumentsInput
   uploadedBy: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutMatterInput = {
@@ -1119,6 +1145,7 @@ export type DocumentUncheckedCreateWithoutMatterInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutMatterInput = {
@@ -1167,6 +1194,7 @@ export type DocumentCreateWithoutFolderInput = {
   matter: Prisma.MatterCreateNestedOneWithoutDocumentsInput
   uploadedBy: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutFolderInput = {
@@ -1189,6 +1217,7 @@ export type DocumentUncheckedCreateWithoutFolderInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutFolderInput = {
@@ -1237,6 +1266,7 @@ export type DocumentCreateWithoutVersionsInput = {
   folder?: Prisma.FolderCreateNestedOneWithoutDocumentsInput
   matter: Prisma.MatterCreateNestedOneWithoutDocumentsInput
   uploadedBy: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutVersionsInput = {
@@ -1259,6 +1289,7 @@ export type DocumentUncheckedCreateWithoutVersionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutVersionsInput = {
@@ -1297,6 +1328,7 @@ export type DocumentUpdateWithoutVersionsInput = {
   folder?: Prisma.FolderUpdateOneWithoutDocumentsNestedInput
   matter?: Prisma.MatterUpdateOneRequiredWithoutDocumentsNestedInput
   uploadedBy?: Prisma.UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutVersionsInput = {
@@ -1319,6 +1351,115 @@ export type DocumentUncheckedUpdateWithoutVersionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentCreateWithoutCorrespondenceAttachmentsInput = {
+  id?: string
+  referenceNumber: string
+  name: string
+  originalName: string
+  mimeType: string
+  extension: string
+  size: bigint | number
+  storageKey: string
+  status?: $Enums.DocumentStatus
+  currentVersion?: number
+  category?: string | null
+  tags?: Prisma.DocumentCreatetagsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  firm: Prisma.FirmCreateNestedOneWithoutDocumentsInput
+  folder?: Prisma.FolderCreateNestedOneWithoutDocumentsInput
+  matter: Prisma.MatterCreateNestedOneWithoutDocumentsInput
+  uploadedBy: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutCorrespondenceAttachmentsInput = {
+  id?: string
+  firmId: string
+  matterId: string
+  folderId?: string | null
+  referenceNumber: string
+  name: string
+  originalName: string
+  mimeType: string
+  extension: string
+  size: bigint | number
+  storageKey: string
+  status?: $Enums.DocumentStatus
+  currentVersion?: number
+  category?: string | null
+  tags?: Prisma.DocumentCreatetagsInput | string[]
+  uploadedById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutCorrespondenceAttachmentsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCorrespondenceAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+}
+
+export type DocumentUpsertWithoutCorrespondenceAttachmentsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutCorrespondenceAttachmentsInput, Prisma.DocumentUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCorrespondenceAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutCorrespondenceAttachmentsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutCorrespondenceAttachmentsInput, Prisma.DocumentUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+}
+
+export type DocumentUpdateWithoutCorrespondenceAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  extension?: Prisma.StringFieldUpdateOperationsInput | string
+  size?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.DocumentUpdatetagsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firm?: Prisma.FirmUpdateOneRequiredWithoutDocumentsNestedInput
+  folder?: Prisma.FolderUpdateOneWithoutDocumentsNestedInput
+  matter?: Prisma.MatterUpdateOneRequiredWithoutDocumentsNestedInput
+  uploadedBy?: Prisma.UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutCorrespondenceAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firmId?: Prisma.StringFieldUpdateOperationsInput | string
+  matterId?: Prisma.StringFieldUpdateOperationsInput | string
+  folderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  extension?: Prisma.StringFieldUpdateOperationsInput | string
+  size?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.DocumentUpdatetagsInput | string[]
+  uploadedById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyFirmInput = {
@@ -1362,6 +1503,7 @@ export type DocumentUpdateWithoutFirmInput = {
   matter?: Prisma.MatterUpdateOneRequiredWithoutDocumentsNestedInput
   uploadedBy?: Prisma.UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutFirmInput = {
@@ -1384,6 +1526,7 @@ export type DocumentUncheckedUpdateWithoutFirmInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutFirmInput = {
@@ -1448,6 +1591,7 @@ export type DocumentUpdateWithoutUploadedByInput = {
   folder?: Prisma.FolderUpdateOneWithoutDocumentsNestedInput
   matter?: Prisma.MatterUpdateOneRequiredWithoutDocumentsNestedInput
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutUploadedByInput = {
@@ -1470,6 +1614,7 @@ export type DocumentUncheckedUpdateWithoutUploadedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutUploadedByInput = {
@@ -1534,6 +1679,7 @@ export type DocumentUpdateWithoutMatterInput = {
   folder?: Prisma.FolderUpdateOneWithoutDocumentsNestedInput
   uploadedBy?: Prisma.UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutMatterInput = {
@@ -1556,6 +1702,7 @@ export type DocumentUncheckedUpdateWithoutMatterInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutMatterInput = {
@@ -1620,6 +1767,7 @@ export type DocumentUpdateWithoutFolderInput = {
   matter?: Prisma.MatterUpdateOneRequiredWithoutDocumentsNestedInput
   uploadedBy?: Prisma.UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutFolderInput = {
@@ -1642,6 +1790,7 @@ export type DocumentUncheckedUpdateWithoutFolderInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutFolderInput = {
@@ -1672,10 +1821,12 @@ export type DocumentUncheckedUpdateManyWithoutFolderInput = {
 
 export type DocumentCountOutputType = {
   versions: number
+  correspondenceAttachments: number
 }
 
 export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   versions?: boolean | DocumentCountOutputTypeCountVersionsArgs
+  correspondenceAttachments?: boolean | DocumentCountOutputTypeCountCorrespondenceAttachmentsArgs
 }
 
 /**
@@ -1693,6 +1844,13 @@ export type DocumentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
  */
 export type DocumentCountOutputTypeCountVersionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.DocumentVersionWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountCorrespondenceAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceAttachmentWhereInput
 }
 
 
@@ -1721,6 +1879,7 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   matter?: boolean | Prisma.MatterDefaultArgs<ExtArgs>
   uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   versions?: boolean | Prisma.Document$versionsArgs<ExtArgs>
+  correspondenceAttachments?: boolean | Prisma.Document$correspondenceAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
@@ -1805,6 +1964,7 @@ export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   matter?: boolean | Prisma.MatterDefaultArgs<ExtArgs>
   uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   versions?: boolean | Prisma.Document$versionsArgs<ExtArgs>
+  correspondenceAttachments?: boolean | Prisma.Document$correspondenceAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1828,6 +1988,7 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     matter: Prisma.$MatterPayload<ExtArgs>
     uploadedBy: Prisma.$UserPayload<ExtArgs>
     versions: Prisma.$DocumentVersionPayload<ExtArgs>[]
+    correspondenceAttachments: Prisma.$CorrespondenceAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2248,6 +2409,7 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
   matter<T extends Prisma.MatterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MatterDefaultArgs<ExtArgs>>): Prisma.Prisma__MatterClient<runtime.Types.Result.GetResult<Prisma.$MatterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   uploadedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   versions<T extends Prisma.Document$versionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$versionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  correspondenceAttachments<T extends Prisma.Document$correspondenceAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$correspondenceAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondenceAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2737,6 +2899,30 @@ export type Document$versionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.DocumentVersionScalarFieldEnum | Prisma.DocumentVersionScalarFieldEnum[]
+}
+
+/**
+ * Document.correspondenceAttachments
+ */
+export type Document$correspondenceAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CorrespondenceAttachment
+   */
+  select?: Prisma.CorrespondenceAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CorrespondenceAttachment
+   */
+  omit?: Prisma.CorrespondenceAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceAttachmentInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceAttachmentWhereInput
+  orderBy?: Prisma.CorrespondenceAttachmentOrderByWithRelationInput | Prisma.CorrespondenceAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceAttachmentScalarFieldEnum | Prisma.CorrespondenceAttachmentScalarFieldEnum[]
 }
 
 /**

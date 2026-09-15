@@ -242,3 +242,38 @@ export const IntakeStatus = {
 } as const
 
 export type IntakeStatus = (typeof IntakeStatus)[keyof typeof IntakeStatus]
+
+
+export const CorrespondenceDirection = {
+  INCOMING: 'INCOMING',
+  OUTGOING: 'OUTGOING'
+} as const
+
+export type CorrespondenceDirection = (typeof CorrespondenceDirection)[keyof typeof CorrespondenceDirection]
+
+
+export const CorrespondenceType = {
+  LETTER: 'LETTER',
+  COURT_NOTICE: 'COURT_NOTICE',
+  CLIENT_EMAIL: 'CLIENT_EMAIL',
+  DEMAND: 'DEMAND',
+  NOTICE: 'NOTICE',
+  OPPOSING_ATTORNEY: 'OPPOSING_ATTORNEY',
+  CLIENT_CORRESPONDENCE: 'CLIENT_CORRESPONDENCE',
+  COURT_CORRESPONDENCE: 'COURT_CORRESPONDENCE',
+  FOLLOW_UP: 'FOLLOW_UP',
+  OTHER: 'OTHER'
+} as const
+
+export type CorrespondenceType = (typeof CorrespondenceType)[keyof typeof CorrespondenceType]
+
+
+export const CorrespondenceStatus = {
+  RECEIVED: 'RECEIVED',
+  ASSIGNED: 'ASSIGNED',
+  ACTION_REQUIRED: 'ACTION_REQUIRED',
+  RESPONDED: 'RESPONDED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type CorrespondenceStatus = (typeof CorrespondenceStatus)[keyof typeof CorrespondenceStatus]

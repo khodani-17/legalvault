@@ -255,6 +255,9 @@ export type UserWhereInput = {
   reviewedTaskReports?: Prisma.TaskReportListRelationFilter
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestListRelationFilter
   taskActivities?: Prisma.TaskActivityListRelationFilter
+  createdCorrespondences?: Prisma.CorrespondenceListRelationFilter
+  responsibleCorrespondences?: Prisma.CorrespondenceListRelationFilter
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentListRelationFilter
   firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
 }
 
@@ -295,6 +298,9 @@ export type UserOrderByWithRelationInput = {
   reviewedTaskReports?: Prisma.TaskReportOrderByRelationAggregateInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestOrderByRelationAggregateInput
   taskActivities?: Prisma.TaskActivityOrderByRelationAggregateInput
+  createdCorrespondences?: Prisma.CorrespondenceOrderByRelationAggregateInput
+  responsibleCorrespondences?: Prisma.CorrespondenceOrderByRelationAggregateInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentOrderByRelationAggregateInput
   firm?: Prisma.FirmOrderByWithRelationInput
 }
 
@@ -338,6 +344,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   reviewedTaskReports?: Prisma.TaskReportListRelationFilter
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestListRelationFilter
   taskActivities?: Prisma.TaskActivityListRelationFilter
+  createdCorrespondences?: Prisma.CorrespondenceListRelationFilter
+  responsibleCorrespondences?: Prisma.CorrespondenceListRelationFilter
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentListRelationFilter
   firm?: Prisma.XOR<Prisma.FirmScalarRelationFilter, Prisma.FirmWhereInput>
 }, "id" | "email">
 
@@ -411,6 +420,9 @@ export type UserCreateInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -451,6 +463,9 @@ export type UserUncheckedCreateInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUpdateInput = {
@@ -489,6 +504,9 @@ export type UserUpdateInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -529,6 +547,9 @@ export type UserUncheckedUpdateInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -978,6 +999,50 @@ export type UserUpdateOneRequiredWithoutAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.UserUpdateWithoutAuditLogsInput>, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
 }
 
+export type UserCreateNestedOneWithoutCreatedCorrespondencesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCorrespondencesInput, Prisma.UserUncheckedCreateWithoutCreatedCorrespondencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCorrespondencesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutResponsibleCorrespondencesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResponsibleCorrespondencesInput, Prisma.UserUncheckedCreateWithoutResponsibleCorrespondencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResponsibleCorrespondencesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedCorrespondencesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCorrespondencesInput, Prisma.UserUncheckedCreateWithoutCreatedCorrespondencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCorrespondencesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedCorrespondencesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedCorrespondencesInput, Prisma.UserUpdateWithoutCreatedCorrespondencesInput>, Prisma.UserUncheckedUpdateWithoutCreatedCorrespondencesInput>
+}
+
+export type UserUpdateOneWithoutResponsibleCorrespondencesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResponsibleCorrespondencesInput, Prisma.UserUncheckedCreateWithoutResponsibleCorrespondencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResponsibleCorrespondencesInput
+  upsert?: Prisma.UserUpsertWithoutResponsibleCorrespondencesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResponsibleCorrespondencesInput, Prisma.UserUpdateWithoutResponsibleCorrespondencesInput>, Prisma.UserUncheckedUpdateWithoutResponsibleCorrespondencesInput>
+}
+
+export type UserCreateNestedOneWithoutCorrespondenceAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCorrespondenceAttachmentsInput, Prisma.UserUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCorrespondenceAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCorrespondenceAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCorrespondenceAttachmentsInput, Prisma.UserUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCorrespondenceAttachmentsInput
+  upsert?: Prisma.UserUpsertWithoutCorrespondenceAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCorrespondenceAttachmentsInput, Prisma.UserUpdateWithoutCorrespondenceAttachmentsInput>, Prisma.UserUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+}
+
 export type UserCreateNestedOneWithoutCheckedConflictChecksInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCheckedConflictChecksInput, Prisma.UserUncheckedCreateWithoutCheckedConflictChecksInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCheckedConflictChecksInput
@@ -1090,6 +1155,9 @@ export type UserCreateWithoutFirmInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutFirmInput = {
@@ -1128,6 +1196,9 @@ export type UserUncheckedCreateWithoutFirmInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutFirmInput = {
@@ -1208,6 +1279,9 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -1247,6 +1321,9 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1300,6 +1377,9 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -1339,6 +1419,9 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutMattersInput = {
@@ -1376,6 +1459,9 @@ export type UserCreateWithoutMattersInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -1415,6 +1501,9 @@ export type UserUncheckedCreateWithoutMattersInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutMattersInput = {
@@ -1468,6 +1557,9 @@ export type UserUpdateWithoutMattersInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -1507,6 +1599,9 @@ export type UserUncheckedUpdateWithoutMattersInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutMatterAccessRequestsInput = {
@@ -1544,6 +1639,9 @@ export type UserCreateWithoutMatterAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -1583,6 +1681,9 @@ export type UserUncheckedCreateWithoutMatterAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutMatterAccessRequestsInput = {
@@ -1625,6 +1726,9 @@ export type UserCreateWithoutReviewedAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -1664,6 +1768,9 @@ export type UserUncheckedCreateWithoutReviewedAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewedAccessRequestsInput = {
@@ -1717,6 +1824,9 @@ export type UserUpdateWithoutMatterAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -1756,6 +1866,9 @@ export type UserUncheckedUpdateWithoutMatterAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutReviewedAccessRequestsInput = {
@@ -1804,6 +1917,9 @@ export type UserUpdateWithoutReviewedAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -1843,6 +1959,9 @@ export type UserUncheckedUpdateWithoutReviewedAccessRequestsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutUploadedDocumentsInput = {
@@ -1880,6 +1999,9 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -1919,6 +2041,9 @@ export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutUploadedDocumentsInput = {
@@ -1972,6 +2097,9 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -2011,6 +2139,9 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutUploadedFinanceDocumentsInput = {
@@ -2048,6 +2179,9 @@ export type UserCreateWithoutUploadedFinanceDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -2087,6 +2221,9 @@ export type UserUncheckedCreateWithoutUploadedFinanceDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutUploadedFinanceDocumentsInput = {
@@ -2140,6 +2277,9 @@ export type UserUpdateWithoutUploadedFinanceDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -2179,6 +2319,9 @@ export type UserUncheckedUpdateWithoutUploadedFinanceDocumentsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -2216,6 +2359,9 @@ export type UserCreateWithoutAssignedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -2255,6 +2401,9 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -2297,6 +2446,9 @@ export type UserCreateWithoutCreatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -2336,6 +2488,9 @@ export type UserUncheckedCreateWithoutCreatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedTasksInput = {
@@ -2378,6 +2533,9 @@ export type UserCreateWithoutDelegatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -2417,6 +2575,9 @@ export type UserUncheckedCreateWithoutDelegatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutDelegatedTasksInput = {
@@ -2459,6 +2620,9 @@ export type UserCreateWithoutDelegatedOnBehalfOfTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -2498,6 +2662,9 @@ export type UserUncheckedCreateWithoutDelegatedOnBehalfOfTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutDelegatedOnBehalfOfTasksInput = {
@@ -2551,6 +2718,9 @@ export type UserUpdateWithoutAssignedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -2590,6 +2760,9 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutCreatedTasksInput = {
@@ -2638,6 +2811,9 @@ export type UserUpdateWithoutCreatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -2677,6 +2853,9 @@ export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutDelegatedTasksInput = {
@@ -2725,6 +2904,9 @@ export type UserUpdateWithoutDelegatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -2764,6 +2946,9 @@ export type UserUncheckedUpdateWithoutDelegatedTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutDelegatedOnBehalfOfTasksInput = {
@@ -2812,6 +2997,9 @@ export type UserUpdateWithoutDelegatedOnBehalfOfTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -2851,6 +3039,9 @@ export type UserUncheckedUpdateWithoutDelegatedOnBehalfOfTasksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutTaskNotesInput = {
@@ -2888,6 +3079,9 @@ export type UserCreateWithoutTaskNotesInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -2927,6 +3121,9 @@ export type UserUncheckedCreateWithoutTaskNotesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutTaskNotesInput = {
@@ -2980,6 +3177,9 @@ export type UserUpdateWithoutTaskNotesInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -3019,6 +3219,9 @@ export type UserUncheckedUpdateWithoutTaskNotesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutSubmittedTaskReportsInput = {
@@ -3056,6 +3259,9 @@ export type UserCreateWithoutSubmittedTaskReportsInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -3095,6 +3301,9 @@ export type UserUncheckedCreateWithoutSubmittedTaskReportsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutSubmittedTaskReportsInput = {
@@ -3137,6 +3346,9 @@ export type UserCreateWithoutReviewedTaskReportsInput = {
   submittedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutSubmittedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -3176,6 +3388,9 @@ export type UserUncheckedCreateWithoutReviewedTaskReportsInput = {
   submittedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutSubmittedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewedTaskReportsInput = {
@@ -3229,6 +3444,9 @@ export type UserUpdateWithoutSubmittedTaskReportsInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -3268,6 +3486,9 @@ export type UserUncheckedUpdateWithoutSubmittedTaskReportsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutReviewedTaskReportsInput = {
@@ -3316,6 +3537,9 @@ export type UserUpdateWithoutReviewedTaskReportsInput = {
   submittedTaskReports?: Prisma.TaskReportUpdateManyWithoutSubmittedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -3355,6 +3579,9 @@ export type UserUncheckedUpdateWithoutReviewedTaskReportsInput = {
   submittedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutSubmittedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutTaskAssistanceRequestsInput = {
@@ -3392,6 +3619,9 @@ export type UserCreateWithoutTaskAssistanceRequestsInput = {
   submittedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutSubmittedByInput
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -3431,6 +3661,9 @@ export type UserUncheckedCreateWithoutTaskAssistanceRequestsInput = {
   submittedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutSubmittedByInput
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutTaskAssistanceRequestsInput = {
@@ -3484,6 +3717,9 @@ export type UserUpdateWithoutTaskAssistanceRequestsInput = {
   submittedTaskReports?: Prisma.TaskReportUpdateManyWithoutSubmittedByNestedInput
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -3523,6 +3759,9 @@ export type UserUncheckedUpdateWithoutTaskAssistanceRequestsInput = {
   submittedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutSubmittedByNestedInput
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutTaskActivitiesInput = {
@@ -3560,6 +3799,9 @@ export type UserCreateWithoutTaskActivitiesInput = {
   submittedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutSubmittedByInput
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -3599,6 +3841,9 @@ export type UserUncheckedCreateWithoutTaskActivitiesInput = {
   submittedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutSubmittedByInput
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutTaskActivitiesInput = {
@@ -3652,6 +3897,9 @@ export type UserUpdateWithoutTaskActivitiesInput = {
   submittedTaskReports?: Prisma.TaskReportUpdateManyWithoutSubmittedByNestedInput
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -3691,6 +3939,9 @@ export type UserUncheckedUpdateWithoutTaskActivitiesInput = {
   submittedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutSubmittedByNestedInput
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutAssignedDeadlinesInput = {
@@ -3728,6 +3979,9 @@ export type UserCreateWithoutAssignedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -3767,6 +4021,9 @@ export type UserUncheckedCreateWithoutAssignedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedDeadlinesInput = {
@@ -3809,6 +4066,9 @@ export type UserCreateWithoutCompletedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -3848,6 +4108,9 @@ export type UserUncheckedCreateWithoutCompletedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCompletedDeadlinesInput = {
@@ -3890,6 +4153,9 @@ export type UserCreateWithoutCreatedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -3929,6 +4195,9 @@ export type UserUncheckedCreateWithoutCreatedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedDeadlinesInput = {
@@ -3982,6 +4251,9 @@ export type UserUpdateWithoutAssignedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -4021,6 +4293,9 @@ export type UserUncheckedUpdateWithoutAssignedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutCompletedDeadlinesInput = {
@@ -4069,6 +4344,9 @@ export type UserUpdateWithoutCompletedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -4108,6 +4386,9 @@ export type UserUncheckedUpdateWithoutCompletedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutCreatedDeadlinesInput = {
@@ -4156,6 +4437,9 @@ export type UserUpdateWithoutCreatedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -4195,6 +4479,9 @@ export type UserUncheckedUpdateWithoutCreatedDeadlinesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -4232,6 +4519,9 @@ export type UserCreateWithoutNotificationsInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -4271,6 +4561,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -4324,6 +4617,9 @@ export type UserUpdateWithoutNotificationsInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -4363,6 +4659,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutAuditLogsInput = {
@@ -4400,6 +4699,9 @@ export type UserCreateWithoutAuditLogsInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -4439,6 +4741,9 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -4492,6 +4797,9 @@ export type UserUpdateWithoutAuditLogsInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -4531,6 +4839,549 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
+}
+
+export type UserCreateWithoutCreatedCorrespondencesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  assignedDeadlines?: Prisma.DeadlineCreateNestedManyWithoutAssignedToInput
+  completedDeadlines?: Prisma.DeadlineCreateNestedManyWithoutCompletedByInput
+  createdDeadlines?: Prisma.DeadlineCreateNestedManyWithoutCreatedByInput
+  uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutUploadedByInput
+  matterAccessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutRequesterInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutReviewedByInput
+  assignedMatterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutAssignedToInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutConflictCheckedByInput
+  createdMatterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutCreatedByInput
+  checkedConflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutCheckedByInput
+  reviewedConflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutReviewedByInput
+  matters?: Prisma.MatterUserCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssignedToInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  delegatedTasks?: Prisma.TaskCreateNestedManyWithoutDelegatedByInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskCreateNestedManyWithoutDelegatedOnBehalfOfInput
+  taskNotes?: Prisma.TaskNoteCreateNestedManyWithoutAuthorInput
+  submittedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutSubmittedByInput
+  reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
+  taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
+  firm: Prisma.FirmCreateNestedOneWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutCreatedCorrespondencesInput = {
+  id?: string
+  firmId: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  assignedDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutAssignedToInput
+  completedDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutCompletedByInput
+  createdDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutCreatedByInput
+  uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutRequesterInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutAssignedToInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutConflictCheckedByInput
+  createdMatterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutCreatedByInput
+  checkedConflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutCheckedByInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutReviewedByInput
+  matters?: Prisma.MatterUserUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedToInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  delegatedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutDelegatedByInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutDelegatedOnBehalfOfInput
+  taskNotes?: Prisma.TaskNoteUncheckedCreateNestedManyWithoutAuthorInput
+  submittedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutSubmittedByInput
+  reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
+}
+
+export type UserCreateOrConnectWithoutCreatedCorrespondencesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCorrespondencesInput, Prisma.UserUncheckedCreateWithoutCreatedCorrespondencesInput>
+}
+
+export type UserCreateWithoutResponsibleCorrespondencesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  assignedDeadlines?: Prisma.DeadlineCreateNestedManyWithoutAssignedToInput
+  completedDeadlines?: Prisma.DeadlineCreateNestedManyWithoutCompletedByInput
+  createdDeadlines?: Prisma.DeadlineCreateNestedManyWithoutCreatedByInput
+  uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutUploadedByInput
+  matterAccessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutRequesterInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutReviewedByInput
+  assignedMatterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutAssignedToInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutConflictCheckedByInput
+  createdMatterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutCreatedByInput
+  checkedConflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutCheckedByInput
+  reviewedConflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutReviewedByInput
+  matters?: Prisma.MatterUserCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssignedToInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  delegatedTasks?: Prisma.TaskCreateNestedManyWithoutDelegatedByInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskCreateNestedManyWithoutDelegatedOnBehalfOfInput
+  taskNotes?: Prisma.TaskNoteCreateNestedManyWithoutAuthorInput
+  submittedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutSubmittedByInput
+  reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
+  taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
+  firm: Prisma.FirmCreateNestedOneWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutResponsibleCorrespondencesInput = {
+  id?: string
+  firmId: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  assignedDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutAssignedToInput
+  completedDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutCompletedByInput
+  createdDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutCreatedByInput
+  uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutRequesterInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutAssignedToInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutConflictCheckedByInput
+  createdMatterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutCreatedByInput
+  checkedConflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutCheckedByInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutReviewedByInput
+  matters?: Prisma.MatterUserUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedToInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  delegatedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutDelegatedByInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutDelegatedOnBehalfOfInput
+  taskNotes?: Prisma.TaskNoteUncheckedCreateNestedManyWithoutAuthorInput
+  submittedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutSubmittedByInput
+  reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
+}
+
+export type UserCreateOrConnectWithoutResponsibleCorrespondencesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutResponsibleCorrespondencesInput, Prisma.UserUncheckedCreateWithoutResponsibleCorrespondencesInput>
+}
+
+export type UserUpsertWithoutCreatedCorrespondencesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCorrespondencesInput, Prisma.UserUncheckedUpdateWithoutCreatedCorrespondencesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCorrespondencesInput, Prisma.UserUncheckedCreateWithoutCreatedCorrespondencesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedCorrespondencesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCorrespondencesInput, Prisma.UserUncheckedUpdateWithoutCreatedCorrespondencesInput>
+}
+
+export type UserUpdateWithoutCreatedCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  assignedDeadlines?: Prisma.DeadlineUpdateManyWithoutAssignedToNestedInput
+  completedDeadlines?: Prisma.DeadlineUpdateManyWithoutCompletedByNestedInput
+  createdDeadlines?: Prisma.DeadlineUpdateManyWithoutCreatedByNestedInput
+  uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUpdateManyWithoutUploadedByNestedInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutRequesterNestedInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutReviewedByNestedInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUpdateManyWithoutAssignedToNestedInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUpdateManyWithoutConflictCheckedByNestedInput
+  createdMatterIntakes?: Prisma.MatterIntakeUpdateManyWithoutCreatedByNestedInput
+  checkedConflictChecks?: Prisma.ConflictCheckUpdateManyWithoutCheckedByNestedInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUpdateManyWithoutReviewedByNestedInput
+  matters?: Prisma.MatterUserUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  assignedTasks?: Prisma.TaskUpdateManyWithoutAssignedToNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  delegatedTasks?: Prisma.TaskUpdateManyWithoutDelegatedByNestedInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUpdateManyWithoutDelegatedOnBehalfOfNestedInput
+  taskNotes?: Prisma.TaskNoteUpdateManyWithoutAuthorNestedInput
+  submittedTaskReports?: Prisma.TaskReportUpdateManyWithoutSubmittedByNestedInput
+  reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
+  taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firmId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  assignedDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutAssignedToNestedInput
+  completedDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutCompletedByNestedInput
+  createdDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutCreatedByNestedInput
+  uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutAssignedToNestedInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutConflictCheckedByNestedInput
+  createdMatterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+  checkedConflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutCheckedByNestedInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutReviewedByNestedInput
+  matters?: Prisma.MatterUserUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedToNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  delegatedTasks?: Prisma.TaskUncheckedUpdateManyWithoutDelegatedByNestedInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUncheckedUpdateManyWithoutDelegatedOnBehalfOfNestedInput
+  taskNotes?: Prisma.TaskNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  submittedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutSubmittedByNestedInput
+  reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
+}
+
+export type UserUpsertWithoutResponsibleCorrespondencesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutResponsibleCorrespondencesInput, Prisma.UserUncheckedUpdateWithoutResponsibleCorrespondencesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResponsibleCorrespondencesInput, Prisma.UserUncheckedCreateWithoutResponsibleCorrespondencesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutResponsibleCorrespondencesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutResponsibleCorrespondencesInput, Prisma.UserUncheckedUpdateWithoutResponsibleCorrespondencesInput>
+}
+
+export type UserUpdateWithoutResponsibleCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  assignedDeadlines?: Prisma.DeadlineUpdateManyWithoutAssignedToNestedInput
+  completedDeadlines?: Prisma.DeadlineUpdateManyWithoutCompletedByNestedInput
+  createdDeadlines?: Prisma.DeadlineUpdateManyWithoutCreatedByNestedInput
+  uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUpdateManyWithoutUploadedByNestedInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutRequesterNestedInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutReviewedByNestedInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUpdateManyWithoutAssignedToNestedInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUpdateManyWithoutConflictCheckedByNestedInput
+  createdMatterIntakes?: Prisma.MatterIntakeUpdateManyWithoutCreatedByNestedInput
+  checkedConflictChecks?: Prisma.ConflictCheckUpdateManyWithoutCheckedByNestedInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUpdateManyWithoutReviewedByNestedInput
+  matters?: Prisma.MatterUserUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  assignedTasks?: Prisma.TaskUpdateManyWithoutAssignedToNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  delegatedTasks?: Prisma.TaskUpdateManyWithoutDelegatedByNestedInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUpdateManyWithoutDelegatedOnBehalfOfNestedInput
+  taskNotes?: Prisma.TaskNoteUpdateManyWithoutAuthorNestedInput
+  submittedTaskReports?: Prisma.TaskReportUpdateManyWithoutSubmittedByNestedInput
+  reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
+  taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutResponsibleCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firmId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  assignedDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutAssignedToNestedInput
+  completedDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutCompletedByNestedInput
+  createdDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutCreatedByNestedInput
+  uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutAssignedToNestedInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutConflictCheckedByNestedInput
+  createdMatterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+  checkedConflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutCheckedByNestedInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutReviewedByNestedInput
+  matters?: Prisma.MatterUserUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedToNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  delegatedTasks?: Prisma.TaskUncheckedUpdateManyWithoutDelegatedByNestedInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUncheckedUpdateManyWithoutDelegatedOnBehalfOfNestedInput
+  taskNotes?: Prisma.TaskNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  submittedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutSubmittedByNestedInput
+  reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
+}
+
+export type UserCreateWithoutCorrespondenceAttachmentsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  assignedDeadlines?: Prisma.DeadlineCreateNestedManyWithoutAssignedToInput
+  completedDeadlines?: Prisma.DeadlineCreateNestedManyWithoutCompletedByInput
+  createdDeadlines?: Prisma.DeadlineCreateNestedManyWithoutCreatedByInput
+  uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentCreateNestedManyWithoutUploadedByInput
+  matterAccessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutRequesterInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestCreateNestedManyWithoutReviewedByInput
+  assignedMatterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutAssignedToInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutConflictCheckedByInput
+  createdMatterIntakes?: Prisma.MatterIntakeCreateNestedManyWithoutCreatedByInput
+  checkedConflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutCheckedByInput
+  reviewedConflictChecks?: Prisma.ConflictCheckCreateNestedManyWithoutReviewedByInput
+  matters?: Prisma.MatterUserCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssignedToInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  delegatedTasks?: Prisma.TaskCreateNestedManyWithoutDelegatedByInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskCreateNestedManyWithoutDelegatedOnBehalfOfInput
+  taskNotes?: Prisma.TaskNoteCreateNestedManyWithoutAuthorInput
+  submittedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutSubmittedByInput
+  reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
+  taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  firm: Prisma.FirmCreateNestedOneWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutCorrespondenceAttachmentsInput = {
+  id?: string
+  firmId: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  assignedDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutAssignedToInput
+  completedDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutCompletedByInput
+  createdDeadlines?: Prisma.DeadlineUncheckedCreateNestedManyWithoutCreatedByInput
+  uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutRequesterInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutAssignedToInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutConflictCheckedByInput
+  createdMatterIntakes?: Prisma.MatterIntakeUncheckedCreateNestedManyWithoutCreatedByInput
+  checkedConflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutCheckedByInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUncheckedCreateNestedManyWithoutReviewedByInput
+  matters?: Prisma.MatterUserUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedToInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  delegatedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutDelegatedByInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutDelegatedOnBehalfOfInput
+  taskNotes?: Prisma.TaskNoteUncheckedCreateNestedManyWithoutAuthorInput
+  submittedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutSubmittedByInput
+  reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+}
+
+export type UserCreateOrConnectWithoutCorrespondenceAttachmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCorrespondenceAttachmentsInput, Prisma.UserUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+}
+
+export type UserUpsertWithoutCorrespondenceAttachmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCorrespondenceAttachmentsInput, Prisma.UserUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCorrespondenceAttachmentsInput, Prisma.UserUncheckedCreateWithoutCorrespondenceAttachmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCorrespondenceAttachmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCorrespondenceAttachmentsInput, Prisma.UserUncheckedUpdateWithoutCorrespondenceAttachmentsInput>
+}
+
+export type UserUpdateWithoutCorrespondenceAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  assignedDeadlines?: Prisma.DeadlineUpdateManyWithoutAssignedToNestedInput
+  completedDeadlines?: Prisma.DeadlineUpdateManyWithoutCompletedByNestedInput
+  createdDeadlines?: Prisma.DeadlineUpdateManyWithoutCreatedByNestedInput
+  uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUpdateManyWithoutUploadedByNestedInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutRequesterNestedInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUpdateManyWithoutReviewedByNestedInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUpdateManyWithoutAssignedToNestedInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUpdateManyWithoutConflictCheckedByNestedInput
+  createdMatterIntakes?: Prisma.MatterIntakeUpdateManyWithoutCreatedByNestedInput
+  checkedConflictChecks?: Prisma.ConflictCheckUpdateManyWithoutCheckedByNestedInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUpdateManyWithoutReviewedByNestedInput
+  matters?: Prisma.MatterUserUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  assignedTasks?: Prisma.TaskUpdateManyWithoutAssignedToNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  delegatedTasks?: Prisma.TaskUpdateManyWithoutDelegatedByNestedInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUpdateManyWithoutDelegatedOnBehalfOfNestedInput
+  taskNotes?: Prisma.TaskNoteUpdateManyWithoutAuthorNestedInput
+  submittedTaskReports?: Prisma.TaskReportUpdateManyWithoutSubmittedByNestedInput
+  reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
+  taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCorrespondenceAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firmId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  assignedDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutAssignedToNestedInput
+  completedDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutCompletedByNestedInput
+  createdDeadlines?: Prisma.DeadlineUncheckedUpdateManyWithoutCreatedByNestedInput
+  uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  uploadedFinanceDocuments?: Prisma.FinanceDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  matterAccessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  reviewedAccessRequests?: Prisma.MatterAccessRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignedMatterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutAssignedToNestedInput
+  conflictCheckedIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutConflictCheckedByNestedInput
+  createdMatterIntakes?: Prisma.MatterIntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+  checkedConflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutCheckedByNestedInput
+  reviewedConflictChecks?: Prisma.ConflictCheckUncheckedUpdateManyWithoutReviewedByNestedInput
+  matters?: Prisma.MatterUserUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedToNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  delegatedTasks?: Prisma.TaskUncheckedUpdateManyWithoutDelegatedByNestedInput
+  delegatedOnBehalfOfTasks?: Prisma.TaskUncheckedUpdateManyWithoutDelegatedOnBehalfOfNestedInput
+  taskNotes?: Prisma.TaskNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  submittedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutSubmittedByNestedInput
+  reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
 }
 
 export type UserCreateWithoutCheckedConflictChecksInput = {
@@ -4568,6 +5419,9 @@ export type UserCreateWithoutCheckedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -4607,6 +5461,9 @@ export type UserUncheckedCreateWithoutCheckedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCheckedConflictChecksInput = {
@@ -4649,6 +5506,9 @@ export type UserCreateWithoutReviewedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -4688,6 +5548,9 @@ export type UserUncheckedCreateWithoutReviewedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewedConflictChecksInput = {
@@ -4741,6 +5604,9 @@ export type UserUpdateWithoutCheckedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -4780,6 +5646,9 @@ export type UserUncheckedUpdateWithoutCheckedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutReviewedConflictChecksInput = {
@@ -4828,6 +5697,9 @@ export type UserUpdateWithoutReviewedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -4867,6 +5739,9 @@ export type UserUncheckedUpdateWithoutReviewedConflictChecksInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutAssignedMatterIntakesInput = {
@@ -4904,6 +5779,9 @@ export type UserCreateWithoutAssignedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -4943,6 +5821,9 @@ export type UserUncheckedCreateWithoutAssignedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedMatterIntakesInput = {
@@ -4985,6 +5866,9 @@ export type UserCreateWithoutConflictCheckedIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -5024,6 +5908,9 @@ export type UserUncheckedCreateWithoutConflictCheckedIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutConflictCheckedIntakesInput = {
@@ -5066,6 +5953,9 @@ export type UserCreateWithoutCreatedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentCreateNestedManyWithoutAddedByInput
   firm: Prisma.FirmCreateNestedOneWithoutUsersInput
 }
 
@@ -5105,6 +5995,9 @@ export type UserUncheckedCreateWithoutCreatedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedCreateNestedManyWithoutReviewedByInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedCreateNestedManyWithoutRequestedByInput
   taskActivities?: Prisma.TaskActivityUncheckedCreateNestedManyWithoutUserInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedCreateNestedManyWithoutResponsibleUserInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedMatterIntakesInput = {
@@ -5158,6 +6051,9 @@ export type UserUpdateWithoutAssignedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -5197,6 +6093,9 @@ export type UserUncheckedUpdateWithoutAssignedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutConflictCheckedIntakesInput = {
@@ -5245,6 +6144,9 @@ export type UserUpdateWithoutConflictCheckedIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -5284,6 +6186,9 @@ export type UserUncheckedUpdateWithoutConflictCheckedIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutCreatedMatterIntakesInput = {
@@ -5332,6 +6237,9 @@ export type UserUpdateWithoutCreatedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
   firm?: Prisma.FirmUpdateOneRequiredWithoutUsersNestedInput
 }
 
@@ -5371,6 +6279,9 @@ export type UserUncheckedUpdateWithoutCreatedMatterIntakesInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateManyFirmInput = {
@@ -5422,6 +6333,9 @@ export type UserUpdateWithoutFirmInput = {
   reviewedTaskReports?: Prisma.TaskReportUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFirmInput = {
@@ -5460,6 +6374,9 @@ export type UserUncheckedUpdateWithoutFirmInput = {
   reviewedTaskReports?: Prisma.TaskReportUncheckedUpdateManyWithoutReviewedByNestedInput
   taskAssistanceRequests?: Prisma.TaskAssistanceRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   taskActivities?: Prisma.TaskActivityUncheckedUpdateManyWithoutUserNestedInput
+  createdCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  responsibleCorrespondences?: Prisma.CorrespondenceUncheckedUpdateManyWithoutResponsibleUserNestedInput
+  correspondenceAttachments?: Prisma.CorrespondenceAttachmentUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutFirmInput = {
@@ -5506,6 +6423,9 @@ export type UserCountOutputType = {
   reviewedTaskReports: number
   taskAssistanceRequests: number
   taskActivities: number
+  createdCorrespondences: number
+  responsibleCorrespondences: number
+  correspondenceAttachments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5534,6 +6454,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reviewedTaskReports?: boolean | UserCountOutputTypeCountReviewedTaskReportsArgs
   taskAssistanceRequests?: boolean | UserCountOutputTypeCountTaskAssistanceRequestsArgs
   taskActivities?: boolean | UserCountOutputTypeCountTaskActivitiesArgs
+  createdCorrespondences?: boolean | UserCountOutputTypeCountCreatedCorrespondencesArgs
+  responsibleCorrespondences?: boolean | UserCountOutputTypeCountResponsibleCorrespondencesArgs
+  correspondenceAttachments?: boolean | UserCountOutputTypeCountCorrespondenceAttachmentsArgs
 }
 
 /**
@@ -5721,6 +6644,27 @@ export type UserCountOutputTypeCountTaskActivitiesArgs<ExtArgs extends runtime.T
   where?: Prisma.TaskActivityWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountResponsibleCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCorrespondenceAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CorrespondenceAttachmentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5759,6 +6703,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reviewedTaskReports?: boolean | Prisma.User$reviewedTaskReportsArgs<ExtArgs>
   taskAssistanceRequests?: boolean | Prisma.User$taskAssistanceRequestsArgs<ExtArgs>
   taskActivities?: boolean | Prisma.User$taskActivitiesArgs<ExtArgs>
+  createdCorrespondences?: boolean | Prisma.User$createdCorrespondencesArgs<ExtArgs>
+  responsibleCorrespondences?: boolean | Prisma.User$responsibleCorrespondencesArgs<ExtArgs>
+  correspondenceAttachments?: boolean | Prisma.User$correspondenceAttachmentsArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -5834,6 +6781,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reviewedTaskReports?: boolean | Prisma.User$reviewedTaskReportsArgs<ExtArgs>
   taskAssistanceRequests?: boolean | Prisma.User$taskAssistanceRequestsArgs<ExtArgs>
   taskActivities?: boolean | Prisma.User$taskActivitiesArgs<ExtArgs>
+  createdCorrespondences?: boolean | Prisma.User$createdCorrespondencesArgs<ExtArgs>
+  responsibleCorrespondences?: boolean | Prisma.User$responsibleCorrespondencesArgs<ExtArgs>
+  correspondenceAttachments?: boolean | Prisma.User$correspondenceAttachmentsArgs<ExtArgs>
   firm?: boolean | Prisma.FirmDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -5872,6 +6822,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reviewedTaskReports: Prisma.$TaskReportPayload<ExtArgs>[]
     taskAssistanceRequests: Prisma.$TaskAssistanceRequestPayload<ExtArgs>[]
     taskActivities: Prisma.$TaskActivityPayload<ExtArgs>[]
+    createdCorrespondences: Prisma.$CorrespondencePayload<ExtArgs>[]
+    responsibleCorrespondences: Prisma.$CorrespondencePayload<ExtArgs>[]
+    correspondenceAttachments: Prisma.$CorrespondenceAttachmentPayload<ExtArgs>[]
     firm: Prisma.$FirmPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -6305,6 +7258,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   reviewedTaskReports<T extends Prisma.User$reviewedTaskReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedTaskReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taskAssistanceRequests<T extends Prisma.User$taskAssistanceRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$taskAssistanceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskAssistanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taskActivities<T extends Prisma.User$taskActivitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$taskActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdCorrespondences<T extends Prisma.User$createdCorrespondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdCorrespondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  responsibleCorrespondences<T extends Prisma.User$responsibleCorrespondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$responsibleCorrespondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  correspondenceAttachments<T extends Prisma.User$correspondenceAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$correspondenceAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CorrespondenceAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   firm<T extends Prisma.FirmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FirmDefaultArgs<ExtArgs>>): Prisma.Prisma__FirmClient<runtime.Types.Result.GetResult<Prisma.$FirmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7344,6 +8300,78 @@ export type User$taskActivitiesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.TaskActivityScalarFieldEnum | Prisma.TaskActivityScalarFieldEnum[]
+}
+
+/**
+ * User.createdCorrespondences
+ */
+export type User$createdCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Correspondence
+   */
+  select?: Prisma.CorrespondenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Correspondence
+   */
+  omit?: Prisma.CorrespondenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceWhereInput
+  orderBy?: Prisma.CorrespondenceOrderByWithRelationInput | Prisma.CorrespondenceOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceScalarFieldEnum | Prisma.CorrespondenceScalarFieldEnum[]
+}
+
+/**
+ * User.responsibleCorrespondences
+ */
+export type User$responsibleCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Correspondence
+   */
+  select?: Prisma.CorrespondenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Correspondence
+   */
+  omit?: Prisma.CorrespondenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceWhereInput
+  orderBy?: Prisma.CorrespondenceOrderByWithRelationInput | Prisma.CorrespondenceOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceScalarFieldEnum | Prisma.CorrespondenceScalarFieldEnum[]
+}
+
+/**
+ * User.correspondenceAttachments
+ */
+export type User$correspondenceAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CorrespondenceAttachment
+   */
+  select?: Prisma.CorrespondenceAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CorrespondenceAttachment
+   */
+  omit?: Prisma.CorrespondenceAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CorrespondenceAttachmentInclude<ExtArgs> | null
+  where?: Prisma.CorrespondenceAttachmentWhereInput
+  orderBy?: Prisma.CorrespondenceAttachmentOrderByWithRelationInput | Prisma.CorrespondenceAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.CorrespondenceAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CorrespondenceAttachmentScalarFieldEnum | Prisma.CorrespondenceAttachmentScalarFieldEnum[]
 }
 
 /**

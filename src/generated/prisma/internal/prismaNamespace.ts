@@ -419,6 +419,8 @@ export const ModelName = {
   Deadline: 'Deadline',
   Notification: 'Notification',
   AuditLog: 'AuditLog',
+  Correspondence: 'Correspondence',
+  CorrespondenceAttachment: 'CorrespondenceAttachment',
   ConflictCheck: 'ConflictCheck',
   MatterIntake: 'MatterIntake'
 } as const
@@ -436,7 +438,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "firm" | "subscription" | "payment" | "user" | "passwordResetToken" | "client" | "matter" | "matterUser" | "matterAccessRequest" | "folder" | "document" | "documentVersion" | "financeFolder" | "financeDocument" | "task" | "taskNote" | "taskReport" | "taskAssistanceRequest" | "taskActivity" | "deadline" | "notification" | "auditLog" | "conflictCheck" | "matterIntake"
+    modelProps: "firm" | "subscription" | "payment" | "user" | "passwordResetToken" | "client" | "matter" | "matterUser" | "matterAccessRequest" | "folder" | "document" | "documentVersion" | "financeFolder" | "financeDocument" | "task" | "taskNote" | "taskReport" | "taskAssistanceRequest" | "taskActivity" | "deadline" | "notification" | "auditLog" | "correspondence" | "correspondenceAttachment" | "conflictCheck" | "matterIntake"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2068,6 +2070,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Correspondence: {
+      payload: Prisma.$CorrespondencePayload<ExtArgs>
+      fields: Prisma.CorrespondenceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CorrespondenceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CorrespondenceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>
+        }
+        findFirst: {
+          args: Prisma.CorrespondenceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CorrespondenceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>
+        }
+        findMany: {
+          args: Prisma.CorrespondenceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>[]
+        }
+        create: {
+          args: Prisma.CorrespondenceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>
+        }
+        createMany: {
+          args: Prisma.CorrespondenceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CorrespondenceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>[]
+        }
+        delete: {
+          args: Prisma.CorrespondenceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>
+        }
+        update: {
+          args: Prisma.CorrespondenceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>
+        }
+        deleteMany: {
+          args: Prisma.CorrespondenceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CorrespondenceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CorrespondenceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>[]
+        }
+        upsert: {
+          args: Prisma.CorrespondenceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondencePayload>
+        }
+        aggregate: {
+          args: Prisma.CorrespondenceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCorrespondence>
+        }
+        groupBy: {
+          args: Prisma.CorrespondenceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CorrespondenceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CorrespondenceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CorrespondenceCountAggregateOutputType> | number
+        }
+      }
+    }
+    CorrespondenceAttachment: {
+      payload: Prisma.$CorrespondenceAttachmentPayload<ExtArgs>
+      fields: Prisma.CorrespondenceAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CorrespondenceAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CorrespondenceAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.CorrespondenceAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CorrespondenceAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.CorrespondenceAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.CorrespondenceAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.CorrespondenceAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CorrespondenceAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.CorrespondenceAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>
+        }
+        update: {
+          args: Prisma.CorrespondenceAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.CorrespondenceAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CorrespondenceAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CorrespondenceAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.CorrespondenceAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CorrespondenceAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.CorrespondenceAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCorrespondenceAttachment>
+        }
+        groupBy: {
+          args: Prisma.CorrespondenceAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CorrespondenceAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CorrespondenceAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CorrespondenceAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
     ConflictCheck: {
       payload: Prisma.$ConflictCheckPayload<ExtArgs>
       fields: Prisma.ConflictCheckFieldRefs
@@ -2639,6 +2789,42 @@ export const AuditLogScalarFieldEnum = {
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+export const CorrespondenceScalarFieldEnum = {
+  id: 'id',
+  firmId: 'firmId',
+  matterId: 'matterId',
+  clientId: 'clientId',
+  direction: 'direction',
+  correspondenceDate: 'correspondenceDate',
+  sender: 'sender',
+  recipient: 'recipient',
+  subject: 'subject',
+  type: 'type',
+  status: 'status',
+  responsibleUserId: 'responsibleUserId',
+  responseRequired: 'responseRequired',
+  responseDeadline: 'responseDeadline',
+  notes: 'notes',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CorrespondenceScalarFieldEnum = (typeof CorrespondenceScalarFieldEnum)[keyof typeof CorrespondenceScalarFieldEnum]
+
+
+export const CorrespondenceAttachmentScalarFieldEnum = {
+  id: 'id',
+  firmId: 'firmId',
+  correspondenceId: 'correspondenceId',
+  documentId: 'documentId',
+  addedById: 'addedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CorrespondenceAttachmentScalarFieldEnum = (typeof CorrespondenceAttachmentScalarFieldEnum)[keyof typeof CorrespondenceAttachmentScalarFieldEnum]
+
+
 export const ConflictCheckScalarFieldEnum = {
   id: 'id',
   firmId: 'firmId',
@@ -3077,6 +3263,48 @@ export type ListEnumAuditActionFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'CorrespondenceDirection'
+ */
+export type EnumCorrespondenceDirectionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CorrespondenceDirection'>
+    
+
+
+/**
+ * Reference to a field of type 'CorrespondenceDirection[]'
+ */
+export type ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CorrespondenceDirection[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CorrespondenceType'
+ */
+export type EnumCorrespondenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CorrespondenceType'>
+    
+
+
+/**
+ * Reference to a field of type 'CorrespondenceType[]'
+ */
+export type ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CorrespondenceType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CorrespondenceStatus'
+ */
+export type EnumCorrespondenceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CorrespondenceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'CorrespondenceStatus[]'
+ */
+export type ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CorrespondenceStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ConflictCheckStatus'
  */
 export type EnumConflictCheckStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConflictCheckStatus'>
@@ -3304,6 +3532,8 @@ export type GlobalOmitConfig = {
   deadline?: Prisma.DeadlineOmit
   notification?: Prisma.NotificationOmit
   auditLog?: Prisma.AuditLogOmit
+  correspondence?: Prisma.CorrespondenceOmit
+  correspondenceAttachment?: Prisma.CorrespondenceAttachmentOmit
   conflictCheck?: Prisma.ConflictCheckOmit
   matterIntake?: Prisma.MatterIntakeOmit
 }

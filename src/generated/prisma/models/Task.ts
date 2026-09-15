@@ -2709,20 +2709,10 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     priority: $Enums.TaskPriority
     assignedToId: string | null
     createdById: string
-    /**
-     * * Person who physically delegated/created the task.
-     */
     delegatedById: string | null
-    /**
-     * * Director / Managing Partner on whose behalf
-     *    * the task was delegated.
-     */
     delegatedOnBehalfOfId: string | null
     dueDate: Date | null
     completedAt: Date | null
-    /**
-     * * Reporting workflow.
-     */
     requiresReport: boolean
     reportSubmittedAt: Date | null
     reportReviewedAt: Date | null

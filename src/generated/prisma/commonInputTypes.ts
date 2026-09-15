@@ -603,6 +603,57 @@ export type EnumAuditActionWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumAuditActionFilter<$PrismaModel>
 }
 
+export type EnumCorrespondenceDirectionFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceDirection | Prisma.EnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceDirectionFilter<$PrismaModel> | $Enums.CorrespondenceDirection
+}
+
+export type EnumCorrespondenceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceType | Prisma.EnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceTypeFilter<$PrismaModel> | $Enums.CorrespondenceType
+}
+
+export type EnumCorrespondenceStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceStatus | Prisma.EnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceStatusFilter<$PrismaModel> | $Enums.CorrespondenceStatus
+}
+
+export type EnumCorrespondenceDirectionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceDirection | Prisma.EnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceDirectionWithAggregatesFilter<$PrismaModel> | $Enums.CorrespondenceDirection
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCorrespondenceDirectionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCorrespondenceDirectionFilter<$PrismaModel>
+}
+
+export type EnumCorrespondenceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceType | Prisma.EnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceTypeWithAggregatesFilter<$PrismaModel> | $Enums.CorrespondenceType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCorrespondenceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCorrespondenceTypeFilter<$PrismaModel>
+}
+
+export type EnumCorrespondenceStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceStatus | Prisma.EnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceStatusWithAggregatesFilter<$PrismaModel> | $Enums.CorrespondenceStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCorrespondenceStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCorrespondenceStatusFilter<$PrismaModel>
+}
+
 export type EnumConflictCheckStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.ConflictCheckStatus | Prisma.EnumConflictCheckStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ConflictCheckStatus[] | Prisma.ListEnumConflictCheckStatusFieldRefInput<$PrismaModel>
@@ -1227,6 +1278,57 @@ export type NestedEnumAuditActionWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumAuditActionFilter<$PrismaModel>
   _max?: Prisma.NestedEnumAuditActionFilter<$PrismaModel>
+}
+
+export type NestedEnumCorrespondenceDirectionFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceDirection | Prisma.EnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceDirectionFilter<$PrismaModel> | $Enums.CorrespondenceDirection
+}
+
+export type NestedEnumCorrespondenceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceType | Prisma.EnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceTypeFilter<$PrismaModel> | $Enums.CorrespondenceType
+}
+
+export type NestedEnumCorrespondenceStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceStatus | Prisma.EnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceStatusFilter<$PrismaModel> | $Enums.CorrespondenceStatus
+}
+
+export type NestedEnumCorrespondenceDirectionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceDirection | Prisma.EnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceDirection[] | Prisma.ListEnumCorrespondenceDirectionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceDirectionWithAggregatesFilter<$PrismaModel> | $Enums.CorrespondenceDirection
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCorrespondenceDirectionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCorrespondenceDirectionFilter<$PrismaModel>
+}
+
+export type NestedEnumCorrespondenceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceType | Prisma.EnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceType[] | Prisma.ListEnumCorrespondenceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceTypeWithAggregatesFilter<$PrismaModel> | $Enums.CorrespondenceType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCorrespondenceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCorrespondenceTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumCorrespondenceStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CorrespondenceStatus | Prisma.EnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CorrespondenceStatus[] | Prisma.ListEnumCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCorrespondenceStatusWithAggregatesFilter<$PrismaModel> | $Enums.CorrespondenceStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCorrespondenceStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCorrespondenceStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumConflictCheckStatusFilter<$PrismaModel = never> = {
