@@ -126,24 +126,30 @@ export default function CorrespondenceCentre() {
       setLoading(true);
       setError("");
 
-      const response = await fetch(
-        "/api/correspondence",
-        {
-          method: "GET",
-          cache: "no-store",
-        },
-      );
+      const response = await fetch("/api/correspondence", {
+        method: "GET",
+        cache: "no-store",
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
         throw new Error(
-          data?.error ||
-            "Failed to load correspondence.",
+          data?.error || "Failed to load correspondence.",
         );
       }
 
-      setItems(data.correspondence || []);
+      /*
+       * The API returns:
+       *
+       * {
+       *   correspondences: [...]
+       * }
+       *
+       * Make sure the frontend reads the plural
+       * property name.
+       */
+      setItems(data.correspondences || []);
     } catch (err) {
       console.error(err);
 
@@ -171,8 +177,7 @@ export default function CorrespondenceCentre() {
     ).length;
 
     const actionRequired = items.filter(
-      (item) =>
-        item.status === "ACTION_REQUIRED",
+      (item) => item.status === "ACTION_REQUIRED",
     ).length;
 
     const awaitingResponse = items.filter(
@@ -182,8 +187,8 @@ export default function CorrespondenceCentre() {
         item.status !== "CLOSED",
     ).length;
 
-    const overdue = items.filter(
-      (item) => isOverdue(item),
+    const overdue = items.filter((item) =>
+      isOverdue(item),
     ).length;
 
     const closed = items.filter(
@@ -206,23 +211,19 @@ export default function CorrespondenceCentre() {
     switch (filter) {
       case "INCOMING":
         result = result.filter(
-          (item) =>
-            item.direction === "INCOMING",
+          (item) => item.direction === "INCOMING",
         );
         break;
 
       case "OUTGOING":
         result = result.filter(
-          (item) =>
-            item.direction === "OUTGOING",
+          (item) => item.direction === "OUTGOING",
         );
         break;
 
       case "ACTION_REQUIRED":
         result = result.filter(
-          (item) =>
-            item.status ===
-            "ACTION_REQUIRED",
+          (item) => item.status === "ACTION_REQUIRED",
         );
         break;
 
@@ -243,8 +244,7 @@ export default function CorrespondenceCentre() {
 
       case "CLOSED":
         result = result.filter(
-          (item) =>
-            item.status === "CLOSED",
+          (item) => item.status === "CLOSED",
         );
         break;
 
@@ -252,9 +252,7 @@ export default function CorrespondenceCentre() {
         break;
     }
 
-    const query = search
-      .trim()
-      .toLowerCase();
+    const query = search.trim().toLowerCase();
 
     if (query) {
       result = result.filter((item) => {
@@ -310,7 +308,10 @@ export default function CorrespondenceCentre() {
 
       {error && (
         <div className="error-banner">
-          <strong>Unable to load correspondence.</strong>
+          <strong>
+            Unable to load correspondence.
+          </strong>
+
           <span>{error}</span>
 
           <button
@@ -485,9 +486,7 @@ export default function CorrespondenceCentre() {
           {filter !== "ALL" && (
             <button
               className="clear-filter"
-              onClick={() =>
-                setFilter("ALL")
-              }
+              onClick={() => setFilter("ALL")}
             >
               Clear filter
             </button>
@@ -497,6 +496,7 @@ export default function CorrespondenceCentre() {
         {loading ? (
           <div className="empty-state">
             <div className="loading-spinner" />
+
             <p>
               Loading correspondence...
             </p>
@@ -543,192 +543,185 @@ export default function CorrespondenceCentre() {
               </thead>
 
               <tbody>
-                {filteredItems.map(
-                  (item) => {
-                    const overdue =
-                      isOverdue(item);
+                {filteredItems.map((item) => {
+                  const overdue = isOverdue(item);
 
-                    return (
-                      <tr key={item.id}>
-                        <td>
-                          <Link
-                            href={`/dashboard/correspondence/${item.id}`}
-                            className="date-link"
-                          >
-                            {formatDate(
-                              item.correspondenceDate,
-                            )}
-                          </Link>
-                        </td>
+                  return (
+                    <tr key={item.id}>
+                      <td>
+                        <Link
+                          href={`/dashboard/correspondence/${item.id}`}
+                          className="date-link"
+                        >
+                          {formatDate(
+                            item.correspondenceDate,
+                          )}
+                        </Link>
+                      </td>
 
-                        <td>
-                          <span
-                            className={
-                              item.direction ===
-                              "INCOMING"
-                                ? "direction incoming"
-                                : "direction outgoing"
-                            }
-                          >
-                            {item.direction ===
+                      <td>
+                        <span
+                          className={
+                            item.direction ===
                             "INCOMING"
-                              ? "Incoming"
-                              : "Outgoing"}
+                              ? "direction incoming"
+                              : "direction outgoing"
+                          }
+                        >
+                          {item.direction ===
+                          "INCOMING"
+                            ? "Incoming"
+                            : "Outgoing"}
+                        </span>
+                      </td>
+
+                      <td>
+                        <Link
+                          href={`/dashboard/correspondence/${item.id}`}
+                          className="subject-link"
+                        >
+                          {item.subject}
+                        </Link>
+
+                        <div className="correspondence-meta">
+                          <span>
+                            {typeLabels[item.type] ||
+                              item.type}
                           </span>
-                        </td>
 
-                        <td>
-                          <Link
-                            href={`/dashboard/correspondence/${item.id}`}
-                            className="subject-link"
-                          >
-                            {item.subject}
-                          </Link>
+                          <span>
+                            From: {item.sender}
+                          </span>
 
-                          <div className="correspondence-meta">
+                          {item._count?.attachments ? (
                             <span>
-                              {typeLabels[
-                                item.type
-                              ] ||
-                                item.type}
+                              {item._count.attachments}{" "}
+                              attachment
+                              {item._count.attachments ===
+                              1
+                                ? ""
+                                : "s"}
                             </span>
+                          ) : null}
+                        </div>
+                      </td>
 
-                            <span>
-                              From:{" "}
-                              {item.sender}
-                            </span>
-                          </div>
-                        </td>
+                      <td>
+                        {item.client ? (
+                          <div>
+                            <strong>
+                              {item.client.name}
+                            </strong>
 
-                        <td>
-                          {item.client ? (
-                            <div>
-                              <strong>
-                                {
-                                  item
-                                    .client
-                                    .name
-                                }
-                              </strong>
-
-                              {item.matter && (
-                                <div className="matter-text">
-                                  {
-                                    item
-                                      .matter
-                                      .referenceNumber
-                                  }
-                                  {" — "}
-                                  {
-                                    item
-                                      .matter
-                                      .title
-                                  }
-                                </div>
-                              )}
-                            </div>
-                          ) : item.matter ? (
-                            <div>
-                              <strong>
-                                {
-                                  item
-                                    .matter
-                                    .referenceNumber
-                                }
-                              </strong>
-
+                            {item.matter && (
                               <div className="matter-text">
                                 {
-                                  item
-                                    .matter
-                                    .title
+                                  item.matter
+                                    .referenceNumber
+                                }
+                                {" — "}
+                                {
+                                  item.matter.title
                                 }
                               </div>
-                            </div>
-                          ) : (
-                            <span className="muted">
-                              Not linked
-                            </span>
-                          )}
-                        </td>
-
-                        <td>
-                          {item.responsibleUser ? (
-                            <div>
-                              <strong>
-                                {
-                                  item
-                                    .responsibleUser
-                                    .email
-                                }
-                              </strong>
-
-                              <div className="role-text">
-                                {
-                                  item
-                                    .responsibleUser
-                                    .role
-                                }
-                              </div>
-                            </div>
-                          ) : (
-                            <span className="unassigned">
-                              Unassigned
-                            </span>
-                          )}
-                        </td>
-
-                        <td>
-                          {item.responseRequired ? (
-                            <div
-                              className={
-                                overdue
-                                  ? "response overdue"
-                                  : "response"
-                              }
-                            >
-                              <strong>
-                                Required
-                              </strong>
-
-                              {item.responseDeadline && (
-                                <span>
-                                  {formatDate(
-                                    item.responseDeadline,
-                                  )}
-                                </span>
-                              )}
-
-                              {overdue && (
-                                <small>
-                                  Overdue
-                                </small>
-                              )}
-                            </div>
-                          ) : (
-                            <span className="muted">
-                              Not required
-                            </span>
-                          )}
-                        </td>
-
-                        <td>
-                          <span
-                            className={getStatusClass(
-                              item.status,
                             )}
-                          >
-                            {
-                              statusLabels[
-                                item.status
-                              ]
-                            }
+                          </div>
+                        ) : item.matter ? (
+                          <div>
+                            <strong>
+                              {
+                                item.matter
+                                  .referenceNumber
+                              }
+                            </strong>
+
+                            <div className="matter-text">
+                              {item.matter.title}
+                            </div>
+                          </div>
+                        ) : (
+                          <span className="muted">
+                            Not linked
                           </span>
-                        </td>
-                      </tr>
-                    );
-                  },
-                )}
+                        )}
+                      </td>
+
+                      <td>
+                        {item.responsibleUser ? (
+                          <div>
+                            <strong>
+                              {
+                                item
+                                  .responsibleUser
+                                  .email
+                              }
+                            </strong>
+
+                            <div className="role-text">
+                              {
+                                item
+                                  .responsibleUser
+                                  .role
+                              }
+                            </div>
+                          </div>
+                        ) : (
+                          <span className="unassigned">
+                            Unassigned
+                          </span>
+                        )}
+                      </td>
+
+                      <td>
+                        {item.responseRequired ? (
+                          <div
+                            className={
+                              overdue
+                                ? "response overdue"
+                                : "response"
+                            }
+                          >
+                            <strong>
+                              Required
+                            </strong>
+
+                            {item.responseDeadline && (
+                              <span>
+                                {formatDate(
+                                  item.responseDeadline,
+                                )}
+                              </span>
+                            )}
+
+                            {overdue && (
+                              <small>
+                                Overdue
+                              </small>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="muted">
+                            Not required
+                          </span>
+                        )}
+                      </td>
+
+                      <td>
+                        <span
+                          className={getStatusClass(
+                            item.status,
+                          )}
+                        >
+                          {
+                            statusLabels[
+                              item.status
+                            ]
+                          }
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
