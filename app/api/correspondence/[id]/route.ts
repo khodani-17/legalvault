@@ -1,4 +1,8 @@
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
+import { hasPermission } from "@/lib/permissions";
+import { createAuditLog } from "@/lib/audit";
 import {
   CorrespondenceDirection,
   CorrespondenceStatus,
@@ -6,16 +10,56 @@ import {
   NotificationType,
   UserStatus,
 } from "@/src/generated/prisma/enums";
-import { prisma } from "@/lib/prisma";
-import { requirePermission } from "@/lib/permissions-server";
-import { createAuditLog } from "@/lib/audit";
-import { createNotification } from "@/lib/notifications";
 
 type RouteContext = {
   params: Promise<{ id: string }>;
 };
 
-function parseOptionalDate(value: unknown): Date | null | undefined {
+/*
+ * Explicit enum values.
+ *
+ * Using explicit string arrays avoids TypeScript treating
+ * Object.values() as unknown[] with Prisma 7 generated enums.
+ */
+const statusValues = [
+  "RECEIVED",
+  "ASSIGNED",
+  "ACTION_REQUIRED",
+  "RESPONDED",
+  "CLOSED",
+] as const;
+
+const directionValues = [
+  "INCOMING",
+  "OUTGOING",
+] as const;
+
+const typeValues = [
+  "LETTER",
+  "COURT_NOTICE",
+  "CLIENT_EMAIL",
+  "DEMAND",
+  "NOTICE",
+  "OPPOSING_ATTORNEY",
+  "CLIENT_CORRESPONDENCE",
+  "COURT_CORRESPONDENCE",
+  "FOLLOW_UP",
+  "OTHER",
+] as const;
+
+function cleanString(value: unknown): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+function parseOptionalDate(
+  value: unknown
+): Date | null | undefined {
   if (value === undefined) {
     return undefined;
   }
@@ -24,7 +68,11 @@ function parseOptionalDate(value: unknown): Date | null | undefined {
     return null;
   }
 
-  const date = new Date(String(value));
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const date = new Date(value);
 
   if (Number.isNaN(date.getTime())) {
     return null;
@@ -33,72 +81,127 @@ function parseOptionalDate(value: unknown): Date | null | undefined {
   return date;
 }
 
-function cleanString(
+function isEnumValue<T extends string>(
   value: unknown,
-  maxLength = 5000,
-): string | null | undefined {
-  if (value === undefined) {
-    return undefined;
-  }
-
-  if (value === null) {
-    return null;
-  }
-
-  const valueString = String(value).trim();
-
-  if (!valueString) {
-    return null;
-  }
-
-  return valueString.slice(0, maxLength);
-}
-
-function isEnumValue<T extends Record<string, string>>(
-  enumObject: T,
-  value: unknown,
-): value is T[keyof T] {
+  values: readonly T[]
+): value is T {
   return (
     typeof value === "string" &&
-    Object.values(enumObject).includes(value as T[keyof T])
+    values.includes(value as T)
+  );
+}
+
+/*
+ * Correspondence workflow:
+ *
+ * RECEIVED
+ *    ↓
+ * ASSIGNED
+ *    ↓
+ * ACTION_REQUIRED
+ *    ↓
+ * RESPONDED
+ *    ↓
+ * CLOSED
+ *
+ * Permitted reversals:
+ *
+ * ACTION_REQUIRED → ASSIGNED
+ * RESPONDED → ACTION_REQUIRED
+ *
+ * CLOSED is final.
+ */
+const allowedStatusTransitions: Record<
+  CorrespondenceStatus,
+  CorrespondenceStatus[]
+> = {
+  [CorrespondenceStatus.RECEIVED]: [
+    CorrespondenceStatus.ASSIGNED,
+  ],
+
+  [CorrespondenceStatus.ASSIGNED]: [
+    CorrespondenceStatus.ACTION_REQUIRED,
+  ],
+
+  [CorrespondenceStatus.ACTION_REQUIRED]: [
+    CorrespondenceStatus.RESPONDED,
+    CorrespondenceStatus.ASSIGNED,
+  ],
+
+  [CorrespondenceStatus.RESPONDED]: [
+    CorrespondenceStatus.CLOSED,
+    CorrespondenceStatus.ACTION_REQUIRED,
+  ],
+
+  [CorrespondenceStatus.CLOSED]: [],
+};
+
+function canTransitionStatus(
+  currentStatus: CorrespondenceStatus,
+  nextStatus: CorrespondenceStatus
+): boolean {
+  if (currentStatus === nextStatus) {
+    return true;
+  }
+
+  return (
+    allowedStatusTransitions[currentStatus]?.includes(
+      nextStatus
+    ) ?? false
   );
 }
 
 /**
- * GET /api/correspondence/[id]
- *
- * View one correspondence record.
+ * GET
+ * Retrieve one correspondence record.
  */
 export async function GET(
   request: Request,
-  { params }: RouteContext,
+  context: RouteContext
 ) {
-  const permission = await requirePermission(
-    "correspondence.view",
-  );
-
-  if (!permission.authorized) {
-    return permission.response;
-  }
-
-  const sessionUser = permission.session.user;
-
-  const { id } = await params;
-
-  if (!id) {
-    return NextResponse.json(
-      { error: "Correspondence ID is required." },
-      { status: 400 },
-    );
-  }
-
   try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Unauthorized." },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+    const role = session.user.role;
+    const firmId = session.user.firmId;
+
+    if (!firmId) {
+      return NextResponse.json(
+        {
+          error:
+            "Your account is not associated with a firm.",
+        },
+        { status: 403 }
+      );
+    }
+
+    if (!hasPermission(role, "correspondence.view")) {
+      return NextResponse.json(
+        {
+          error:
+            "You do not have permission to view correspondence.",
+        },
+        { status: 403 }
+      );
+    }
+
+    const { id } = await context.params;
+
     const correspondence =
       await prisma.correspondence.findFirst({
         where: {
           id,
-          firmId: sessionUser.firmId,
+          firmId,
         },
+
         include: {
           client: {
             select: {
@@ -106,7 +209,6 @@ export async function GET(
               name: true,
               email: true,
               phone: true,
-              referenceNumber: true,
             },
           },
 
@@ -114,15 +216,14 @@ export async function GET(
             select: {
               id: true,
               title: true,
-              status: true,
               referenceNumber: true,
-              clientId: true,
             },
           },
 
           responsibleUser: {
             select: {
               id: true,
+              name: true,
               email: true,
               role: true,
               status: true,
@@ -132,6 +233,7 @@ export async function GET(
           createdBy: {
             select: {
               id: true,
+              name: true,
               email: true,
               role: true,
             },
@@ -146,8 +248,6 @@ export async function GET(
                   originalName: true,
                   mimeType: true,
                   size: true,
-                  extension: true,
-                  currentVersion: true,
                   createdAt: true,
                 },
               },
@@ -155,8 +255,8 @@ export async function GET(
               addedBy: {
                 select: {
                   id: true,
+                  name: true,
                   email: true,
-                  role: true,
                 },
               },
             },
@@ -170,80 +270,109 @@ export async function GET(
 
     if (!correspondence) {
       return NextResponse.json(
-        { error: "Correspondence not found." },
-        { status: 404 },
+        {
+          error: "Correspondence not found.",
+        },
+        { status: 404 }
       );
     }
 
-    await createAuditLog({
-      request,
-      firmId: sessionUser.firmId,
-      userId: sessionUser.id,
-      action: "READ",
-      entityType: "Correspondence",
-      entityId: correspondence.id,
-      description: `Viewed correspondence: ${correspondence.subject}`,
-    });
+    /*
+     * Audit failure must never prevent a valid GET request.
+     */
+    try {
+      await createAuditLog({
+        firmId,
+        userId,
+        action: "READ",
+        entityType: "Correspondence",
+        entityId: correspondence.id,
+        description: `Viewed correspondence "${correspondence.subject}".`,
+      });
+    } catch (auditError) {
+      console.error(
+        "Failed to create correspondence view audit log:",
+        auditError
+      );
+    }
 
     return NextResponse.json({
       correspondence,
     });
   } catch (error) {
     console.error(
-      "GET correspondence error:",
-      error,
+      "GET /api/correspondence/[id] error:",
+      error
     );
 
     return NextResponse.json(
       {
-        error:
-          "Failed to load correspondence.",
+        error: "Failed to load correspondence.",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
 /**
- * PATCH /api/correspondence/[id]
- *
+ * PATCH
  * Update correspondence.
  */
 export async function PATCH(
   request: Request,
-  { params }: RouteContext,
+  context: RouteContext
 ) {
-  const permission = await requirePermission(
-    "correspondence.update",
-  );
-
-  if (!permission.authorized) {
-    return permission.response;
-  }
-
-  const sessionUser = permission.session.user;
-
-  const { id } = await params;
-
-  if (!id) {
-    return NextResponse.json(
-      { error: "Correspondence ID is required." },
-      { status: 400 },
-    );
-  }
-
   try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Unauthorized." },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+    const role = session.user.role;
+    const firmId = session.user.firmId;
+
+    if (!firmId) {
+      return NextResponse.json(
+        {
+          error:
+            "Your account is not associated with a firm.",
+        },
+        { status: 403 }
+      );
+    }
+
+    if (!hasPermission(role, "correspondence.update")) {
+      return NextResponse.json(
+        {
+          error:
+            "You do not have permission to update correspondence.",
+        },
+        { status: 403 }
+      );
+    }
+
+    const { id } = await context.params;
+
     const existing =
       await prisma.correspondence.findFirst({
         where: {
           id,
-          firmId: sessionUser.firmId,
+          firmId,
         },
+
         include: {
           responsibleUser: {
             select: {
               id: true,
+              name: true,
               email: true,
+              role: true,
+              status: true,
             },
           },
         },
@@ -251,436 +380,516 @@ export async function PATCH(
 
     if (!existing) {
       return NextResponse.json(
-        { error: "Correspondence not found." },
-        { status: 404 },
+        {
+          error: "Correspondence not found.",
+        },
+        { status: 404 }
+      );
+    }
+
+    /*
+     * Closed correspondence is considered final.
+     */
+    if (
+      existing.status ===
+      CorrespondenceStatus.CLOSED
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Closed correspondence cannot be modified through the normal workflow.",
+        },
+        { status: 409 }
       );
     }
 
     const body = await request.json();
 
-    if (!body || typeof body !== "object") {
+    const sender =
+      body.sender !== undefined
+        ? cleanString(body.sender)
+        : undefined;
+
+    const recipient =
+      body.recipient !== undefined
+        ? cleanString(body.recipient)
+        : undefined;
+
+    const subject =
+      body.subject !== undefined
+        ? cleanString(body.subject)
+        : undefined;
+
+    const notes =
+      body.notes !== undefined
+        ? typeof body.notes === "string"
+          ? body.notes.trim()
+          : undefined
+        : undefined;
+
+    const direction =
+      body.direction !== undefined
+        ? body.direction
+        : undefined;
+
+    const type =
+      body.type !== undefined
+        ? body.type
+        : undefined;
+
+    const requestedStatus =
+      body.status !== undefined
+        ? body.status
+        : undefined;
+
+    const correspondenceDate =
+      parseOptionalDate(
+        body.correspondenceDate
+      );
+
+    const responseDeadline =
+      parseOptionalDate(
+        body.responseDeadline
+      );
+
+    const responseRequired =
+      body.responseRequired !== undefined
+        ? Boolean(body.responseRequired)
+        : undefined;
+
+    const clientId =
+      body.clientId !== undefined
+        ? body.clientId === null ||
+          body.clientId === ""
+          ? null
+          : cleanString(body.clientId)
+        : undefined;
+
+    const matterId =
+      body.matterId !== undefined
+        ? body.matterId === null ||
+          body.matterId === ""
+          ? null
+          : cleanString(body.matterId)
+        : undefined;
+
+    const responsibleUserId =
+      body.responsibleUserId !== undefined
+        ? body.responsibleUserId === null ||
+          body.responsibleUserId === ""
+          ? null
+          : cleanString(
+              body.responsibleUserId
+            )
+        : undefined;
+
+    /*
+     * Basic field validation.
+     */
+    if (
+      body.sender !== undefined &&
+      !sender
+    ) {
       return NextResponse.json(
-        { error: "Invalid request body." },
-        { status: 400 },
+        {
+          error: "Sender is required.",
+        },
+        { status: 400 }
       );
     }
 
-    const updateData: Record<string, unknown> =
-      {};
-
-    /*
-     * Sender
-     */
-    if (body.sender !== undefined) {
-      const sender = String(body.sender).trim();
-
-      if (!sender) {
-        return NextResponse.json(
-          {
-            error:
-              "Sender cannot be empty.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.sender = sender.slice(0, 500);
-    }
-
-    /*
-     * Recipient
-     */
-    if (body.recipient !== undefined) {
-      const recipient =
-        String(body.recipient).trim();
-
-      if (!recipient) {
-        return NextResponse.json(
-          {
-            error:
-              "Recipient cannot be empty.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.recipient =
-        recipient.slice(0, 500);
-    }
-
-    /*
-     * Subject
-     */
-    if (body.subject !== undefined) {
-      const subject =
-        String(body.subject).trim();
-
-      if (!subject) {
-        return NextResponse.json(
-          {
-            error:
-              "Subject cannot be empty.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.subject =
-        subject.slice(0, 1000);
-    }
-
-    /*
-     * Direction
-     */
-    if (body.direction !== undefined) {
-      if (
-        !isEnumValue(
-          CorrespondenceDirection,
-          body.direction,
-        )
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "Invalid correspondence direction.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.direction =
-        body.direction;
-    }
-
-    /*
-     * Type
-     */
-    if (body.type !== undefined) {
-      if (
-        !isEnumValue(
-          CorrespondenceType,
-          body.type,
-        )
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "Invalid correspondence type.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.type = body.type;
-    }
-
-    /*
-     * Status
-     */
-    if (body.status !== undefined) {
-      if (
-        !isEnumValue(
-          CorrespondenceStatus,
-          body.status,
-        )
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "Invalid correspondence status.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.status =
-        body.status;
-    }
-
-    /*
-     * Correspondence date
-     */
     if (
-      body.correspondenceDate !==
-      undefined
+      body.recipient !== undefined &&
+      !recipient
     ) {
-      const date =
-        parseOptionalDate(
-          body.correspondenceDate,
-        );
-
-      if (date === null) {
-        return NextResponse.json(
-          {
-            error:
-              "Invalid correspondence date.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.correspondenceDate =
-        date;
+      return NextResponse.json(
+        {
+          error: "Recipient is required.",
+        },
+        { status: 400 }
+      );
     }
 
-    /*
-     * Response required
-     */
     if (
-      body.responseRequired !==
-      undefined
+      body.subject !== undefined &&
+      !subject
     ) {
-      if (
-        typeof body.responseRequired !==
-        "boolean"
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "responseRequired must be true or false.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.responseRequired =
-        body.responseRequired;
-
-      if (
-        body.responseRequired ===
-        false
-      ) {
-        updateData.responseDeadline =
-          null;
-      }
+      return NextResponse.json(
+        {
+          error: "Subject is required.",
+        },
+        { status: 400 }
+      );
     }
-
-    /*
-     * Response deadline
-     */
-    if (
-      body.responseDeadline !==
-        undefined &&
-      body.responseRequired !==
-        false
-    ) {
-      const deadline =
-        parseOptionalDate(
-          body.responseDeadline,
-        );
-
-      if (deadline === null) {
-        return NextResponse.json(
-          {
-            error:
-              "Invalid response deadline.",
-          },
-          { status: 400 },
-        );
-      }
-
-      updateData.responseDeadline =
-        deadline;
-    }
-
-    /*
-     * Notes
-     */
-    if (body.notes !== undefined) {
-      updateData.notes =
-        cleanString(
-          body.notes,
-          10000,
-        );
-    }
-
-    /*
-     * Client
-     */
-    if (body.clientId !== undefined) {
-      if (
-        body.clientId === null ||
-        body.clientId === ""
-      ) {
-        updateData.clientId =
-          null;
-      } else {
-        const client =
-          await prisma.client.findFirst({
-            where: {
-              id: String(
-                body.clientId,
-              ),
-              firmId:
-                sessionUser.firmId,
-            },
-            select: {
-              id: true,
-            },
-          });
-
-        if (!client) {
-          return NextResponse.json(
-            {
-              error:
-                "Client not found in this firm.",
-            },
-            { status: 404 },
-          );
-        }
-
-        updateData.clientId =
-          client.id;
-      }
-    }
-
-    /*
-     * Matter
-     */
-    if (body.matterId !== undefined) {
-      if (
-        body.matterId === null ||
-        body.matterId === ""
-      ) {
-        updateData.matterId =
-          null;
-      } else {
-        const matter =
-          await prisma.matter.findFirst({
-            where: {
-              id: String(
-                body.matterId,
-              ),
-              firmId:
-                sessionUser.firmId,
-            },
-            select: {
-              id: true,
-              clientId: true,
-            },
-          });
-
-        if (!matter) {
-          return NextResponse.json(
-            {
-              error:
-                "Matter not found in this firm.",
-            },
-            { status: 404 },
-          );
-        }
-
-        const requestedClientId =
-          body.clientId !== undefined
-            ? body.clientId
-            : existing.clientId;
-
-        if (
-          requestedClientId &&
-          matter.clientId &&
-          matter.clientId !==
-            String(
-              requestedClientId,
-            )
-        ) {
-          return NextResponse.json(
-            {
-              error:
-                "The selected matter does not belong to the selected client.",
-            },
-            { status: 400 },
-          );
-        }
-
-        updateData.matterId =
-          matter.id;
-      }
-    }
-
-    /*
-     * Responsible employee
-     */
-    let responsibleUserChanged =
-      false;
-
-    let newResponsibleUserId:
-      | string
-      | null = null;
 
     if (
-      body.responsibleUserId !==
-      undefined
-    ) {
-      if (
-        body.responsibleUserId ===
-          null ||
-        body.responsibleUserId ===
-          ""
-      ) {
-        updateData.responsibleUserId =
-          null;
-
-        responsibleUserChanged =
-          existing.responsibleUserId !==
-          null;
-
-        newResponsibleUserId = null;
-      } else {
-        const responsibleUser =
-          await prisma.user.findFirst({
-            where: {
-              id: String(
-                body.responsibleUserId,
-              ),
-              firmId:
-                sessionUser.firmId,
-              status:
-                UserStatus.ACTIVE,
-            },
-            select: {
-              id: true,
-              email: true,
-            },
-          });
-
-        if (!responsibleUser) {
-          return NextResponse.json(
-            {
-              error:
-                "Responsible employee not found or inactive.",
-            },
-            { status: 404 },
-          );
-        }
-
-        updateData.responsibleUserId =
-          responsibleUser.id;
-
-        responsibleUserChanged =
-          existing.responsibleUserId !==
-          responsibleUser.id;
-
-        newResponsibleUserId =
-          responsibleUser.id;
-      }
-    }
-
-    /*
-     * Nothing to update.
-     */
-    if (
-      Object.keys(updateData)
-        .length === 0
+      direction !== undefined &&
+      !isEnumValue(
+        direction,
+        directionValues
+      )
     ) {
       return NextResponse.json(
         {
           error:
-            "No valid fields were supplied for the update.",
+            "Invalid correspondence direction.",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
+    if (
+      type !== undefined &&
+      !isEnumValue(type, typeValues)
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid correspondence type.",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (
+      requestedStatus !== undefined &&
+      !isEnumValue(
+        requestedStatus,
+        statusValues
+      )
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid correspondence status.",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (
+      body.correspondenceDate !== undefined &&
+      correspondenceDate === null
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid correspondence date.",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (
+      body.responseDeadline !== undefined &&
+      responseDeadline === null &&
+      responseRequired !== false
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid response deadline.",
+        },
+        { status: 400 }
+      );
+    }
+
+    /*
+     * Determine requested status.
+     */
+    let nextStatus =
+      requestedStatus ??
+      existing.status;
+
+    const responsibleUserChanged =
+      responsibleUserId !== undefined &&
+      responsibleUserId !==
+        existing.responsibleUserId;
+
+    /*
+     * Assigning an employee to newly received
+     * correspondence automatically moves it to ASSIGNED.
+     */
+    if (
+      requestedStatus === undefined &&
+      responsibleUserChanged &&
+      responsibleUserId &&
+      existing.status ===
+        CorrespondenceStatus.RECEIVED
+    ) {
+      nextStatus =
+        CorrespondenceStatus.ASSIGNED;
+    }
+
+    /*
+     * Enforce status workflow.
+     */
+    if (
+      !canTransitionStatus(
+        existing.status,
+        nextStatus
+      )
+    ) {
+      return NextResponse.json(
+        {
+          error: `Invalid status transition from ${existing.status} to ${nextStatus}.`,
+        },
+        { status: 409 }
+      );
+    }
+
+    /*
+     * CLOSED may only follow RESPONDED.
+     */
+    if (
+      nextStatus ===
+        CorrespondenceStatus.CLOSED &&
+      existing.status !==
+        CorrespondenceStatus.RESPONDED
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Correspondence can only be closed after it has been marked as responded.",
+        },
+        { status: 409 }
+      );
+    }
+
+    /*
+     * Determine final response settings.
+     */
+    const finalResponseRequired =
+      responseRequired !== undefined
+        ? responseRequired
+        : existing.responseRequired;
+
+    const finalResponseDeadline =
+      body.responseDeadline !== undefined
+        ? responseDeadline
+        : existing.responseDeadline;
+
+    if (
+      finalResponseRequired &&
+      !finalResponseDeadline
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "A response deadline is required when response is required.",
+        },
+        { status: 400 }
+      );
+    }
+
+    /*
+     * Validate client.
+     */
+    if (
+      clientId !== undefined &&
+      clientId !== null
+    ) {
+      const client =
+        await prisma.client.findFirst({
+          where: {
+            id: clientId,
+            firmId,
+          },
+
+          select: {
+            id: true,
+          },
+        });
+
+      if (!client) {
+        return NextResponse.json(
+          {
+            error:
+              "Selected client was not found.",
+          },
+          { status: 400 }
+        );
+      }
+    }
+
+    /*
+     * Validate matter.
+     */
+    if (
+      matterId !== undefined &&
+      matterId !== null
+    ) {
+      const matter =
+        await prisma.matter.findFirst({
+          where: {
+            id: matterId,
+            firmId,
+          },
+
+          select: {
+            id: true,
+          },
+        });
+
+      if (!matter) {
+        return NextResponse.json(
+          {
+            error:
+              "Selected matter was not found.",
+          },
+          { status: 400 }
+        );
+      }
+    }
+
+    /*
+     * Validate responsible employee.
+     */
+    if (
+      responsibleUserId !== undefined &&
+      responsibleUserId !== null
+    ) {
+      const responsibleUser =
+        await prisma.user.findFirst({
+          where: {
+            id: responsibleUserId,
+            firmId,
+            status: UserStatus.ACTIVE,
+          },
+
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        });
+
+      if (!responsibleUser) {
+        return NextResponse.json(
+          {
+            error:
+              "Selected responsible employee was not found or is inactive.",
+          },
+          { status: 400 }
+        );
+      }
+    }
+
+    /*
+     * Track meaningful changes.
+     */
+    const statusChanged =
+      nextStatus !== existing.status;
+
+    const assignmentChanged =
+      responsibleUserId !== undefined &&
+      responsibleUserId !==
+        existing.responsibleUserId;
+
+    const responseRequirementChanged =
+      responseRequired !== undefined &&
+      responseRequired !==
+        existing.responseRequired;
+
+    const deadlineChanged =
+      body.responseDeadline !== undefined &&
+      finalResponseDeadline?.getTime() !==
+        existing.responseDeadline?.getTime();
+
+    /*
+     * Build update object.
+     */
+    const updateData: Record<
+      string,
+      unknown
+    > = {};
+
+    if (sender !== undefined) {
+      updateData.sender = sender;
+    }
+
+    if (recipient !== undefined) {
+      updateData.recipient = recipient;
+    }
+
+    if (subject !== undefined) {
+      updateData.subject = subject;
+    }
+
+    if (direction !== undefined) {
+      updateData.direction = direction;
+    }
+
+    if (type !== undefined) {
+      updateData.type = type;
+    }
+
+    if (requestedStatus !== undefined) {
+      updateData.status = nextStatus;
+    } else if (
+      responsibleUserChanged &&
+      responsibleUserId &&
+      existing.status ===
+        CorrespondenceStatus.RECEIVED
+    ) {
+      updateData.status =
+        CorrespondenceStatus.ASSIGNED;
+    }
+
+    if (
+      body.correspondenceDate !== undefined
+    ) {
+      updateData.correspondenceDate =
+        correspondenceDate;
+    }
+
+    if (body.clientId !== undefined) {
+      updateData.clientId = clientId;
+    }
+
+    if (body.matterId !== undefined) {
+      updateData.matterId = matterId;
+    }
+
+    if (
+      body.responsibleUserId !== undefined
+    ) {
+      updateData.responsibleUserId =
+        responsibleUserId;
+    }
+
+    if (
+      body.responseRequired !== undefined
+    ) {
+      updateData.responseRequired =
+        responseRequired;
+    }
+
+    if (
+      body.responseDeadline !== undefined
+    ) {
+      updateData.responseDeadline =
+        finalResponseDeadline;
+    }
+
+    if (body.notes !== undefined) {
+      updateData.notes = notes ?? null;
+    }
+
+    /*
+     * If response is no longer required,
+     * remove the response deadline.
+     */
+    if (
+      responseRequired === false &&
+      body.responseDeadline === undefined
+    ) {
+      updateData.responseDeadline = null;
+    }
+
+    /*
+     * Update record.
+     */
     const updated =
       await prisma.correspondence.update({
         where: {
@@ -696,7 +905,6 @@ export async function PATCH(
               name: true,
               email: true,
               phone: true,
-              referenceNumber: true,
             },
           },
 
@@ -704,124 +912,168 @@ export async function PATCH(
             select: {
               id: true,
               title: true,
-              status: true,
               referenceNumber: true,
-              clientId: true,
             },
           },
 
           responsibleUser: {
             select: {
               id: true,
+              name: true,
               email: true,
               role: true,
               status: true,
+            },
+          },
+
+          createdBy: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              role: true,
+            },
+          },
+
+          attachments: {
+            include: {
+              document: {
+                select: {
+                  id: true,
+                  name: true,
+                  originalName: true,
+                  mimeType: true,
+                  size: true,
+                  createdAt: true,
+                },
+              },
+
+              addedBy: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                },
+              },
+            },
+
+            orderBy: {
+              createdAt: "desc",
             },
           },
         },
       });
 
     /*
-     * Audit update.
+     * Audit the update.
+     *
+     * Your existing AuditAction type supports UPDATE,
+     * not STATUS_CHANGE, so status changes are recorded
+     * as UPDATE with a more specific description.
      */
-    await createAuditLog({
-      request,
-      firmId: sessionUser.firmId,
-      userId: sessionUser.id,
-      action: "UPDATE",
-      entityType: "Correspondence",
-      entityId: updated.id,
-      description:
-        `Updated correspondence: ${updated.subject}`,
-      metadata: {
-        changedFields:
-          Object.keys(updateData),
-
-        previousStatus:
-          existing.status,
-
-        newStatus:
-          updated.status,
-
-        previousResponsibleUserId:
-          existing.responsibleUserId,
-
-        newResponsibleUserId:
-          updated.responsibleUserId,
-      },
-    });
+    try {
+      await createAuditLog({
+        firmId,
+        userId,
+        action: "UPDATE",
+        entityType: "Correspondence",
+        entityId: updated.id,
+        description: statusChanged
+          ? `Updated correspondence status from ${existing.status} to ${nextStatus}.`
+          : "Updated correspondence.",
+      });
+    } catch (auditError) {
+      console.error(
+        "Failed to create correspondence update audit log:",
+        auditError
+      );
+    }
 
     /*
      * Notify newly assigned employee.
      */
     if (
-      responsibleUserChanged &&
-      newResponsibleUserId &&
-      newResponsibleUserId !==
-        sessionUser.id
+      assignmentChanged &&
+      updated.responsibleUserId &&
+      updated.responsibleUserId !== userId
     ) {
-      await createNotification({
-        firmId:
-          sessionUser.firmId,
-
-        userId:
-          newResponsibleUserId,
-
-        type:
-          NotificationType.SYSTEM,
-
-        title:
-          "Correspondence assigned",
-
-        message:
-          `You have been assigned correspondence: "${updated.subject}".`,
-      });
+      try {
+        await prisma.notification.create({
+          data: {
+            firmId,
+            userId:
+              updated.responsibleUserId,
+            type: NotificationType.SYSTEM,
+            title: "Correspondence Assigned",
+            message: `You have been assigned correspondence: "${updated.subject}".`,
+          },
+        });
+      } catch (notificationError) {
+        console.error(
+          "Failed to create assignment notification:",
+          notificationError
+        );
+      }
     }
 
     /*
-     * Notify employee when response
-     * requirement or deadline changes.
+     * Notify responsible employee when important
+     * correspondence details change.
      */
     if (
       updated.responsibleUserId &&
-      updated.responsibleUserId !==
-        sessionUser.id &&
-      (
-        body.responseRequired !==
-          undefined ||
-        body.responseDeadline !==
-          undefined
-      )
+      updated.responsibleUserId !== userId &&
+      (responseRequirementChanged ||
+        deadlineChanged ||
+        statusChanged)
     ) {
-      await createNotification({
-        firmId:
-          sessionUser.firmId,
+      try {
+        let message = `Correspondence "${updated.subject}" was updated.`;
 
-        userId:
-          updated.responsibleUserId,
+        if (statusChanged) {
+          message += ` Status: ${nextStatus}.`;
+        }
 
-        type:
-          NotificationType.SYSTEM,
+        if (
+          responseRequirementChanged &&
+          updated.responseRequired
+        ) {
+          message +=
+            " A response is required.";
+        }
 
-        title:
-          "Correspondence response updated",
+        if (
+          deadlineChanged &&
+          updated.responseDeadline
+        ) {
+          message += ` Response deadline: ${updated.responseDeadline.toISOString()}.`;
+        }
 
-        message:
-          `The response requirement for "${updated.subject}" has been updated.`,
-      });
+        await prisma.notification.create({
+          data: {
+            firmId,
+            userId:
+              updated.responsibleUserId,
+            type: NotificationType.SYSTEM,
+            title: "Correspondence Updated",
+            message,
+          },
+        });
+      } catch (notificationError) {
+        console.error(
+          "Failed to create correspondence update notification:",
+          notificationError
+        );
+      }
     }
 
     return NextResponse.json({
-      message:
-        "Correspondence updated successfully.",
-
-      correspondence:
-        updated,
+      correspondence: updated,
     });
   } catch (error) {
     console.error(
-      "PATCH correspondence error:",
-      error,
+      "PATCH /api/correspondence/[id] error:",
+      error
     );
 
     return NextResponse.json(
@@ -829,58 +1081,70 @@ export async function PATCH(
         error:
           "Failed to update correspondence.",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
 /**
- * DELETE /api/correspondence/[id]
+ * DELETE
  *
- * Delete correspondence.
+ * Deletes the correspondence record and its
+ * attachment relationships.
+ *
+ * The underlying Document records are NOT deleted.
  */
 export async function DELETE(
   request: Request,
-  { params }: RouteContext,
+  context: RouteContext
 ) {
-  const permission =
-    await requirePermission(
-      "correspondence.delete",
-    );
-
-  if (!permission.authorized) {
-    return permission.response;
-  }
-
-  const sessionUser =
-    permission.session.user;
-
-  const { id } = await params;
-
-  if (!id) {
-    return NextResponse.json(
-      {
-        error:
-          "Correspondence ID is required.",
-      },
-      { status: 400 },
-    );
-  }
-
   try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Unauthorized." },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+    const role = session.user.role;
+    const firmId = session.user.firmId;
+
+    if (!firmId) {
+      return NextResponse.json(
+        {
+          error:
+            "Your account is not associated with a firm.",
+        },
+        { status: 403 }
+      );
+    }
+
+    if (!hasPermission(role, "correspondence.delete")) {
+      return NextResponse.json(
+        {
+          error:
+            "You do not have permission to delete correspondence.",
+        },
+        { status: 403 }
+      );
+    }
+
+    const { id } = await context.params;
+
     const existing =
       await prisma.correspondence.findFirst({
         where: {
           id,
-          firmId:
-            sessionUser.firmId,
+          firmId,
         },
 
         select: {
           id: true,
           subject: true,
-          matterId: true,
-          clientId: true,
+          status: true,
         },
       });
 
@@ -890,61 +1154,62 @@ export async function DELETE(
           error:
             "Correspondence not found.",
         },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
     /*
-     * Delete only the correspondence.
-     *
-     * CorrespondenceAttachment records
-     * are removed through Cascade.
-     *
-     * The underlying Document records
-     * remain untouched.
+     * Closed correspondence becomes part of the
+     * firm's historical record.
      */
+    if (
+      existing.status ===
+      CorrespondenceStatus.CLOSED
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Closed correspondence cannot be deleted.",
+        },
+        { status: 409 }
+      );
+    }
+
     await prisma.correspondence.delete({
       where: {
         id: existing.id,
       },
     });
 
-    await createAuditLog({
-      request,
-      firmId:
-        sessionUser.firmId,
-
-      userId:
-        sessionUser.id,
-
-      action: "DELETE",
-
-      entityType:
-        "Correspondence",
-
-      entityId:
-        existing.id,
-
-      description:
-        `Deleted correspondence: ${existing.subject}`,
-
-      metadata: {
-        matterId:
-          existing.matterId,
-
-        clientId:
-          existing.clientId,
-      },
-    });
+    /*
+     * Audit failure must not turn a successful deletion
+     * into a false error response.
+     */
+    try {
+      await createAuditLog({
+        firmId,
+        userId,
+        action: "DELETE",
+        entityType: "Correspondence",
+        entityId: existing.id,
+        description: `Deleted correspondence "${existing.subject}".`,
+      });
+    } catch (auditError) {
+      console.error(
+        "Failed to create correspondence deletion audit log:",
+        auditError
+      );
+    }
 
     return NextResponse.json({
+      success: true,
       message:
         "Correspondence deleted successfully.",
     });
   } catch (error) {
     console.error(
-      "DELETE correspondence error:",
-      error,
+      "DELETE /api/correspondence/[id] error:",
+      error
     );
 
     return NextResponse.json(
@@ -952,7 +1217,7 @@ export async function DELETE(
         error:
           "Failed to delete correspondence.",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
