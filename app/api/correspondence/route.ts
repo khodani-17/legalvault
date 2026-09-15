@@ -31,16 +31,17 @@ function isValidEnumValue<T extends Record<string, string>>(
 ): value is T[keyof T] {
   return (
     typeof value === "string" &&
-    Object.values(enumObject).includes(
-      value,
-    )
+    Object.values(enumObject).includes(value)
   );
 }
 
 function parseOptionalString(
   value: unknown,
 ): string | null {
-  if (value === undefined || value === null) {
+  if (
+    value === undefined ||
+    value === null
+  ) {
     return null;
   }
 
@@ -100,10 +101,6 @@ function parseOptionalDate(
 export async function GET(
   request: Request,
 ) {
-  // ==========================================================
-  // PERMISSION
-  // ==========================================================
-
   const permission =
     await requirePermission(
       "correspondence.view",
@@ -136,251 +133,280 @@ export async function GET(
     );
   }
 
-  // ==========================================================
-  // QUERY PARAMETERS
-  // ==========================================================
+  try {
+    // ========================================================
+    // QUERY PARAMETERS
+    // ========================================================
 
-  const { searchParams } =
-    new URL(request.url);
+    const { searchParams } =
+      new URL(request.url);
 
-  const statusParam =
-    searchParams.get("status");
+    const statusParam =
+      searchParams.get("status");
 
-  const directionParam =
-    searchParams.get("direction");
+    const directionParam =
+      searchParams.get("direction");
 
-  const matterId =
-    searchParams.get("matterId");
+    const matterId =
+      searchParams.get("matterId");
 
-  const clientId =
-    searchParams.get("clientId");
+    const clientId =
+      searchParams.get("clientId");
 
-  const responsibleUserId =
-    searchParams.get(
-      "responsibleUserId",
-    );
+    const responsibleUserId =
+      searchParams.get(
+        "responsibleUserId",
+      );
 
-  const responseRequiredParam =
-    searchParams.get(
-      "responseRequired",
-    );
+    const responseRequiredParam =
+      searchParams.get(
+        "responseRequired",
+      );
 
-  const overdueParam =
-    searchParams.get("overdue");
+    const overdueParam =
+      searchParams.get("overdue");
 
-  // ==========================================================
-  // VALIDATE ENUM FILTERS
-  // ==========================================================
+    // ========================================================
+    // VALIDATE ENUM FILTERS
+    // ========================================================
 
-  if (
-    statusParam &&
-    !isValidEnumValue(
-      CorrespondenceStatus,
-      statusParam,
-    )
-  ) {
-    return NextResponse.json(
-      {
-        error: "Invalid correspondence status.",
-      },
-      {
-        status: 400,
-      },
-    );
-  }
+    if (
+      statusParam &&
+      !isValidEnumValue(
+        CorrespondenceStatus,
+        statusParam,
+      )
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid correspondence status.",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
 
-  if (
-    directionParam &&
-    !isValidEnumValue(
-      CorrespondenceDirection,
-      directionParam,
-    )
-  ) {
-    return NextResponse.json(
-      {
-        error: "Invalid correspondence direction.",
-      },
-      {
-        status: 400,
-      },
-    );
-  }
+    if (
+      directionParam &&
+      !isValidEnumValue(
+        CorrespondenceDirection,
+        directionParam,
+      )
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid correspondence direction.",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
 
-  // ==========================================================
-  // BUILD FIRM-SCOPED QUERY
-  // ==========================================================
+    // ========================================================
+    // BUILD FIRM-SCOPED QUERY
+    // ========================================================
 
-  const where: {
-    firmId: string;
-    status?: CorrespondenceStatus;
-    direction?: CorrespondenceDirection;
-    matterId?: string;
-    clientId?: string;
-    responsibleUserId?: string;
-    responseRequired?: boolean;
-    responseDeadline?: {
-      lt: Date;
-      not: null;
+    const where: {
+      firmId: string;
+      status?: CorrespondenceStatus;
+      direction?: CorrespondenceDirection;
+      matterId?: string;
+      clientId?: string;
+      responsibleUserId?: string;
+      responseRequired?: boolean;
+      responseDeadline?: {
+        lt: Date;
+        not: null;
+      };
+    } = {
+      firmId,
     };
-  } = {
-    firmId,
-  };
 
-  if (statusParam) {
-    where.status =
-      statusParam as CorrespondenceStatus;
-  }
+    if (statusParam) {
+      where.status =
+        statusParam as CorrespondenceStatus;
+    }
 
-  if (directionParam) {
-    where.direction =
-      directionParam as CorrespondenceDirection;
-  }
+    if (directionParam) {
+      where.direction =
+        directionParam as CorrespondenceDirection;
+    }
 
-  if (matterId) {
-    where.matterId =
-      matterId;
-  }
+    if (matterId) {
+      where.matterId = matterId;
+    }
 
-  if (clientId) {
-    where.clientId =
-      clientId;
-  }
+    if (clientId) {
+      where.clientId = clientId;
+    }
 
-  if (responsibleUserId) {
-    where.responsibleUserId =
-      responsibleUserId;
-  }
+    if (responsibleUserId) {
+      where.responsibleUserId =
+        responsibleUserId;
+    }
 
-  if (
-    responseRequiredParam ===
-    "true"
-  ) {
-    where.responseRequired = true;
-  }
+    if (
+      responseRequiredParam === "true"
+    ) {
+      where.responseRequired = true;
+    }
 
-  if (
-    overdueParam === "true"
-  ) {
-    where.responseDeadline = {
-      lt: new Date(),
-      not: null,
-    };
-  }
+    if (
+      overdueParam === "true"
+    ) {
+      where.responseDeadline = {
+        lt: new Date(),
+        not: null,
+      };
+    }
 
-  // ==========================================================
-  // FETCH
-  // ==========================================================
+    // ========================================================
+    // FETCH
+    // ========================================================
 
-  const correspondences =
-    await prisma.correspondence.findMany(
-      {
-        where,
+    const correspondences =
+      await prisma.correspondence.findMany(
+        {
+          where,
 
-        orderBy: [
-          {
-            responseDeadline:
-              "asc",
-          },
-          {
-            correspondenceDate:
-              "desc",
-          },
-        ],
-
-        select: {
-          id: true,
-          direction: true,
-          correspondenceDate: true,
-          sender: true,
-          recipient: true,
-          subject: true,
-          type: true,
-          status: true,
-          responseRequired: true,
-          responseDeadline: true,
-          notes: true,
-          createdAt: true,
-          updatedAt: true,
-
-          client: {
-            select: {
-              id: true,
-              name: true,
+          orderBy: [
+            {
+              responseDeadline: "asc",
             },
-          },
-
-          matter: {
-            select: {
-              id: true,
-              title: true,
+            {
+              correspondenceDate: "desc",
             },
-          },
+          ],
 
-          responsibleUser: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              role: true,
+          select: {
+            id: true,
+            direction: true,
+            correspondenceDate: true,
+            sender: true,
+            recipient: true,
+            subject: true,
+            type: true,
+            status: true,
+            responseRequired: true,
+            responseDeadline: true,
+            notes: true,
+            createdAt: true,
+            updatedAt: true,
+
+            client: {
+              select: {
+                id: true,
+                name: true,
+              },
             },
-          },
 
-          createdBy: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
+            matter: {
+              select: {
+                id: true,
+                title: true,
+              },
             },
-          },
 
-          _count: {
-            select: {
-              attachments: true,
+            responsibleUser: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+              },
+            },
+
+            createdBy: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              },
+            },
+
+            _count: {
+              select: {
+                attachments: true,
+              },
             },
           },
         },
+      );
+
+    // ========================================================
+    // AUDIT READ
+    // ========================================================
+    //
+    // Audit failure must NOT prevent the correspondence
+    // records from being returned to the dashboard.
+    //
+    // ========================================================
+
+    try {
+      await createAuditLog({
+        request,
+        firmId,
+        userId,
+        action: "READ",
+        entityType: "Correspondence",
+        description:
+          "Viewed legal correspondence.",
+        metadata: {
+          filters: {
+            status: statusParam,
+            direction:
+              directionParam,
+            matterId,
+            clientId,
+            responsibleUserId,
+            responseRequired:
+              responseRequiredParam,
+            overdue:
+              overdueParam,
+          },
+          resultCount:
+            correspondences.length,
+        },
+      });
+    } catch (auditError) {
+      console.error(
+        "CORRESPONDENCE READ AUDIT ERROR:",
+        auditError,
+      );
+    }
+
+    // ========================================================
+    // RESPONSE
+    // ========================================================
+
+    return NextResponse.json(
+      {
+        correspondences,
+      },
+      {
+        status: 200,
       },
     );
+  } catch (error) {
+    console.error(
+      "GET CORRESPONDENCE ERROR:",
+      error,
+    );
 
-  // ==========================================================
-  // AUDIT READ
-  // ==========================================================
-
-  await createAuditLog({
-    request,
-    firmId,
-    userId,
-    action: "READ",
-    entityType: "Correspondence",
-    description:
-      "Viewed legal correspondence.",
-    metadata: {
-      filters: {
-        status:
-          statusParam,
-        direction:
-          directionParam,
-        matterId,
-        clientId,
-        responsibleUserId,
-        responseRequired:
-          responseRequiredParam,
-        overdue:
-          overdueParam,
+    return NextResponse.json(
+      {
+        error:
+          "Failed to load correspondence.",
       },
-      resultCount:
-        correspondences.length,
-    },
-  });
-
-  return NextResponse.json(
-    {
-      correspondences,
-    },
-    {
-      status: 200,
-    },
-  );
+      {
+        status: 500,
+      },
+    );
+  }
 }
 
 // ============================================================
@@ -394,10 +420,6 @@ export async function GET(
 export async function POST(
   request: Request,
 ) {
-  // ==========================================================
-  // PERMISSION
-  // ==========================================================
-
   const permission =
     await requirePermission(
       "correspondence.create",
@@ -667,13 +689,51 @@ export async function POST(
     );
 
   const responseRequired =
-    data.responseRequired ===
-    true;
+    data.responseRequired === true;
 
   const responseDeadline =
     parseOptionalDate(
       data.responseDeadline,
     );
+
+  const correspondenceDate =
+    parseOptionalDate(
+      data.correspondenceDate,
+    );
+
+  // ==========================================================
+  // DATE VALIDATION
+  // ==========================================================
+
+  if (
+    data.correspondenceDate &&
+    !correspondenceDate
+  ) {
+    return NextResponse.json(
+      {
+        error:
+          "Invalid correspondence date.",
+      },
+      {
+        status: 400,
+      },
+    );
+  }
+
+  if (
+    data.responseDeadline &&
+    !responseDeadline
+  ) {
+    return NextResponse.json(
+      {
+        error:
+          "Invalid response deadline.",
+      },
+      {
+        status: 400,
+      },
+    );
+  }
 
   // ==========================================================
   // NOTES LENGTH
@@ -787,15 +847,9 @@ export async function POST(
       );
     }
 
-    // --------------------------------------------------------
-    // If both a client and matter are supplied, ensure they
-    // belong together.
-    // --------------------------------------------------------
-
     if (
       clientId &&
-      matter.clientId !==
-        clientId
+      matter.clientId !== clientId
     ) {
       return NextResponse.json(
         {
@@ -845,127 +899,143 @@ export async function POST(
   // CREATE CORRESPONDENCE
   // ==========================================================
 
-  const correspondence =
-    await prisma.$transaction(
-      async (tx) => {
-        const created =
-          await tx.correspondence.create(
-            {
-              data: {
-                firmId,
+  let correspondence;
 
-                matterId:
-                  matterId ??
-                  null,
+  try {
+    correspondence =
+      await prisma.correspondence.create(
+        {
+          data: {
+            firmId,
 
-                clientId:
-                  clientId ??
-                  null,
+            matterId:
+              matterId ?? null,
 
-                direction:
-                  direction as CorrespondenceDirection,
+            clientId:
+              clientId ?? null,
 
-                correspondenceDate:
-                  parseOptionalDate(
-                    data.correspondenceDate,
-                  ) ??
-                  new Date(),
+            direction:
+              direction as CorrespondenceDirection,
 
-                sender,
+            correspondenceDate:
+              correspondenceDate ??
+              new Date(),
 
-                recipient,
+            sender,
 
-                subject,
+            recipient,
 
-                type:
-                  type as CorrespondenceType,
+            subject,
 
-                status:
-                  status as CorrespondenceStatus,
+            type:
+              type as CorrespondenceType,
 
-                responsibleUserId:
-                  responsibleUserId ??
-                  null,
+            status:
+              status as CorrespondenceStatus,
 
-                responseRequired,
+            responsibleUserId:
+              responsibleUserId ?? null,
 
-                responseDeadline:
-                  responseDeadline ??
-                  null,
+            responseRequired,
 
-                notes:
-                  notes ??
-                  null,
+            responseDeadline:
+              responseDeadline ?? null,
 
-                createdById:
-                  userId,
-              },
+            notes:
+              notes ?? null,
 
-              select: {
-                id: true,
-                firmId: true,
-                matterId: true,
-                clientId: true,
-                direction: true,
-                correspondenceDate:
-                  true,
-                sender: true,
-                recipient: true,
-                subject: true,
-                type: true,
-                status: true,
-                responsibleUserId:
-                  true,
-                responseRequired:
-                  true,
-                responseDeadline:
-                  true,
-                notes: true,
-                createdById: true,
-                createdAt: true,
-                updatedAt: true,
-              },
-            },
-          );
+            createdById:
+              userId,
+          },
 
-        return created;
+          select: {
+            id: true,
+            firmId: true,
+            matterId: true,
+            clientId: true,
+            direction: true,
+            correspondenceDate:
+              true,
+            sender: true,
+            recipient: true,
+            subject: true,
+            type: true,
+            status: true,
+            responsibleUserId:
+              true,
+            responseRequired:
+              true,
+            responseDeadline:
+              true,
+            notes: true,
+            createdById: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      );
+  } catch (error) {
+    console.error(
+      "CREATE CORRESPONDENCE DATABASE ERROR:",
+      error,
+    );
+
+    return NextResponse.json(
+      {
+        error:
+          "The correspondence could not be saved. Please try again.",
+      },
+      {
+        status: 500,
       },
     );
+  }
 
   // ==========================================================
   // AUDIT CREATE
   // ==========================================================
+  //
+  // Audit logging must never prevent a successfully created
+  // correspondence from being returned.
+  //
+  // ==========================================================
 
-  await createAuditLog({
-    request,
-    firmId,
-    userId,
-    action: "CREATE",
-    entityType:
-      "Correspondence",
-    entityId:
-      correspondence.id,
-    description:
-      "Created legal correspondence.",
-    metadata: {
-      direction:
-        correspondence.direction,
-      type:
-        correspondence.type,
-      status:
-        correspondence.status,
-      matterId:
-        correspondence.matterId,
-      clientId:
-        correspondence.clientId,
-      responsibleUserId:
-        correspondence.responsibleUserId,
-      responseRequired:
-        correspondence.responseRequired,
-      responseDeadline:
-        correspondence.responseDeadline,
-    },
-  });
+  try {
+    await createAuditLog({
+      request,
+      firmId,
+      userId,
+      action: "CREATE",
+      entityType: "Correspondence",
+      entityId:
+        correspondence.id,
+      description:
+        "Created legal correspondence.",
+      metadata: {
+        direction:
+          correspondence.direction,
+        type:
+          correspondence.type,
+        status:
+          correspondence.status,
+        matterId:
+          correspondence.matterId,
+        clientId:
+          correspondence.clientId,
+        responsibleUserId:
+          correspondence.responsibleUserId,
+        responseRequired:
+          correspondence.responseRequired,
+        responseDeadline:
+          correspondence.responseDeadline,
+      },
+    });
+  } catch (auditError) {
+    console.error(
+      "CORRESPONDENCE CREATE AUDIT ERROR:",
+      auditError,
+    );
+  }
 
   // ==========================================================
   // NOTIFY RESPONSIBLE EMPLOYEE
@@ -976,17 +1046,24 @@ export async function POST(
     correspondence.responsibleUserId !==
       userId
   ) {
-    await createNotification({
-      firmId,
-      userId:
-        correspondence.responsibleUserId,
-      type:
-        NotificationType.SYSTEM,
-      title:
-        "Correspondence Assigned",
-      message:
-        `You have been assigned correspondence: "${correspondence.subject}".`,
-    });
+    try {
+      await createNotification({
+        firmId,
+        userId:
+          correspondence.responsibleUserId,
+        type:
+          NotificationType.SYSTEM,
+        title:
+          "Correspondence Assigned",
+        message:
+          `You have been assigned correspondence: "${correspondence.subject}".`,
+      });
+    } catch (notificationError) {
+      console.error(
+        "CORRESPONDENCE NOTIFICATION ERROR:",
+        notificationError,
+      );
+    }
   }
 
   // ==========================================================
