@@ -190,15 +190,6 @@ export default async function DashboardPage() {
 
   const now = new Date();
 
-  /*
-   * ============================================================
-   * DASHBOARD DATA
-   * ============================================================
-   *
-   * Everything below uses existing LegalVault records.
-   * No new database model is required.
-   */
-
   const [
     firm,
     clientsCount,
@@ -223,9 +214,6 @@ export default async function DashboardPage() {
     todayCorrespondence,
     upcomingCorrespondence,
   ] = await Promise.all([
-    /*
-     * FIRM
-     */
     prisma.firm.findUnique({
       where: {
         id: firmId,
@@ -236,9 +224,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * COUNTS
-     */
     prisma.client.count({
       where: {
         firmId,
@@ -268,9 +253,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * RECENT DOCUMENTS
-     */
     prisma.document.findMany({
       where: {
         firmId,
@@ -289,9 +271,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * RECENT MATTERS
-     */
     prisma.matter.findMany({
       where: {
         firmId,
@@ -309,11 +288,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — OVERDUE TASKS
-     * ==========================================================
-     */
     prisma.task.findMany({
       where: {
         firmId,
@@ -351,11 +325,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — TASKS DUE TODAY
-     * ==========================================================
-     */
     prisma.task.findMany({
       where: {
         firmId,
@@ -394,14 +363,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — REPORTS REQUIRED
-     * ==========================================================
-     *
-     * These are tasks where the employee must still report back.
-     * ==========================================================
-     */
     prisma.task.findMany({
       where: {
         firmId,
@@ -438,11 +399,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — UPCOMING TASKS
-     * ==========================================================
-     */
     prisma.task.findMany({
       where: {
         firmId,
@@ -475,15 +431,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — OVERDUE DEADLINES
-     * ==========================================================
-     *
-     * We use completedAt rather than guessing DeadlineStatus
-     * enum values.
-     * ==========================================================
-     */
     prisma.deadline.findMany({
       where: {
         firmId,
@@ -516,11 +463,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — DEADLINES DUE TODAY
-     * ==========================================================
-     */
     prisma.deadline.findMany({
       where: {
         firmId,
@@ -554,11 +496,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — UPCOMING DEADLINES
-     * ==========================================================
-     */
     prisma.deadline.findMany({
       where: {
         firmId,
@@ -591,11 +528,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — CORRESPONDENCE REQUIRING ACTION
-     * ==========================================================
-     */
     prisma.correspondence.findMany({
       where: {
         firmId,
@@ -631,11 +563,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — OVERDUE CORRESPONDENCE
-     * ==========================================================
-     */
     prisma.correspondence.findMany({
       where: {
         firmId,
@@ -674,11 +601,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — CORRESPONDENCE DUE TODAY
-     * ==========================================================
-     */
     prisma.correspondence.findMany({
       where: {
         firmId,
@@ -718,11 +640,6 @@ export default async function DashboardPage() {
       },
     }),
 
-    /*
-     * ==========================================================
-     * MY DAY — UPCOMING CORRESPONDENCE
-     * ==========================================================
-     */
     prisma.correspondence.findMany({
       where: {
         firmId,
@@ -761,12 +678,6 @@ export default async function DashboardPage() {
       },
     }),
   ]);
-
-  /*
-   * ============================================================
-   * MY DAY COUNTS
-   * ============================================================
-   */
 
   const overdueCount =
     overdueTasks.length +
@@ -838,7 +749,10 @@ export default async function DashboardPage() {
           {/* NEEDS ATTENTION */}
           {/* ===================================================== */}
 
-          <div className="mt-6 rounded-2xl border border-red-200 bg-red-50/60 p-5">
+          <div
+            id="needs-attention"
+            className="mt-6 rounded-2xl border border-red-200 bg-red-50/60 p-5"
+          >
 
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
@@ -859,7 +773,7 @@ export default async function DashboardPage() {
               </div>
 
               <Link
-                href="/dashboard/tasks?filter=overdue"
+                href="#needs-attention"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-red-700 shadow-sm ring-1 ring-red-200 transition hover:bg-red-50"
               >
                 Open attention queue
@@ -873,7 +787,7 @@ export default async function DashboardPage() {
               {/* OVERDUE */}
 
               <Link
-                href="/dashboard/tasks?filter=overdue"
+                href="#needs-attention"
                 className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-red-100 transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
@@ -908,7 +822,7 @@ export default async function DashboardPage() {
               {/* DUE TODAY */}
 
               <Link
-                href="/dashboard/tasks"
+                href="#today-work"
                 className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-blue-100 transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
@@ -943,7 +857,7 @@ export default async function DashboardPage() {
               {/* REPORTS */}
 
               <Link
-                href="/dashboard/tasks?filter=report-required"
+                href="#reports-required"
                 className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-purple-100 transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
@@ -983,7 +897,10 @@ export default async function DashboardPage() {
           {/* TODAY */}
           {/* ===================================================== */}
 
-          <div className="mt-6">
+          <div
+            id="today-work"
+            className="mt-6"
+          >
 
             <div className="mb-3 flex items-end justify-between">
 
@@ -998,7 +915,7 @@ export default async function DashboardPage() {
               </div>
 
               <Link
-                href="/dashboard/tasks"
+                href="#today-work"
                 className="hidden text-sm font-semibold text-slate-700 hover:text-slate-900 sm:inline-flex"
               >
                 View work
@@ -1007,8 +924,6 @@ export default async function DashboardPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-
-              {/* TODAY TASKS */}
 
               <Link
                 href="/dashboard/tasks"
@@ -1038,8 +953,6 @@ export default async function DashboardPage() {
 
               </Link>
 
-              {/* TODAY DEADLINES */}
-
               <Link
                 href="/dashboard/deadlines"
                 className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
@@ -1067,8 +980,6 @@ export default async function DashboardPage() {
                 </p>
 
               </Link>
-
-              {/* TODAY CORRESPONDENCE */}
 
               <Link
                 href="/dashboard/correspondence"
@@ -1232,7 +1143,10 @@ export default async function DashboardPage() {
         {/* ===================================================== */}
 
         {overdueCount > 0 && (
-          <section className="mb-8">
+          <section
+            id="overdue-work"
+            className="mb-8"
+          >
 
             <div className="mb-4 flex items-center justify-between">
 
@@ -1836,7 +1750,10 @@ export default async function DashboardPage() {
         {/* ===================================================== */}
 
         {reportRequiredTasks.length > 0 && (
-          <section className="mb-8 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-purple-200">
+          <section
+            id="reports-required"
+            className="mb-8 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-purple-200"
+          >
 
             <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
 
@@ -1865,7 +1782,7 @@ export default async function DashboardPage() {
               </div>
 
               <Link
-                href="/dashboard/tasks?filter=report-required"
+                href="#reports-required"
                 className="text-sm font-semibold text-purple-700 hover:text-purple-900"
               >
                 View all
