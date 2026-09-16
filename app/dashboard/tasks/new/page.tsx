@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -86,13 +86,13 @@ function formatDateForInput(value: string | null | undefined) {
 
 function formatDisplayDate(value: string | null | undefined) {
   if (!value) {
-    return "—";
+    return "â€”";
   }
 
   const date = new Date(value);
 
   if (Number.isNaN(date.getTime())) {
-    return "—";
+    return "â€”";
   }
 
   return new Intl.DateTimeFormat("en-ZA", {
@@ -229,14 +229,14 @@ export default function NewTaskPage() {
               matter?.title
                 ? `Matter: ${
                     matter.referenceNumber
-                      ? `${matter.referenceNumber} — ${matter.title}`
+                      ? `${matter.referenceNumber} â€” ${matter.title}`
                       : matter.title
                   }`
                 : null,
               loadedCorrespondence.responseRequired
                 ? `Response required: Yes${
                     loadedCorrespondence.responseDeadline
-                      ? ` — deadline ${formatDisplayDate(
+                      ? ` â€” deadline ${formatDisplayDate(
                           loadedCorrespondence.responseDeadline
                         )}`
                       : ""
@@ -261,6 +261,10 @@ export default function NewTaskPage() {
               ),
               assignedToId:
                 loadedCorrespondence.responsibleUser?.id ?? "",
+              requiresReport:
+                loadedCorrespondence.responseRequired === true
+                  ? true
+                  : current.requiresReport,
             }));
           }
         }
@@ -367,16 +371,36 @@ export default function NewTaskPage() {
   }
 
   return (
-    <main className="mx-auto max-w-4xl p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">
-          Delegate Task
-        </h1>
+    <main className="mx-auto max-w-4xl p-6">      <div className="mb-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">
+              Delegate Task
+            </h1>
 
-        <p className="mt-2 text-sm text-gray-600">
-          Delegate work to an attorney or staff member and track
-          the required follow-up.
-        </p>
+            <p className="mt-2 text-sm text-gray-600">
+              Delegate work to an attorney or staff member and track
+              the required follow-up.
+            </p>
+          </div>
+
+          {correspondence && (
+            <button
+              type="button"
+              onClick={() =>
+                router.push(
+                  `/dashboard/correspondence/${encodeURIComponent(
+                    correspondence.id
+                  )}`
+                )
+              }
+              className="rounded-lg border px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+              disabled={saving}
+            >
+              ← Back to Correspondence
+            </button>
+          )}
+        </div>
       </div>
 
       {error && (
@@ -482,7 +506,7 @@ export default function NewTaskPage() {
                 </p>
                 <p className="mt-1 text-sm font-medium text-gray-900">
                   {correspondence.matter.referenceNumber
-                    ? `${correspondence.matter.referenceNumber} — ${correspondence.matter.title}`
+                    ? `${correspondence.matter.referenceNumber} â€” ${correspondence.matter.title}`
                     : correspondence.matter.title}
                 </p>
               </div>
@@ -547,7 +571,7 @@ export default function NewTaskPage() {
                     value={matter.id}
                   >
                     {matter.referenceNumber
-                      ? `${matter.referenceNumber} — ${matter.title}`
+                      ? `${matter.referenceNumber} â€” ${matter.title}`
                       : matter.title}
                   </option>
                 ))}
@@ -636,7 +660,7 @@ export default function NewTaskPage() {
                     key={user.id}
                     value={user.id}
                   >
-                    {user.name || user.email} — {user.role}
+                    {user.name || user.email} â€” {user.role}
                   </option>
                 ))}
               </select>
@@ -660,7 +684,8 @@ export default function NewTaskPage() {
               )}
             </div>
 
-            <div>
+            {delegationUsers.length > 0 && (
+<div>
               <label className="mb-2 block text-sm font-medium">
                 Delegating on behalf of
               </label>
@@ -684,7 +709,7 @@ export default function NewTaskPage() {
                     key={user.id}
                     value={user.id}
                   >
-                    {user.name || user.email} — {user.role}
+                    {user.name || user.email} â€” {user.role}
                   </option>
                 ))}
               </select>
@@ -695,6 +720,9 @@ export default function NewTaskPage() {
                 Managing Partner.
               </p>
             </div>
+
+
+            )}
           </div>
         </section>
 
@@ -756,7 +784,17 @@ export default function NewTaskPage() {
             Reporting
           </h2>
 
-          <label className="mt-5 flex cursor-pointer items-start gap-3">
+          <p className="mt-1 text-sm text-gray-500">
+            Require the assigned employee to report back when the work is complete.
+          </p>
+
+          {correspondence?.responseRequired && (
+            <span className="mt-3 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+              Response required
+            </span>
+          )}
+
+          <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-lg border bg-gray-50 p-4">
             <input
               type="checkbox"
               checked={form.requiresReport}
@@ -852,7 +890,12 @@ export default function NewTaskPage() {
           </div>
         </section>
 
-        <div className="flex items-center justify-end gap-3">
+                <div className="sticky bottom-4 z-10 rounded-xl border bg-white/95 p-3 shadow-lg backdrop-blur">
+          <div className="mb-2 text-xs text-gray-500">
+            Review the assignee, due date and reporting requirement before delegation.
+          </div>
+
+          <div className="flex items-center justify-end gap-3">
           <button
             type="button"
             onClick={() => router.push("/dashboard/tasks")}
@@ -870,7 +913,10 @@ export default function NewTaskPage() {
             {saving ? "Delegating..." : "Delegate Task"}
           </button>
         </div>
+        </div>
       </form>
     </main>
   );
 }
+
+
