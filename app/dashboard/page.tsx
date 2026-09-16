@@ -96,7 +96,9 @@ function getSouthAfricaDayBounds(now = new Date()) {
     Date.UTC(year, month - 1, day) - 2 * 60 * 60 * 1000
   );
 
-  const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+  const end = new Date(
+    start.getTime() + 24 * 60 * 60 * 1000
+  );
 
   return {
     start,
@@ -185,10 +187,20 @@ export default async function DashboardPage() {
     "correspondence.create"
   );
 
-  const { start: todayStart, end: tomorrowStart } =
-    getSouthAfricaDayBounds();
+  const {
+    start: todayStart,
+    end: tomorrowStart,
+  } = getSouthAfricaDayBounds();
 
   const now = new Date();
+
+  /**
+   * Upcoming work means the next 7 calendar days
+   * after today.
+   */
+  const next7DaysEnd = new Date(
+    tomorrowStart.getTime() + 7 * 24 * 60 * 60 * 1000
+  );
 
   const [
     firm,
@@ -209,7 +221,6 @@ export default async function DashboardPage() {
     todayDeadlines,
     upcomingDeadlines,
 
-    actionCorrespondence,
     overdueCorrespondence,
     todayCorrespondence,
     upcomingCorrespondence,
@@ -407,7 +418,8 @@ export default async function DashboardPage() {
           not: "COMPLETED",
         },
         dueDate: {
-          gt: tomorrowStart,
+          gte: tomorrowStart,
+          lt: next7DaysEnd,
         },
       },
       orderBy: {
@@ -502,7 +514,8 @@ export default async function DashboardPage() {
         assignedToId: userId,
         completedAt: null,
         dueDate: {
-          gt: tomorrowStart,
+          gte: tomorrowStart,
+          lt: next7DaysEnd,
         },
       },
       orderBy: {
@@ -517,41 +530,6 @@ export default async function DashboardPage() {
         priority: true,
         status: true,
         dueDate: true,
-        matterId: true,
-        matter: {
-          select: {
-            id: true,
-            referenceNumber: true,
-            title: true,
-          },
-        },
-      },
-    }),
-
-    prisma.correspondence.findMany({
-      where: {
-        firmId,
-        responsibleUserId: userId,
-        responseRequired: true,
-        status: {
-          notIn: ["RESPONDED", "CLOSED"],
-        },
-      },
-      orderBy: {
-        responseDeadline: "asc",
-      },
-      take: 8,
-      select: {
-        id: true,
-        direction: true,
-        correspondenceDate: true,
-        sender: true,
-        recipient: true,
-        subject: true,
-        type: true,
-        status: true,
-        responseRequired: true,
-        responseDeadline: true,
         matterId: true,
         matter: {
           select: {
@@ -649,7 +627,8 @@ export default async function DashboardPage() {
           notIn: ["RESPONDED", "CLOSED"],
         },
         responseDeadline: {
-          gt: tomorrowStart,
+          gte: tomorrowStart,
+          lt: next7DaysEnd,
         },
       },
       orderBy: {
@@ -690,8 +669,6 @@ export default async function DashboardPage() {
     todayCorrespondence.length;
 
   const reportCount = reportRequiredTasks.length;
-
-  const actionCount = actionCorrespondence.length;
 
   const upcomingCount =
     upcomingTasks.length +
@@ -767,27 +744,31 @@ export default async function DashboardPage() {
 
                 <p className="mt-1 text-sm text-red-700/80">
                   {overdueCount > 0
-                    ? "These items require attention before you continue with your day."
+                    ? `${overdueCount} ${
+                        overdueCount === 1 ? "item needs" : "items need"
+                      } attention.`
                     : "Nothing is overdue right now."}
                 </p>
               </div>
 
-              <Link
-                href="#needs-attention"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-red-700 shadow-sm ring-1 ring-red-200 transition hover:bg-red-50"
-              >
-                Open attention queue
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              {overdueCount > 0 && (
+                <Link
+                  href="#overdue-work"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-red-700 shadow-sm ring-1 ring-red-200 transition hover:bg-red-50"
+                >
+                  Open overdue work
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              )}
 
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
 
-              {/* OVERDUE */}
+              {/* OVERDUE SUMMARY */}
 
               <Link
-                href="#needs-attention"
+                href="#overdue-work"
                 className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-red-100 transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
@@ -890,6 +871,189 @@ export default async function DashboardPage() {
               </Link>
 
             </div>
+
+            {/* ===================================================== */}
+            {/* IMMEDIATE OVERDUE ITEMS */}
+            {/* ===================================================== */}
+
+            {overdueCount > 0 && (
+              <div className="mt-5 overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-red-100">
+
+                <div className="border-b border-red-100 px-4 py-3">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 text-red-700" />
+
+                    <p className="text-sm font-semibold text-slate-900">
+                      Immediate overdue work
+                    </p>
+                  </div>
+                </div>
+
+                <div className="divide-y divide-slate-100">
+
+                  {/* FIRST OVERDUE TASK */}
+
+                  {overdueTasks.length > 0 && (
+                    <Link
+                      href={`/dashboard/tasks/${overdueTasks[0].id}`}
+                      className="group flex items-center justify-between gap-4 px-4 py-4 transition hover:bg-red-50"
+                    >
+                      <div className="flex min-w-0 items-center gap-3">
+
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-700">
+                          <ListTodo className="h-4 w-4" />
+                        </div>
+
+                        <div className="min-w-0">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-red-700">
+                            {overdueTasks.length}{" "}
+                            {overdueTasks.length === 1
+                              ? "Overdue Task"
+                              : "Overdue Tasks"}
+                          </p>
+
+                          <p className="mt-0.5 truncate font-semibold text-slate-900 group-hover:text-red-700">
+                            {overdueTasks[0].title}
+                          </p>
+
+                          {overdueTasks[0].matter && (
+                            <p className="mt-1 truncate text-xs text-slate-500">
+                              {overdueTasks[0].matter.referenceNumber} ·{" "}
+                              {overdueTasks[0].matter.title}
+                            </p>
+                          )}
+
+                          {overdueTasks[0].dueDate && (
+                            <p className="mt-1 flex items-center gap-1 text-xs text-red-600">
+                              <Clock className="h-3 w-3" />
+                              Due {formatDateTime(overdueTasks[0].dueDate)}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex shrink-0 items-center gap-2">
+
+                        <span className="hidden rounded-full bg-red-100 px-2.5 py-1 text-[10px] font-semibold text-red-700 sm:inline-flex">
+                          {formatStatus(overdueTasks[0].priority)}
+                        </span>
+
+                        <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-red-600" />
+
+                      </div>
+
+                    </Link>
+                  )}
+
+                  {/* FIRST OVERDUE DEADLINE */}
+
+                  {overdueDeadlines.length > 0 && (
+                    <Link
+                      href={`/dashboard/deadlines/${overdueDeadlines[0].id}`}
+                      className="group flex items-center justify-between gap-4 px-4 py-4 transition hover:bg-red-50"
+                    >
+                      <div className="flex min-w-0 items-center gap-3">
+
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-700">
+                          <CalendarDays className="h-4 w-4" />
+                        </div>
+
+                        <div className="min-w-0">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-red-700">
+                            {overdueDeadlines.length}{" "}
+                            {overdueDeadlines.length === 1
+                              ? "Overdue Deadline"
+                              : "Overdue Deadlines"}
+                          </p>
+
+                          <p className="mt-0.5 truncate font-semibold text-slate-900 group-hover:text-red-700">
+                            {overdueDeadlines[0].title}
+                          </p>
+
+                          {overdueDeadlines[0].matter && (
+                            <p className="mt-1 truncate text-xs text-slate-500">
+                              {overdueDeadlines[0].matter.referenceNumber} ·{" "}
+                              {overdueDeadlines[0].matter.title}
+                            </p>
+                          )}
+
+                          <p className="mt-1 flex items-center gap-1 text-xs text-red-600">
+                            <Clock className="h-3 w-3" />
+                            Due{" "}
+                            {formatDateTime(
+                              overdueDeadlines[0].dueDate
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 transition group-hover:translate-x-1 group-hover:text-red-600" />
+
+                    </Link>
+                  )}
+
+                  {/* FIRST OVERDUE RESPONSE */}
+
+                  {overdueCorrespondence.length > 0 && (
+                    <Link
+                      href={`/dashboard/correspondence/${overdueCorrespondence[0].id}`}
+                      className="group flex items-center justify-between gap-4 px-4 py-4 transition hover:bg-red-50"
+                    >
+                      <div className="flex min-w-0 items-center gap-3">
+
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-700">
+                          <Mail className="h-4 w-4" />
+                        </div>
+
+                        <div className="min-w-0">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-red-700">
+                            {overdueCorrespondence.length}{" "}
+                            {overdueCorrespondence.length === 1
+                              ? "Overdue Response"
+                              : "Overdue Responses"}
+                          </p>
+
+                          <p className="mt-0.5 truncate font-semibold text-slate-900 group-hover:text-red-700">
+                            {overdueCorrespondence[0].subject}
+                          </p>
+
+                          <p className="mt-1 truncate text-xs text-slate-500">
+                            {overdueCorrespondence[0].sender}
+                          </p>
+
+                          {overdueCorrespondence[0].responseDeadline && (
+                            <p className="mt-1 flex items-center gap-1 text-xs text-red-600">
+                              <Clock className="h-3 w-3" />
+                              Response due{" "}
+                              {formatDateTime(
+                                overdueCorrespondence[0].responseDeadline
+                              )}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 transition group-hover:translate-x-1 group-hover:text-red-600" />
+
+                    </Link>
+                  )}
+
+                </div>
+
+                {overdueCount > 3 && (
+                  <div className="border-t border-slate-100 bg-slate-50 px-4 py-3">
+                    <Link
+                      href="#overdue-work"
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-red-700 hover:text-red-900"
+                    >
+                      View all {overdueCount} overdue items
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                )}
+
+              </div>
+            )}
 
           </div>
 
@@ -1856,7 +2020,7 @@ export default async function DashboardPage() {
               </h2>
 
               <p className="mt-1 text-sm text-slate-500">
-                Work coming up after today.
+                Work coming up within the next 7 days.
               </p>
 
             </div>
