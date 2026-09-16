@@ -790,10 +790,22 @@ export default function TaskWorkflow({
                   Review Report
                 </h3>
 
+                <span className="mt-3 inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-800">
+                  Awaiting your review
+                </span>
+
                 <p className="mt-1 text-sm text-slate-500">
                   Review the employee's report and
                   either accept it or send it back for
                   further work.
+
+                <div className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-900 ring-1 ring-amber-200">
+                  <p className="font-medium">Review decision</p>
+                  <p className="mt-1">
+                    Choose Accept only when the reported work is satisfactory and complete.
+                    Use Send Back when further work or clarification is required.
+                  </p>
+                </div>
                 </p>
 
                 <textarea
