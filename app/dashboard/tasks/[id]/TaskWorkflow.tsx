@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 
@@ -118,6 +118,15 @@ export default function TaskWorkflow({
   function clearMessages() {
     setMessage(null);
     setError(null);
+  }
+
+  function openReportBack() {
+    document
+      .getElementById("report-back-form")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
   }
 
   async function submitUpdate(
@@ -465,6 +474,16 @@ export default function TaskWorkflow({
                 Keep the delegating person informed
                 of progress and raise assistance
                 requests when necessary.
+
+              {canReport && (
+                <button
+                  type="button"
+                  onClick={openReportBack}
+                  className="mt-4 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+                >
+                  Report Back
+                </button>
+              )}
               </p>
             </div>
 
@@ -508,6 +527,7 @@ export default function TaskWorkflow({
             {canReport && (
               <form
                 onSubmit={submitReport}
+                id="report-back-form"
                 className="mt-8 border-t border-slate-200 pt-8"
               >
                 <div>
