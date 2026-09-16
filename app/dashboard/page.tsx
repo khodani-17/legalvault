@@ -788,180 +788,402 @@ export default async function DashboardPage() {
       <div className="mx-auto max-w-7xl px-6 py-8">
 
         {/* ===================================================== */}
-        {/* HEADER */}
-        {/* ===================================================== */}
-
-        <div className="mb-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-
-            <div>
-              <p className="text-sm font-medium text-slate-500">
-                LegalVault
-              </p>
-
-              <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
-                My Day
-              </h1>
-
-              <p className="mt-2 text-sm text-slate-500">
-                Good day, {session.user.name || "User"}. Here is what needs
-                your attention.
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white px-5 py-4 shadow-sm ring-1 ring-slate-200">
-              <div className="flex items-center gap-3">
-
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-white">
-                  <Building2 className="h-5 w-5" />
-                </div>
-
-                <div>
-                  <p className="text-sm font-semibold text-slate-900">
-                    {firm?.name || "Law Firm"}
-                  </p>
-
-                  <p className="mt-1 font-mono text-xs text-slate-500">
-                    {firm?.referenceNumber || "—"}
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        {/* ===================================================== */}
-        {/* MY DAY SUMMARY */}
+        {/* MY DAY COMMAND CENTRE */}
         {/* ===================================================== */}
 
         <section className="mb-8">
-          <div className="mb-4">
-            <h2 className="text-lg font-bold text-slate-900">
-              Today
-            </h2>
 
-            <p className="mt-1 text-sm text-slate-500">
-              The work that requires your attention first.
-            </p>
-          </div>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p className="text-sm font-semibold text-slate-500">
+                LegalVault · My Day
+              </p>
 
-            {/* OVERDUE */}
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+                Good morning, {session.user.name || "User"}
+              </h1>
 
-            <Link
-              href="/dashboard/tasks?filter=overdue"
-              className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-red-200 transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <div className="flex items-center justify-between">
+              <p className="mt-2 max-w-2xl text-sm text-slate-500">
+                Your employee command centre. Start with what needs your
+                attention, then move through today's work.
+              </p>
+            </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-700">
-                  <AlertCircle className="h-5 w-5" />
-                </div>
+            <div className="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-sm ring-1 ring-slate-200">
 
-                <ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-red-600" />
-
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-white">
+                <Building2 className="h-5 w-5" />
               </div>
 
-              <p className="mt-4 text-sm font-medium text-slate-500">
-                Overdue
-              </p>
+              <div>
+                <p className="text-sm font-semibold text-slate-900">
+                  {firm?.name || "Law Firm"}
+                </p>
 
-              <p className="mt-1 text-3xl font-bold text-red-700">
-                {overdueCount}
-              </p>
-
-              <p className="mt-1 text-xs text-slate-500">
-                Tasks, deadlines and responses
-              </p>
-
-            </Link>
-
-            {/* DUE TODAY */}
-
-            <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-blue-200">
-
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
-                <CalendarDays className="h-5 w-5" />
+                <p className="mt-1 font-mono text-xs text-slate-500">
+                  {firm?.referenceNumber || "—"}
+                </p>
               </div>
-
-              <p className="mt-4 text-sm font-medium text-slate-500">
-                Due Today
-              </p>
-
-              <p className="mt-1 text-3xl font-bold text-slate-900">
-                {dueTodayCount}
-              </p>
-
-              <p className="mt-1 text-xs text-slate-500">
-                Items requiring attention today
-              </p>
 
             </div>
 
-            {/* REPORTS */}
+          </div>
 
-            <Link
-              href="/dashboard/tasks?filter=report-required"
-              className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-purple-200 transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <div className="flex items-center justify-between">
+          {/* ===================================================== */}
+          {/* NEEDS ATTENTION */}
+          {/* ===================================================== */}
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-50 text-purple-700">
-                  <ClipboardCheck className="h-5 w-5" />
+          <div className="mt-6 rounded-2xl border border-red-200 bg-red-50/60 p-5">
+
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+              <div>
+                <div className="flex items-center gap-2">
+                  <CircleAlert className="h-5 w-5 text-red-700" />
+
+                  <h2 className="text-sm font-bold uppercase tracking-wide text-red-800">
+                    Needs Attention
+                  </h2>
                 </div>
 
-                <ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-purple-600" />
-
+                <p className="mt-1 text-sm text-red-700/80">
+                  {overdueCount > 0
+                    ? "These items require attention before you continue with your day."
+                    : "Nothing is overdue right now."}
+                </p>
               </div>
 
-              <p className="mt-4 text-sm font-medium text-slate-500">
-                Reports Required
-              </p>
+              <Link
+                href="/dashboard/tasks?filter=overdue"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-red-700 shadow-sm ring-1 ring-red-200 transition hover:bg-red-50"
+              >
+                Open attention queue
+                <ArrowRight className="h-4 w-4" />
+              </Link>
 
-              <p className="mt-1 text-3xl font-bold text-slate-900">
-                {reportCount}
-              </p>
+            </div>
 
-              <p className="mt-1 text-xs text-slate-500">
-                Tasks waiting for your report
-              </p>
+            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
 
-            </Link>
+              {/* OVERDUE */}
 
-            {/* CORRESPONDENCE */}
+              <Link
+                href="/dashboard/tasks?filter=overdue"
+                className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-red-100 transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center justify-between">
 
-            <Link
-              href="/dashboard/correspondence"
-              className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-orange-200 transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-700">
+                      <AlertCircle className="h-5 w-5" />
+                    </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-700">
-                  <Mail className="h-5 w-5" />
+                    <div>
+                      <p className="text-xs font-medium text-slate-500">
+                        Overdue
+                      </p>
+
+                      <p className="mt-0.5 text-2xl font-bold text-red-700">
+                        {overdueCount}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-red-600" />
+
                 </div>
 
-                <ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-orange-600" />
+                <p className="mt-3 text-xs text-slate-500">
+                  Tasks, deadlines and responses
+                </p>
+              </Link>
 
-              </div>
+              {/* DUE TODAY */}
 
-              <p className="mt-4 text-sm font-medium text-slate-500">
-                Correspondence
-              </p>
+              <Link
+                href="/dashboard/tasks"
+                className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-blue-100 transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center justify-between">
 
-              <p className="mt-1 text-3xl font-bold text-slate-900">
-                {actionCount}
-              </p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-700">
+                      <CalendarDays className="h-5 w-5" />
+                    </div>
 
-              <p className="mt-1 text-xs text-slate-500">
-                Requiring your action
-              </p>
+                    <div>
+                      <p className="text-xs font-medium text-slate-500">
+                        Due Today
+                      </p>
 
-            </Link>
+                      <p className="mt-0.5 text-2xl font-bold text-slate-900">
+                        {dueTodayCount}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-blue-600" />
+
+                </div>
+
+                <p className="mt-3 text-xs text-slate-500">
+                  Tasks, deadlines and responses
+                </p>
+              </Link>
+
+              {/* REPORTS */}
+
+              <Link
+                href="/dashboard/tasks?filter=report-required"
+                className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-purple-100 transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center justify-between">
+
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-purple-700">
+                      <ClipboardCheck className="h-5 w-5" />
+                    </div>
+
+                    <div>
+                      <p className="text-xs font-medium text-slate-500">
+                        Reports Awaiting Review
+                      </p>
+
+                      <p className="mt-0.5 text-2xl font-bold text-slate-900">
+                        {reportCount}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-purple-600" />
+
+                </div>
+
+                <p className="mt-3 text-xs text-slate-500">
+                  Delegated work requiring your report
+                </p>
+              </Link>
+
+            </div>
 
           </div>
+
+          {/* ===================================================== */}
+          {/* TODAY */}
+          {/* ===================================================== */}
+
+          <div className="mt-6">
+
+            <div className="mb-3 flex items-end justify-between">
+              <div>
+                <h2 className="text-lg font-bold text-slate-900">
+                  Today
+                </h2>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  Your work for today at a glance.
+                </p>
+              </div>
+
+              <Link
+                href="/dashboard/tasks"
+                className="hidden text-sm font-semibold text-slate-700 hover:text-slate-900 sm:inline-flex"
+              >
+                View work
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+
+              <Link
+                href="/dashboard/tasks"
+                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
+                    <CheckSquare className="h-5 w-5" />
+                  </div>
+
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-blue-600" />
+                </div>
+
+                <p className="mt-4 text-sm font-semibold text-slate-900">
+                  Tasks
+                </p>
+
+                <p className="mt-1 text-2xl font-bold text-slate-900">
+                  {todayTasks.length}
+                </p>
+
+                <p className="mt-1 text-xs text-slate-500">
+                  Due today
+                </p>
+              </Link>
+
+              <Link
+                href="/dashboard/deadlines"
+                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-50 text-purple-700">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-purple-600" />
+                </div>
+
+                <p className="mt-4 text-sm font-semibold text-slate-900">
+                  Deadlines
+                </p>
+
+                <p className="mt-1 text-2xl font-bold text-slate-900">
+                  {todayDeadlines.length}
+                </p>
+
+                <p className="mt-1 text-xs text-slate-500">
+                  Due today
+                </p>
+              </Link>
+
+              <Link
+                href="/dashboard/correspondence"
+                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-50 text-orange-700">
+                    <Mail className="h-5 w-5" />
+                  </div>
+
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-orange-600" />
+                </div>
+
+                <p className="mt-4 text-sm font-semibold text-slate-900">
+                  Correspondence
+                </p>
+
+                <p className="mt-1 text-2xl font-bold text-slate-900">
+                  {todayCorrespondence.length}
+                </p>
+
+                <p className="mt-1 text-xs text-slate-500">
+                  Responses due today
+                </p>
+              </Link>
+
+            </div>
+
+          </div>
+
+          {/* ===================================================== */}
+          {/* UPCOMING */}
+          {/* ===================================================== */}
+
+          <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+              <div>
+                <div className="flex items-center gap-2">
+                  <CalendarDays className="h-5 w-5 text-slate-700" />
+
+                  <h2 className="text-base font-bold text-slate-900">
+                    Upcoming
+                  </h2>
+                </div>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  Next 7 days of assigned work.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-5 text-sm">
+                <div>
+                  <span className="font-bold text-slate-900">
+                    {upcomingTasks.length}
+                  </span>{" "}
+                  <span className="text-slate-500">tasks</span>
+                </div>
+
+                <div>
+                  <span className="font-bold text-slate-900">
+                    {upcomingDeadlines.length}
+                  </span>{" "}
+                  <span className="text-slate-500">deadlines</span>
+                </div>
+
+                <div>
+                  <span className="font-bold text-slate-900">
+                    {upcomingCorrespondence.length}
+                  </span>{" "}
+                  <span className="text-slate-500">responses</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* ===================================================== */}
+          {/* QUICK ACTIONS */}
+          {/* ===================================================== */}
+
+          <div className="mt-6">
+
+            <div className="mb-3">
+              <h2 className="text-lg font-bold text-slate-900">
+                Quick Actions
+              </h2>
+
+              <p className="mt-1 text-sm text-slate-500">
+                Start a common piece of work without searching through menus.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+
+              {canCreateTask && (
+                <Link
+                  href="/dashboard/tasks/new"
+                  className="inline-flex items-center justify-between rounded-xl bg-slate-900 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                >
+                  <span>Delegate Task</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              )}
+
+              {canCreateCorrespondence && (
+                <Link
+                  href="/dashboard/correspondence/new"
+                  className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+                >
+                  <span>Add Correspondence</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              )}
+
+              <Link
+                href="/dashboard/deadlines/new"
+                className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+              >
+                <span>Add Deadline</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+
+              {canCreateMatter && (
+                <Link
+                  href="/dashboard/matters/new"
+                  className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+                >
+                  <span>Add Matter</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              )}
+
+            </div>
+
+          </div>
+
         </section>
 
         {/* ===================================================== */}
@@ -1057,6 +1279,13 @@ export default async function DashboardPage() {
 
                         </div>
 
+                        <div className="mt-4">
+                          <span className="inline-flex items-center gap-1.5 rounded-lg bg-red-700 px-3 py-2 text-xs font-semibold text-white transition group-hover:bg-red-800">
+                            Open Task
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
+
                       </Link>
                     ))}
 
@@ -1118,6 +1347,13 @@ export default async function DashboardPage() {
                           <Clock className="h-3 w-3" />
                           Due {formatDateTime(deadline.dueDate)}
                         </p>
+
+                        <div className="mt-4">
+                          <span className="inline-flex items-center gap-1.5 rounded-lg bg-red-700 px-3 py-2 text-xs font-semibold text-white transition group-hover:bg-red-800">
+                            Open Deadline
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
 
                       </Link>
                     ))}
@@ -1182,6 +1418,13 @@ export default async function DashboardPage() {
                             )}
                           </p>
                         )}
+
+                        <div className="mt-4">
+                          <span className="inline-flex items-center gap-1.5 rounded-lg bg-red-700 px-3 py-2 text-xs font-semibold text-white transition group-hover:bg-red-800">
+                            Open Correspondence
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
 
                       </Link>
                     ))}
@@ -1295,6 +1538,13 @@ export default async function DashboardPage() {
 
                       </div>
 
+                      <div className="mt-4">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700">
+                          Open Task
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
+
                     </Link>
                   ))}
 
@@ -1381,6 +1631,13 @@ export default async function DashboardPage() {
                           {formatStatus(deadline.priority)}
                         </span>
 
+                      </div>
+
+                      <div className="mt-4">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-700">
+                          Open Deadline
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
                       </div>
 
                     </Link>
@@ -1471,6 +1728,13 @@ export default async function DashboardPage() {
                           {formatStatus(correspondence.status)}
                         </span>
 
+                      </div>
+
+                      <div className="mt-4">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700">
+                          Open Correspondence
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
                       </div>
 
                     </Link>
@@ -1650,6 +1914,13 @@ export default async function DashboardPage() {
                           </p>
                         )}
 
+                        <div className="mt-3">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700">
+                            Open Task
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
+
                       </Link>
                     ))}
 
@@ -1713,6 +1984,13 @@ export default async function DashboardPage() {
                           {formatDate(deadline.dueDate)}
                         </p>
 
+                        <div className="mt-3">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-700">
+                            Open Deadline
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
+
                       </Link>
                     ))}
 
@@ -1775,6 +2053,13 @@ export default async function DashboardPage() {
                             {formatDate(correspondence.responseDeadline)}
                           </p>
                         )}
+
+                        <div className="mt-3">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700">
+                            Open Correspondence
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </span>
+                        </div>
 
                       </Link>
                     ))}
