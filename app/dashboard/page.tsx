@@ -112,7 +112,7 @@ function getPriorityClasses(priority: string) {
       return "bg-red-100 text-red-700";
 
     case "HIGH":
-      return "bg-orange-100 text-orange-700";
+      return "bg-orange-100 text-[#142B4F]";
 
     case "MEDIUM":
       return "bg-yellow-100 text-yellow-700";
@@ -131,7 +131,7 @@ function getCorrespondenceStatusClasses(status: string) {
       return "bg-red-100 text-red-700";
 
     case "ASSIGNED":
-      return "bg-blue-100 text-blue-700";
+      return "bg-blue-100 text-[#142B4F]";
 
     case "RESPONDED":
       return "bg-green-100 text-green-700";
@@ -676,8 +676,8 @@ export default async function DashboardPage() {
     upcomingCorrespondence.length;
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-7xl px-6 py-8">
+    <main className="min-h-screen bg-[#F5F7FB]">
+      <div className="mx-auto max-w-[1500px] px-4 py-7 sm:px-6 lg:px-10">
 
         {/* ===================================================== */}
         {/* MY DAY COMMAND CENTRE */}
@@ -685,41 +685,50 @@ export default async function DashboardPage() {
 
         <section className="mb-8">
 
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="relative overflow-hidden rounded-[28px] bg-[#08172F] px-6 py-8 text-white shadow-[0_20px_60px_-30px_rgba(8,23,47,0.6)] sm:px-9 sm:py-10">
+            <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-32 h-80 w-80 rounded-full border border-[#D4AF37]/20" />
+            <div aria-hidden="true" className="pointer-events-none absolute -right-8 -top-20 h-64 w-64 rounded-full border border-[#D4AF37]/10" />
+            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 
             <div>
-              <p className="text-sm font-semibold text-slate-500">
-                LegalVault · My Day
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#D4AF37]">
+                LegalVault / Command Centre
               </p>
 
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+              <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 Good morning, {session.user.name || "User"}
               </h1>
 
-              <p className="mt-2 max-w-2xl text-sm text-slate-500">
-                Your employee command centre. Start with what needs your
-                attention, then move through today's work.
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[#C8D2E2]">
+                Your matters, priorities and deadlines — organised for a focused working day.
               </p>
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-sm ring-1 ring-slate-200">
+            <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm">
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37] text-[#08172F]">
                 <Building2 className="h-5 w-5" />
               </div>
 
               <div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-white">
                   {firm?.name || "Law Firm"}
                 </p>
 
-                <p className="mt-1 font-mono text-xs text-slate-500">
+                <p className="mt-1 font-mono text-xs text-[#C8D2E2]">
                   {firm?.referenceNumber || "—"}
                 </p>
               </div>
 
             </div>
 
+            </div>
+            <div className="relative mt-7 flex flex-wrap gap-2 border-t border-white/15 pt-5">
+              <Link href="/dashboard/matters" className="rounded-lg bg-[#D4AF37] px-4 py-2.5 text-sm font-bold text-[#08172F] transition hover:bg-[#E8C65B]">Open Matters →</Link>
+              <Link href="/dashboard/documents" className="rounded-lg border border-white/25 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">Documents</Link>
+              <Link href="/dashboard/tasks" className="rounded-lg border border-white/25 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">My Tasks</Link>
+              <Link href="/dashboard/deadlines" className="rounded-lg border border-white/25 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">Court Dates & Deadlines</Link>
+            </div>
           </div>
 
           {/* ===================================================== */}
@@ -804,13 +813,13 @@ export default async function DashboardPage() {
 
               <Link
                 href="#today-work"
-                className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-blue-100 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-[#DDE6F2] transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
 
                   <div className="flex items-center gap-3">
 
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-700">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-[#142B4F]">
                       <CalendarDays className="h-5 w-5" />
                     </div>
 
@@ -819,14 +828,14 @@ export default async function DashboardPage() {
                         Due Today
                       </p>
 
-                      <p className="mt-0.5 text-2xl font-bold text-slate-900">
+                      <p className="mt-0.5 text-2xl font-bold text-[#08172F]">
                         {dueTodayCount}
                       </p>
                     </div>
 
                   </div>
 
-                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-blue-600" />
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-[#A68122]" />
 
                 </div>
 
@@ -839,13 +848,13 @@ export default async function DashboardPage() {
 
               <Link
                 href="#reports-required"
-                className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-purple-100 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-xl bg-white p-4 shadow-sm ring-1 ring-[#DDE6F2] transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
 
                   <div className="flex items-center gap-3">
 
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-purple-700">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-[#142B4F]">
                       <ClipboardCheck className="h-5 w-5" />
                     </div>
 
@@ -854,7 +863,7 @@ export default async function DashboardPage() {
                         Reports Required
                       </p>
 
-                      <p className="mt-0.5 text-2xl font-bold text-slate-900">
+                      <p className="mt-0.5 text-2xl font-bold text-[#08172F]">
                         {reportCount}
                       </p>
                     </div>
@@ -883,7 +892,7 @@ export default async function DashboardPage() {
                   <div className="flex items-center gap-2">
                     <AlertCircle className="h-4 w-4 text-red-700" />
 
-                    <p className="text-sm font-semibold text-slate-900">
+                    <p className="text-sm font-semibold text-[#08172F]">
                       Immediate overdue work
                     </p>
                   </div>
@@ -912,7 +921,7 @@ export default async function DashboardPage() {
                               : "Overdue Tasks"}
                           </p>
 
-                          <p className="mt-0.5 truncate font-semibold text-slate-900 group-hover:text-red-700">
+                          <p className="mt-0.5 truncate font-semibold text-[#08172F] group-hover:text-red-700">
                             {overdueTasks[0].title}
                           </p>
 
@@ -966,7 +975,7 @@ export default async function DashboardPage() {
                               : "Overdue Deadlines"}
                           </p>
 
-                          <p className="mt-0.5 truncate font-semibold text-slate-900 group-hover:text-red-700">
+                          <p className="mt-0.5 truncate font-semibold text-[#08172F] group-hover:text-red-700">
                             {overdueDeadlines[0].title}
                           </p>
 
@@ -1013,7 +1022,7 @@ export default async function DashboardPage() {
                               : "Overdue Responses"}
                           </p>
 
-                          <p className="mt-0.5 truncate font-semibold text-slate-900 group-hover:text-red-700">
+                          <p className="mt-0.5 truncate font-semibold text-[#08172F] group-hover:text-red-700">
                             {overdueCorrespondence[0].subject}
                           </p>
 
@@ -1069,7 +1078,7 @@ export default async function DashboardPage() {
             <div className="mb-3 flex items-end justify-between">
 
               <div>
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-[#08172F]">
                   Today
                 </h2>
 
@@ -1080,7 +1089,7 @@ export default async function DashboardPage() {
 
               <Link
                 href="#today-work"
-                className="hidden text-sm font-semibold text-slate-700 hover:text-slate-900 sm:inline-flex"
+                className="hidden text-sm font-semibold text-slate-700 hover:text-[#08172F] sm:inline-flex"
               >
                 View work
               </Link>
@@ -1091,23 +1100,23 @@ export default async function DashboardPage() {
 
               <Link
                 href="/dashboard/tasks"
-                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
 
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                     <CheckSquare className="h-5 w-5" />
                   </div>
 
-                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-blue-600" />
+                  <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:translate-x-1 group-hover:text-[#A68122]" />
 
                 </div>
 
-                <p className="mt-4 text-sm font-semibold text-slate-900">
+                <p className="mt-4 text-sm font-semibold text-[#08172F]">
                   Tasks
                 </p>
 
-                <p className="mt-1 text-2xl font-bold text-slate-900">
+                <p className="mt-1 text-2xl font-bold text-[#08172F]">
                   {todayTasks.length}
                 </p>
 
@@ -1119,11 +1128,11 @@ export default async function DashboardPage() {
 
               <Link
                 href="/dashboard/deadlines"
-                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
 
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-50 text-purple-700">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                     <CalendarDays className="h-5 w-5" />
                   </div>
 
@@ -1131,11 +1140,11 @@ export default async function DashboardPage() {
 
                 </div>
 
-                <p className="mt-4 text-sm font-semibold text-slate-900">
+                <p className="mt-4 text-sm font-semibold text-[#08172F]">
                   Deadlines
                 </p>
 
-                <p className="mt-1 text-2xl font-bold text-slate-900">
+                <p className="mt-1 text-2xl font-bold text-[#08172F]">
                   {todayDeadlines.length}
                 </p>
 
@@ -1147,11 +1156,11 @@ export default async function DashboardPage() {
 
               <Link
                 href="/dashboard/correspondence"
-                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
 
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-50 text-orange-700">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                     <Mail className="h-5 w-5" />
                   </div>
 
@@ -1159,11 +1168,11 @@ export default async function DashboardPage() {
 
                 </div>
 
-                <p className="mt-4 text-sm font-semibold text-slate-900">
+                <p className="mt-4 text-sm font-semibold text-[#08172F]">
                   Correspondence
                 </p>
 
-                <p className="mt-1 text-2xl font-bold text-slate-900">
+                <p className="mt-1 text-2xl font-bold text-[#08172F]">
                   {todayCorrespondence.length}
                 </p>
 
@@ -1181,7 +1190,7 @@ export default async function DashboardPage() {
           {/* UPCOMING */}
           {/* ===================================================== */}
 
-          <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+          <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-[#DFE5EE]">
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
@@ -1191,7 +1200,7 @@ export default async function DashboardPage() {
 
                   <CalendarDays className="h-5 w-5 text-slate-700" />
 
-                  <h2 className="text-base font-bold text-slate-900">
+                  <h2 className="text-base font-bold text-[#08172F]">
                     Upcoming
                   </h2>
 
@@ -1206,7 +1215,7 @@ export default async function DashboardPage() {
               <div className="flex items-center gap-5 text-sm">
 
                 <div>
-                  <span className="font-bold text-slate-900">
+                  <span className="font-bold text-[#08172F]">
                     {upcomingTasks.length}
                   </span>{" "}
                   <span className="text-slate-500">
@@ -1215,7 +1224,7 @@ export default async function DashboardPage() {
                 </div>
 
                 <div>
-                  <span className="font-bold text-slate-900">
+                  <span className="font-bold text-[#08172F]">
                     {upcomingDeadlines.length}
                   </span>{" "}
                   <span className="text-slate-500">
@@ -1224,7 +1233,7 @@ export default async function DashboardPage() {
                 </div>
 
                 <div>
-                  <span className="font-bold text-slate-900">
+                  <span className="font-bold text-[#08172F]">
                     {upcomingCorrespondence.length}
                   </span>{" "}
                   <span className="text-slate-500">
@@ -1246,7 +1255,7 @@ export default async function DashboardPage() {
 
             <div className="mb-3">
 
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-[#08172F]">
                 Quick Actions
               </h2>
 
@@ -1261,7 +1270,7 @@ export default async function DashboardPage() {
               {canCreateTask && (
                 <Link
                   href="/dashboard/tasks/new"
-                  className="inline-flex items-center justify-between rounded-xl bg-slate-900 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="inline-flex items-center justify-between rounded-xl bg-[#08172F] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#142B4F]"
                 >
                   <span>Delegate Task</span>
                   <ArrowRight className="h-4 w-4" />
@@ -1271,7 +1280,7 @@ export default async function DashboardPage() {
               {canCreateCorrespondence && (
                 <Link
                   href="/dashboard/correspondence/new"
-                  className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+                  className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-[#08172F] shadow-sm ring-1 ring-[#DFE5EE] transition hover:bg-slate-50"
                 >
                   <span>Add Correspondence</span>
                   <ArrowRight className="h-4 w-4" />
@@ -1280,7 +1289,7 @@ export default async function DashboardPage() {
 
               <Link
                 href="/dashboard/deadlines/new"
-                className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+                className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-[#08172F] shadow-sm ring-1 ring-[#DFE5EE] transition hover:bg-slate-50"
               >
                 <span>Add Deadline</span>
                 <ArrowRight className="h-4 w-4" />
@@ -1289,7 +1298,7 @@ export default async function DashboardPage() {
               {canCreateMatter && (
                 <Link
                   href="/dashboard/matters/new"
-                  className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+                  className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3.5 text-sm font-semibold text-[#08172F] shadow-sm ring-1 ring-[#DFE5EE] transition hover:bg-slate-50"
                 >
                   <span>Add Matter</span>
                   <ArrowRight className="h-4 w-4" />
@@ -1315,7 +1324,7 @@ export default async function DashboardPage() {
             <div className="mb-4 flex items-center justify-between">
 
               <div>
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-[#08172F]">
                   Needs Attention
                 </h2>
 
@@ -1342,7 +1351,7 @@ export default async function DashboardPage() {
 
                     <div>
 
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[#08172F]">
                         Overdue Tasks
                       </h3>
 
@@ -1374,7 +1383,7 @@ export default async function DashboardPage() {
 
                           <div className="min-w-0">
 
-                            <p className="font-semibold text-slate-900 group-hover:text-red-700">
+                            <p className="font-semibold text-[#08172F] group-hover:text-red-700">
                               {task.title}
                             </p>
 
@@ -1435,7 +1444,7 @@ export default async function DashboardPage() {
 
                     <div>
 
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[#08172F]">
                         Overdue Deadlines
                       </h3>
 
@@ -1463,7 +1472,7 @@ export default async function DashboardPage() {
                         className="group block p-5 transition hover:bg-red-50"
                       >
 
-                        <p className="font-semibold text-slate-900 group-hover:text-red-700">
+                        <p className="font-semibold text-[#08172F] group-hover:text-red-700">
                           {deadline.title}
                         </p>
 
@@ -1510,7 +1519,7 @@ export default async function DashboardPage() {
 
                     <div>
 
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[#08172F]">
                         Overdue Responses
                       </h3>
 
@@ -1538,7 +1547,7 @@ export default async function DashboardPage() {
                         className="group block p-5 transition hover:bg-red-50"
                       >
 
-                        <p className="font-semibold text-slate-900 group-hover:text-red-700">
+                        <p className="font-semibold text-[#08172F] group-hover:text-red-700">
                           {correspondence.subject}
                         </p>
 
@@ -1586,7 +1595,7 @@ export default async function DashboardPage() {
 
           <div className="mb-4">
 
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-lg font-bold text-[#08172F]">
               Today's Work
             </h2>
 
@@ -1600,19 +1609,19 @@ export default async function DashboardPage() {
 
             {/* TODAY TASKS */}
 
-            <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+            <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
               <div className="border-b border-slate-200 px-5 py-4">
 
                 <div className="flex items-center gap-3">
 
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                     <CheckSquare className="h-4 w-4" />
                   </div>
 
                   <div>
 
-                    <h3 className="font-semibold text-slate-900">
+                    <h3 className="font-semibold text-[#08172F]">
                       Tasks Due Today
                     </h3>
 
@@ -1655,7 +1664,7 @@ export default async function DashboardPage() {
 
                         <div className="min-w-0">
 
-                          <p className="font-semibold text-slate-900 group-hover:text-blue-700">
+                          <p className="font-semibold text-[#08172F] group-hover:text-[#A68122]">
                             {task.title}
                           </p>
 
@@ -1686,7 +1695,7 @@ export default async function DashboardPage() {
 
                       <div className="mt-4">
 
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#142B4F]">
                           Open Task
                           <ArrowRight className="h-3.5 w-3.5" />
                         </span>
@@ -1703,19 +1712,19 @@ export default async function DashboardPage() {
 
             {/* TODAY DEADLINES */}
 
-            <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+            <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
               <div className="border-b border-slate-200 px-5 py-4">
 
                 <div className="flex items-center gap-3">
 
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-50 text-purple-700">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                     <CalendarDays className="h-4 w-4" />
                   </div>
 
                   <div>
 
-                    <h3 className="font-semibold text-slate-900">
+                    <h3 className="font-semibold text-[#08172F]">
                       Deadlines Due Today
                     </h3>
 
@@ -1758,7 +1767,7 @@ export default async function DashboardPage() {
 
                         <div className="min-w-0">
 
-                          <p className="font-semibold text-slate-900 group-hover:text-purple-700">
+                          <p className="font-semibold text-[#08172F] group-hover:text-[#142B4F]">
                             {deadline.title}
                           </p>
 
@@ -1787,7 +1796,7 @@ export default async function DashboardPage() {
 
                       <div className="mt-4">
 
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-700">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#142B4F]">
                           Open Deadline
                           <ArrowRight className="h-3.5 w-3.5" />
                         </span>
@@ -1804,19 +1813,19 @@ export default async function DashboardPage() {
 
             {/* TODAY CORRESPONDENCE */}
 
-            <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+            <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
               <div className="border-b border-slate-200 px-5 py-4">
 
                 <div className="flex items-center gap-3">
 
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-700">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                     <Mail className="h-4 w-4" />
                   </div>
 
                   <div>
 
-                    <h3 className="font-semibold text-slate-900">
+                    <h3 className="font-semibold text-[#08172F]">
                       Responses Due Today
                     </h3>
 
@@ -1859,7 +1868,7 @@ export default async function DashboardPage() {
 
                         <div className="min-w-0">
 
-                          <p className="truncate font-semibold text-slate-900 group-hover:text-orange-700">
+                          <p className="truncate font-semibold text-[#08172F] group-hover:text-[#142B4F]">
                             {correspondence.subject}
                           </p>
 
@@ -1890,7 +1899,7 @@ export default async function DashboardPage() {
 
                       <div className="mt-4">
 
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#142B4F]">
                           Open Correspondence
                           <ArrowRight className="h-3.5 w-3.5" />
                         </span>
@@ -1916,7 +1925,7 @@ export default async function DashboardPage() {
         {reportRequiredTasks.length > 0 && (
           <section
             id="reports-required"
-            className="mb-8 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-purple-200"
+            className="mb-8 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DDE6F2]"
           >
 
             <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
@@ -1925,13 +1934,13 @@ export default async function DashboardPage() {
 
                 <div className="flex items-center gap-3">
 
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 text-purple-700">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EDF2F9] text-[#142B4F]">
                     <ClipboardCheck className="h-5 w-5" />
                   </div>
 
                   <div>
 
-                    <h2 className="text-lg font-bold text-slate-900">
+                    <h2 className="text-lg font-bold text-[#08172F]">
                       Reports Required
                     </h2>
 
@@ -1947,7 +1956,7 @@ export default async function DashboardPage() {
 
               <Link
                 href="#reports-required"
-                className="text-sm font-semibold text-purple-700 hover:text-purple-900"
+                className="text-sm font-semibold text-[#142B4F] hover:text-purple-900"
               >
                 View all
               </Link>
@@ -1960,14 +1969,14 @@ export default async function DashboardPage() {
                 <Link
                   key={task.id}
                   href={`/dashboard/tasks/${task.id}`}
-                  className="group block px-6 py-5 transition hover:bg-purple-50"
+                  className="group block px-6 py-5 transition hover:bg-[#EDF2F9]"
                 >
 
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
                     <div className="min-w-0">
 
-                      <p className="font-semibold text-slate-900 group-hover:text-purple-700">
+                      <p className="font-semibold text-[#08172F] group-hover:text-[#142B4F]">
                         {task.title}
                       </p>
 
@@ -1988,7 +1997,7 @@ export default async function DashboardPage() {
                         </span>
                       )}
 
-                      <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700">
+                      <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-[#142B4F]">
                         Report Required
                       </span>
 
@@ -2015,7 +2024,7 @@ export default async function DashboardPage() {
 
             <div className="mb-4">
 
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-[#08172F]">
                 Upcoming Work
               </h2>
 
@@ -2029,19 +2038,19 @@ export default async function DashboardPage() {
 
               {/* UPCOMING TASKS */}
 
-              <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+              <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
                 <div className="border-b border-slate-200 px-5 py-4">
 
                   <div className="flex items-center gap-3">
 
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                       <CheckSquare className="h-4 w-4" />
                     </div>
 
                     <div>
 
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[#08172F]">
                         Upcoming Tasks
                       </h3>
 
@@ -2069,7 +2078,7 @@ export default async function DashboardPage() {
                         className="group block p-5 transition hover:bg-slate-50"
                       >
 
-                        <p className="font-semibold text-slate-900 group-hover:text-blue-700">
+                        <p className="font-semibold text-[#08172F] group-hover:text-[#A68122]">
                           {task.title}
                         </p>
 
@@ -2088,7 +2097,7 @@ export default async function DashboardPage() {
 
                         <div className="mt-3">
 
-                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#142B4F]">
                             Open Task
                             <ArrowRight className="h-3.5 w-3.5" />
                           </span>
@@ -2105,19 +2114,19 @@ export default async function DashboardPage() {
 
               {/* UPCOMING DEADLINES */}
 
-              <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+              <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
                 <div className="border-b border-slate-200 px-5 py-4">
 
                   <div className="flex items-center gap-3">
 
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-50 text-purple-700">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                       <CalendarDays className="h-4 w-4" />
                     </div>
 
                     <div>
 
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[#08172F]">
                         Upcoming Deadlines
                       </h3>
 
@@ -2145,7 +2154,7 @@ export default async function DashboardPage() {
                         className="group block p-5 transition hover:bg-slate-50"
                       >
 
-                        <p className="font-semibold text-slate-900 group-hover:text-purple-700">
+                        <p className="font-semibold text-[#08172F] group-hover:text-[#142B4F]">
                           {deadline.title}
                         </p>
 
@@ -2162,7 +2171,7 @@ export default async function DashboardPage() {
 
                         <div className="mt-3">
 
-                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-700">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#142B4F]">
                             Open Deadline
                             <ArrowRight className="h-3.5 w-3.5" />
                           </span>
@@ -2179,19 +2188,19 @@ export default async function DashboardPage() {
 
               {/* UPCOMING CORRESPONDENCE */}
 
-              <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+              <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
                 <div className="border-b border-slate-200 px-5 py-4">
 
                   <div className="flex items-center gap-3">
 
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-700">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                       <Mail className="h-4 w-4" />
                     </div>
 
                     <div>
 
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[#08172F]">
                         Upcoming Responses
                       </h3>
 
@@ -2219,7 +2228,7 @@ export default async function DashboardPage() {
                         className="group block p-5 transition hover:bg-slate-50"
                       >
 
-                        <p className="truncate font-semibold text-slate-900 group-hover:text-orange-700">
+                        <p className="truncate font-semibold text-[#08172F] group-hover:text-[#142B4F]">
                           {correspondence.subject}
                         </p>
 
@@ -2236,7 +2245,7 @@ export default async function DashboardPage() {
 
                         <div className="mt-3">
 
-                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#142B4F]">
                             Open Correspondence
                             <ArrowRight className="h-3.5 w-3.5" />
                           </span>
@@ -2264,7 +2273,7 @@ export default async function DashboardPage() {
 
           <div className="mb-4">
 
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-lg font-bold text-[#08172F]">
               Quick Access
             </h2>
 
@@ -2280,16 +2289,16 @@ export default async function DashboardPage() {
 
             <Link
               href="/dashboard/clients"
-              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md hover:ring-blue-200"
+              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md hover:ring-blue-200"
             >
 
               <div className="flex items-start justify-between">
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EDF2F9] text-[#142B4F]">
                   <Users className="h-6 w-6" />
                 </div>
 
-                <ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-blue-600" />
+                <ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-[#A68122]" />
 
               </div>
 
@@ -2297,7 +2306,7 @@ export default async function DashboardPage() {
                 Clients
               </p>
 
-              <p className="mt-1 text-3xl font-bold text-slate-900">
+              <p className="mt-1 text-3xl font-bold text-[#08172F]">
                 {clientsCount}
               </p>
 
@@ -2311,12 +2320,12 @@ export default async function DashboardPage() {
 
             <Link
               href="/dashboard/matters"
-              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md hover:ring-purple-200"
+              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md hover:ring-[#DDE6F2]"
             >
 
               <div className="flex items-start justify-between">
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-50 text-purple-700">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EDF2F9] text-[#142B4F]">
                   <BriefcaseBusiness className="h-6 w-6" />
                 </div>
 
@@ -2328,7 +2337,7 @@ export default async function DashboardPage() {
                 Matters
               </p>
 
-              <p className="mt-1 text-3xl font-bold text-slate-900">
+              <p className="mt-1 text-3xl font-bold text-[#08172F]">
                 {mattersCount}
               </p>
 
@@ -2342,7 +2351,7 @@ export default async function DashboardPage() {
 
             <Link
               href="/dashboard/documents"
-              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md hover:ring-green-200"
+              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md hover:ring-green-200"
             >
 
               <div className="flex items-start justify-between">
@@ -2359,7 +2368,7 @@ export default async function DashboardPage() {
                 Documents
               </p>
 
-              <p className="mt-1 text-3xl font-bold text-slate-900">
+              <p className="mt-1 text-3xl font-bold text-[#08172F]">
                 {documentsCount}
               </p>
 
@@ -2373,12 +2382,12 @@ export default async function DashboardPage() {
 
             <Link
               href="/dashboard/tasks"
-              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md hover:ring-orange-200"
+              className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md hover:ring-orange-200"
             >
 
               <div className="flex items-start justify-between">
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-700">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EDF2F9] text-[#142B4F]">
                   <CheckSquare className="h-6 w-6" />
                 </div>
 
@@ -2390,7 +2399,7 @@ export default async function DashboardPage() {
                 Tasks
               </p>
 
-              <p className="mt-1 text-3xl font-bold text-slate-900">
+              <p className="mt-1 text-3xl font-bold text-[#08172F]">
                 {tasksCount}
               </p>
 
@@ -2405,7 +2414,7 @@ export default async function DashboardPage() {
             {isFinanceUser && (
               <Link
                 href="/dashboard/finance"
-                className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md hover:ring-emerald-200"
+                className="group rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#DFE5EE] transition hover:-translate-y-0.5 hover:shadow-md hover:ring-emerald-200"
               >
 
                 <div className="flex items-start justify-between">
@@ -2422,7 +2431,7 @@ export default async function DashboardPage() {
                   Finance
                 </p>
 
-                <p className="mt-1 text-3xl font-bold text-slate-900">
+                <p className="mt-1 text-3xl font-bold text-[#08172F]">
                   Vault
                 </p>
 
@@ -2445,13 +2454,13 @@ export default async function DashboardPage() {
 
           {/* RECENT DOCUMENTS */}
 
-          <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+          <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
             <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
 
               <div>
 
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-[#08172F]">
                   Recent Documents
                 </h2>
 
@@ -2463,7 +2472,7 @@ export default async function DashboardPage() {
 
               <Link
                 href="/dashboard/documents"
-                className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+                className="text-sm font-semibold text-[#142B4F] hover:text-blue-900"
               >
                 View all
               </Link>
@@ -2475,7 +2484,7 @@ export default async function DashboardPage() {
 
                 <FileText className="mx-auto h-10 w-10 text-slate-300" />
 
-                <p className="mt-3 font-semibold text-slate-900">
+                <p className="mt-3 font-semibold text-[#08172F]">
                   No documents
                 </p>
 
@@ -2486,7 +2495,7 @@ export default async function DashboardPage() {
                 {canUploadDocument && (
                   <Link
                     href="/dashboard/documents/new"
-                    className="mt-4 inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                    className="mt-4 inline-flex rounded-lg bg-[#08172F] px-4 py-2 text-sm font-semibold text-white hover:bg-[#142B4F]"
                   >
                     Upload Document
                   </Link>
@@ -2507,13 +2516,13 @@ export default async function DashboardPage() {
 
                       <div className="flex min-w-0 items-center gap-4">
 
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                           <FileText className="h-5 w-5" />
                         </div>
 
                         <div className="min-w-0">
 
-                          <p className="truncate font-semibold text-slate-900 group-hover:text-blue-700">
+                          <p className="truncate font-semibold text-[#08172F] group-hover:text-[#A68122]">
                             {document.name}
                           </p>
 
@@ -2530,7 +2539,7 @@ export default async function DashboardPage() {
 
                       </div>
 
-                      <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition group-hover:translate-x-1 group-hover:text-blue-600" />
+                      <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition group-hover:translate-x-1 group-hover:text-[#A68122]" />
 
                     </div>
 
@@ -2544,13 +2553,13 @@ export default async function DashboardPage() {
 
           {/* RECENT MATTERS */}
 
-          <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+          <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#DFE5EE]">
 
             <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
 
               <div>
 
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-[#08172F]">
                   Recent Matters
                 </h2>
 
@@ -2562,7 +2571,7 @@ export default async function DashboardPage() {
 
               <Link
                 href="/dashboard/matters"
-                className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+                className="text-sm font-semibold text-[#142B4F] hover:text-blue-900"
               >
                 View all
               </Link>
@@ -2574,7 +2583,7 @@ export default async function DashboardPage() {
 
                 <BriefcaseBusiness className="mx-auto h-10 w-10 text-slate-300" />
 
-                <p className="mt-3 font-semibold text-slate-900">
+                <p className="mt-3 font-semibold text-[#08172F]">
                   No matters
                 </p>
 
@@ -2585,7 +2594,7 @@ export default async function DashboardPage() {
                 {canCreateMatter && (
                   <Link
                     href="/dashboard/matters/new"
-                    className="mt-4 inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                    className="mt-4 inline-flex rounded-lg bg-[#08172F] px-4 py-2 text-sm font-semibold text-white hover:bg-[#142B4F]"
                   >
                     Create Matter
                   </Link>
@@ -2606,13 +2615,13 @@ export default async function DashboardPage() {
 
                       <div className="flex min-w-0 items-center gap-4">
 
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-purple-50 text-purple-700">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#EDF2F9] text-[#142B4F]">
                           <BriefcaseBusiness className="h-5 w-5" />
                         </div>
 
                         <div className="min-w-0">
 
-                          <p className="truncate font-semibold text-slate-900 group-hover:text-blue-700">
+                          <p className="truncate font-semibold text-[#08172F] group-hover:text-[#A68122]">
                             {matter.title}
                           </p>
 
@@ -2639,7 +2648,7 @@ export default async function DashboardPage() {
                           {formatStatus(matter.status)}
                         </span>
 
-                        <ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-blue-600" />
+                        <ArrowRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-[#A68122]" />
 
                       </div>
 
@@ -2659,7 +2668,7 @@ export default async function DashboardPage() {
         {/* FOOTER QUICK ACTIONS */}
         {/* ===================================================== */}
 
-        <section className="mt-8 rounded-2xl bg-slate-900 p-6 text-white">
+        <section className="mt-8 rounded-2xl bg-[#08172F] p-6 text-white">
 
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
@@ -2680,7 +2689,7 @@ export default async function DashboardPage() {
               {canCreateClient && (
                 <Link
                   href="/dashboard/clients/new"
-                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#08172F] transition hover:bg-slate-100"
                 >
                   + New Client
                 </Link>
@@ -2689,7 +2698,7 @@ export default async function DashboardPage() {
               {canCreateMatter && (
                 <Link
                   href="/dashboard/matters/new"
-                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#08172F] transition hover:bg-slate-100"
                 >
                   + New Matter
                 </Link>
@@ -2698,7 +2707,7 @@ export default async function DashboardPage() {
               {canUploadDocument && (
                 <Link
                   href="/dashboard/documents/new"
-                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#08172F] transition hover:bg-slate-100"
                 >
                   + Upload Document
                 </Link>
@@ -2707,7 +2716,7 @@ export default async function DashboardPage() {
               {canCreateTask && (
                 <Link
                   href="/dashboard/tasks/new"
-                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#08172F] transition hover:bg-slate-100"
                 >
                   + Delegate Task
                 </Link>
@@ -2716,7 +2725,7 @@ export default async function DashboardPage() {
               {canCreateCorrespondence && (
                 <Link
                   href="/dashboard/correspondence/new"
-                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#08172F] transition hover:bg-slate-100"
                 >
                   + New Correspondence
                 </Link>
