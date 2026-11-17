@@ -32,6 +32,7 @@ export type MatterMinAggregateOutputType = {
   title: string | null
   description: string | null
   practiceArea: string | null
+  matterType: string | null
   status: $Enums.MatterStatus | null
   openedAt: Date | null
   closedAt: Date | null
@@ -48,6 +49,7 @@ export type MatterMaxAggregateOutputType = {
   title: string | null
   description: string | null
   practiceArea: string | null
+  matterType: string | null
   status: $Enums.MatterStatus | null
   openedAt: Date | null
   closedAt: Date | null
@@ -64,6 +66,7 @@ export type MatterCountAggregateOutputType = {
   title: number
   description: number
   practiceArea: number
+  matterType: number
   status: number
   openedAt: number
   closedAt: number
@@ -82,6 +85,7 @@ export type MatterMinAggregateInputType = {
   title?: true
   description?: true
   practiceArea?: true
+  matterType?: true
   status?: true
   openedAt?: true
   closedAt?: true
@@ -98,6 +102,7 @@ export type MatterMaxAggregateInputType = {
   title?: true
   description?: true
   practiceArea?: true
+  matterType?: true
   status?: true
   openedAt?: true
   closedAt?: true
@@ -114,6 +119,7 @@ export type MatterCountAggregateInputType = {
   title?: true
   description?: true
   practiceArea?: true
+  matterType?: true
   status?: true
   openedAt?: true
   closedAt?: true
@@ -203,6 +209,7 @@ export type MatterGroupByOutputType = {
   title: string
   description: string | null
   practiceArea: string | null
+  matterType: string | null
   status: $Enums.MatterStatus
   openedAt: Date
   closedAt: Date | null
@@ -240,6 +247,7 @@ export type MatterWhereInput = {
   title?: Prisma.StringFilter<"Matter"> | string
   description?: Prisma.StringNullableFilter<"Matter"> | string | null
   practiceArea?: Prisma.StringNullableFilter<"Matter"> | string | null
+  matterType?: Prisma.StringNullableFilter<"Matter"> | string | null
   status?: Prisma.EnumMatterStatusFilter<"Matter"> | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFilter<"Matter"> | Date | string
   closedAt?: Prisma.DateTimeNullableFilter<"Matter"> | Date | string | null
@@ -266,6 +274,7 @@ export type MatterOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   practiceArea?: Prisma.SortOrderInput | Prisma.SortOrder
+  matterType?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   openedAt?: Prisma.SortOrder
   closedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -297,6 +306,7 @@ export type MatterWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Matter"> | string
   description?: Prisma.StringNullableFilter<"Matter"> | string | null
   practiceArea?: Prisma.StringNullableFilter<"Matter"> | string | null
+  matterType?: Prisma.StringNullableFilter<"Matter"> | string | null
   status?: Prisma.EnumMatterStatusFilter<"Matter"> | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFilter<"Matter"> | Date | string
   closedAt?: Prisma.DateTimeNullableFilter<"Matter"> | Date | string | null
@@ -322,6 +332,7 @@ export type MatterOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   practiceArea?: Prisma.SortOrderInput | Prisma.SortOrder
+  matterType?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   openedAt?: Prisma.SortOrder
   closedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -344,6 +355,7 @@ export type MatterScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Matter"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Matter"> | string | null
   practiceArea?: Prisma.StringNullableWithAggregatesFilter<"Matter"> | string | null
+  matterType?: Prisma.StringNullableWithAggregatesFilter<"Matter"> | string | null
   status?: Prisma.EnumMatterStatusWithAggregatesFilter<"Matter"> | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeWithAggregatesFilter<"Matter"> | Date | string
   closedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Matter"> | Date | string | null
@@ -358,6 +370,7 @@ export type MatterCreateInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -383,6 +396,7 @@ export type MatterUncheckedCreateInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -404,6 +418,7 @@ export type MatterUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -429,6 +444,7 @@ export type MatterUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -452,6 +468,7 @@ export type MatterCreateManyInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -466,6 +483,7 @@ export type MatterUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -481,6 +499,7 @@ export type MatterUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -512,6 +531,7 @@ export type MatterCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   practiceArea?: Prisma.SortOrder
+  matterType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   openedAt?: Prisma.SortOrder
   closedAt?: Prisma.SortOrder
@@ -528,6 +548,7 @@ export type MatterMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   practiceArea?: Prisma.SortOrder
+  matterType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   openedAt?: Prisma.SortOrder
   closedAt?: Prisma.SortOrder
@@ -544,6 +565,7 @@ export type MatterMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   practiceArea?: Prisma.SortOrder
+  matterType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   openedAt?: Prisma.SortOrder
   closedAt?: Prisma.SortOrder
@@ -790,6 +812,7 @@ export type MatterCreateWithoutFirmInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -813,6 +836,7 @@ export type MatterUncheckedCreateWithoutFirmInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -865,6 +889,7 @@ export type MatterScalarWhereInput = {
   title?: Prisma.StringFilter<"Matter"> | string
   description?: Prisma.StringNullableFilter<"Matter"> | string | null
   practiceArea?: Prisma.StringNullableFilter<"Matter"> | string | null
+  matterType?: Prisma.StringNullableFilter<"Matter"> | string | null
   status?: Prisma.EnumMatterStatusFilter<"Matter"> | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFilter<"Matter"> | Date | string
   closedAt?: Prisma.DateTimeNullableFilter<"Matter"> | Date | string | null
@@ -879,6 +904,7 @@ export type MatterCreateWithoutClientInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -902,6 +928,7 @@ export type MatterUncheckedCreateWithoutClientInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -949,6 +976,7 @@ export type MatterCreateWithoutUsersInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -973,6 +1001,7 @@ export type MatterUncheckedCreateWithoutUsersInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1009,6 +1038,7 @@ export type MatterUpdateWithoutUsersInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1033,6 +1063,7 @@ export type MatterUncheckedUpdateWithoutUsersInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1053,6 +1084,7 @@ export type MatterCreateWithoutAccessRequestsInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1077,6 +1109,7 @@ export type MatterUncheckedCreateWithoutAccessRequestsInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1113,6 +1146,7 @@ export type MatterUpdateWithoutAccessRequestsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1137,6 +1171,7 @@ export type MatterUncheckedUpdateWithoutAccessRequestsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1157,6 +1192,7 @@ export type MatterCreateWithoutFoldersInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1181,6 +1217,7 @@ export type MatterUncheckedCreateWithoutFoldersInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1217,6 +1254,7 @@ export type MatterUpdateWithoutFoldersInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1241,6 +1279,7 @@ export type MatterUncheckedUpdateWithoutFoldersInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1261,6 +1300,7 @@ export type MatterCreateWithoutDocumentsInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1285,6 +1325,7 @@ export type MatterUncheckedCreateWithoutDocumentsInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1321,6 +1362,7 @@ export type MatterUpdateWithoutDocumentsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1345,6 +1387,7 @@ export type MatterUncheckedUpdateWithoutDocumentsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1365,6 +1408,7 @@ export type MatterCreateWithoutTasksInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1389,6 +1433,7 @@ export type MatterUncheckedCreateWithoutTasksInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1425,6 +1470,7 @@ export type MatterUpdateWithoutTasksInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1449,6 +1495,7 @@ export type MatterUncheckedUpdateWithoutTasksInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1469,6 +1516,7 @@ export type MatterCreateWithoutDeadlinesInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1493,6 +1541,7 @@ export type MatterUncheckedCreateWithoutDeadlinesInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1529,6 +1578,7 @@ export type MatterUpdateWithoutDeadlinesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1553,6 +1603,7 @@ export type MatterUncheckedUpdateWithoutDeadlinesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1573,6 +1624,7 @@ export type MatterCreateWithoutCorrespondencesInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1597,6 +1649,7 @@ export type MatterUncheckedCreateWithoutCorrespondencesInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1633,6 +1686,7 @@ export type MatterUpdateWithoutCorrespondencesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1657,6 +1711,7 @@ export type MatterUncheckedUpdateWithoutCorrespondencesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1677,6 +1732,7 @@ export type MatterCreateWithoutConvertedMatterInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1701,6 +1757,7 @@ export type MatterUncheckedCreateWithoutConvertedMatterInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1737,6 +1794,7 @@ export type MatterUpdateWithoutConvertedMatterInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1761,6 +1819,7 @@ export type MatterUncheckedUpdateWithoutConvertedMatterInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1782,6 +1841,7 @@ export type MatterCreateManyFirmInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1796,6 +1856,7 @@ export type MatterUpdateWithoutFirmInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1819,6 +1880,7 @@ export type MatterUncheckedUpdateWithoutFirmInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1841,6 +1903,7 @@ export type MatterUncheckedUpdateManyWithoutFirmInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1856,6 +1919,7 @@ export type MatterCreateManyClientInput = {
   title: string
   description?: string | null
   practiceArea?: string | null
+  matterType?: string | null
   status?: $Enums.MatterStatus
   openedAt?: Date | string
   closedAt?: Date | string | null
@@ -1870,6 +1934,7 @@ export type MatterUpdateWithoutClientInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1893,6 +1958,7 @@ export type MatterUncheckedUpdateWithoutClientInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1915,6 +1981,7 @@ export type MatterUncheckedUpdateManyWithoutClientInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   practiceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matterType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2016,6 +2083,7 @@ export type MatterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   title?: boolean
   description?: boolean
   practiceArea?: boolean
+  matterType?: boolean
   status?: boolean
   openedAt?: boolean
   closedAt?: boolean
@@ -2043,6 +2111,7 @@ export type MatterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   title?: boolean
   description?: boolean
   practiceArea?: boolean
+  matterType?: boolean
   status?: boolean
   openedAt?: boolean
   closedAt?: boolean
@@ -2062,6 +2131,7 @@ export type MatterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   title?: boolean
   description?: boolean
   practiceArea?: boolean
+  matterType?: boolean
   status?: boolean
   openedAt?: boolean
   closedAt?: boolean
@@ -2081,6 +2151,7 @@ export type MatterSelectScalar = {
   title?: boolean
   description?: boolean
   practiceArea?: boolean
+  matterType?: boolean
   status?: boolean
   openedAt?: boolean
   closedAt?: boolean
@@ -2089,7 +2160,7 @@ export type MatterSelectScalar = {
   intakeId?: boolean
 }
 
-export type MatterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firmId" | "clientId" | "referenceNumber" | "title" | "description" | "practiceArea" | "status" | "openedAt" | "closedAt" | "createdAt" | "updatedAt" | "intakeId", ExtArgs["result"]["matter"]>
+export type MatterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firmId" | "clientId" | "referenceNumber" | "title" | "description" | "practiceArea" | "matterType" | "status" | "openedAt" | "closedAt" | "createdAt" | "updatedAt" | "intakeId", ExtArgs["result"]["matter"]>
 export type MatterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   deadlines?: boolean | Prisma.Matter$deadlinesArgs<ExtArgs>
   documents?: boolean | Prisma.Matter$documentsArgs<ExtArgs>
@@ -2136,6 +2207,7 @@ export type $MatterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     title: string
     description: string | null
     practiceArea: string | null
+    matterType: string | null
     status: $Enums.MatterStatus
     openedAt: Date
     closedAt: Date | null
@@ -2582,6 +2654,7 @@ export interface MatterFieldRefs {
   readonly title: Prisma.FieldRef<"Matter", 'String'>
   readonly description: Prisma.FieldRef<"Matter", 'String'>
   readonly practiceArea: Prisma.FieldRef<"Matter", 'String'>
+  readonly matterType: Prisma.FieldRef<"Matter", 'String'>
   readonly status: Prisma.FieldRef<"Matter", 'MatterStatus'>
   readonly openedAt: Prisma.FieldRef<"Matter", 'DateTime'>
   readonly closedAt: Prisma.FieldRef<"Matter", 'DateTime'>

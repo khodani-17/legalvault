@@ -147,3 +147,8 @@ export type ConflictCheck = Prisma.ConflictCheckModel
  * 
  */
 export type MatterIntake = Prisma.MatterIntakeModel
+/**
+ * Model ReferenceCounter
+ * 
+ */
+export type ReferenceCounter = Prisma.ReferenceCounterModel

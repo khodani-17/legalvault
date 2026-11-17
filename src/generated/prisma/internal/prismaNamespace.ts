@@ -422,7 +422,8 @@ export const ModelName = {
   Correspondence: 'Correspondence',
   CorrespondenceAttachment: 'CorrespondenceAttachment',
   ConflictCheck: 'ConflictCheck',
-  MatterIntake: 'MatterIntake'
+  MatterIntake: 'MatterIntake',
+  ReferenceCounter: 'ReferenceCounter'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -438,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "firm" | "subscription" | "payment" | "user" | "passwordResetToken" | "client" | "matter" | "matterUser" | "matterAccessRequest" | "folder" | "document" | "documentVersion" | "financeFolder" | "financeDocument" | "task" | "taskNote" | "taskReport" | "taskAssistanceRequest" | "taskActivity" | "deadline" | "notification" | "auditLog" | "correspondence" | "correspondenceAttachment" | "conflictCheck" | "matterIntake"
+    modelProps: "firm" | "subscription" | "payment" | "user" | "passwordResetToken" | "client" | "matter" | "matterUser" | "matterAccessRequest" | "folder" | "document" | "documentVersion" | "financeFolder" | "financeDocument" | "task" | "taskNote" | "taskReport" | "taskAssistanceRequest" | "taskActivity" | "deadline" | "notification" | "auditLog" | "correspondence" | "correspondenceAttachment" | "conflictCheck" | "matterIntake" | "referenceCounter"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2366,6 +2367,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ReferenceCounter: {
+      payload: Prisma.$ReferenceCounterPayload<ExtArgs>
+      fields: Prisma.ReferenceCounterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReferenceCounterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReferenceCounterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>
+        }
+        findFirst: {
+          args: Prisma.ReferenceCounterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReferenceCounterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>
+        }
+        findMany: {
+          args: Prisma.ReferenceCounterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>[]
+        }
+        create: {
+          args: Prisma.ReferenceCounterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>
+        }
+        createMany: {
+          args: Prisma.ReferenceCounterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReferenceCounterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>[]
+        }
+        delete: {
+          args: Prisma.ReferenceCounterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>
+        }
+        update: {
+          args: Prisma.ReferenceCounterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReferenceCounterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReferenceCounterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReferenceCounterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReferenceCounterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReferenceCounterPayload>
+        }
+        aggregate: {
+          args: Prisma.ReferenceCounterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReferenceCounter>
+        }
+        groupBy: {
+          args: Prisma.ReferenceCounterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferenceCounterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReferenceCounterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReferenceCounterCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2520,6 +2595,7 @@ export const MatterScalarFieldEnum = {
   title: 'title',
   description: 'description',
   practiceArea: 'practiceArea',
+  matterType: 'matterType',
   status: 'status',
   openedAt: 'openedAt',
   closedAt: 'closedAt',
@@ -2870,6 +2946,19 @@ export const MatterIntakeScalarFieldEnum = {
 } as const
 
 export type MatterIntakeScalarFieldEnum = (typeof MatterIntakeScalarFieldEnum)[keyof typeof MatterIntakeScalarFieldEnum]
+
+
+export const ReferenceCounterScalarFieldEnum = {
+  id: 'id',
+  firmId: 'firmId',
+  type: 'type',
+  year: 'year',
+  lastValue: 'lastValue',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferenceCounterScalarFieldEnum = (typeof ReferenceCounterScalarFieldEnum)[keyof typeof ReferenceCounterScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3536,6 +3625,7 @@ export type GlobalOmitConfig = {
   correspondenceAttachment?: Prisma.CorrespondenceAttachmentOmit
   conflictCheck?: Prisma.ConflictCheckOmit
   matterIntake?: Prisma.MatterIntakeOmit
+  referenceCounter?: Prisma.ReferenceCounterOmit
 }
 
 /* Types for Logging */

@@ -76,7 +76,8 @@ export const ModelName = {
   Correspondence: 'Correspondence',
   CorrespondenceAttachment: 'CorrespondenceAttachment',
   ConflictCheck: 'ConflictCheck',
-  MatterIntake: 'MatterIntake'
+  MatterIntake: 'MatterIntake',
+  ReferenceCounter: 'ReferenceCounter'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -210,6 +211,7 @@ export const MatterScalarFieldEnum = {
   title: 'title',
   description: 'description',
   practiceArea: 'practiceArea',
+  matterType: 'matterType',
   status: 'status',
   openedAt: 'openedAt',
   closedAt: 'closedAt',
@@ -560,6 +562,19 @@ export const MatterIntakeScalarFieldEnum = {
 } as const
 
 export type MatterIntakeScalarFieldEnum = (typeof MatterIntakeScalarFieldEnum)[keyof typeof MatterIntakeScalarFieldEnum]
+
+
+export const ReferenceCounterScalarFieldEnum = {
+  id: 'id',
+  firmId: 'firmId',
+  type: 'type',
+  year: 'year',
+  lastValue: 'lastValue',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferenceCounterScalarFieldEnum = (typeof ReferenceCounterScalarFieldEnum)[keyof typeof ReferenceCounterScalarFieldEnum]
 
 
 export const SortOrder = {
