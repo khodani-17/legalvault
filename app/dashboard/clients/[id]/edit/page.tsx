@@ -186,7 +186,7 @@ export default function EditClientPage() {
             Client Management
           </p>
 
-          <h1 className="mt-1 text-3xl font-bold text-slate-900">
+          <h1 className="mt-1 text-3xl font-bold text-navy">
             Edit Client
           </h1>
 
@@ -220,7 +220,7 @@ export default function EditClientPage() {
                     event.target.value,
                   )
                 }
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               >
                 <option value="INDIVIDUAL">
                   Individual
@@ -259,7 +259,7 @@ export default function EditClientPage() {
                   )
                 }
                 placeholder="Enter client name"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -278,7 +278,7 @@ export default function EditClientPage() {
                   )
                 }
                 placeholder="client@example.com"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -296,7 +296,7 @@ export default function EditClientPage() {
                   )
                 }
                 placeholder="+27 ..."
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -314,7 +314,7 @@ export default function EditClientPage() {
                   )
                 }
                 placeholder="ID or registration number"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -332,7 +332,7 @@ export default function EditClientPage() {
                   )
                 }
                 placeholder="Client address"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
           </div>
@@ -352,7 +352,7 @@ export default function EditClientPage() {
                 )
               }
               placeholder="Additional information about the client..."
-              className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+              className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
             />
           </div>
 
@@ -371,7 +371,7 @@ export default function EditClientPage() {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-lg bg-slate-900 px-6 py-3 font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-navy px-6 py-3 font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               {saving
                 ? "Saving..."

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -850,7 +850,7 @@ export default function DocumentsPage() {
               Document Management
             </p>
 
-            <h1 className="mt-1 text-3xl font-bold text-slate-900">
+            <h1 className="mt-1 text-3xl font-bold text-navy">
               Documents
             </h1>
 
@@ -876,7 +876,7 @@ export default function DocumentsPage() {
             {can("documents.upload") && (
               <Link
                 href="/dashboard/documents/new"
-                className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-3 font-medium text-white transition hover:bg-slate-800"
+                className="inline-flex items-center justify-center rounded-lg bg-navy px-5 py-3 font-medium text-white transition hover:bg-navy"
               >
                 + Upload Document
               </Link>
@@ -964,7 +964,7 @@ export default function DocumentsPage() {
 
                 </div>
 
-                <p className="mt-3 text-3xl font-bold text-slate-900">
+                <p className="mt-3 text-3xl font-bold text-navy">
                   {totalDocuments}
                 </p>
 
@@ -986,7 +986,7 @@ export default function DocumentsPage() {
 
                 </div>
 
-                <p className="mt-3 text-3xl font-bold text-slate-900">
+                <p className="mt-3 text-3xl font-bold text-navy">
                   {activeDocuments}
                 </p>
 
@@ -1008,7 +1008,7 @@ export default function DocumentsPage() {
 
                 </div>
 
-                <p className="mt-3 text-3xl font-bold text-slate-900">
+                <p className="mt-3 text-3xl font-bold text-navy">
                   {archivedDocuments}
                 </p>
 
@@ -1024,13 +1024,13 @@ export default function DocumentsPage() {
                     Current Results
                   </p>
 
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold/15">
                     🔎
                   </span>
 
                 </div>
 
-                <p className="mt-3 text-3xl font-bold text-slate-900">
+                <p className="mt-3 text-3xl font-bold text-navy">
                   {filteredDocuments.length}
                 </p>
 
@@ -1051,7 +1051,7 @@ export default function DocumentsPage() {
 
                 <div>
 
-                  <h2 className="font-semibold text-slate-900">
+                  <h2 className="font-semibold text-navy">
                     Document Repository
                   </h2>
 
@@ -1069,7 +1069,7 @@ export default function DocumentsPage() {
                   onClick={
                     clearFilters
                   }
-                  className="text-sm font-medium text-blue-600 hover:text-blue-800"
+                  className="text-sm font-medium text-navy hover:text-navy"
                 >
                   Clear filters
                 </button>
@@ -1099,7 +1099,7 @@ export default function DocumentsPage() {
                       )
                     }
                     placeholder="Search by name, reference, matter or tag..."
-                    className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
 
                 </div>
@@ -1123,7 +1123,7 @@ export default function DocumentsPage() {
                         event.target.value
                       )
                     }
-                    className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   >
                     <option value="">
                       All Matters
@@ -1170,7 +1170,7 @@ export default function DocumentsPage() {
                         event.target.value
                       )
                     }
-                    className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   >
                     <option value="">
                       All Categories
@@ -1213,7 +1213,7 @@ export default function DocumentsPage() {
                         event.target.value
                       )
                     }
-                    className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   >
                     <option value="">
                       All Folders
@@ -1259,7 +1259,7 @@ export default function DocumentsPage() {
                     className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
                       statusFilter ===
                       status
-                        ? "bg-slate-900 text-white"
+                        ? "bg-navy text-white"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                     }`}
                   >
@@ -1297,7 +1297,7 @@ export default function DocumentsPage() {
                           .value as SortOption
                       )
                     }
-                    className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   >
                     <option value="newest">
                       Newest first
@@ -1346,7 +1346,7 @@ export default function DocumentsPage() {
                         )
                       )
                     }
-                    className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   >
                     <option value={10}>
                       10
@@ -1383,7 +1383,7 @@ export default function DocumentsPage() {
                   📄
                 </div>
 
-                <h2 className="text-xl font-semibold text-slate-900">
+                <h2 className="text-xl font-semibold text-navy">
                   No documents yet
                 </h2>
 
@@ -1397,7 +1397,7 @@ export default function DocumentsPage() {
                 {can("documents.upload") && (
                   <Link
                     href="/dashboard/documents/new"
-                    className="mt-6 inline-flex rounded-lg bg-slate-900 px-5 py-3 font-medium text-white hover:bg-slate-800"
+                    className="mt-6 inline-flex rounded-lg bg-navy px-5 py-3 font-medium text-white hover:bg-navy"
                   >
                     Upload your first
                     document
@@ -1414,7 +1414,7 @@ export default function DocumentsPage() {
                   🔎
                 </div>
 
-                <h2 className="text-xl font-semibold text-slate-900">
+                <h2 className="text-xl font-semibold text-navy">
                   No matching documents
                 </h2>
 
@@ -1520,7 +1520,7 @@ export default function DocumentsPage() {
 
                                       <div className="min-w-0">
 
-                                        <p className="font-semibold text-slate-900 group-hover:text-blue-600">
+                                        <p className="font-semibold text-navy group-hover:text-navy">
                                           {
                                             document.name
                                           }
@@ -1592,7 +1592,7 @@ export default function DocumentsPage() {
                                                     key={
                                                       tag
                                                     }
-                                                    className="rounded bg-blue-50 px-2 py-1 text-[11px] text-blue-700"
+                                                    className="rounded bg-gold/10 px-2 py-1 text-[11px] text-navy"
                                                   >
                                                     {
                                                       tag
@@ -1630,7 +1630,7 @@ export default function DocumentsPage() {
                                     <>
                                       <Link
                                         href={`/dashboard/matters/${document.matter.id}`}
-                                        className="font-medium text-slate-900 hover:text-blue-600"
+                                        className="font-medium text-navy hover:text-navy"
                                       >
                                         {
                                           document
@@ -1680,7 +1680,7 @@ export default function DocumentsPage() {
 
                                 <td className="px-6 py-5">
 
-                                  <span className="inline-flex rounded-lg bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-700">
+                                  <span className="inline-flex rounded-lg bg-gold/10 px-3 py-1.5 text-sm font-semibold text-navy">
                                     v
                                     {
                                       document.currentVersion
@@ -1747,7 +1747,7 @@ export default function DocumentsPage() {
                                     ) && (
                                       <a
                                         href={`/api/documents/${document.id}/download`}
-                                        className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-medium text-white transition hover:bg-slate-800"
+                                        className="rounded-lg bg-navy px-3 py-2 text-xs font-medium text-white transition hover:bg-navy"
                                       >
                                         Download
                                       </a>
@@ -1758,7 +1758,7 @@ export default function DocumentsPage() {
                                     ) && (
                                       <Link
                                         href={`/dashboard/documents/${document.id}`}
-                                        className="rounded-lg border border-blue-300 bg-blue-50 px-3 py-2 text-xs font-medium text-blue-700 transition hover:bg-blue-100"
+                                        className="rounded-lg border border-gold/50 bg-gold/10 px-3 py-2 text-xs font-medium text-navy transition hover:bg-gold/15"
                                       >
                                         Details
                                       </Link>
@@ -1845,18 +1845,18 @@ export default function DocumentsPage() {
                   <div className="text-sm text-slate-600">
 
                     Showing{" "}
-                    <span className="font-semibold text-slate-900">
+                    <span className="font-semibold text-navy">
                       {sortedDocuments.length ===
                       0
                         ? 0
                         : startIndex + 1}
                     </span>{" "}
                     to{" "}
-                    <span className="font-semibold text-slate-900">
+                    <span className="font-semibold text-navy">
                       {endIndex}
                     </span>{" "}
                     of{" "}
-                    <span className="font-semibold text-slate-900">
+                    <span className="font-semibold text-navy">
                       {
                         sortedDocuments.length
                       }
@@ -1889,13 +1889,13 @@ export default function DocumentsPage() {
 
                     <span className="px-3 text-sm text-slate-600">
                       Page{" "}
-                      <span className="font-semibold text-slate-900">
+                      <span className="font-semibold text-navy">
                         {
                           safeCurrentPage
                         }
                       </span>{" "}
                       of{" "}
-                      <span className="font-semibold text-slate-900">
+                      <span className="font-semibold text-navy">
                         {totalPages}
                       </span>
                     </span>
@@ -1973,7 +1973,7 @@ export default function DocumentsPage() {
 
                   <h2
                     id="document-action-title"
-                    className="text-xl font-semibold text-slate-900"
+                    className="text-xl font-semibold text-navy"
                   >
                     {getActionTitle()}
                   </h2>

@@ -88,12 +88,12 @@ function getSeverityConfig(
         label: "Information",
         icon: Info,
         container:
-          "border-blue-200 bg-blue-50/70",
+          "border-gold/30 bg-blue-50/70",
         iconContainer:
-          "bg-blue-100 text-blue-600",
+          "bg-gold/15 text-navy",
         title: "text-blue-950",
         badge:
-          "bg-blue-100 text-blue-700",
+          "bg-gold/15 text-navy",
         accent: "border-l-blue-500",
       };
   }
@@ -285,7 +285,7 @@ function InsightCard({
                 onClick={() =>
                   router.push(entityUrl)
                 }
-                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+                className="inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white transition hover:bg-navy"
               >
                 View {insight.entityType}
 
@@ -310,12 +310,12 @@ function SectionHeader({
 }) {
   return (
     <div className="flex items-start gap-3">
-      <div className="rounded-xl bg-slate-900 p-3">
+      <div className="rounded-xl bg-navy p-3">
         <Icon className="h-5 w-5 text-white" />
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-slate-900">
+        <h3 className="text-lg font-semibold text-navy">
           {title}
         </h3>
 
@@ -760,7 +760,7 @@ export default function BIInsights() {
             </span>
           </div>
 
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-bold tracking-tight text-navy">
             What requires attention?
           </h2>
 
@@ -779,7 +779,7 @@ export default function BIInsights() {
               Intelligence signals
             </p>
 
-            <p className="mt-1 text-xl font-bold text-slate-900">
+            <p className="mt-1 text-xl font-bold text-navy">
               {insights.length}
             </p>
           </div>
@@ -835,18 +835,18 @@ export default function BIInsights() {
           </div>
 
           {/* Information */}
-          <div className="rounded-2xl border border-blue-200 bg-white p-5 shadow-sm">
+          <div className="rounded-2xl border border-gold/30 bg-white p-5 shadow-sm">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-slate-500">
                 Information
               </span>
 
-              <div className="rounded-lg bg-blue-100 p-2">
-                <Info className="h-4 w-4 text-blue-600" />
+              <div className="rounded-lg bg-gold/15 p-2">
+                <Info className="h-4 w-4 text-navy" />
               </div>
             </div>
 
-            <p className="mt-3 text-3xl font-bold text-blue-600">
+            <p className="mt-3 text-3xl font-bold text-navy">
               {infoCount}
             </p>
 
@@ -898,7 +898,7 @@ export default function BIInsights() {
                 Current management status
               </p>
 
-              <h3 className="mt-1 text-lg font-semibold text-slate-900">
+              <h3 className="mt-1 text-lg font-semibold text-navy">
                 {managementStatus.title}
               </h3>
 
@@ -912,7 +912,7 @@ export default function BIInsights() {
                     Priority signals
                   </span>
 
-                  <span className="ml-2 font-bold text-slate-900">
+                  <span className="ml-2 font-bold text-navy">
                     {criticalCount +
                       warningCount}
                   </span>
@@ -923,7 +923,7 @@ export default function BIInsights() {
                     Information gaps
                   </span>
 
-                  <span className="ml-2 font-bold text-slate-900">
+                  <span className="ml-2 font-bold text-navy">
                     {informationCategoryCount}
                   </span>
                 </div>
@@ -933,7 +933,7 @@ export default function BIInsights() {
                     Positive signals
                   </span>
 
-                  <span className="ml-2 font-bold text-slate-900">
+                  <span className="ml-2 font-bold text-navy">
                     {positiveCount}
                   </span>
                 </div>

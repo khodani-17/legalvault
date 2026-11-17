@@ -1,22 +1,33 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+@source "../app";
+@source "../components";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b1f3a;
+  --foreground: #ffffff;
+
+  --lv-navy: #0b1f3a;
+  --lv-navy-light: #142d4e;
+  --lv-gold: #d4af37;
+  --lv-gold-light: #f4e5ae;
+  --lv-white: #ffffff;
+  --lv-surface: #f8fafc;
+  --lv-border: #e2e8f0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-navy: var(--lv-navy);
+  --color-navy-light: var(--lv-navy-light);
+  --color-gold: var(--lv-gold);
+  --color-gold-light: var(--lv-gold-light);
+  --color-surface: var(--lv-surface);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -24,3 +35,317 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .lv-btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-navy px-5 py-3 font-semibold text-white transition-colors hover:bg-navy-light;
+  }
+
+  .lv-btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border border-gold bg-white px-5 py-3 font-semibold text-navy transition-colors hover:bg-gold-light;
+  }
+
+  .lv-card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  }
+
+  .lv-input {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-navy outline-none focus:border-gold focus:ring-2 focus:ring-gold/20;
+  }
+
+  .lv-page-title {
+    @apply text-2xl font-bold tracking-tight text-navy;
+  }
+}
+/* LegalVault Deep Navy Search Bars */
+@layer components {
+  .lv-search-input {
+    background-color: #0B1F3A;
+    color: #FFFFFF;
+    border: 1px solid #D4AF37;
+    border-radius: 0.75rem;
+    color-scheme: dark;
+  }
+
+  .lv-search-input::placeholder {
+    color: #CBD5E1;
+    opacity: 1;
+  }
+
+  .lv-search-input:focus {
+    outline: 2px solid #D4AF37;
+    outline-offset: 1px;
+    border-color: #D4AF37;
+  }
+
+  .lv-search-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+/* LegalVault Global Search Bar Theme */
+@layer utilities {
+  input[type="search"],
+  input.lv-search-input,
+  input[placeholder*="Search"],
+  input[placeholder*="search"],
+  input[placeholder*="Find"],
+  input[placeholder*="find"] {
+    background-color: #0B1F3A;
+    color: #FFFFFF;
+    border: 1px solid #D4AF37;
+    border-radius: 0.75rem;
+    caret-color: #D4AF37;
+    color-scheme: dark;
+  }
+
+  input[type="search"]::placeholder,
+  input.lv-search-input::placeholder,
+  input[placeholder*="Search"]::placeholder,
+  input[placeholder*="search"]::placeholder,
+  input[placeholder*="Find"]::placeholder,
+  input[placeholder*="find"]::placeholder {
+    color: #CBD5E1;
+    opacity: 1;
+  }
+
+  input[type="search"]:focus,
+  input.lv-search-input:focus,
+  input[placeholder*="Search"]:focus,
+  input[placeholder*="search"]:focus,
+  input[placeholder*="Find"]:focus,
+  input[placeholder*="find"]:focus {
+    outline: 2px solid #D4AF37;
+    outline-offset: 1px;
+    border-color: #D4AF37;
+  }
+}
+
+/* LEGALVAULT FULL DARK THEME START */
+
+:root {
+  --background: #0B1F3A;
+  --foreground: #FFFFFF;
+  --lv-navy: #0B1F3A;
+  --lv-navy-light: #142D4E;
+  --lv-gold: #D4AF37;
+  --lv-gold-light: #F4E5AE;
+  --lv-muted: #CBD5E1;
+  --lv-border: #304663;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--lv-navy);
+  color: var(--foreground);
+}
+
+/* Dashboard and page containers */
+@layer utilities {
+  .bg-white,
+  .bg-slate-50,
+  .bg-slate-100,
+  .bg-gray-50,
+  .bg-gray-100,
+  .bg-surface {
+    background-color: var(--lv-navy-light);
+  }
+
+  .bg-slate-200,
+  .bg-gray-200 {
+    background-color: #203B5B;
+  }
+
+  .text-slate-900,
+  .text-slate-800,
+  .text-slate-700,
+  .text-gray-900,
+  .text-gray-800,
+  .text-gray-700 {
+    color: #FFFFFF;
+  }
+
+  .text-slate-600,
+  .text-slate-500,
+  .text-slate-400,
+  .text-gray-600,
+  .text-gray-500,
+  .text-gray-400 {
+    color: var(--lv-muted);
+  }
+
+  .border-slate-100,
+  .border-slate-200,
+  .border-slate-300,
+  .border-gray-100,
+  .border-gray-200,
+  .border-gray-300 {
+    border-color: var(--lv-border);
+  }
+
+  .ring-slate-200,
+  .ring-slate-300,
+  .ring-gray-200 {
+    --tw-ring-color: var(--lv-border);
+  }
+}
+
+/* Form controls */
+@layer components {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  textarea,
+  select {
+    background-color: #102440;
+    color: #FFFFFF;
+    border-color: #D4AF37;
+    caret-color: #D4AF37;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #CBD5E1;
+    opacity: 1;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline-color: #D4AF37;
+  }
+
+  option {
+    background-color: #142D4E;
+    color: #FFFFFF;
+  }
+}
+
+/* Common LegalVault components */
+@layer components {
+  .lv-card {
+    background-color: #142D4E;
+    color: #FFFFFF;
+    border-color: #304663;
+  }
+
+  .lv-input {
+    background-color: #102440;
+    color: #FFFFFF;
+    border-color: #D4AF37;
+  }
+
+  .lv-page-title {
+    color: #D4AF37;
+  }
+
+  .lv-btn-secondary {
+    background-color: #142D4E;
+    color: #FFFFFF;
+    border-color: #D4AF37;
+  }
+}
+
+/* LEGALVAULT FULL DARK THEME END */
+
+/* LEGALVAULT WHITE TEXT START */
+
+@layer utilities {
+  .text-navy,
+  .text-navy-light,
+  .text-gold,
+  .text-gold-light,
+  .text-slate-900,
+  .text-slate-800,
+  .text-slate-700,
+  .text-slate-600,
+  .text-slate-500,
+  .text-slate-400,
+  .text-gray-900,
+  .text-gray-800,
+  .text-gray-700,
+  .text-gray-600,
+  .text-gray-500,
+  .text-gray-400,
+  .text-blue-900,
+  .text-blue-800,
+  .text-blue-700 {
+    color: #FFFFFF;
+  }
+}
+
+@layer components {
+  body,
+  h1, h2, h3, h4, h5, h6,
+  p, label, th, td,
+  input, textarea, select {
+    color: #FFFFFF;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #FFFFFF;
+    opacity: 1;
+  }
+
+  .lv-page-title,
+  .lv-btn-primary,
+  .lv-btn-secondary {
+    color: #FFFFFF;
+  }
+}
+
+/* LEGALVAULT WHITE TEXT END */
+
+/* LEGALVAULT HIGHLIGHTING START */
+
+/* Selected text throughout the platform */
+::selection {
+  background-color: #D4AF37;
+  color: #0B1F3A;
+  -webkit-text-fill-color: #0B1F3A;
+}
+
+::-moz-selection {
+  background-color: #D4AF37;
+  color: #0B1F3A;
+}
+
+/* Text selected inside form controls */
+input::selection,
+textarea::selection {
+  background-color: #D4AF37;
+  color: #0B1F3A;
+  -webkit-text-fill-color: #0B1F3A;
+}
+
+/* Keyboard and accessible focus indicators */
+:where(
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  summary,
+  [role="button"],
+  [tabindex]
+):focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 3px;
+}
+
+/* Hover highlighting for interactive rows */
+@media (hover: hover) {
+  tbody tr:hover {
+    background-color: #203B5B;
+  }
+}
+
+/* Highlighted search results */
+mark {
+  background-color: #D4AF37;
+  color: #0B1F3A;
+  -webkit-text-fill-color: #0B1F3A;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* LEGALVAULT HIGHLIGHTING END */

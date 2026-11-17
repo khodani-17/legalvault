@@ -80,9 +80,9 @@ function getIssueClasses(
 
     case "INFO":
       return {
-        container: "border-blue-200 bg-blue-50",
-        icon: "bg-blue-100 text-blue-700",
-        label: "text-blue-700",
+        container: "border-gold/30 bg-gold/10",
+        icon: "bg-gold/15 text-navy",
+        label: "text-navy",
       };
 
     case "POSITIVE":
@@ -147,7 +147,7 @@ function StatCard({
         {label}
       </p>
 
-      <p className="mt-2 text-2xl font-bold text-slate-900">
+      <p className="mt-2 text-2xl font-bold text-navy">
         {value}
       </p>
 
@@ -192,12 +192,12 @@ export default function MatterControl({
           <div>
             <div className="flex items-center gap-3">
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-lg text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-lg text-white">
                 ✓
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-slate-900">
+                <h2 className="text-xl font-bold text-navy">
                   Matter Control
                 </h2>
 
@@ -365,7 +365,7 @@ export default function MatterControl({
 
           <div className="mb-5">
 
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-navy">
               Issues Requiring Attention
             </h3>
 
@@ -407,7 +407,7 @@ export default function MatterControl({
 
                       <div className="flex flex-wrap items-center gap-2">
 
-                        <h4 className="font-bold text-slate-900">
+                        <h4 className="font-bold text-navy">
                           {issue.title}
                         </h4>
 
@@ -486,7 +486,7 @@ export default function MatterControl({
 
           <div className="mb-5">
 
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-navy">
               Recent Matter Activity
             </h3>
 
@@ -513,7 +513,7 @@ export default function MatterControl({
 
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
 
-                      <p className="text-sm font-semibold text-slate-900">
+                      <p className="text-sm font-semibold text-navy">
                         {entry.action}
                       </p>
 

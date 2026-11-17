@@ -28,6 +28,7 @@ model Firm {
 
   auditLogs        AuditLog[]
   clients          Client[]
+    referenceCounters ReferenceCounter[]
   conflictChecks   ConflictCheck[]
   deadlines        Deadline[]
   documents        Document[]
@@ -246,6 +247,7 @@ model Matter {
   title           String
   description     String?
   practiceArea    String?
+  matterType      String?
   status          MatterStatus @default(OPEN)
   openedAt        DateTime     @default(now())
   closedAt        DateTime?
@@ -1145,4 +1147,19 @@ enum CorrespondenceStatus {
   ACTION_REQUIRED
   RESPONDED
   CLOSED
+}
+
+model ReferenceCounter {
+  id        String   @id @default(cuid())
+  firmId    String
+  type      String
+  year      Int
+  lastValue Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  firm Firm @relation(fields: [firmId], references: [id], onDelete: Cascade)
+
+  @@unique([firmId, type, year])
+  @@index([firmId])
 }

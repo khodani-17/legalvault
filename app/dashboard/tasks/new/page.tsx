@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -410,20 +410,20 @@ export default function NewTaskPage() {
       )}
 
       {loadingCorrespondence && (
-        <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800">
+        <div className="mb-6 rounded-lg border border-gold/30 bg-gold/10 p-4 text-sm text-navy">
           Loading correspondence details...
         </div>
       )}
 
       {correspondence && (
-        <section className="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
+        <section className="mb-6 rounded-xl border border-gold/30 bg-gold/10 p-6 shadow-sm">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">
+              <p className="text-xs font-semibold uppercase tracking-wide text-navy">
                 Created from Correspondence
               </p>
 
-              <h2 className="mt-1 text-lg font-semibold text-gray-900">
+              <h2 className="mt-1 text-lg font-semibold text-navy">
                 {correspondence.subject}
               </h2>
 
@@ -434,7 +434,7 @@ export default function NewTaskPage() {
               </p>
             </div>
 
-            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-blue-700">
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-navy">
               {correspondence.direction === "INCOMING"
                 ? "Incoming"
                 : "Outgoing"}
@@ -446,7 +446,7 @@ export default function NewTaskPage() {
               <p className="text-xs font-medium text-gray-500">
                 Sender
               </p>
-              <p className="mt-1 text-sm font-medium text-gray-900">
+              <p className="mt-1 text-sm font-medium text-navy">
                 {correspondence.sender}
               </p>
             </div>
@@ -455,7 +455,7 @@ export default function NewTaskPage() {
               <p className="text-xs font-medium text-gray-500">
                 Recipient
               </p>
-              <p className="mt-1 text-sm font-medium text-gray-900">
+              <p className="mt-1 text-sm font-medium text-navy">
                 {correspondence.recipient}
               </p>
             </div>
@@ -464,7 +464,7 @@ export default function NewTaskPage() {
               <p className="text-xs font-medium text-gray-500">
                 Correspondence Date
               </p>
-              <p className="mt-1 text-sm font-medium text-gray-900">
+              <p className="mt-1 text-sm font-medium text-navy">
                 {formatDisplayDate(
                   correspondence.correspondenceDate
                 )}
@@ -475,7 +475,7 @@ export default function NewTaskPage() {
               <p className="text-xs font-medium text-gray-500">
                 Type
               </p>
-              <p className="mt-1 text-sm font-medium text-gray-900">
+              <p className="mt-1 text-sm font-medium text-navy">
                 {getCorrespondenceTypeLabel(
                   correspondence.type
                 )}
@@ -487,7 +487,7 @@ export default function NewTaskPage() {
                 <p className="text-xs font-medium text-gray-500">
                   Client
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {correspondence.client.name}
                 </p>
 
@@ -504,7 +504,7 @@ export default function NewTaskPage() {
                 <p className="text-xs font-medium text-gray-500">
                   Matter
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {correspondence.matter.referenceNumber
                     ? `${correspondence.matter.referenceNumber} â€” ${correspondence.matter.title}`
                     : correspondence.matter.title}
@@ -516,7 +516,7 @@ export default function NewTaskPage() {
               <p className="text-xs font-medium text-gray-500">
                 Response Required
               </p>
-              <p className="mt-1 text-sm font-medium text-gray-900">
+              <p className="mt-1 text-sm font-medium text-navy">
                 {correspondence.responseRequired
                   ? "Yes"
                   : "No"}
@@ -528,7 +528,7 @@ export default function NewTaskPage() {
                 <p className="text-xs font-medium text-gray-500">
                   Response Deadline
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {formatDisplayDate(
                     correspondence.responseDeadline
                   )}
@@ -789,7 +789,7 @@ export default function NewTaskPage() {
           </p>
 
           {correspondence?.responseRequired && (
-            <span className="mt-3 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+            <span className="mt-3 inline-flex rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold text-navy">
               Response required
             </span>
           )}

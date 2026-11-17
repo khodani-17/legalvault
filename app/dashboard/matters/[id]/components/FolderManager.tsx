@@ -122,7 +122,7 @@ export default function FolderManager({
     <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Folders
           </h2>
 
@@ -138,7 +138,7 @@ export default function FolderManager({
               setShowForm((current) => !current);
               setError("");
             }}
-            className="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800"
+            className="rounded-lg bg-navy px-4 py-2.5 text-sm font-medium text-white hover:bg-navy"
           >
             {showForm ? "Cancel" : "+ New Folder"}
           </button>
@@ -162,13 +162,13 @@ export default function FolderManager({
               }
               placeholder="e.g. Court Documents"
               autoFocus
-              className="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-600"
+              className="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-gold"
             />
 
             <button
               type="submit"
               disabled={creating}
-              className="rounded-lg bg-blue-700 px-5 py-3 font-medium text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-navy px-5 py-3 font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               {creating
                 ? "Creating..."
@@ -211,7 +211,7 @@ export default function FolderManager({
                 setShowForm(true);
                 setError("");
               }}
-              className="mt-4 rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
+              className="mt-4 rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-navy"
             >
               Create Folder
             </button>
@@ -230,7 +230,7 @@ export default function FolderManager({
                 </div>
 
                 <div className="min-w-0">
-                  <p className="truncate font-semibold text-slate-900">
+                  <p className="truncate font-semibold text-navy">
                     {folder.name}
                   </p>
 

@@ -94,7 +94,7 @@ export default function SignupPage() {
 
   return (
     <main
-      className="relative min-h-screen bg-slate-950 bg-cover bg-center bg-no-repeat px-6 py-10"
+      className="relative min-h-screen bg-navy bg-cover bg-center bg-no-repeat px-6 py-10"
       style={{
         backgroundImage:
           "url('/images/legal%20vault.png')",
@@ -109,11 +109,11 @@ export default function SignupPage() {
 
           {/* Header */}
           <div className="mb-8 text-center">
-            <p className="text-sm font-bold tracking-[0.25em] text-blue-700">
+            <p className="text-sm font-bold tracking-[0.25em] text-navy">
               LEGALVAULT
             </p>
 
-            <h1 className="mt-3 text-3xl font-bold text-slate-900 md:text-4xl">
+            <h1 className="mt-3 text-3xl font-bold text-navy md:text-4xl">
               Create your law firm account
             </h1>
 
@@ -141,7 +141,7 @@ export default function SignupPage() {
             {/* Firm information */}
             <section>
               <div className="mb-5 border-b border-slate-200 pb-4">
-                <h2 className="text-lg font-semibold text-slate-900">
+                <h2 className="text-lg font-semibold text-navy">
                   Law firm information
                 </h2>
 
@@ -173,7 +173,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="Law Firm"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -200,7 +200,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="2020/123456/21"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -225,7 +225,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="info@lawfirm.co.za"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -250,7 +250,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="+27 11 123 4567"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -275,7 +275,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="Pretoria, Gauteng"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
               </div>
@@ -284,7 +284,7 @@ export default function SignupPage() {
             {/* Administrator */}
             <section>
               <div className="mb-5 border-b border-slate-200 pb-4">
-                <h2 className="text-lg font-semibold text-slate-900">
+                <h2 className="text-lg font-semibold text-navy">
                   Administrator account
                 </h2>
 
@@ -317,7 +317,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="John Doe"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -343,7 +343,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="admin@lawfirm.co.za"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -370,7 +370,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="Minimum 8 characters"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -397,7 +397,7 @@ export default function SignupPage() {
                       )
                     }
                     placeholder="Re-enter your password"
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
               </div>
@@ -405,7 +405,7 @@ export default function SignupPage() {
 
             {/* Free trial notice */}
             <div className="rounded-xl border border-emerald-100 bg-emerald-50/90 p-5">
-              <h3 className="font-semibold text-slate-900">
+              <h3 className="font-semibold text-navy">
                 Your 14-day free trial
               </h3>
 
@@ -462,7 +462,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-lg bg-navy px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading
                 ? "Creating firm account..."
@@ -478,7 +478,7 @@ export default function SignupPage() {
 
             <Link
               href="/login"
-              className="mt-2 inline-block text-sm font-semibold text-blue-700 hover:text-blue-900 hover:underline"
+              className="mt-2 inline-block text-sm font-semibold text-navy hover:text-navy hover:underline"
             >
               Sign in
             </Link>

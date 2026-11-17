@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useState } from "react";
 
@@ -466,7 +466,7 @@ export default function TaskWorkflow({
                 Employee Workflow
               </p>
 
-              <h2 className="mt-1 text-lg font-semibold text-slate-900">
+              <h2 className="mt-1 text-lg font-semibold text-navy">
                 Work on this task
               </h2>
 
@@ -493,7 +493,7 @@ export default function TaskWorkflow({
               onSubmit={submitUpdate}
               className="mt-6"
             >
-              <label className="text-sm font-semibold text-slate-900">
+              <label className="text-sm font-semibold text-navy">
                 Add Update
               </label>
 
@@ -506,7 +506,7 @@ export default function TaskWorkflow({
                 }
                 rows={4}
                 placeholder="Describe the progress you have made..."
-                className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
 
               <button
@@ -514,7 +514,7 @@ export default function TaskWorkflow({
                 disabled={
                   loading === "update"
                 }
-                className="mt-3 rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className="mt-3 rounded-lg bg-navy px-5 py-3 text-sm font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {loading === "update"
                   ? "Adding Update..."
@@ -531,7 +531,7 @@ export default function TaskWorkflow({
                 className="mt-8 border-t border-slate-200 pt-8"
               >
                 <div>
-                  <h3 className="text-base font-semibold text-slate-900">
+                  <h3 className="text-base font-semibold text-navy">
                     Report Back
                   </h3>
 
@@ -555,7 +555,7 @@ export default function TaskWorkflow({
                         event.target.value
                       )
                     }
-                    className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                   >
                     <option value="COMPLETED">
                       Completed
@@ -590,7 +590,7 @@ export default function TaskWorkflow({
                     }
                     rows={6}
                     placeholder="Explain what you did, what you found, and the outcome..."
-                    className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -612,7 +612,7 @@ export default function TaskWorkflow({
                     }
                     rows={3}
                     placeholder="What should happen next?"
-                    className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                   />
                 </div>
 
@@ -637,7 +637,7 @@ export default function TaskWorkflow({
                 onSubmit={requestAssistance}
                 className="mt-8 border-t border-slate-200 pt-8"
               >
-                <h3 className="text-base font-semibold text-slate-900">
+                <h3 className="text-base font-semibold text-navy">
                   Request Assistance
                 </h3>
 
@@ -655,7 +655,7 @@ export default function TaskWorkflow({
                   }
                   rows={4}
                   placeholder="Explain what assistance you need..."
-                  className="mt-4 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className="mt-4 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
 
                 <button
@@ -689,12 +689,12 @@ export default function TaskWorkflow({
                 Task Report
               </p>
 
-              <h2 className="mt-1 text-lg font-semibold text-slate-900">
+              <h2 className="mt-1 text-lg font-semibold text-navy">
                 Report Back
               </h2>
             </div>
 
-            <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase text-blue-700">
+            <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold uppercase text-navy">
               {formatOutcome(
                 task.latestReport.outcome
               )}
@@ -709,7 +709,7 @@ export default function TaskWorkflow({
                 Submitted By
               </p>
 
-              <p className="mt-1 text-sm font-medium text-slate-900">
+              <p className="mt-1 text-sm font-medium text-navy">
                 {task.latestReport.submittedBy.name ||
                   "Unnamed user"}
               </p>
@@ -752,7 +752,7 @@ export default function TaskWorkflow({
                   Reviewed
                 </p>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {task.latestReport.reviewedBy?.name ||
                     "Reviewer"}
                 </p>
@@ -786,7 +786,7 @@ export default function TaskWorkflow({
             hasPendingReport && (
               <div className="mt-6 border-t border-slate-200 pt-6">
 
-                <h3 className="text-base font-semibold text-slate-900">
+                <h3 className="text-base font-semibold text-navy">
                   Review Report
                 </h3>
 
@@ -817,7 +817,7 @@ export default function TaskWorkflow({
                   }
                   rows={4}
                   placeholder="Add a review note..."
-                  className="mt-4 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className="mt-4 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
 
                 <div className="mt-4 flex flex-wrap gap-3">
@@ -880,7 +880,7 @@ export default function TaskWorkflow({
               Support
             </p>
 
-            <h2 className="mt-1 text-lg font-semibold text-slate-900">
+            <h2 className="mt-1 text-lg font-semibold text-navy">
               Assistance Requests
             </h2>
           </div>
@@ -897,7 +897,7 @@ export default function TaskWorkflow({
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
 
                     <div>
-                      <p className="font-medium text-slate-900">
+                      <p className="font-medium text-navy">
                         {request.requestedBy.name ||
                           "Unnamed user"}
                       </p>
@@ -980,7 +980,7 @@ export default function TaskWorkflow({
                           }
                           rows={4}
                           placeholder="Provide guidance or assistance..."
-                          className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                          className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                         />
 
                         <button
@@ -994,7 +994,7 @@ export default function TaskWorkflow({
                               request.id
                             )
                           }
-                          className="mt-3 rounded-lg bg-slate-900 px-5 py-3 text-sm font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="mt-3 rounded-lg bg-navy px-5 py-3 text-sm font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {loading ===
                           `assistance-${request.id}`
@@ -1017,7 +1017,7 @@ export default function TaskWorkflow({
       {/* WORKFLOW SUMMARY */}
       {/* ================================================= */}
 
-      <section className="rounded-2xl bg-slate-900 p-6 text-white shadow-sm">
+      <section className="rounded-2xl bg-navy p-6 text-white shadow-sm">
 
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
           Workflow

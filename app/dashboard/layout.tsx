@@ -176,35 +176,35 @@ export default async function DashboardLayout({
 
   return (
     <AuthSessionProvider>
-      <div className="min-h-screen bg-slate-50">
-        <div className="flex min-h-screen">
+      <div className="min-h-screen bg-navy text-white">
+        <div className="flex h-screen overflow-hidden bg-navy">
 
           {/* ------------------------------------------------
               SIDEBAR
           ------------------------------------------------ */}
 
-          <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-900 text-white md:block">
+          <aside className="hidden h-screen w-64 shrink-0 overflow-hidden border-r border-gold/20 bg-navy text-white md:block">
             <div className="flex h-screen flex-col">
 
               {/* BRAND */}
 
-              <div className="shrink-0 border-b border-slate-800 px-6 py-6">
+              <div className="shrink-0 border-b border-white/15 px-6 py-6">
                 <Link
                   href="/dashboard"
-                  className="text-xl font-bold tracking-tight"
+                  className="text-xl font-bold tracking-tight text-gold"
                 >
                   LegalVault
                 </Link>
 
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="mt-1 text-xs text-white/60">
                   Legal Document Management
                 </p>
               </div>
 
               {/* NAVIGATION */}
 
-              <nav className="min-h-0 flex-1 overflow-y-auto px-4 py-6 scrollbar-thin scrollbar-track-slate-900 scrollbar-thumb-slate-700">
-                <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <nav className="min-h-0 flex-1 overflow-y-auto px-4 py-6 scrollbar-thin scrollbar-track-navy scrollbar-thumb-gold/40">
+                <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-white/50">
                   Main Menu
                 </p>
 
@@ -217,7 +217,7 @@ export default async function DashboardLayout({
                   {canViewAudit && (
                     <Link
                       href="/dashboard/audit"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <ShieldCheck className="h-5 w-5 shrink-0" />
                       Audit Trail
@@ -231,7 +231,7 @@ export default async function DashboardLayout({
                   {canViewBusinessIntelligence && (
                     <Link
                       href="/dashboard/business-intelligence"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <BarChart3 className="h-5 w-5 shrink-0" />
                       Business Intelligence
@@ -245,7 +245,7 @@ export default async function DashboardLayout({
                   {canViewCalendar && (
                     <Link
                       href="/dashboard/calendar"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <CalendarDays className="h-5 w-5 shrink-0" />
                       Calendar
@@ -259,7 +259,7 @@ export default async function DashboardLayout({
                   {canViewClients && (
                     <Link
                       href="/dashboard/clients"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <Users className="h-5 w-5 shrink-0" />
                       Clients
@@ -273,7 +273,7 @@ export default async function DashboardLayout({
                   {canViewCorrespondence && (
                     <Link
                       href="/dashboard/correspondence"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <Mail className="h-5 w-5 shrink-0" />
                       Correspondence
@@ -287,7 +287,7 @@ export default async function DashboardLayout({
                   {canViewDashboard && (
                     <Link
                       href="/dashboard"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <LayoutDashboard className="h-5 w-5 shrink-0" />
                       Dashboard
@@ -301,7 +301,7 @@ export default async function DashboardLayout({
                   {canViewDeadlines && (
                     <Link
                       href="/dashboard/deadlines"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <CalendarClock className="h-5 w-5 shrink-0" />
                       Deadlines
@@ -315,7 +315,7 @@ export default async function DashboardLayout({
                   {canViewDocuments && (
                     <Link
                       href="/dashboard/documents"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <FileText className="h-5 w-5 shrink-0" />
                       Documents
@@ -329,7 +329,7 @@ export default async function DashboardLayout({
                   {isFinanceUser && (
                     <Link
                       href="/dashboard/finance"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <WalletCards className="h-5 w-5 shrink-0" />
                       Finance
@@ -342,7 +342,7 @@ export default async function DashboardLayout({
 
                   <Link
                     href="/dashboard/firm"
-                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                   >
                     <Building2 className="h-5 w-5 shrink-0" />
                     Firm Profile
@@ -355,7 +355,7 @@ export default async function DashboardLayout({
                   {canViewMatters && (
                     <Link
                       href="/dashboard/matters"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <BriefcaseBusiness className="h-5 w-5 shrink-0" />
                       Matters
@@ -368,7 +368,7 @@ export default async function DashboardLayout({
 
                   <Link
                     href="/dashboard/settings"
-                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                   >
                     <Settings className="h-5 w-5 shrink-0" />
                     Settings
@@ -381,7 +381,7 @@ export default async function DashboardLayout({
                   {canViewTasks && (
                     <Link
                       href="/dashboard/tasks"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <CheckSquare className="h-5 w-5 shrink-0" />
                       Tasks
@@ -395,7 +395,7 @@ export default async function DashboardLayout({
                   {canViewUsers && (
                     <Link
                       href="/dashboard/users"
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-navy-light hover:text-gold"
                     >
                       <Users className="h-5 w-5 shrink-0" />
                       Users
@@ -409,10 +409,10 @@ export default async function DashboardLayout({
                   LOGOUT / FOOTER
               ------------------------------------------------ */}
 
-              <div className="shrink-0 border-t border-slate-800 px-4 py-4">
+              <div className="shrink-0 border-t border-white/15 px-4 py-4">
                 <LogoutButton />
 
-                <p className="mt-3 px-3 text-xs text-slate-500">
+                <p className="mt-3 px-3 text-xs text-white/50">
                   LegalVault
                 </p>
               </div>
@@ -424,20 +424,20 @@ export default async function DashboardLayout({
               MAIN CONTENT
           ------------------------------------------------ */}
 
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 h-screen flex-1 overflow-y-auto bg-navy text-white">
 
             {/* DESKTOP HEADER */}
 
-            <header className="hidden items-center justify-end border-b border-slate-200 bg-white px-6 py-3 md:flex">
+            <header className="hidden items-center justify-end border-b border-gold/20 bg-navy-light px-6 py-3 text-white md:flex">
               <NotificationBell />
             </header>
 
             {/* MOBILE HEADER */}
 
-            <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4 md:hidden">
+            <header className="flex items-center justify-between border-b border-gold/20 bg-navy-light px-6 py-4 text-white md:hidden">
               <Link
                 href="/dashboard"
-                className="text-lg font-bold text-slate-900"
+                className="text-lg font-bold text-gold"
               >
                 LegalVault
               </Link>

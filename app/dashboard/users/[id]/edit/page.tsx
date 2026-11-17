@@ -595,7 +595,7 @@ export default function EditUserPage() {
             Administration
           </p>
 
-          <h1 className="mt-2 text-3xl font-bold text-slate-900">
+          <h1 className="mt-2 text-3xl font-bold text-navy">
             Edit User
           </h1>
 
@@ -634,13 +634,13 @@ export default function EditUserPage() {
                 className="h-20 w-20 rounded-full object-cover ring-4 ring-slate-100"
               />
             ) : (
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-900 text-xl font-bold text-white ring-4 ring-slate-100">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-navy text-xl font-bold text-white ring-4 ring-slate-100">
                 {getInitials(user.name)}
               </div>
             )}
 
             <div>
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-xl font-bold text-navy">
                 {user.name}
               </h2>
 
@@ -683,7 +683,7 @@ export default function EditUserPage() {
         >
 
           <div className="mb-8">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Account Details
             </h2>
 
@@ -711,7 +711,7 @@ export default function EditUserPage() {
                   )
                 }
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
               />
             </div>
 
@@ -731,7 +731,7 @@ export default function EditUserPage() {
                   )
                 }
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
               />
             </div>
 
@@ -750,7 +750,7 @@ export default function EditUserPage() {
                   )
                 }
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
               >
                 <option value="">
                   Select role
@@ -792,7 +792,7 @@ export default function EditUserPage() {
                   )
                 }
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
               >
                 {statuses.map(
                   (item) => (
@@ -823,7 +823,7 @@ export default function EditUserPage() {
                   )
                 }
                 placeholder="https://example.com/profile.jpg"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
               />
 
               <p className="mt-1 text-xs text-slate-500">
@@ -838,7 +838,7 @@ export default function EditUserPage() {
 
           <div className="mt-10 border-t border-slate-200 pt-8">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Change Password
             </h2>
 
@@ -870,7 +870,7 @@ export default function EditUserPage() {
                       )
                     }
                     placeholder="Minimum 8 characters"
-                    className="w-full rounded-lg border border-slate-300 px-4 py-3 pr-20 outline-none transition focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full rounded-lg border border-slate-300 px-4 py-3 pr-20 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
                   />
 
                   <button
@@ -912,7 +912,7 @@ export default function EditUserPage() {
                     )
                   }
                   placeholder="Repeat new password"
-                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
                 />
               </div>
 
@@ -924,7 +924,7 @@ export default function EditUserPage() {
 
           <div className="mt-10 border-t border-slate-200 pt-8">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Account Information
             </h2>
 
@@ -994,7 +994,7 @@ export default function EditUserPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-lg bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {saving
                   ? "Saving..."

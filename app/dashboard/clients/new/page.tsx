@@ -73,7 +73,7 @@ export default function NewClientPage() {
             Client Management
           </p>
 
-          <h1 className="mt-1 text-3xl font-bold text-slate-900">
+          <h1 className="mt-1 text-3xl font-bold text-navy">
             Add Client
           </h1>
 
@@ -103,7 +103,7 @@ export default function NewClientPage() {
                 onChange={(event) =>
                   updateField("type", event.target.value)
                 }
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               >
                 <option value="INDIVIDUAL">
                   Individual
@@ -139,7 +139,7 @@ export default function NewClientPage() {
                   updateField("name", event.target.value)
                 }
                 placeholder="Enter client name"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -155,7 +155,7 @@ export default function NewClientPage() {
                   updateField("email", event.target.value)
                 }
                 placeholder="client@example.com"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -170,7 +170,7 @@ export default function NewClientPage() {
                   updateField("phone", event.target.value)
                 }
                 placeholder="+27 ..."
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -185,7 +185,7 @@ export default function NewClientPage() {
                   updateField("idNumber", event.target.value)
                 }
                 placeholder="ID or registration number"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -200,7 +200,7 @@ export default function NewClientPage() {
                   updateField("address", event.target.value)
                 }
                 placeholder="Client address"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
           </div>
@@ -217,7 +217,7 @@ export default function NewClientPage() {
                 updateField("notes", event.target.value)
               }
               placeholder="Additional information about the client..."
-              className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+              className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
             />
           </div>
 
@@ -233,7 +233,7 @@ export default function NewClientPage() {
             <button
               type="submit"
               disabled={loading}
-              className="rounded-lg bg-slate-900 px-6 py-3 font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-navy px-6 py-3 font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Saving..." : "Save Client"}
             </button>

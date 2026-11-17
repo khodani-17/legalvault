@@ -45,7 +45,7 @@ export default async function ClientsPage() {
           <div>
             <Link
               href="/dashboard"
-              className="text-2xl font-bold tracking-tight text-slate-900"
+              className="text-2xl font-bold tracking-tight text-navy"
             >
               LEGALVAULT
             </Link>
@@ -56,7 +56,7 @@ export default async function ClientsPage() {
           </div>
 
           <div className="text-right">
-            <p className="font-medium text-slate-900">
+            <p className="font-medium text-navy">
               {session.user.name}
             </p>
 
@@ -74,7 +74,7 @@ export default async function ClientsPage() {
               Client Management
             </p>
 
-            <h1 className="mt-1 text-3xl font-bold text-slate-900">
+            <h1 className="mt-1 text-3xl font-bold text-navy">
               Clients
             </h1>
 
@@ -86,7 +86,7 @@ export default async function ClientsPage() {
           {canCreateClients && (
             <Link
               href="/dashboard/clients/new"
-              className="rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+              className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
             >
               + Add Client
             </Link>
@@ -96,7 +96,7 @@ export default async function ClientsPage() {
         <div className="mt-8 overflow-hidden rounded-xl border bg-white shadow-sm">
           {clients.length === 0 ? (
             <div className="px-6 py-16 text-center">
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 No clients yet
               </h2>
 
@@ -109,7 +109,7 @@ export default async function ClientsPage() {
               {canCreateClients && (
                 <Link
                   href="/dashboard/clients/new"
-                  className="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white"
+                  className="mt-6 inline-block rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white"
                 >
                   Add your first client
                 </Link>
@@ -151,14 +151,14 @@ export default async function ClientsPage() {
                       <td className="px-6 py-4">
                         <Link
                           href={`/dashboard/clients/${client.id}`}
-                          className="font-medium text-slate-900 hover:underline"
+                          className="font-medium text-navy hover:underline"
                         >
                           {client.referenceNumber}
                         </Link>
                       </td>
 
                       <td className="px-6 py-4">
-                        <p className="font-medium text-slate-900">
+                        <p className="font-medium text-navy">
                           {client.name}
                         </p>
 
@@ -175,7 +175,7 @@ export default async function ClientsPage() {
                         {client.phone || "No phone"}
                       </td>
 
-                      <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                      <td className="px-6 py-4 text-sm font-medium text-navy">
                         {client._count.matters}
                       </td>
                     </tr>

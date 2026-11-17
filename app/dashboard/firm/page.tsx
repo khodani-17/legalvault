@@ -197,7 +197,7 @@ export default function FirmProfilePage() {
 
       <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-slate-900 text-white">
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-navy text-white">
             {firm.logoUrl ? (
               <img
                 src={firm.logoUrl}
@@ -210,7 +210,7 @@ export default function FirmProfilePage() {
           </div>
 
           <div>
-            <h1 className="text-2xl font-semibold text-slate-900">
+            <h1 className="text-2xl font-semibold text-navy">
               Firm Profile
             </h1>
 
@@ -226,7 +226,7 @@ export default function FirmProfilePage() {
             type="button"
             onClick={saveProfile}
             disabled={saving}
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-4 py-2.5 text-sm font-medium text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
 
@@ -254,7 +254,7 @@ export default function FirmProfilePage() {
           <Building2 className="h-5 w-5 text-slate-600" />
 
           <div>
-            <h2 className="font-semibold text-slate-900">
+            <h2 className="font-semibold text-navy">
               Firm Information
             </h2>
 
@@ -321,7 +321,7 @@ export default function FirmProfilePage() {
 
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="mb-6">
-          <h2 className="font-semibold text-slate-900">
+          <h2 className="font-semibold text-navy">
             Contact Information
           </h2>
 
@@ -392,7 +392,7 @@ export default function FirmProfilePage() {
           <CreditCard className="h-5 w-5 text-slate-600" />
 
           <div>
-            <h2 className="font-semibold text-slate-900">
+            <h2 className="font-semibold text-navy">
               Subscription
             </h2>
 
@@ -408,7 +408,7 @@ export default function FirmProfilePage() {
               <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                 Plan
               </p>
-              <p className="mt-1 font-medium text-slate-900">
+              <p className="mt-1 font-medium text-navy">
                 {label(firm.subscription.plan)}
               </p>
             </div>
@@ -417,7 +417,7 @@ export default function FirmProfilePage() {
               <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                 Status
               </p>
-              <p className="mt-1 font-medium text-slate-900">
+              <p className="mt-1 font-medium text-navy">
                 {label(firm.subscription.status)}
               </p>
             </div>
@@ -472,7 +472,7 @@ export default function FirmProfilePage() {
           <ShieldCheck className="h-5 w-5 text-slate-600" />
 
           <div>
-            <h2 className="font-semibold text-slate-900">
+            <h2 className="font-semibold text-navy">
               Account Information
             </h2>
 
@@ -515,7 +515,7 @@ export default function FirmProfilePage() {
             type="button"
             onClick={saveProfile}
             disabled={saving}
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2.5 text-sm font-medium text-white disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {saving ? "Saving..." : "Save Changes"}

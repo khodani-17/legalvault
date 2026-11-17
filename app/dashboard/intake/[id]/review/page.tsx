@@ -458,7 +458,7 @@ export default function ReviewConflictPage() {
 
             <Link
               href="/dashboard/intake"
-              className="mt-5 inline-flex rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white"
+              className="mt-5 inline-flex rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white"
             >
               Back to Intake Centre
             </Link>
@@ -500,7 +500,7 @@ export default function ReviewConflictPage() {
 
           <span>/</span>
 
-          <span className="font-medium text-slate-900">
+          <span className="font-medium text-navy">
             Review Conflict
           </span>
         </div>
@@ -512,7 +512,7 @@ export default function ReviewConflictPage() {
               Legal Intake &amp; Conflict Check Centre
             </p>
 
-            <h1 className="text-3xl font-bold tracking-tight text-slate-950">
+            <h1 className="text-3xl font-bold tracking-tight text-navy">
               Review Conflict
             </h1>
 
@@ -641,7 +641,7 @@ export default function ReviewConflictPage() {
           <div className="border-b border-slate-200 px-6 py-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-950">
+                <h2 className="text-lg font-bold text-navy">
                   Intake Summary
                 </h2>
 
@@ -666,7 +666,7 @@ export default function ReviewConflictPage() {
                 Prospective Client
               </p>
 
-              <p className="mt-1 text-sm font-bold text-slate-950">
+              <p className="mt-1 text-sm font-bold text-navy">
                 {intake.prospectiveClientName}
               </p>
             </div>
@@ -717,7 +717,7 @@ export default function ReviewConflictPage() {
                 Priority
               </p>
 
-              <p className="mt-1 text-sm font-bold text-slate-950">
+              <p className="mt-1 text-sm font-bold text-navy">
                 {formatPriority(intake.priority)}
               </p>
             </div>
@@ -737,7 +737,7 @@ export default function ReviewConflictPage() {
                 Conflict Status
               </p>
 
-              <p className="mt-1 text-sm font-semibold text-slate-900">
+              <p className="mt-1 text-sm font-semibold text-navy">
                 {formatStatus(intake.conflictStatus)}
               </p>
             </div>
@@ -847,7 +847,7 @@ export default function ReviewConflictPage() {
           <div className="border-b border-slate-200 px-6 py-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-950">
+                <h2 className="text-lg font-bold text-navy">
                   Conflict Check
                 </h2>
 
@@ -886,7 +886,7 @@ export default function ReviewConflictPage() {
               {/* Search terms */}
               <div className="border-b border-slate-200 p-6">
                 <div className="mb-4">
-                  <h3 className="font-bold text-slate-950">
+                  <h3 className="font-bold text-navy">
                     Conflict Check Search Terms
                   </h3>
 
@@ -918,7 +918,7 @@ export default function ReviewConflictPage() {
               <div className="border-b border-slate-200 p-6">
                 <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h3 className="font-bold text-slate-950">
+                    <h3 className="font-bold text-navy">
                       Matched Clients
                     </h3>
 
@@ -952,7 +952,7 @@ export default function ReviewConflictPage() {
                       >
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                           <div>
-                            <p className="font-bold text-slate-950">
+                            <p className="font-bold text-navy">
                               {client.name}
                             </p>
 
@@ -999,7 +999,7 @@ export default function ReviewConflictPage() {
               <div className="p-6">
                 <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h3 className="font-bold text-slate-950">
+                    <h3 className="font-bold text-navy">
                       Matched Matters
                     </h3>
 
@@ -1033,7 +1033,7 @@ export default function ReviewConflictPage() {
                       >
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                           <div>
-                            <p className="font-bold text-slate-950">
+                            <p className="font-bold text-navy">
                               {matter.title}
                             </p>
 
@@ -1079,7 +1079,7 @@ export default function ReviewConflictPage() {
         {conflictCheck && (
           <section className="mb-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="text-lg font-bold text-slate-950">
+              <h2 className="text-lg font-bold text-navy">
                 Conflict Check Record
               </h2>
 
@@ -1094,7 +1094,7 @@ export default function ReviewConflictPage() {
                   Check Status
                 </p>
 
-                <p className="mt-1 text-sm font-semibold text-slate-900">
+                <p className="mt-1 text-sm font-semibold text-navy">
                   {formatStatus(conflictCheck.status)}
                 </p>
               </div>
@@ -1104,7 +1104,7 @@ export default function ReviewConflictPage() {
                   Client Matches
                 </p>
 
-                <p className="mt-1 text-sm font-semibold text-slate-900">
+                <p className="mt-1 text-sm font-semibold text-navy">
                   {matchedClients.length}
                 </p>
               </div>
@@ -1114,7 +1114,7 @@ export default function ReviewConflictPage() {
                   Matter Matches
                 </p>
 
-                <p className="mt-1 text-sm font-semibold text-slate-900">
+                <p className="mt-1 text-sm font-semibold text-navy">
                   {matchedMatters.length}
                 </p>
               </div>
@@ -1145,7 +1145,7 @@ export default function ReviewConflictPage() {
         {/* Professional Review */}
         <section className="mb-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-200 px-6 py-5">
-            <h2 className="text-lg font-bold text-slate-950">
+            <h2 className="text-lg font-bold text-navy">
               Professional Review
             </h2>
 
@@ -1158,7 +1158,7 @@ export default function ReviewConflictPage() {
           <div className="p-6">
             <label
               htmlFor="reviewNotes"
-              className="mb-2 block text-sm font-semibold text-slate-900"
+              className="mb-2 block text-sm font-semibold text-navy"
             >
               Review Notes
             </label>
@@ -1172,7 +1172,7 @@ export default function ReviewConflictPage() {
               disabled={!canReview || submitting}
               rows={7}
               placeholder="Record the relevant circumstances, observations, checks performed, and reasoning supporting the professional determination..."
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:bg-slate-100"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-navy outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:bg-slate-100"
             />
 
             <p className="mt-2 text-xs leading-5 text-slate-500">
@@ -1202,7 +1202,7 @@ export default function ReviewConflictPage() {
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h2 className="font-bold text-slate-950">
+              <h2 className="font-bold text-navy">
                 Review Decision
               </h2>
 
@@ -1234,7 +1234,7 @@ export default function ReviewConflictPage() {
                 type="button"
                 onClick={() => submitReview("APPROVE")}
                 disabled={!canReview || submitting}
-                className="inline-flex items-center justify-center rounded-lg bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex items-center justify-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {submitting ? "Processing..." : "Approve Intake"}
               </button>
@@ -1244,17 +1244,17 @@ export default function ReviewConflictPage() {
 
         {/* Workflow */}
         <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="mb-5 text-lg font-bold text-slate-950">
+          <h2 className="mb-5 text-lg font-bold text-navy">
             Workflow
           </h2>
 
           <div className="grid gap-4 sm:grid-cols-4">
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
                 1
               </div>
 
-              <p className="font-bold text-slate-900">
+              <p className="font-bold text-navy">
                 Intake
               </p>
 
@@ -1264,11 +1264,11 @@ export default function ReviewConflictPage() {
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
                 2
               </div>
 
-              <p className="font-bold text-slate-900">
+              <p className="font-bold text-navy">
                 Conflict Check
               </p>
 
@@ -1292,11 +1292,11 @@ export default function ReviewConflictPage() {
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
                 4
               </div>
 
-              <p className="font-bold text-slate-900">
+              <p className="font-bold text-navy">
                 Matter Conversion
               </p>
 

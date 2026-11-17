@@ -581,11 +581,11 @@ export default function FinancePage() {
 
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-700">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-navy">
               LegalVault Finance
             </p>
 
-            <h1 className="text-3xl font-bold text-slate-900">
+            <h1 className="text-3xl font-bold text-navy">
               Finance Vault
             </h1>
 
@@ -615,12 +615,12 @@ export default function FinancePage() {
             SECURITY NOTICE
         ==================================================== */}
 
-        <div className="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4">
-          <p className="text-sm font-medium text-blue-900">
+        <div className="mb-6 rounded-xl border border-gold/30 bg-gold/10 p-4">
+          <p className="text-sm font-medium text-navy">
             Finance access is restricted.
           </p>
 
-          <p className="mt-1 text-sm text-blue-800">
+          <p className="mt-1 text-sm text-navy">
             Only authorised Finance users can
             access Finance documents and folders.
           </p>
@@ -651,7 +651,7 @@ export default function FinancePage() {
           {/* CREATE FOLDER */}
 
           <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Create Finance Folder
             </h2>
 
@@ -683,7 +683,7 @@ export default function FinancePage() {
                   }
                   maxLength={150}
                   placeholder="e.g. Bank Statements"
-                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
               </div>
 
@@ -703,7 +703,7 @@ export default function FinancePage() {
                       event.target.value,
                     )
                   }
-                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 >
                   <option value="">
                     No parent — top-level folder
@@ -723,7 +723,7 @@ export default function FinancePage() {
               <button
                 type="submit"
                 disabled={creatingFolder}
-                className="w-full rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {creatingFolder
                   ? "Creating..."
@@ -735,7 +735,7 @@ export default function FinancePage() {
           {/* UPLOAD DOCUMENT */}
 
           <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Upload Finance Document
             </h2>
 
@@ -789,7 +789,7 @@ export default function FinancePage() {
                       event.target.value,
                     )
                   }
-                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 >
                   <option value="">
                     Unfiled
@@ -812,7 +812,7 @@ export default function FinancePage() {
                   uploading ||
                   !selectedFile
                 }
-                className="w-full rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {uploading
                   ? "Uploading..."
@@ -835,7 +835,7 @@ export default function FinancePage() {
           <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Finance Folders
                 </h2>
 
@@ -871,7 +871,7 @@ export default function FinancePage() {
                   }
                   className={`w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition ${
                     selectedFolderId === null
-                      ? "bg-blue-50 text-blue-800"
+                      ? "bg-gold/10 text-navy"
                       : "text-slate-700 hover:bg-slate-50"
                   }`}
                 >
@@ -890,7 +890,7 @@ export default function FinancePage() {
                     className={`w-full rounded-lg px-3 py-2 text-left transition ${
                       selectedFolderId ===
                       folder.id
-                        ? "bg-blue-50 text-blue-800"
+                        ? "bg-gold/10 text-navy"
                         : "text-slate-700 hover:bg-slate-50"
                     }`}
                   >
@@ -926,7 +926,7 @@ export default function FinancePage() {
           <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-5 flex items-center justify-between">
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   {selectedFolderId
                     ? getFolderName(
                         selectedFolderId,
@@ -996,7 +996,7 @@ export default function FinancePage() {
                           className="border-b border-slate-100 last:border-0 hover:bg-slate-50"
                         >
                           <td className="px-3 py-4">
-                            <p className="text-sm font-medium text-slate-900">
+                            <p className="text-sm font-medium text-navy">
                               {
                                 financeDocument.name
                               }
@@ -1039,7 +1039,7 @@ export default function FinancePage() {
                                       financeDocument,
                                     )
                                   }
-                                  className="rounded-lg border border-blue-300 bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 shadow-sm transition hover:bg-blue-100"
+                                  className="rounded-lg border border-gold/50 bg-gold/10 px-3 py-2 text-xs font-semibold text-navy shadow-sm transition hover:bg-gold/15"
                                 >
                                   Preview
                                 </button>

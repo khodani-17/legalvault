@@ -312,7 +312,7 @@ export default async function DocumentPage({
         <div className="mb-6">
           <Link
             href={`/dashboard/matters/${document.matter.id}`}
-            className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800"
+            className="inline-flex items-center gap-2 text-sm font-medium text-navy hover:text-navy"
           >
             <span aria-hidden="true">
               ←
@@ -346,7 +346,7 @@ export default async function DocumentPage({
 
               </div>
 
-              <h1 className="mt-4 break-words text-3xl font-bold text-slate-900">
+              <h1 className="mt-4 break-words text-3xl font-bold text-navy">
                 {document.name}
               </h1>
 
@@ -356,7 +356,7 @@ export default async function DocumentPage({
 
               <p className="mt-3 text-sm text-slate-600">
                 Original file:{" "}
-                <span className="font-medium text-slate-900">
+                <span className="font-medium text-navy">
                   {document.originalName}
                 </span>
               </p>
@@ -370,7 +370,7 @@ export default async function DocumentPage({
                   href={`/api/documents/${document.id}/preview`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg border border-blue-300 bg-blue-50 px-5 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-100"
+                  className="rounded-lg border border-gold/50 bg-gold/10 px-5 py-3 text-sm font-semibold text-navy hover:bg-gold/15"
                 >
                   Preview
                 </a>
@@ -379,7 +379,7 @@ export default async function DocumentPage({
               {canDownload && (
                 <a
                   href={`/api/documents/${document.id}/download`}
-                  className="rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+                  className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
                 >
                   Download
                 </a>
@@ -404,7 +404,7 @@ export default async function DocumentPage({
 
         <section className="mt-6 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
 
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Document Information
           </h2>
 
@@ -417,7 +417,7 @@ export default async function DocumentPage({
 
               <Link
                 href={`/dashboard/matters/${document.matter.id}`}
-                className="mt-2 block font-semibold text-blue-600 hover:text-blue-800"
+                className="mt-2 block font-semibold text-navy hover:text-navy"
               >
                 {document.matter.referenceNumber}
               </Link>
@@ -432,7 +432,7 @@ export default async function DocumentPage({
                 File Type
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {document.extension.toUpperCase()}
               </p>
 
@@ -446,7 +446,7 @@ export default async function DocumentPage({
                 File Size
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {formatFileSize(
                   document.size
                 )}
@@ -458,7 +458,7 @@ export default async function DocumentPage({
                 Uploaded
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {formatDate(
                   document.createdAt
                 )}
@@ -470,7 +470,7 @@ export default async function DocumentPage({
                 Last Updated
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {formatDate(
                   document.updatedAt
                 )}
@@ -482,7 +482,7 @@ export default async function DocumentPage({
                 Current Version
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 Version{" "}
                 {document.currentVersion}
               </p>
@@ -498,7 +498,7 @@ export default async function DocumentPage({
 
         <section className="mt-6 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
 
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Folder
           </h2>
 
@@ -507,13 +507,13 @@ export default async function DocumentPage({
             {document.folder ? (
               <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 p-5">
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-100 text-xl">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-xl">
                   📁
                 </div>
 
                 <div>
 
-                  <p className="font-semibold text-slate-900">
+                  <p className="font-semibold text-navy">
                     {document.folder.name}
                   </p>
 
@@ -540,14 +540,14 @@ export default async function DocumentPage({
 
         <section className="mt-6 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
 
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Category
           </h2>
 
           <div className="mt-5">
 
             {document.category ? (
-              <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
+              <span className="rounded-full bg-gold/15 px-4 py-2 text-sm font-semibold text-navy">
                 {document.category}
               </span>
             ) : (
@@ -566,7 +566,7 @@ export default async function DocumentPage({
 
         <section className="mt-6 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
 
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Tags
           </h2>
 
@@ -599,13 +599,13 @@ export default async function DocumentPage({
 
         <section className="mt-6 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
 
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Uploaded By
           </h2>
 
           <div className="mt-5">
 
-            <p className="font-semibold text-slate-900">
+            <p className="font-semibold text-navy">
               {document.uploadedBy.name ||
                 "Unknown user"}
             </p>

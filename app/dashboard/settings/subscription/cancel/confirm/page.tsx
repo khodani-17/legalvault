@@ -155,7 +155,7 @@ export default async function ConfirmCancelSubscriptionPage() {
             {/* Subscription summary */}
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-5">
 
-              <h2 className="font-semibold text-slate-900">
+              <h2 className="font-semibold text-navy">
                 Subscription Summary
               </h2>
 
@@ -166,7 +166,7 @@ export default async function ConfirmCancelSubscriptionPage() {
                     Current plan
                   </dt>
 
-                  <dd className="text-sm font-semibold text-slate-900">
+                  <dd className="text-sm font-semibold text-navy">
                     {getPlanLabel(subscription.plan)}
                   </dd>
                 </div>
@@ -186,7 +186,7 @@ export default async function ConfirmCancelSubscriptionPage() {
                     Payment provider
                   </dt>
 
-                  <dd className="text-sm font-semibold text-slate-900">
+                  <dd className="text-sm font-semibold text-navy">
                     PayFast
                   </dd>
                 </div>
@@ -196,7 +196,7 @@ export default async function ConfirmCancelSubscriptionPage() {
                     Access remains available until
                   </dt>
 
-                  <dd className="text-right text-sm font-semibold text-slate-900">
+                  <dd className="text-right text-sm font-semibold text-navy">
                     {formatDate(subscription.currentPeriodEnd)}
                   </dd>
                 </div>
@@ -250,7 +250,7 @@ export default async function ConfirmCancelSubscriptionPage() {
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-slate-700" />
 
                 <div>
-                  <h2 className="font-semibold text-slate-900">
+                  <h2 className="font-semibold text-navy">
                     Secure cancellation
                   </h2>
 
@@ -269,14 +269,14 @@ export default async function ConfirmCancelSubscriptionPage() {
             {/* Confirmation */}
             <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-5">
 
-              <h2 className="font-semibold text-slate-900">
+              <h2 className="font-semibold text-navy">
                 Final confirmation
               </h2>
 
               <p className="mt-2 text-sm leading-6 text-slate-600">
                 By continuing, you confirm that you want to cancel the
                 recurring PayFast subscription for{" "}
-                <span className="font-semibold text-slate-900">
+                <span className="font-semibold text-navy">
                   {firm.name}
                 </span>
                 .

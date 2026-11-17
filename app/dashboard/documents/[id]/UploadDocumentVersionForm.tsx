@@ -107,7 +107,7 @@ export default function UploadDocumentVersionForm({
       className="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200"
     >
       <div>
-        <h2 className="text-xl font-bold text-slate-900">
+        <h2 className="text-xl font-bold text-navy">
           Upload New Version
         </h2>
 
@@ -148,7 +148,7 @@ export default function UploadDocumentVersionForm({
 
           {file && (
             <div className="mt-3 rounded-lg bg-slate-50 p-3 text-sm">
-              <p className="font-medium text-slate-900">
+              <p className="font-medium text-navy">
                 {file.name}
               </p>
 
@@ -175,7 +175,7 @@ export default function UploadDocumentVersionForm({
             }
             rows={4}
             placeholder="e.g. Updated medical report and supporting documents."
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
           />
 
           <p className="mt-1 text-xs text-slate-500">
@@ -198,7 +198,7 @@ export default function UploadDocumentVersionForm({
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-slate-900 px-6 py-3 text-sm font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-navy px-6 py-3 text-sm font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading
             ? "Uploading..."

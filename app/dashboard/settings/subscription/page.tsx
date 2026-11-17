@@ -187,13 +187,13 @@ export default async function SubscriptionSettingsPage({
         -------------------------------------------------- */}
 
         <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-bold tracking-tight text-navy">
             Subscription & Billing
           </h1>
 
           <p className="mt-2 text-sm leading-6 text-slate-600">
             Manage the LegalVault subscription for{" "}
-            <span className="font-semibold text-slate-900">
+            <span className="font-semibold text-navy">
               {firm.name}
             </span>
             .
@@ -299,7 +299,7 @@ export default async function SubscriptionSettingsPage({
                     </div>
 
                     <div>
-                      <h2 className="text-xl font-semibold text-slate-900">
+                      <h2 className="text-xl font-semibold text-navy">
                         Current Subscription
                       </h2>
 
@@ -335,7 +335,7 @@ export default async function SubscriptionSettingsPage({
                       Plan
                     </p>
 
-                    <p className="mt-1 text-base font-semibold text-slate-900">
+                    <p className="mt-1 text-base font-semibold text-navy">
                       {getPlanLabel(subscription.plan)}
                     </p>
                   </div>
@@ -345,7 +345,7 @@ export default async function SubscriptionSettingsPage({
                       Billing Provider
                     </p>
 
-                    <p className="mt-1 text-base font-semibold text-slate-900">
+                    <p className="mt-1 text-base font-semibold text-navy">
                       {subscription.provider ?? "—"}
                     </p>
                   </div>
@@ -355,7 +355,7 @@ export default async function SubscriptionSettingsPage({
                       Current Period
                     </p>
 
-                    <p className="mt-1 text-sm font-medium text-slate-900">
+                    <p className="mt-1 text-sm font-medium text-navy">
                       {formatDate(subscription.currentPeriodStart)}
                       {" — "}
                       {formatDate(subscription.currentPeriodEnd)}
@@ -367,7 +367,7 @@ export default async function SubscriptionSettingsPage({
                       Trial Ends
                     </p>
 
-                    <p className="mt-1 text-sm font-medium text-slate-900">
+                    <p className="mt-1 text-sm font-medium text-navy">
                       {formatDate(subscription.trialEndsAt)}
                     </p>
                   </div>
@@ -377,7 +377,7 @@ export default async function SubscriptionSettingsPage({
                       Cancelled At
                     </p>
 
-                    <p className="mt-1 text-sm font-medium text-slate-900">
+                    <p className="mt-1 text-sm font-medium text-navy">
                       {formatDate(subscription.cancelledAt)}
                     </p>
                   </div>
@@ -387,7 +387,7 @@ export default async function SubscriptionSettingsPage({
                       Cancellation
                     </p>
 
-                    <p className="mt-1 text-sm font-medium text-slate-900">
+                    <p className="mt-1 text-sm font-medium text-navy">
                       {subscription.cancelAtPeriodEnd
                         ? "Scheduled"
                         : "Not scheduled"}
@@ -452,7 +452,7 @@ export default async function SubscriptionSettingsPage({
 
                   <div className="p-6">
 
-                    <h2 className="text-lg font-semibold text-slate-900">
+                    <h2 className="text-lg font-semibold text-navy">
                       Cancel Subscription
                     </h2>
 
@@ -488,7 +488,7 @@ export default async function SubscriptionSettingsPage({
 
                 <div className="p-6">
 
-                  <h2 className="text-lg font-semibold text-slate-900">
+                  <h2 className="text-lg font-semibold text-navy">
                     Subscription Cancelled
                   </h2>
 
@@ -502,7 +502,7 @@ export default async function SubscriptionSettingsPage({
 
                     <Link
                       href="/signup/payment"
-                      className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                      className="inline-flex items-center justify-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-navy"
                     >
                       Renew Subscription
                     </Link>
@@ -526,7 +526,7 @@ export default async function SubscriptionSettingsPage({
 
                 <div>
 
-                  <h2 className="font-semibold text-slate-900">
+                  <h2 className="font-semibold text-navy">
                     Billing Security
                   </h2>
 
@@ -548,7 +548,7 @@ export default async function SubscriptionSettingsPage({
         ) : (
           <section className="rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               No subscription found
             </h2>
 

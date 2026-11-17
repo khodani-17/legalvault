@@ -114,7 +114,7 @@ function priorityClass(priority: string) {
       return "border-gray-200 bg-gray-50 text-gray-600";
 
     default:
-      return "border-blue-200 bg-blue-50 text-blue-700";
+      return "border-gold/30 bg-gold/10 text-navy";
   }
 }
 
@@ -274,12 +274,12 @@ export default function CalendarPage() {
 
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-blue-100 p-2.5 text-blue-700">
+          <div className="rounded-lg bg-gold/15 p-2.5 text-navy">
             <CalendarDays size={21} />
           </div>
 
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">
+            <h1 className="text-xl font-semibold text-navy">
               Legal Calendar
             </h1>
 
@@ -315,7 +315,7 @@ export default function CalendarPage() {
 
             <CalendarDays
               size={20}
-              className="text-blue-600"
+              className="text-navy"
             />
           </div>
         </div>
@@ -467,7 +467,7 @@ export default function CalendarPage() {
                     <span
                       className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-medium ${
                         isToday
-                          ? "bg-gray-900 text-white"
+                          ? "bg-navy text-white"
                           : belongsToMonth
                             ? "text-gray-700"
                             : "text-gray-400"
@@ -547,7 +547,7 @@ export default function CalendarPage() {
 
         <aside className="w-full shrink-0 rounded-lg border bg-white xl:w-64">
           <div className="border-b px-4 py-3">
-            <h2 className="text-sm font-semibold text-gray-900">
+            <h2 className="text-sm font-semibold text-navy">
               Upcoming
             </h2>
 
@@ -579,7 +579,7 @@ export default function CalendarPage() {
                           event.type ===
                           "DEADLINE"
                             ? "bg-red-50 text-red-600"
-                            : "bg-blue-50 text-blue-600"
+                            : "bg-gold/10 text-navy"
                         }`}
                       >
                         {event.type ===
@@ -591,7 +591,7 @@ export default function CalendarPage() {
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-xs font-medium text-gray-900">
+                        <p className="truncate text-xs font-medium text-navy">
                           {event.title}
                         </p>
 

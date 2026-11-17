@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   FormEvent,
@@ -502,7 +502,7 @@ export default function UploadDocumentForm() {
             disabled={
               loadingMatters || loading
             }
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:cursor-not-allowed disabled:bg-slate-100"
           >
             <option value="">
               {loadingMatters
@@ -559,7 +559,7 @@ export default function UploadDocumentForm() {
               loadingFolders ||
               loading
             }
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:cursor-not-allowed disabled:bg-slate-100"
           >
             <option value="">
               {!form.matterId
@@ -608,7 +608,7 @@ export default function UploadDocumentForm() {
             disabled={loading}
             placeholder="e.g. Court Document"
             maxLength={100}
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 disabled:bg-slate-100"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:bg-slate-100"
           />
 
         </div>
@@ -639,7 +639,7 @@ export default function UploadDocumentForm() {
             disabled={loading}
             placeholder="e.g. RAF Claim Form"
             maxLength={200}
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 disabled:bg-slate-100"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:bg-slate-100"
           />
 
           <p className="mt-1 text-xs text-slate-500">
@@ -674,7 +674,7 @@ export default function UploadDocumentForm() {
             disabled={loading}
             placeholder="RAF, medical, claim"
             maxLength={500}
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 disabled:bg-slate-100"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:bg-slate-100"
           />
 
           <p className="mt-1 text-xs text-slate-500">
@@ -724,7 +724,7 @@ export default function UploadDocumentForm() {
             {file && (
               <div className="mt-5 rounded-lg bg-slate-50 p-4 text-left">
 
-                <p className="text-sm font-medium text-slate-900">
+                <p className="text-sm font-medium text-navy">
                   Selected file
                 </p>
 
@@ -770,7 +770,7 @@ export default function UploadDocumentForm() {
             loadingMatters ||
             matters.length === 0
           }
-          className="rounded-lg bg-slate-900 px-6 py-3 font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-navy px-6 py-3 font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading
             ? "Uploading..."

@@ -128,14 +128,14 @@ function getActionClasses(action: string) {
       return "bg-emerald-50 text-emerald-700 border-emerald-200";
 
     case "UPDATE":
-      return "bg-blue-50 text-blue-700 border-blue-200";
+      return "bg-gold/10 text-navy border-gold/30";
 
     case "DELETE":
       return "bg-red-50 text-red-700 border-red-200";
 
     case "DOWNLOAD":
     case "UPLOAD":
-      return "bg-indigo-50 text-indigo-700 border-indigo-200";
+      return "bg-gold/10 text-navy border-indigo-200";
 
     case "SHARE":
       return "bg-purple-50 text-purple-700 border-purple-200";
@@ -224,7 +224,7 @@ export default function MatterTimeline({
             <div className="flex items-center gap-2">
               <History className="h-5 w-5 text-slate-700" />
 
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 Matter Timeline
               </h2>
             </div>
@@ -288,7 +288,7 @@ export default function MatterTimeline({
                 <History className="h-6 w-6 text-slate-500" />
               </div>
 
-              <h3 className="mt-4 font-medium text-slate-900">
+              <h3 className="mt-4 font-medium text-navy">
                 No activity recorded yet
               </h3>
 

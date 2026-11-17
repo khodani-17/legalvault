@@ -340,7 +340,7 @@ function StatCard({
                 ? "text-red-600"
                 : positive
                   ? "text-green-600"
-                  : "text-slate-900"
+                  : "text-navy"
             }`}
           >
             {value}
@@ -393,7 +393,7 @@ function ProgressBar({
 
       <div className="h-2 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-slate-900 transition-all"
+          className="h-full rounded-full bg-navy transition-all"
           style={{
             width: `${safeValue}%`,
           }}
@@ -470,7 +470,7 @@ function StaffWorkloadBar({
 
       <div className="h-2 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-slate-900"
+          className="h-full rounded-full bg-navy"
           style={{
             width: `${activeWidth}%`,
           }}
@@ -603,7 +603,7 @@ export default async function BusinessIntelligencePage() {
             Business Intelligence
           </div>
 
-          <h1 className="text-3xl font-bold tracking-tight text-slate-950">
+          <h1 className="text-3xl font-bold tracking-tight text-navy">
             Business Intelligence Dashboard
           </h1>
 
@@ -621,7 +621,7 @@ export default async function BusinessIntelligencePage() {
             Intelligence generated
           </div>
 
-          <p className="mt-1 text-sm font-semibold text-slate-900">
+          <p className="mt-1 text-sm font-semibold text-navy">
             {new Date(
               analytics.generatedAt,
             ).toLocaleString("en-ZA")}
@@ -634,7 +634,7 @@ export default async function BusinessIntelligencePage() {
         <div className="mb-4 flex items-center gap-2">
           <Gauge className="h-5 w-5 text-slate-700" />
 
-          <h2 className="text-xl font-bold text-slate-950">
+          <h2 className="text-xl font-bold text-navy">
             Executive Overview
           </h2>
         </div>
@@ -744,7 +744,7 @@ export default async function BusinessIntelligencePage() {
         <div className="mb-4 flex items-center gap-2">
           <BarChart3 className="h-5 w-5 text-slate-700" />
 
-          <h2 className="text-xl font-bold text-slate-950">
+          <h2 className="text-xl font-bold text-navy">
             Analytics & Trends
           </h2>
         </div>
@@ -771,7 +771,7 @@ export default async function BusinessIntelligencePage() {
           <div className="mb-2 flex items-center gap-2">
             <Users className="h-5 w-5 text-slate-700" />
 
-            <h2 className="text-xl font-bold text-slate-950">
+            <h2 className="text-xl font-bold text-navy">
               Staff Performance & Workload
               Intelligence
             </h2>
@@ -936,7 +936,7 @@ export default async function BusinessIntelligencePage() {
           <div className="border-b border-slate-200 px-5 py-4">
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h3 className="font-bold text-slate-950">
+                <h3 className="font-bold text-navy">
                   Staff Workload Register
                 </h3>
 
@@ -1026,7 +1026,7 @@ export default async function BusinessIntelligencePage() {
                             </div>
 
                             <div>
-                              <p className="font-semibold text-slate-900">
+                              <p className="font-semibold text-navy">
                                 {staff.name}
                               </p>
 
@@ -1060,7 +1060,7 @@ export default async function BusinessIntelligencePage() {
 
                         <td className="min-w-[170px] px-5 py-4 align-top">
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-semibold text-slate-900">
+                            <span className="text-sm font-semibold text-navy">
                               {
                                 staff.completionRate
                               }
@@ -1199,7 +1199,7 @@ export default async function BusinessIntelligencePage() {
                   >
                     <div className="flex items-center justify-between gap-3">
                       <div>
-                        <p className="font-semibold text-slate-900">
+                        <p className="font-semibold text-navy">
                           {staff.name}
                         </p>
 
@@ -1225,7 +1225,7 @@ export default async function BusinessIntelligencePage() {
 
                     <div className="mt-3 grid grid-cols-3 gap-3 text-center">
                       <div className="rounded-lg bg-slate-50 p-2">
-                        <p className="text-lg font-bold text-slate-900">
+                        <p className="text-lg font-bold text-navy">
                           {staff.activeTasks}
                         </p>
 
@@ -1287,7 +1287,7 @@ export default async function BusinessIntelligencePage() {
                   >
                     <div className="flex items-center justify-between gap-3">
                       <div>
-                        <p className="font-semibold text-slate-900">
+                        <p className="font-semibold text-navy">
                           {staff.name}
                         </p>
 
@@ -1320,7 +1320,7 @@ export default async function BusinessIntelligencePage() {
                       </div>
 
                       <div className="rounded-lg bg-slate-50 p-3">
-                        <p className="text-lg font-bold text-slate-900">
+                        <p className="text-lg font-bold text-navy">
                           {staff.activeTasks}
                         </p>
 
@@ -1341,18 +1341,18 @@ export default async function BusinessIntelligencePage() {
           <div className="flex items-center gap-3">
             <Gauge className="h-5 w-5 text-slate-700" />
 
-            <h3 className="font-bold text-slate-950">
+            <h3 className="font-bold text-navy">
               Workload Interpretation
             </h3>
           </div>
 
           <div className="mt-4 grid gap-5 md:grid-cols-3">
             <div>
-              <p className="text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold text-navy">
                 Average workload
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {
                   staffPerformance.totals
                     .averageActiveTasks
@@ -1366,11 +1366,11 @@ export default async function BusinessIntelligencePage() {
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold text-navy">
                 Highest individual workload
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {
                   staffPerformance.totals
                     .highestActiveTasks
@@ -1384,11 +1384,11 @@ export default async function BusinessIntelligencePage() {
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold text-navy">
                 Assignment coverage
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {percentage(
                   staffPerformance.totals
                     .assignedActiveTasks,
@@ -1419,7 +1419,7 @@ export default async function BusinessIntelligencePage() {
             <BriefcaseBusiness className="h-5 w-5 text-slate-700" />
 
             <div>
-              <h3 className="font-bold text-slate-950">
+              <h3 className="font-bold text-navy">
                 Matter Intelligence
               </h3>
 
@@ -1435,7 +1435,7 @@ export default async function BusinessIntelligencePage() {
                 Total
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {analytics.matters.total}
               </p>
             </div>
@@ -1457,7 +1457,7 @@ export default async function BusinessIntelligencePage() {
             <Users className="h-5 w-5 text-slate-700" />
 
             <div>
-              <h3 className="font-bold text-slate-950">
+              <h3 className="font-bold text-navy">
                 Client Intelligence
               </h3>
 
@@ -1473,17 +1473,17 @@ export default async function BusinessIntelligencePage() {
                 Total clients
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {analytics.clients.total}
               </p>
             </div>
 
-            <div className="rounded-xl bg-blue-50 p-4">
-              <p className="text-xs text-blue-700">
+            <div className="rounded-xl bg-gold/10 p-4">
+              <p className="text-xs text-navy">
                 Client Portfolio
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-blue-700">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {analytics.clients.total}
               </p>
             </div>
@@ -1542,7 +1542,7 @@ export default async function BusinessIntelligencePage() {
             <FileText className="h-5 w-5 text-slate-700" />
 
             <div>
-              <h3 className="font-bold text-slate-950">
+              <h3 className="font-bold text-navy">
                 Document Intelligence
               </h3>
 
@@ -1558,7 +1558,7 @@ export default async function BusinessIntelligencePage() {
                 Total documents
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {analytics.documents.total}
               </p>
             </div>
@@ -1580,7 +1580,7 @@ export default async function BusinessIntelligencePage() {
             <Users className="h-5 w-5 text-slate-700" />
 
             <div>
-              <h3 className="font-bold text-slate-950">
+              <h3 className="font-bold text-navy">
                 Workforce Overview
               </h3>
 
@@ -1596,7 +1596,7 @@ export default async function BusinessIntelligencePage() {
                 Active users
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {analytics.users.active}
               </p>
             </div>
@@ -1606,7 +1606,7 @@ export default async function BusinessIntelligencePage() {
                 Total users
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-slate-950">
+              <p className="mt-1 text-2xl font-bold text-navy">
                 {analytics.users.total}
               </p>
             </div>
@@ -1620,7 +1620,7 @@ export default async function BusinessIntelligencePage() {
           <Activity className="h-5 w-5 text-slate-700" />
 
           <div>
-            <h3 className="font-bold text-slate-950">
+            <h3 className="font-bold text-navy">
               Activity Intelligence
             </h3>
 
@@ -1637,17 +1637,17 @@ export default async function BusinessIntelligencePage() {
               Activity — last 30 days
             </p>
 
-            <p className="mt-1 text-2xl font-bold text-slate-950">
+            <p className="mt-1 text-2xl font-bold text-navy">
               {analytics.activity.last30Days}
             </p>
           </div>
 
-          <div className="rounded-xl bg-blue-50 p-4">
-            <p className="text-xs text-blue-700">
+          <div className="rounded-xl bg-gold/10 p-4">
+            <p className="text-xs text-navy">
               Activity today
             </p>
 
-            <p className="mt-1 text-2xl font-bold text-blue-700">
+            <p className="mt-1 text-2xl font-bold text-navy">
               {analytics.activity.today}
             </p>
           </div>
@@ -1665,7 +1665,7 @@ export default async function BusinessIntelligencePage() {
       </section>
 
       {/* MANAGEMENT SUMMARY */}
-      <section className="rounded-2xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+      <section className="rounded-2xl border border-slate-200 bg-navy p-6 text-white shadow-sm">
         <div className="flex items-start gap-4">
           <div className="rounded-xl bg-white/10 p-3">
             <Gauge className="h-6 w-6" />

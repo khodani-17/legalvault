@@ -203,7 +203,7 @@ export default async function CancelSubscriptionPage() {
               <div className="flex items-center gap-3">
                 <CreditCard className="h-5 w-5 text-slate-600" />
 
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Subscription Details
                 </h2>
               </div>
@@ -215,7 +215,7 @@ export default async function CancelSubscriptionPage() {
                     Current Plan
                   </p>
 
-                  <p className="mt-1 font-medium text-slate-900">
+                  <p className="mt-1 font-medium text-navy">
                     {getPlanLabel(subscription.plan)}
                   </p>
                 </div>
@@ -235,7 +235,7 @@ export default async function CancelSubscriptionPage() {
                     Payment Provider
                   </p>
 
-                  <p className="mt-1 font-medium text-slate-900">
+                  <p className="mt-1 font-medium text-navy">
                     PayFast
                   </p>
                 </div>
@@ -245,7 +245,7 @@ export default async function CancelSubscriptionPage() {
                     Access Until
                   </p>
 
-                  <p className="mt-1 font-medium text-slate-900">
+                  <p className="mt-1 font-medium text-navy">
                     {formatDate(subscription.currentPeriodEnd)}
                   </p>
                 </div>
@@ -260,14 +260,14 @@ export default async function CancelSubscriptionPage() {
 
             <div className="mt-6">
 
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 What happens when you cancel?
               </h2>
 
               <div className="mt-4 space-y-4">
 
                 <div className="flex gap-3">
-                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-white">
                     1
                   </div>
 
@@ -278,7 +278,7 @@ export default async function CancelSubscriptionPage() {
                 </div>
 
                 <div className="flex gap-3">
-                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-white">
                     2
                   </div>
 
@@ -289,7 +289,7 @@ export default async function CancelSubscriptionPage() {
                 </div>
 
                 <div className="flex gap-3">
-                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-white">
                     3
                   </div>
 
@@ -301,7 +301,7 @@ export default async function CancelSubscriptionPage() {
                 </div>
 
                 <div className="flex gap-3">
-                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-white">
                     4
                   </div>
 
@@ -326,7 +326,7 @@ export default async function CancelSubscriptionPage() {
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-slate-700" />
 
                 <div>
-                  <h3 className="font-semibold text-slate-900">
+                  <h3 className="font-semibold text-navy">
                     Secure cancellation
                   </h3>
 

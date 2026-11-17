@@ -516,7 +516,7 @@ function NewDeadlineForm() {
             Deadline Management
           </p>
 
-          <h1 className="mt-1 text-3xl font-bold text-slate-900">
+          <h1 className="mt-1 text-3xl font-bold text-navy">
             Create Deadline
           </h1>
 
@@ -568,7 +568,7 @@ function NewDeadlineForm() {
                   )
                 }
                 disabled={loadingData}
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
               >
                 <option value="">
                   {loadingData
@@ -619,7 +619,7 @@ function NewDeadlineForm() {
                   )
                 }
                 placeholder="e.g. File notice of intention to defend"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
               />
             </div>
 
@@ -644,7 +644,7 @@ function NewDeadlineForm() {
                 }
                 rows={4}
                 placeholder="Add notes or additional information about this deadline..."
-                className="w-full resize-none rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full resize-none rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
               />
             </div>
 
@@ -668,7 +668,7 @@ function NewDeadlineForm() {
                     event.target.value,
                   )
                 }
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
               >
                 {DEADLINE_TYPES.map(
                   (type) => (
@@ -702,7 +702,7 @@ function NewDeadlineForm() {
                     event.target.value,
                   )
                 }
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
               >
                 {PRIORITIES.map(
                   (priority) => (
@@ -743,7 +743,7 @@ function NewDeadlineForm() {
                   )
                 }
                 disabled={loadingData}
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
               >
                 <option value="">
                   {loadingData
@@ -786,13 +786,13 @@ function NewDeadlineForm() {
                     event.target.checked,
                   )
                 }
-                className="mt-1 h-4 w-4 rounded border-slate-300 text-blue-700 focus:ring-blue-600"
+                className="mt-1 h-4 w-4 rounded border-slate-300 text-navy focus:ring-gold"
               />
 
               <div>
                 <label
                   htmlFor="calculationMode"
-                  className="font-semibold text-slate-900"
+                  className="font-semibold text-navy"
                 >
                   Use assisted deadline
                   calculation
@@ -832,7 +832,7 @@ function NewDeadlineForm() {
                         event.target.value,
                       )
                     }
-                    className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
                   />
                 </div>
 
@@ -863,7 +863,7 @@ function NewDeadlineForm() {
                       )
                     }
                     placeholder="e.g. 15"
-                    className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
                   />
                 </div>
 
@@ -888,7 +888,7 @@ function NewDeadlineForm() {
                         event.target.value,
                       )
                     }
-                    className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
                   >
                     {CALCULATION_UNITS.map(
                       (unit) => (
@@ -971,7 +971,7 @@ function NewDeadlineForm() {
                     event.target.value,
                   )
                 }
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold focus:ring-1 focus:ring-gold"
               />
 
               <p className="mt-1 text-xs text-slate-500">
@@ -1002,7 +1002,7 @@ function NewDeadlineForm() {
                 loading ||
                 loadingData
               }
-              className="rounded-lg bg-slate-900 px-6 py-3 font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-navy px-6 py-3 font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading
                 ? "Creating..."

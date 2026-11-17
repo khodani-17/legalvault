@@ -64,7 +64,7 @@ const PRIORITY_CLASSES: Record<
   LOW:
     "bg-slate-100 text-slate-700",
   MEDIUM:
-    "bg-blue-100 text-blue-700",
+    "bg-gold/15 text-navy",
   HIGH:
     "bg-orange-100 text-orange-700",
   CRITICAL:
@@ -370,7 +370,7 @@ export default function DeadlinesPage() {
             <div className="flex items-center gap-2 text-sm text-slate-500">
               <Link
                 href="/dashboard"
-                className="transition hover:text-blue-700"
+                className="transition hover:text-navy"
               >
                 Dashboard
               </Link>
@@ -382,7 +382,7 @@ export default function DeadlinesPage() {
               </span>
             </div>
 
-            <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-900">
+            <h1 className="mt-3 text-3xl font-bold tracking-tight text-navy">
               Legal Deadlines
             </h1>
 
@@ -416,7 +416,7 @@ export default function DeadlinesPage() {
 
             <Link
               href="/dashboard/deadlines/new"
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800"
+              className="inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy"
             >
               <Plus className="h-4 w-4" />
 
@@ -477,7 +477,7 @@ export default function DeadlinesPage() {
             icon={
               <CalendarClock className="h-5 w-5" />
             }
-            iconClass="bg-blue-100 text-blue-700"
+            iconClass="bg-gold/15 text-navy"
           />
 
           <SummaryCard
@@ -498,7 +498,7 @@ export default function DeadlinesPage() {
           <div className="border-b border-slate-200 px-6 py-5">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-navy">
                   Deadline Schedule
                 </h2>
 
@@ -515,7 +515,7 @@ export default function DeadlinesPage() {
 
           {loading ? (
             <div className="px-6 py-16 text-center">
-              <RefreshCw className="mx-auto h-7 w-7 animate-spin text-blue-600" />
+              <RefreshCw className="mx-auto h-7 w-7 animate-spin text-navy" />
 
               <p className="mt-4 text-sm text-slate-500">
                 Loading deadlines...
@@ -528,7 +528,7 @@ export default function DeadlinesPage() {
                 <CalendarClock className="h-6 w-6 text-slate-500" />
               </div>
 
-              <h3 className="mt-4 text-base font-semibold text-slate-900">
+              <h3 className="mt-4 text-base font-semibold text-navy">
                 No deadlines found
               </h3>
 
@@ -540,7 +540,7 @@ export default function DeadlinesPage() {
 
               <Link
                 href="/dashboard/deadlines/new"
-                className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-800"
+                className="mt-5 inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy"
               >
                 <Plus className="h-4 w-4" />
 
@@ -566,7 +566,7 @@ export default function DeadlinesPage() {
                       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
-                            <h3 className="font-semibold text-slate-900">
+                            <h3 className="font-semibold text-navy">
                               {
                                 deadline.title
                               }
@@ -652,7 +652,7 @@ export default function DeadlinesPage() {
                               className={`font-semibold ${
                                 overdue
                                   ? "text-red-700"
-                                  : "text-slate-900"
+                                  : "text-navy"
                               }`}
                             >
                               {formatDate(
@@ -723,7 +723,7 @@ function SummaryCard({
             {title}
           </p>
 
-          <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+          <p className="mt-2 text-3xl font-bold tracking-tight text-navy">
             {count}
           </p>
         </div>
