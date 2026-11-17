@@ -198,7 +198,7 @@ export default async function DeadlineDetailPage({
                     LegalVault Deadline
                   </p>
 
-                  <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
+                  <h1 className="mt-1 text-3xl font-bold tracking-tight text-navy">
                     {deadline.title}
                   </h1>
                 </div>
@@ -278,7 +278,7 @@ export default async function DeadlineDetailPage({
           <section className="lg:col-span-2 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
 
             <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Deadline Details
               </h2>
 
@@ -294,7 +294,7 @@ export default async function DeadlineDetailPage({
                   Title
                 </p>
 
-                <p className="text-sm font-semibold text-slate-900 sm:col-span-2">
+                <p className="text-sm font-semibold text-navy sm:col-span-2">
                   {deadline.title}
                 </p>
               </div>
@@ -304,7 +304,7 @@ export default async function DeadlineDetailPage({
                   Type
                 </p>
 
-                <p className="text-sm text-slate-900 sm:col-span-2">
+                <p className="text-sm text-navy sm:col-span-2">
                   {formatStatus(deadline.type)}
                 </p>
               </div>
@@ -315,7 +315,7 @@ export default async function DeadlineDetailPage({
                 </p>
 
                 <div className="sm:col-span-2">
-                  <p className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-navy">
                     <CalendarDays className="h-4 w-4 text-purple-600" />
                     {formatDateTime(deadline.dueDate)}
                   </p>
@@ -343,7 +343,7 @@ export default async function DeadlineDetailPage({
                   Status
                 </p>
 
-                <p className="text-sm text-slate-900 sm:col-span-2">
+                <p className="text-sm text-navy sm:col-span-2">
                   {isOverdue
                     ? "Overdue"
                     : isCompleted
@@ -372,7 +372,7 @@ export default async function DeadlineDetailPage({
           <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
 
             <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Assignment
               </h2>
 
@@ -394,7 +394,7 @@ export default async function DeadlineDetailPage({
 
                 {deadline.assignedTo ? (
                   <div className="mt-2">
-                    <p className="font-semibold text-slate-900">
+                    <p className="font-semibold text-navy">
                       {deadline.assignedTo.name ||
                         deadline.assignedTo.email}
                     </p>
@@ -420,7 +420,7 @@ export default async function DeadlineDetailPage({
                 </div>
 
                 <div className="mt-2">
-                  <p className="font-semibold text-slate-900">
+                  <p className="font-semibold text-navy">
                     {deadline.createdBy.name ||
                       deadline.createdBy.email}
                   </p>
@@ -442,7 +442,7 @@ export default async function DeadlineDetailPage({
                   </div>
 
                   <div className="mt-2">
-                    <p className="font-semibold text-slate-900">
+                    <p className="font-semibold text-navy">
                       {deadline.completedBy.name ||
                         deadline.completedBy.email}
                     </p>
@@ -465,7 +465,7 @@ export default async function DeadlineDetailPage({
         <section className="mt-6 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
 
           <div className="border-b border-slate-200 px-6 py-5">
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-lg font-bold text-navy">
               Matter
             </h2>
           </div>
@@ -488,7 +488,7 @@ export default async function DeadlineDetailPage({
                       {deadline.matter.referenceNumber}
                     </p>
 
-                    <p className="mt-1 font-semibold text-slate-900 group-hover:text-purple-700">
+                    <p className="mt-1 font-semibold text-navy group-hover:text-purple-700">
                       {deadline.matter.title}
                     </p>
 
@@ -518,7 +518,7 @@ export default async function DeadlineDetailPage({
           <section className="mt-6 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
 
             <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Deadline Calculation
               </h2>
 
@@ -535,7 +535,7 @@ export default async function DeadlineDetailPage({
                     Source Date
                   </p>
 
-                  <p className="mt-1 text-sm text-slate-900">
+                  <p className="mt-1 text-sm text-navy">
                     {formatDateTime(deadline.sourceDate)}
                   </p>
                 </div>
@@ -563,7 +563,7 @@ export default async function DeadlineDetailPage({
 
           <Link
             href="/dashboard/deadlines"
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Deadlines

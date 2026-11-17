@@ -48,7 +48,7 @@ export default async function NotificationSettingsPage() {
             Back to Settings
           </Link>
 
-          <h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="mt-5 text-3xl font-bold tracking-tight text-navy">
             Notifications
           </h1>
 
@@ -66,7 +66,7 @@ export default async function NotificationSettingsPage() {
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 LegalVault Notifications
               </h2>
 
@@ -84,7 +84,7 @@ export default async function NotificationSettingsPage() {
               <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
 
               <div>
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-navy">
                   Tasks and deadlines
                 </p>
 
@@ -99,7 +99,7 @@ export default async function NotificationSettingsPage() {
               <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
 
               <div>
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-navy">
                   Matter access
                 </p>
 
@@ -114,7 +114,7 @@ export default async function NotificationSettingsPage() {
               <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
 
               <div>
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-navy">
                   Documents
                 </p>
 
@@ -129,7 +129,7 @@ export default async function NotificationSettingsPage() {
               <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-slate-700" />
 
               <div>
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-navy">
                   Security notifications
                 </p>
 
@@ -145,7 +145,7 @@ export default async function NotificationSettingsPage() {
         </section>
 
         <section className="mt-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="font-semibold text-slate-900">
+          <h2 className="font-semibold text-navy">
             Notification Centre
           </h2>
 
@@ -157,7 +157,7 @@ export default async function NotificationSettingsPage() {
           <div className="mt-4">
             <Link
               href="/dashboard"
-              className="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
+              className="inline-flex items-center rounded-lg bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy"
             >
               Go to Dashboard
             </Link>

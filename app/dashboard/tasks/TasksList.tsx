@@ -158,7 +158,7 @@ function statusClass(status: string) {
     case "COMPLETED":
       return "bg-green-100 text-green-700";
     case "IN_PROGRESS":
-      return "bg-blue-100 text-blue-700";
+      return "bg-gold/15 text-navy";
     case "CANCELLED":
       return "bg-gray-100 text-gray-600";
     case "TODO":

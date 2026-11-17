@@ -139,7 +139,7 @@ export default async function SettingsPage() {
         -------------------------------------------------- */}
 
         <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-bold tracking-tight text-navy">
             Settings
           </h1>
 
@@ -160,7 +160,7 @@ export default async function SettingsPage() {
                 Current Firm
               </p>
 
-              <h2 className="mt-1 text-xl font-semibold text-slate-900">
+              <h2 className="mt-1 text-xl font-semibold text-navy">
                 {firm.name}
               </h2>
 
@@ -204,7 +204,7 @@ export default async function SettingsPage() {
 
                 </div>
 
-                <h3 className="mt-5 text-lg font-semibold text-slate-900">
+                <h3 className="mt-5 text-lg font-semibold text-navy">
                   {section.title}
                 </h3>
 
@@ -234,7 +234,7 @@ export default async function SettingsPage() {
 
               </div>
 
-              <h3 className="mt-5 text-lg font-semibold text-slate-900">
+              <h3 className="mt-5 text-lg font-semibold text-navy">
                 Subscription & Billing
               </h3>
 
@@ -274,7 +274,7 @@ export default async function SettingsPage() {
 
         <section className="mt-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
 
-          <h2 className="text-lg font-semibold text-slate-900">
+          <h2 className="text-lg font-semibold text-navy">
             Account Information
           </h2>
 
@@ -285,7 +285,7 @@ export default async function SettingsPage() {
                 Name
               </p>
 
-              <p className="mt-1 text-sm text-slate-900">
+              <p className="mt-1 text-sm text-navy">
                 {user.name}
               </p>
             </div>
@@ -295,7 +295,7 @@ export default async function SettingsPage() {
                 Email
               </p>
 
-              <p className="mt-1 text-sm text-slate-900">
+              <p className="mt-1 text-sm text-navy">
                 {user.email}
               </p>
             </div>
@@ -305,7 +305,7 @@ export default async function SettingsPage() {
                 Role
               </p>
 
-              <p className="mt-1 text-sm text-slate-900">
+              <p className="mt-1 text-sm text-navy">
                 {user.role}
               </p>
             </div>

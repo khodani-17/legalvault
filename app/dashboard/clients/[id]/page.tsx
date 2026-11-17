@@ -209,11 +209,11 @@ export default async function ClientDetailsPage({
               Client File
             </p>
 
-            <h1 className="mt-1 text-3xl font-bold text-slate-900">
+            <h1 className="mt-1 text-3xl font-bold text-navy">
               {client.name}
             </h1>
 
-            <p className="mt-2 font-mono text-sm font-semibold text-blue-700">
+            <p className="mt-2 font-mono text-sm font-semibold text-navy">
               {client.referenceNumber}
             </p>
           </div>
@@ -230,7 +230,7 @@ export default async function ClientDetailsPage({
             {canUpdateClient && (
               <Link
                 href={`/dashboard/clients/${client.id}/edit`}
-                className="rounded-lg border border-blue-300 bg-white px-5 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+                className="rounded-lg border border-gold/50 bg-white px-5 py-3 text-sm font-semibold text-navy hover:bg-gold/10"
               >
                 Edit Client
               </Link>
@@ -246,7 +246,7 @@ export default async function ClientDetailsPage({
             {canCreateMatter && (
               <Link
                 href={`/dashboard/matters/new?clientId=${client.id}`}
-                className="rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+                className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
               >
                 + New Matter
               </Link>
@@ -266,7 +266,7 @@ export default async function ClientDetailsPage({
               Client Reference
             </p>
 
-            <p className="mt-2 font-mono text-xl font-bold text-blue-700">
+            <p className="mt-2 font-mono text-xl font-bold text-navy">
               {client.referenceNumber}
             </p>
           </div>
@@ -276,7 +276,7 @@ export default async function ClientDetailsPage({
               Legal Matters
             </p>
 
-            <p className="mt-2 text-2xl font-bold text-slate-900">
+            <p className="mt-2 text-2xl font-bold text-navy">
               {client._count.matters}
             </p>
           </div>
@@ -286,7 +286,7 @@ export default async function ClientDetailsPage({
               Documents
             </p>
 
-            <p className="mt-2 text-2xl font-bold text-slate-900">
+            <p className="mt-2 text-2xl font-bold text-navy">
               {documentCount}
             </p>
           </div>
@@ -302,7 +302,7 @@ export default async function ClientDetailsPage({
           <div className="mb-6 flex items-center justify-between">
 
             <div>
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-xl font-bold text-navy">
                 Client Information
               </h2>
 
@@ -324,7 +324,7 @@ export default async function ClientDetailsPage({
                 Client Name
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {client.name}
               </p>
             </div>
@@ -334,7 +334,7 @@ export default async function ClientDetailsPage({
                 Client Type
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {client.type.replaceAll("_", " ")}
               </p>
             </div>
@@ -344,7 +344,7 @@ export default async function ClientDetailsPage({
                 Reference Number
               </p>
 
-              <p className="mt-2 font-mono font-semibold text-blue-700">
+              <p className="mt-2 font-mono font-semibold text-navy">
                 {client.referenceNumber}
               </p>
             </div>
@@ -354,7 +354,7 @@ export default async function ClientDetailsPage({
                 ID / Registration
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {client.idNumber || "Not provided"}
               </p>
             </div>
@@ -364,7 +364,7 @@ export default async function ClientDetailsPage({
                 Phone
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {client.phone || "Not provided"}
               </p>
             </div>
@@ -374,7 +374,7 @@ export default async function ClientDetailsPage({
                 Email
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {client.email || "Not provided"}
               </p>
             </div>
@@ -384,7 +384,7 @@ export default async function ClientDetailsPage({
                 Address
               </p>
 
-              <p className="mt-2 text-slate-900">
+              <p className="mt-2 text-navy">
                 {client.address || "Not provided"}
               </p>
             </div>
@@ -394,7 +394,7 @@ export default async function ClientDetailsPage({
                 Notes
               </p>
 
-              <p className="mt-2 whitespace-pre-wrap text-slate-900">
+              <p className="mt-2 whitespace-pre-wrap text-navy">
                 {client.notes || "No notes have been added."}
               </p>
             </div>
@@ -411,7 +411,7 @@ export default async function ClientDetailsPage({
           <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
             <div>
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-xl font-bold text-navy">
                 Legal Matters
               </h2>
 
@@ -423,7 +423,7 @@ export default async function ClientDetailsPage({
             {canCreateMatter && (
               <Link
                 href={`/dashboard/matters/new?clientId=${client.id}`}
-                className="rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+                className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
               >
                 + New Matter
               </Link>
@@ -439,7 +439,7 @@ export default async function ClientDetailsPage({
                 ⚖️
               </div>
 
-              <h3 className="font-semibold text-slate-900">
+              <h3 className="font-semibold text-navy">
                 No legal matters yet
               </h3>
 
@@ -452,7 +452,7 @@ export default async function ClientDetailsPage({
               {canCreateMatter && (
                 <Link
                   href={`/dashboard/matters/new?clientId=${client.id}`}
-                  className="mt-5 inline-flex rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+                  className="mt-5 inline-flex rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
                 >
                   Create Matter
                 </Link>
@@ -479,12 +479,12 @@ export default async function ClientDetailsPage({
 
                       <Link
                         href={`/dashboard/matters/${matter.id}`}
-                        className="font-semibold text-blue-700 hover:text-blue-900 hover:underline"
+                        className="font-semibold text-navy hover:text-navy hover:underline"
                       >
                         {matter.referenceNumber}
                       </Link>
 
-                      <h3 className="mt-1 text-lg font-semibold text-slate-900">
+                      <h3 className="mt-1 text-lg font-semibold text-navy">
                         {matter.title}
                       </h3>
 
@@ -496,7 +496,7 @@ export default async function ClientDetailsPage({
 
                     <div className="flex flex-wrap gap-2">
 
-                      <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+                      <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold text-navy">
                         {matter.status}
                       </span>
 
@@ -515,7 +515,7 @@ export default async function ClientDetailsPage({
                     <div className="mb-4 flex items-center justify-between">
 
                       <div>
-                        <h4 className="font-semibold text-slate-900">
+                        <h4 className="font-semibold text-navy">
                           Matter Documents
                         </h4>
 
@@ -566,7 +566,7 @@ export default async function ClientDetailsPage({
 
                               <Link
                                 href={`/dashboard/documents/${document.id}`}
-                                className="font-medium text-slate-900 hover:text-blue-700 hover:underline"
+                                className="font-medium text-navy hover:text-navy hover:underline"
                               >
                                 {document.name}
                               </Link>
@@ -590,7 +590,7 @@ export default async function ClientDetailsPage({
                                 </span>
 
                                 {document.category && (
-                                  <span className="rounded bg-blue-50 px-2 py-1 text-[11px] text-blue-700">
+                                  <span className="rounded bg-gold/10 px-2 py-1 text-[11px] text-navy">
                                     {document.category}
                                   </span>
                                 )}
@@ -613,7 +613,7 @@ export default async function ClientDetailsPage({
                               {canDownloadDocument && (
                                 <a
                                   href={`/api/documents/${document.id}/download`}
-                                  className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-medium text-white hover:bg-slate-800"
+                                  className="rounded-lg bg-navy px-3 py-2 text-xs font-medium text-white hover:bg-navy"
                                 >
                                   Download
                                 </a>
@@ -647,7 +647,7 @@ export default async function ClientDetailsPage({
 
         <section className="mt-6 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
 
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Client File
           </h2>
 
@@ -664,7 +664,7 @@ export default async function ClientDetailsPage({
                   Client Reference
                 </p>
 
-                <p className="mt-1 font-mono font-semibold text-slate-900">
+                <p className="mt-1 font-mono font-semibold text-navy">
                   {client.referenceNumber}
                 </p>
               </div>
@@ -674,7 +674,7 @@ export default async function ClientDetailsPage({
                   Created
                 </p>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {formatDate(client.createdAt)}
                 </p>
               </div>
@@ -684,7 +684,7 @@ export default async function ClientDetailsPage({
                   Matters
                 </p>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {client._count.matters}
                 </p>
               </div>

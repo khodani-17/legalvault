@@ -410,7 +410,7 @@ export default function EditTaskPage() {
 
           <div className="rounded-2xl border border-red-200 bg-white p-8 shadow-sm">
 
-            <h1 className="text-xl font-semibold text-slate-900">
+            <h1 className="text-xl font-semibold text-navy">
               Task not found
             </h1>
 
@@ -421,7 +421,7 @@ export default function EditTaskPage() {
 
             <Link
               href="/dashboard/tasks"
-              className="mt-6 inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+              className="mt-6 inline-flex rounded-lg bg-navy px-4 py-2 text-sm font-medium text-white hover:bg-navy"
             >
               Back to Tasks
             </Link>
@@ -467,7 +467,7 @@ export default function EditTaskPage() {
             Task Management
           </p>
 
-          <h1 className="mt-2 text-3xl font-bold text-slate-900">
+          <h1 className="mt-2 text-3xl font-bold text-navy">
             Edit Task
           </h1>
 
@@ -503,7 +503,7 @@ export default function EditTaskPage() {
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Task Details
             </h2>
 
@@ -537,7 +537,7 @@ export default function EditTaskPage() {
                     )
                   }
                   placeholder="Enter task title"
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
 
               </div>
@@ -564,7 +564,7 @@ export default function EditTaskPage() {
                   }
                   rows={5}
                   placeholder="Describe what needs to be done..."
-                  className="mt-2 w-full resize-none rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full resize-none rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
 
               </div>
@@ -579,7 +579,7 @@ export default function EditTaskPage() {
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Matter
             </h2>
 
@@ -606,7 +606,7 @@ export default function EditTaskPage() {
                     event.target.value
                   )
                 }
-                className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
               >
 
                 <option value="">
@@ -644,7 +644,7 @@ export default function EditTaskPage() {
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Workflow
             </h2>
 
@@ -675,7 +675,7 @@ export default function EditTaskPage() {
                       event.target.value
                     )
                   }
-                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 >
 
                   <option value="TODO">
@@ -718,7 +718,7 @@ export default function EditTaskPage() {
                       event.target.value
                     )
                   }
-                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 >
 
                   <option value="LOW">
@@ -762,7 +762,7 @@ export default function EditTaskPage() {
                       event.target.value
                     )
                   }
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
 
               </div>
@@ -790,7 +790,7 @@ export default function EditTaskPage() {
                   disabled={
                     loadingData
                   }
-                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-50"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:cursor-not-allowed disabled:bg-slate-50"
                 >
 
                   <option value="">
@@ -838,15 +838,15 @@ export default function EditTaskPage() {
           ================================================== */}
 
           {task.assignedTo && (
-            <section className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
+            <section className="rounded-2xl border border-gold/20 bg-gold/10 p-6">
 
-              <h2 className="text-sm font-semibold text-slate-900">
+              <h2 className="text-sm font-semibold text-navy">
                 Current Assignment
               </h2>
 
               <div className="mt-3">
 
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-navy">
                   {task.assignedTo.name ||
                     task.assignedTo.email}
                 </p>
@@ -882,7 +882,7 @@ export default function EditTaskPage() {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-xl bg-navy px-6 py-3 text-sm font-semibold text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
             >
               {saving
                 ? "Saving..."

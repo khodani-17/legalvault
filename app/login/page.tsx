@@ -77,7 +77,7 @@ function LoginForm() {
 
   return (
     <main
-      className="relative flex min-h-screen items-center justify-center bg-slate-950 bg-cover bg-center bg-no-repeat px-6 py-10"
+      className="relative flex min-h-screen items-center justify-center bg-navy bg-cover bg-center bg-no-repeat px-6 py-10"
       style={{
         backgroundImage:
           "url('/images/legal%20vault.png')",
@@ -92,11 +92,11 @@ function LoginForm() {
 
           {/* Logo / Brand */}
           <div className="mb-8 text-center">
-            <p className="text-sm font-bold tracking-[0.25em] text-blue-700">
+            <p className="text-sm font-bold tracking-[0.25em] text-navy">
               LEGALVAULT
             </p>
 
-            <h1 className="mt-3 text-3xl font-bold text-slate-900">
+            <h1 className="mt-3 text-3xl font-bold text-navy">
               Welcome back
             </h1>
 
@@ -138,7 +138,7 @@ function LoginForm() {
                 onChange={(event) =>
                   setEmail(event.target.value)
                 }
-                className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 placeholder="you@lawfirm.co.za"
               />
             </div>
@@ -155,7 +155,7 @@ function LoginForm() {
 
                 <a
                   href="/forgot-password"
-                  className="text-sm font-medium text-blue-700 hover:text-blue-900 hover:underline"
+                  className="text-sm font-medium text-navy hover:text-navy hover:underline"
                 >
                   Forgot password?
                 </a>
@@ -171,7 +171,7 @@ function LoginForm() {
                 onChange={(event) =>
                   setPassword(event.target.value)
                 }
-                className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 placeholder="Enter your password"
               />
             </div>
@@ -180,7 +180,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-lg bg-navy px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading
                 ? "Signing in..."
@@ -194,7 +194,7 @@ function LoginForm() {
               Don't have a LegalVault account?{" "}
               <a
                 href="/signup"
-                className="font-semibold text-blue-700 hover:text-blue-900 hover:underline"
+                className="font-semibold text-navy hover:text-navy hover:underline"
               >
                 Create an account
               </a>
@@ -216,7 +216,7 @@ export default function LoginPage() {
     <Suspense
       fallback={
         <main
-          className="flex min-h-screen items-center justify-center bg-slate-950 bg-cover bg-center px-6"
+          className="flex min-h-screen items-center justify-center bg-navy bg-cover bg-center px-6"
           style={{
             backgroundImage:
               "url('/images/legal%20vault.png')",
@@ -226,7 +226,7 @@ export default function LoginPage() {
 
           <div className="relative z-10 w-full max-w-md">
             <div className="rounded-2xl bg-white/95 p-8 text-center shadow-2xl backdrop-blur-sm">
-              <p className="text-sm font-bold tracking-[0.25em] text-blue-700">
+              <p className="text-sm font-bold tracking-[0.25em] text-navy">
                 LEGALVAULT
               </p>
 

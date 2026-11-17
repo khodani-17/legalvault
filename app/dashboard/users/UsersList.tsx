@@ -80,10 +80,10 @@ function getRoleClasses(role: string) {
       return "bg-fuchsia-50 text-fuchsia-700 ring-1 ring-fuchsia-200";
 
     case "ATTORNEY":
-      return "bg-blue-50 text-blue-700 ring-1 ring-blue-200";
+      return "bg-gold/10 text-navy ring-1 ring-blue-200";
 
     case "CANDIDATE_ATTORNEY":
-      return "bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200";
+      return "bg-gold/10 text-navy ring-1 ring-indigo-200";
 
     case "PARALEGAL":
       return "bg-amber-50 text-amber-700 ring-1 ring-amber-200";
@@ -315,7 +315,7 @@ export default function UsersList({
               Administration
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold text-slate-900">
+            <h1 className="mt-2 text-3xl font-bold text-navy">
               User Management
             </h1>
 
@@ -328,7 +328,7 @@ export default function UsersList({
           {canCreateUser && (
             <Link
               href="/dashboard/users/new"
-              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
+              className="inline-flex items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-navy"
             >
               + Add User
             </Link>
@@ -360,7 +360,7 @@ export default function UsersList({
               Active Users
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-slate-900">
+            <p className="mt-2 text-3xl font-bold text-navy">
               {loading ? "—" : activeUsers}
             </p>
 
@@ -374,7 +374,7 @@ export default function UsersList({
               Administrators
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-slate-900">
+            <p className="mt-2 text-3xl font-bold text-navy">
               {loading ? "—" : administrators}
             </p>
 
@@ -388,7 +388,7 @@ export default function UsersList({
               Inactive Users
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-slate-900">
+            <p className="mt-2 text-3xl font-bold text-navy">
               {loading ? "—" : inactiveUsers}
             </p>
 
@@ -527,11 +527,11 @@ export default function UsersList({
 
             <p className="text-sm text-slate-500">
               Showing{" "}
-              <span className="font-semibold text-slate-900">
+              <span className="font-semibold text-navy">
                 {filteredUsers.length}
               </span>{" "}
               of{" "}
-              <span className="font-semibold text-slate-900">
+              <span className="font-semibold text-navy">
                 {users.length}
               </span>{" "}
               users
@@ -562,7 +562,7 @@ export default function UsersList({
         <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
           <div className="border-b border-slate-200 px-6 py-5">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Firm Users
             </h2>
 
@@ -584,7 +584,7 @@ export default function UsersList({
                 👤
               </div>
 
-              <h3 className="mt-4 text-lg font-semibold text-slate-900">
+              <h3 className="mt-4 text-lg font-semibold text-navy">
                 No users found
               </h3>
 
@@ -599,7 +599,7 @@ export default function UsersList({
               {users.length === 0 && canCreateUser && (
                 <Link
                   href="/dashboard/users/new"
-                  className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+                  className="mt-5 inline-flex rounded-xl bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
                 >
                   + Add User
                 </Link>
@@ -662,13 +662,13 @@ export default function UsersList({
                               className="h-10 w-10 rounded-full object-cover"
                             />
                           ) : (
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-navy text-xs font-bold text-white">
                               {getInitials(user.name)}
                             </div>
                           )}
 
                           <div>
-                            <p className="font-semibold text-slate-900 hover:underline">
+                            <p className="font-semibold text-navy hover:underline">
                               {user.name}
                             </p>
 
@@ -731,7 +731,7 @@ export default function UsersList({
                           {canUpdateUser && (
                             <Link
                               href={`/dashboard/users/${user.id}/edit`}
-                              className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+                              className="text-sm font-semibold text-navy hover:text-navy"
                             >
                               Edit
                             </Link>

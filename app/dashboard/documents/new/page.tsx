@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Suspense } from "react";
 import UploadDocumentForm from "../upload/UploadDocumentForm";
 
@@ -34,7 +34,7 @@ export default function NewDocumentPage() {
 
           <Link
             href="/dashboard/documents"
-            className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
+            className="inline-flex items-center text-sm font-medium text-navy hover:text-navy"
           >
             ← Back to Documents
           </Link>
@@ -43,7 +43,7 @@ export default function NewDocumentPage() {
             Document Management
           </p>
 
-          <h1 className="mt-1 text-3xl font-bold text-slate-900">
+          <h1 className="mt-1 text-3xl font-bold text-navy">
             Upload Document
           </h1>
 

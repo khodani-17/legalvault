@@ -107,7 +107,7 @@ function getTaskStatusClass(status: string) {
       return "bg-emerald-50 text-emerald-700";
 
     case "IN_PROGRESS":
-      return "bg-blue-50 text-blue-700";
+      return "bg-gold/10 text-navy";
 
     case "CANCELLED":
       return "bg-red-50 text-red-700";
@@ -126,7 +126,7 @@ function getPriorityClass(priority: string) {
       return "bg-orange-50 text-orange-700";
 
     case "MEDIUM":
-      return "bg-blue-50 text-blue-700";
+      return "bg-gold/10 text-navy";
 
     default:
       return "bg-slate-100 text-slate-600";
@@ -291,7 +291,7 @@ export default function UserProfilePage({
       <main className="min-h-screen bg-slate-50 p-6">
         <div className="mx-auto max-w-6xl">
           <div className="rounded-2xl border border-red-200 bg-white p-8">
-            <h1 className="text-xl font-semibold text-slate-900">
+            <h1 className="text-xl font-semibold text-navy">
               User not found
             </h1>
 
@@ -302,7 +302,7 @@ export default function UserProfilePage({
 
             <Link
               href="/dashboard/users"
-              className="mt-6 inline-flex rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+              className="mt-6 inline-flex rounded-xl bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
             >
               Back to Users
             </Link>
@@ -349,7 +349,7 @@ export default function UserProfilePage({
                   className="h-20 w-20 rounded-full object-cover"
                 />
               ) : (
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-900 text-xl font-bold text-white">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-navy text-xl font-bold text-white">
                   {getInitials(user.name)}
                 </div>
               )}
@@ -359,7 +359,7 @@ export default function UserProfilePage({
                   User Profile
                 </p>
 
-                <h1 className="mt-1 text-3xl font-bold text-slate-900">
+                <h1 className="mt-1 text-3xl font-bold text-navy">
                   {user.name}
                 </h1>
 
@@ -398,7 +398,7 @@ export default function UserProfilePage({
               {canUpdateUser && (
                 <Link
                   href={`/dashboard/users/${id}/edit`}
-                  className="rounded-xl bg-slate-900 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-slate-800"
+                  className="rounded-xl bg-navy px-5 py-3 text-center text-sm font-semibold text-white hover:bg-navy"
                 >
                   Edit User
                 </Link>
@@ -435,7 +435,7 @@ export default function UserProfilePage({
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-1">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Account Information
             </h2>
 
@@ -446,7 +446,7 @@ export default function UserProfilePage({
                   Full Name
                 </p>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {user.name}
                 </p>
               </div>
@@ -456,7 +456,7 @@ export default function UserProfilePage({
                   Email Address
                 </p>
 
-                <p className="mt-1 break-all text-sm font-medium text-slate-900">
+                <p className="mt-1 break-all text-sm font-medium text-navy">
                   {user.email}
                 </p>
               </div>
@@ -466,7 +466,7 @@ export default function UserProfilePage({
                   Role
                 </p>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {formatRole(user.role)}
                 </p>
               </div>
@@ -476,7 +476,7 @@ export default function UserProfilePage({
                   Status
                 </p>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {formatStatus(
                     user.status
                   )}
@@ -490,7 +490,7 @@ export default function UserProfilePage({
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-2">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Account Activity
             </h2>
 
@@ -501,7 +501,7 @@ export default function UserProfilePage({
                   Last Login
                 </p>
 
-                <p className="mt-2 text-sm font-semibold text-slate-900">
+                <p className="mt-2 text-sm font-semibold text-navy">
                   {formatDateTime(
                     user.lastLoginAt
                   )}
@@ -513,7 +513,7 @@ export default function UserProfilePage({
                   Account Created
                 </p>
 
-                <p className="mt-2 text-sm font-semibold text-slate-900">
+                <p className="mt-2 text-sm font-semibold text-navy">
                   {formatDate(
                     user.createdAt
                   )}
@@ -525,7 +525,7 @@ export default function UserProfilePage({
                   Last Updated
                 </p>
 
-                <p className="mt-2 text-sm font-semibold text-slate-900">
+                <p className="mt-2 text-sm font-semibold text-navy">
                   {formatDateTime(
                     user.updatedAt
                   )}
@@ -537,7 +537,7 @@ export default function UserProfilePage({
                   Assigned Tasks
                 </p>
 
-                <p className="mt-2 text-2xl font-bold text-slate-900">
+                <p className="mt-2 text-2xl font-bold text-navy">
                   {user.assignedTasks
                     ?.length || 0}
                 </p>
@@ -553,7 +553,7 @@ export default function UserProfilePage({
         <section className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
           <div className="border-b border-slate-200 px-6 py-5">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Assigned Tasks
             </h2>
 
@@ -566,7 +566,7 @@ export default function UserProfilePage({
           user.assignedTasks.length ===
             0 ? (
             <div className="p-10 text-center">
-              <h3 className="text-base font-semibold text-slate-900">
+              <h3 className="text-base font-semibold text-navy">
                 No assigned tasks
               </h3>
 
@@ -617,7 +617,7 @@ export default function UserProfilePage({
                         <td className="px-6 py-5">
                           <Link
                             href={`/dashboard/tasks/${task.id}`}
-                            className="text-sm font-semibold text-slate-900 hover:text-blue-700"
+                            className="text-sm font-semibold text-navy hover:text-navy"
                           >
                             {task.title}
                           </Link>
@@ -627,7 +627,7 @@ export default function UserProfilePage({
                           {task.matter ? (
                             <Link
                               href={`/dashboard/matters/${task.matter.id}`}
-                              className="text-sm text-slate-700 hover:text-blue-700"
+                              className="text-sm text-slate-700 hover:text-navy"
                             >
                               {task.matter.referenceNumber}
                             </Link>

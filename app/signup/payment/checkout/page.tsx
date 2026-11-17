@@ -235,15 +235,15 @@ export default function PaymentCheckoutPage() {
    */
   if (!plan && error) {
     return (
-      <main className="min-h-screen bg-slate-950 px-6 py-10">
+      <main className="min-h-screen bg-navy px-6 py-10">
         <div className="mx-auto w-full max-w-2xl">
           <div className="rounded-2xl bg-white p-8 shadow-2xl md:p-10">
             <div className="text-center">
-              <p className="text-sm font-semibold tracking-wide text-blue-600">
+              <p className="text-sm font-semibold tracking-wide text-navy">
                 LEGALVAULT
               </p>
 
-              <h1 className="mt-3 text-2xl font-bold text-slate-900">
+              <h1 className="mt-3 text-2xl font-bold text-navy">
                 Payment setup unavailable
               </h1>
 
@@ -256,7 +256,7 @@ export default function PaymentCheckoutPage() {
 
               <Link
                 href="/signup/payment"
-                className="mt-6 inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-800"
+                className="mt-6 inline-block rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy"
               >
                 Return to subscription plans
               </Link>
@@ -272,14 +272,14 @@ export default function PaymentCheckoutPage() {
    */
   if (!plan) {
     return (
-      <main className="min-h-screen bg-slate-950 px-6 py-10">
+      <main className="min-h-screen bg-navy px-6 py-10">
         <div className="mx-auto w-full max-w-2xl">
           <div className="rounded-2xl bg-white p-8 text-center shadow-2xl md:p-10">
-            <p className="text-sm font-semibold tracking-wide text-blue-600">
+            <p className="text-sm font-semibold tracking-wide text-navy">
               LEGALVAULT
             </p>
 
-            <h1 className="mt-3 text-2xl font-bold text-slate-900">
+            <h1 className="mt-3 text-2xl font-bold text-navy">
               Preparing secure checkout...
             </h1>
 
@@ -293,17 +293,17 @@ export default function PaymentCheckoutPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-10">
+    <main className="min-h-screen bg-navy px-6 py-10">
       <div className="mx-auto w-full max-w-2xl">
         <div className="rounded-2xl bg-white p-8 shadow-2xl md:p-10">
 
           {/* Header */}
           <div className="text-center">
-            <p className="text-sm font-semibold tracking-wide text-blue-600">
+            <p className="text-sm font-semibold tracking-wide text-navy">
               LEGALVAULT
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold text-slate-900">
+            <h1 className="mt-2 text-3xl font-bold text-navy">
               Secure payment
             </h1>
 
@@ -320,12 +320,12 @@ export default function PaymentCheckoutPage() {
             </p>
 
             <div className="mt-2 flex items-center justify-between gap-4">
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-xl font-bold text-navy">
                 {planNames[plan]}
               </h2>
 
               {payment?.amount !== undefined && (
-                <p className="text-lg font-bold text-slate-900">
+                <p className="text-lg font-bold text-navy">
                   {formatAmount(payment.amount)}
                 </p>
               )}
@@ -346,7 +346,7 @@ export default function PaymentCheckoutPage() {
           {/* Checkout not created */}
           {!checkout && (
             <div className="mt-8">
-              <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-4 text-sm leading-6 text-blue-800">
+              <div className="rounded-lg border border-gold/30 bg-gold/10 px-4 py-4 text-sm leading-6 text-navy">
                 <p className="font-semibold">
                   Ready for secure payment
                 </p>
@@ -362,7 +362,7 @@ export default function PaymentCheckoutPage() {
                 type="button"
                 onClick={createCheckout}
                 disabled={loading}
-                className="mt-6 w-full rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+                className="mt-6 w-full rounded-lg bg-navy px-4 py-3 font-semibold text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {loading
                   ? "Preparing secure payment..."
@@ -392,7 +392,7 @@ export default function PaymentCheckoutPage() {
                     Payment reference
                   </p>
 
-                  <p className="mt-1 break-all text-sm font-semibold text-slate-900">
+                  <p className="mt-1 break-all text-sm font-semibold text-navy">
                     {payment.reference}
                   </p>
                 </div>
@@ -401,7 +401,7 @@ export default function PaymentCheckoutPage() {
               <button
                 type="button"
                 onClick={handlePayNow}
-                className="mt-6 w-full rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white transition hover:bg-blue-800"
+                className="mt-6 w-full rounded-lg bg-navy px-4 py-3 font-semibold text-white transition hover:bg-navy"
               >
                 Pay now with PayFast
               </button>
@@ -444,7 +444,7 @@ export default function PaymentCheckoutPage() {
           <div className="mt-8 text-center">
             <Link
               href="/signup/payment"
-              className="text-sm font-semibold text-blue-700 hover:text-blue-800"
+              className="text-sm font-semibold text-navy hover:text-navy"
             >
               Return to subscription plans
             </Link>

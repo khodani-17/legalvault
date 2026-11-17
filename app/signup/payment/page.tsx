@@ -166,17 +166,17 @@ export default function PaymentPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-10">
+    <main className="min-h-screen bg-navy px-6 py-10">
       <div className="mx-auto w-full max-w-6xl">
         <div className="rounded-2xl bg-white p-8 shadow-2xl md:p-10">
 
           {/* Header */}
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold tracking-wide text-blue-600">
+            <p className="text-sm font-semibold tracking-wide text-navy">
               LEGALVAULT
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold text-slate-900 md:text-4xl">
+            <h1 className="mt-2 text-3xl font-bold text-navy md:text-4xl">
               Choose your subscription
             </h1>
 
@@ -188,7 +188,7 @@ export default function PaymentPage() {
           </div>
 
           {/* Finance notice */}
-          <div className="mx-auto mt-8 max-w-3xl rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+          <div className="mx-auto mt-8 max-w-3xl rounded-lg border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-navy">
             <span className="font-semibold">
               Finance payment access:
             </span>{" "}
@@ -227,8 +227,8 @@ export default function PaymentPage() {
                   aria-pressed={isSelected}
                   className={`relative flex h-full flex-col rounded-2xl border-2 p-6 text-left transition ${
                     isSelected
-                      ? "border-blue-700 bg-blue-50 shadow-lg"
-                      : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-md"
+                      ? "border-blue-700 bg-gold/10 shadow-lg"
+                      : "border-slate-200 bg-white hover:border-gold/50 hover:shadow-md"
                   } ${
                     loading
                       ? "cursor-not-allowed opacity-70"
@@ -237,14 +237,14 @@ export default function PaymentPage() {
                 >
                   {/* Recommended badge */}
                   {plan.id === "PROFESSIONAL" && (
-                    <span className="absolute right-5 top-5 rounded-full bg-blue-700 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="absolute right-5 top-5 rounded-full bg-navy px-3 py-1 text-xs font-semibold text-white">
                       Recommended
                     </span>
                   )}
 
                   {/* Plan information */}
                   <div className="pr-20">
-                    <h2 className="text-xl font-bold text-slate-900">
+                    <h2 className="text-xl font-bold text-navy">
                       {plan.name}
                     </h2>
 
@@ -255,7 +255,7 @@ export default function PaymentPage() {
 
                   {/* Price */}
                   <div className="mt-6">
-                    <p className="text-lg font-bold text-slate-900">
+                    <p className="text-lg font-bold text-navy">
                       {plan.price}
                     </p>
 
@@ -267,7 +267,7 @@ export default function PaymentPage() {
 
                   {/* Features */}
                   <div className="mt-6 border-t border-slate-200 pt-5">
-                    <p className="text-sm font-semibold text-slate-900">
+                    <p className="text-sm font-semibold text-navy">
                       Includes:
                     </p>
 
@@ -278,7 +278,7 @@ export default function PaymentPage() {
                             key={feature}
                             className="flex gap-2 text-sm text-slate-600"
                           >
-                            <span className="mt-0.5 font-bold text-blue-700">
+                            <span className="mt-0.5 font-bold text-navy">
                               ✓
                             </span>
 
@@ -296,7 +296,7 @@ export default function PaymentPage() {
                     <div
                       className={`rounded-lg px-4 py-3 text-center text-sm font-semibold ${
                         isSelected
-                          ? "bg-blue-700 text-white"
+                          ? "bg-navy text-white"
                           : "bg-slate-100 text-slate-700"
                       }`}
                     >
@@ -318,7 +318,7 @@ export default function PaymentPage() {
               disabled={
                 loading || !selectedPlan
               }
-              className="w-full rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full rounded-lg bg-navy px-4 py-3 font-semibold text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading
                 ? "Preparing secure payment..."
@@ -338,7 +338,7 @@ export default function PaymentPage() {
           <div className="mt-8 border-t border-slate-200 pt-6 text-center">
             <Link
               href="/dashboard"
-              className="text-sm font-semibold text-blue-700 hover:text-blue-800"
+              className="text-sm font-semibold text-navy hover:text-navy"
             >
               Return to LegalVault
             </Link>

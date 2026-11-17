@@ -163,7 +163,7 @@ function getStatusClass(status: string) {
       return "bg-amber-100 text-amber-800";
 
     case "CONVERTED":
-      return "bg-blue-100 text-blue-800";
+      return "bg-gold/15 text-navy";
 
     default:
       return "bg-slate-100 text-slate-700";
@@ -199,7 +199,7 @@ function getConflictResultClass(status: string) {
       return "border-red-200 bg-red-50 text-red-900";
 
     default:
-      return "border-slate-200 bg-slate-50 text-slate-900";
+      return "border-slate-200 bg-slate-50 text-navy";
   }
 }
 
@@ -456,7 +456,7 @@ export default function LegalIntakeDetailPage() {
               !
             </div>
 
-            <h1 className="text-xl font-bold text-slate-950">
+            <h1 className="text-xl font-bold text-navy">
               Unable to load legal intake
             </h1>
 
@@ -469,7 +469,7 @@ export default function LegalIntakeDetailPage() {
               <button
                 type="button"
                 onClick={loadIntake}
-                className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
+                className="rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white hover:bg-navy"
               >
                 Try Again
               </button>
@@ -539,7 +539,7 @@ export default function LegalIntakeDetailPage() {
 
           <span>/</span>
 
-          <span className="font-medium text-slate-900">
+          <span className="font-medium text-navy">
             {intake.prospectiveClientName}
           </span>
         </div>
@@ -566,7 +566,7 @@ export default function LegalIntakeDetailPage() {
               </span>
             </div>
 
-            <h1 className="text-3xl font-bold tracking-tight text-slate-950">
+            <h1 className="text-3xl font-bold tracking-tight text-navy">
               {intake.prospectiveClientName}
             </h1>
 
@@ -590,7 +590,7 @@ export default function LegalIntakeDetailPage() {
               type="button"
               onClick={loadIntake}
               disabled={loading}
-              className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               Refresh
             </button>
@@ -655,7 +655,7 @@ export default function LegalIntakeDetailPage() {
         {/* Workflow */}
         <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-5">
-            <h2 className="text-lg font-bold text-slate-950">
+            <h2 className="text-lg font-bold text-navy">
               Intake Workflow
             </h2>
 
@@ -699,7 +699,7 @@ export default function LegalIntakeDetailPage() {
                 key={step.label}
                 className={`rounded-xl border p-4 ${
                   step.active
-                    ? "border-slate-900 bg-slate-950 text-white"
+                    ? "border-navy bg-navy text-white"
                     : "border-slate-200 bg-slate-50 text-slate-500"
                 }`}
               >
@@ -721,7 +721,7 @@ export default function LegalIntakeDetailPage() {
             {/* Client */}
             <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
               <div className="border-b border-slate-200 px-6 py-5">
-                <h2 className="text-lg font-bold text-slate-950">
+                <h2 className="text-lg font-bold text-navy">
                   Client Information
                 </h2>
               </div>
@@ -732,7 +732,7 @@ export default function LegalIntakeDetailPage() {
                     Prospective Client
                   </p>
 
-                  <p className="mt-1 font-semibold text-slate-900">
+                  <p className="mt-1 font-semibold text-navy">
                     {intake.prospectiveClientName}
                   </p>
                 </div>
@@ -742,7 +742,7 @@ export default function LegalIntakeDetailPage() {
                     Existing Client
                   </p>
 
-                  <p className="mt-1 font-semibold text-slate-900">
+                  <p className="mt-1 font-semibold text-navy">
                     {intake.client?.name || "Not linked"}
                   </p>
 
@@ -778,7 +778,7 @@ export default function LegalIntakeDetailPage() {
                     Practice Area
                   </p>
 
-                  <p className="mt-1 text-sm font-semibold text-slate-900">
+                  <p className="mt-1 text-sm font-semibold text-navy">
                     {intake.practiceArea || "Not specified"}
                   </p>
                 </div>
@@ -798,7 +798,7 @@ export default function LegalIntakeDetailPage() {
             {/* Description */}
             <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
               <div className="border-b border-slate-200 px-6 py-5">
-                <h2 className="text-lg font-bold text-slate-950">
+                <h2 className="text-lg font-bold text-navy">
                   Enquiry Description
                 </h2>
               </div>
@@ -814,7 +814,7 @@ export default function LegalIntakeDetailPage() {
             {/* Parties */}
             <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
               <div className="border-b border-slate-200 px-6 py-5">
-                <h2 className="text-lg font-bold text-slate-950">
+                <h2 className="text-lg font-bold text-navy">
                   Parties
                 </h2>
 
@@ -825,7 +825,7 @@ export default function LegalIntakeDetailPage() {
 
               <div className="grid gap-6 p-6 md:grid-cols-2">
                 <div>
-                  <h3 className="mb-3 text-sm font-bold text-slate-900">
+                  <h3 className="mb-3 text-sm font-bold text-navy">
                     Opposing Parties
                   </h3>
 
@@ -850,7 +850,7 @@ export default function LegalIntakeDetailPage() {
                 </div>
 
                 <div>
-                  <h3 className="mb-3 text-sm font-bold text-slate-900">
+                  <h3 className="mb-3 text-sm font-bold text-navy">
                     Related Parties
                   </h3>
 
@@ -881,7 +881,7 @@ export default function LegalIntakeDetailPage() {
               <div className="border-b border-slate-200 px-6 py-5">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h2 className="text-lg font-bold text-slate-950">
+                    <h2 className="text-lg font-bold text-navy">
                       Conflict Check
                     </h2>
 
@@ -936,7 +936,7 @@ export default function LegalIntakeDetailPage() {
                           Current Status
                         </p>
 
-                        <p className="mt-2 text-sm font-bold text-slate-900">
+                        <p className="mt-2 text-sm font-bold text-navy">
                           {conflictLabels[
                             intake.conflictStatus
                           ] || intake.conflictStatus}
@@ -948,7 +948,7 @@ export default function LegalIntakeDetailPage() {
                           Last Checked
                         </p>
 
-                        <p className="mt-2 text-sm font-bold text-slate-900">
+                        <p className="mt-2 text-sm font-bold text-navy">
                           {formatDate(
                             intake.conflictCheckedAt
                           )}
@@ -960,7 +960,7 @@ export default function LegalIntakeDetailPage() {
                           Checked By
                         </p>
 
-                        <p className="mt-2 text-sm font-bold text-slate-900">
+                        <p className="mt-2 text-sm font-bold text-navy">
                           {intake.conflictCheckedBy?.name ||
                             intake.conflictCheckedBy?.email ||
                             "Not checked"}
@@ -1018,7 +1018,7 @@ export default function LegalIntakeDetailPage() {
                         {/* Matched clients */}
                         <div className="rounded-xl border border-slate-200 bg-white">
                           <div className="border-b border-slate-200 px-5 py-4">
-                            <h3 className="font-bold text-slate-950">
+                            <h3 className="font-bold text-navy">
                               Matched Clients
                             </h3>
 
@@ -1036,7 +1036,7 @@ export default function LegalIntakeDetailPage() {
                                     key={client.id}
                                     className="rounded-lg border border-amber-200 bg-amber-50 p-4"
                                   >
-                                    <p className="font-semibold text-slate-900">
+                                    <p className="font-semibold text-navy">
                                       {client.name}
                                     </p>
 
@@ -1070,7 +1070,7 @@ export default function LegalIntakeDetailPage() {
                         {/* Matched matters */}
                         <div className="rounded-xl border border-slate-200 bg-white">
                           <div className="border-b border-slate-200 px-5 py-4">
-                            <h3 className="font-bold text-slate-950">
+                            <h3 className="font-bold text-navy">
                               Matched Matters
                             </h3>
 
@@ -1088,7 +1088,7 @@ export default function LegalIntakeDetailPage() {
                                     key={matter.id}
                                     className="rounded-lg border border-amber-200 bg-amber-50 p-4"
                                   >
-                                    <p className="font-semibold text-slate-900">
+                                    <p className="font-semibold text-navy">
                                       {matter.title}
                                     </p>
 
@@ -1130,7 +1130,7 @@ export default function LegalIntakeDetailPage() {
                         {conflictResult.searchTerms &&
                           conflictResult.searchTerms.length > 0 && (
                             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-                              <h3 className="text-sm font-bold text-slate-900">
+                              <h3 className="text-sm font-bold text-navy">
                                 Search Terms Used
                               </h3>
 
@@ -1153,7 +1153,7 @@ export default function LegalIntakeDetailPage() {
 
                     {!conflictResult && latestConflictCheck && (
                       <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-5">
-                        <h3 className="text-sm font-bold text-slate-900">
+                        <h3 className="text-sm font-bold text-navy">
                           Latest Conflict Check
                         </h3>
 
@@ -1163,7 +1163,7 @@ export default function LegalIntakeDetailPage() {
                               Result
                             </p>
 
-                            <p className="mt-1 text-sm font-semibold text-slate-900">
+                            <p className="mt-1 text-sm font-semibold text-navy">
                               {conflictLabels[
                                 latestConflictCheck.status
                               ] ||
@@ -1188,7 +1188,7 @@ export default function LegalIntakeDetailPage() {
                               Matched Clients
                             </p>
 
-                            <p className="mt-1 text-sm font-semibold text-slate-900">
+                            <p className="mt-1 text-sm font-semibold text-navy">
                               {
                                 latestConflictCheck
                                   .matchedClientIds.length
@@ -1201,7 +1201,7 @@ export default function LegalIntakeDetailPage() {
                               Matched Matters
                             </p>
 
-                            <p className="mt-1 text-sm font-semibold text-slate-900">
+                            <p className="mt-1 text-sm font-semibold text-navy">
                               {
                                 latestConflictCheck
                                   .matchedMatterIds.length
@@ -1229,7 +1229,7 @@ export default function LegalIntakeDetailPage() {
                         type="button"
                         onClick={runConflictCheck}
                         disabled={runningConflictCheck}
-                        className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+                        className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {runningConflictCheck && (
                           <svg
@@ -1279,7 +1279,7 @@ export default function LegalIntakeDetailPage() {
             {/* Processing */}
             <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
               <div className="border-b border-slate-200 px-5 py-4">
-                <h2 className="font-bold text-slate-950">
+                <h2 className="font-bold text-navy">
                   Processing
                 </h2>
               </div>
@@ -1304,7 +1304,7 @@ export default function LegalIntakeDetailPage() {
                     Status
                   </p>
 
-                  <p className="mt-1 text-sm font-semibold text-slate-900">
+                  <p className="mt-1 text-sm font-semibold text-navy">
                     {statusLabels[intake.status] ||
                       intake.status}
                   </p>
@@ -1315,7 +1315,7 @@ export default function LegalIntakeDetailPage() {
                     Assigned To
                   </p>
 
-                  <p className="mt-1 text-sm font-semibold text-slate-900">
+                  <p className="mt-1 text-sm font-semibold text-navy">
                     {intake.assignedTo?.name ||
                       intake.assignedTo?.email ||
                       "Unassigned"}
@@ -1345,7 +1345,7 @@ export default function LegalIntakeDetailPage() {
             {/* Dates */}
             <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
               <div className="border-b border-slate-200 px-5 py-4">
-                <h2 className="font-bold text-slate-950">
+                <h2 className="font-bold text-navy">
                   Record Information
                 </h2>
               </div>
@@ -1386,7 +1386,7 @@ export default function LegalIntakeDetailPage() {
             {/* Actions */}
             <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
               <div className="border-b border-slate-200 px-5 py-4">
-                <h2 className="font-bold text-slate-950">
+                <h2 className="font-bold text-navy">
                   Actions
                 </h2>
               </div>
@@ -1474,7 +1474,7 @@ export default function LegalIntakeDetailPage() {
                 )}
 
                 {intake.status === "CONVERTED" && (
-                  <p className="pt-1 text-xs leading-5 text-blue-700">
+                  <p className="pt-1 text-xs leading-5 text-navy">
                     This intake has already been converted into a
                     matter.
                   </p>

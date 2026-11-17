@@ -147,7 +147,7 @@ export default function VersionHistory({
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
 
           <div>
-            <h2 className="text-xl font-bold text-slate-900">
+            <h2 className="text-xl font-bold text-navy">
               Version History
             </h2>
 
@@ -287,7 +287,7 @@ export default function VersionHistory({
                         href={`/api/documents/${documentId}/versions/${version.version}/preview`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-fit rounded-lg border border-blue-300 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100"
+                        className="w-fit rounded-lg border border-gold/50 bg-gold/10 px-4 py-2 text-sm font-medium text-navy hover:bg-gold/15"
                       >
                         Preview
                       </a>

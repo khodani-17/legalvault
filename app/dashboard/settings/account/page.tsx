@@ -55,7 +55,7 @@ export default async function AccountSettingsPage() {
             Back to Settings
           </Link>
 
-          <h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="mt-5 text-3xl font-bold tracking-tight text-navy">
             Account
           </h1>
 
@@ -74,7 +74,7 @@ export default async function AccountSettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Personal Information
                 </h2>
 
@@ -91,7 +91,7 @@ export default async function AccountSettingsPage() {
                   Full Name
                 </p>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {user.name}
                 </p>
               </div>
@@ -105,7 +105,7 @@ export default async function AccountSettingsPage() {
                   </p>
                 </div>
 
-                <p className="mt-1 text-sm font-medium text-slate-900">
+                <p className="mt-1 text-sm font-medium text-navy">
                   {user.email}
                 </p>
               </div>
@@ -121,7 +121,7 @@ export default async function AccountSettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Firm
                 </h2>
 
@@ -137,7 +137,7 @@ export default async function AccountSettingsPage() {
                 Firm Name
               </p>
 
-              <p className="mt-1 text-sm font-medium text-slate-900">
+              <p className="mt-1 text-sm font-medium text-navy">
                 {user.firm.name}
               </p>
 
@@ -152,7 +152,7 @@ export default async function AccountSettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Access Role
                 </h2>
 
@@ -177,7 +177,7 @@ export default async function AccountSettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Account Status
                 </h2>
 
@@ -197,7 +197,7 @@ export default async function AccountSettingsPage() {
         </div>
 
         <section className="mt-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="font-semibold text-slate-900">
+          <h2 className="font-semibold text-navy">
             Account Management
           </h2>
 
@@ -211,7 +211,7 @@ export default async function AccountSettingsPage() {
           <div className="mt-4">
             <Link
               href="/dashboard/users"
-              className="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
+              className="inline-flex items-center rounded-lg bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy"
             >
               Users &amp; Roles
             </Link>

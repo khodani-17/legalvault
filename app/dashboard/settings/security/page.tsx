@@ -48,7 +48,7 @@ export default async function SecuritySettingsPage() {
             Back to Settings
           </Link>
 
-          <h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="mt-5 text-3xl font-bold tracking-tight text-navy">
             Security
           </h1>
 
@@ -68,7 +68,7 @@ export default async function SecuritySettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Authentication
                 </h2>
 
@@ -84,7 +84,7 @@ export default async function SecuritySettingsPage() {
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
 
                 <div>
-                  <p className="font-medium text-slate-900">
+                  <p className="font-medium text-navy">
                     Authenticated account
                   </p>
 
@@ -99,7 +99,7 @@ export default async function SecuritySettingsPage() {
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
 
                 <div>
-                  <p className="font-medium text-slate-900">
+                  <p className="font-medium text-navy">
                     Active account verification
                   </p>
 
@@ -122,7 +122,7 @@ export default async function SecuritySettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Password Security
                 </h2>
 
@@ -141,7 +141,7 @@ export default async function SecuritySettingsPage() {
               </p>
 
               <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-medium text-slate-900">
+                <p className="text-sm font-medium text-navy">
                   Account
                 </p>
 
@@ -162,7 +162,7 @@ export default async function SecuritySettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Access Control
                 </h2>
 
@@ -178,7 +178,7 @@ export default async function SecuritySettingsPage() {
                 Current Role
               </p>
 
-              <p className="mt-2 text-sm font-semibold text-slate-900">
+              <p className="mt-2 text-sm font-semibold text-navy">
                 {user.role}
               </p>
 
@@ -199,7 +199,7 @@ export default async function SecuritySettingsPage() {
               </div>
 
               <div>
-                <h2 className="font-semibold text-slate-900">
+                <h2 className="font-semibold text-navy">
                   Security Status
                 </h2>
 
@@ -231,7 +231,7 @@ export default async function SecuritySettingsPage() {
             <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-slate-700" />
 
             <div>
-              <h2 className="font-semibold text-slate-900">
+              <h2 className="font-semibold text-navy">
                 Security Reminder
               </h2>
 

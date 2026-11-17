@@ -184,7 +184,7 @@ export default function EditIntakePage() {
       <main className="min-h-screen bg-slate-50 p-6">
         <div className="mx-auto max-w-5xl">
           <div className="rounded-2xl border border-red-200 bg-white p-8 shadow-sm">
-            <h1 className="text-xl font-bold text-slate-950">
+            <h1 className="text-xl font-bold text-navy">
               Intake not found
             </h1>
 
@@ -194,7 +194,7 @@ export default function EditIntakePage() {
 
             <Link
               href="/dashboard/intake"
-              className="mt-6 inline-flex rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white"
+              className="mt-6 inline-flex rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white"
             >
               Back to Legal Intake
             </Link>
@@ -209,7 +209,7 @@ export default function EditIntakePage() {
       <main className="min-h-screen bg-slate-50 p-6">
         <div className="mx-auto max-w-5xl">
           <div className="rounded-2xl border border-amber-200 bg-white p-8 shadow-sm">
-            <h1 className="text-xl font-bold text-slate-950">
+            <h1 className="text-xl font-bold text-navy">
               Intake already converted
             </h1>
 
@@ -220,7 +220,7 @@ export default function EditIntakePage() {
 
             <Link
               href={`/dashboard/intake/${intakeId}`}
-              className="mt-6 inline-flex rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white"
+              className="mt-6 inline-flex rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white"
             >
               Back to Intake
             </Link>
@@ -240,7 +240,7 @@ export default function EditIntakePage() {
               Legal Intake & Conflict Check Centre
             </p>
 
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-950">
+            <h1 className="mt-1 text-2xl font-bold tracking-tight text-navy">
               Edit Legal Intake
             </h1>
 
@@ -275,7 +275,7 @@ export default function EditIntakePage() {
           {/* Prospective client */}
           <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-200 px-5 py-4">
-              <h2 className="font-bold text-slate-950">
+              <h2 className="font-bold text-navy">
                 Prospective Client
               </h2>
 
@@ -366,7 +366,7 @@ export default function EditIntakePage() {
           {/* Matter information */}
           <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-200 px-5 py-4">
-              <h2 className="font-bold text-slate-950">
+              <h2 className="font-bold text-navy">
                 Matter Information
               </h2>
             </div>
@@ -441,7 +441,7 @@ export default function EditIntakePage() {
           {/* Parties */}
           <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-200 px-5 py-4">
-              <h2 className="font-bold text-slate-950">
+              <h2 className="font-bold text-navy">
                 Conflict Check Parties
               </h2>
 
@@ -518,7 +518,7 @@ export default function EditIntakePage() {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-lg bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
             >
               {saving ? "Saving Changes..." : "Save Changes"}
             </button>

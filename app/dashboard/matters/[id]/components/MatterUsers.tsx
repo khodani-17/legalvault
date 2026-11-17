@@ -426,7 +426,7 @@ export default function MatterUsers({
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Assigned Users
           </h2>
 
@@ -443,7 +443,7 @@ export default function MatterUsers({
               setError("");
               setSuccess("");
             }}
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-4 py-2.5 text-sm font-medium text-white transition hover:bg-navy"
           >
             {showForm ? (
               <>
@@ -479,7 +479,7 @@ export default function MatterUsers({
           onSubmit={handleAssign}
           className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-5"
         >
-          <h3 className="font-semibold text-slate-900">
+          <h3 className="font-semibold text-navy">
             Assign User
           </h3>
 
@@ -498,7 +498,7 @@ export default function MatterUsers({
                 setSelectedUserId(event.target.value)
               }
               disabled={loadingUsers}
-              className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
             >
               <option value="">
                 {loadingUsers
@@ -663,7 +663,7 @@ export default function MatterUsers({
                 loadingUsers ||
                 !selectedUserId
               }
-              className="rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               {saving ? "Assigning..." : "Assign User"}
             </button>
@@ -714,7 +714,7 @@ export default function MatterUsers({
                       className="h-11 w-11 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
                       {getInitials(
                         assignment.user.name
                       )}
@@ -722,7 +722,7 @@ export default function MatterUsers({
                   )}
 
                   <div>
-                    <p className="font-semibold text-slate-900">
+                    <p className="font-semibold text-navy">
                       {assignment.user.name}
                     </p>
 

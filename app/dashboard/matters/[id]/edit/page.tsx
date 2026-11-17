@@ -545,7 +545,7 @@ export default function EditMatterPage() {
       <main className="min-h-screen bg-slate-50 p-6">
         <div className="mx-auto max-w-5xl">
           <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center shadow-sm">
-            <Loader2 className="mx-auto h-8 w-8 animate-spin text-blue-700" />
+            <Loader2 className="mx-auto h-8 w-8 animate-spin text-navy" />
 
             <p className="mt-4 text-sm text-slate-500">
               Loading matter...
@@ -566,7 +566,7 @@ export default function EditMatterPage() {
         <div className="mx-auto max-w-5xl">
           <Link
             href="/dashboard/matters"
-            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900"
+            className="inline-flex items-center gap-2 text-sm font-medium text-navy hover:text-navy"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Matters
@@ -577,7 +577,7 @@ export default function EditMatterPage() {
               <FileText className="h-7 w-7 text-red-600" />
             </div>
 
-            <h1 className="mt-5 text-2xl font-bold text-slate-900">
+            <h1 className="mt-5 text-2xl font-bold text-navy">
               Matter not found
             </h1>
 
@@ -588,7 +588,7 @@ export default function EditMatterPage() {
 
             <Link
               href="/dashboard/matters"
-              className="mt-6 inline-flex rounded-lg bg-slate-900 px-5 py-3 text-sm font-medium text-white hover:bg-slate-800"
+              className="mt-6 inline-flex rounded-lg bg-navy px-5 py-3 text-sm font-medium text-white hover:bg-navy"
             >
               Return to Matters
             </Link>
@@ -609,7 +609,7 @@ export default function EditMatterPage() {
         {/* Back */}
         <Link
           href={`/dashboard/matters/${matter.id}`}
-          className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900"
+          className="inline-flex items-center gap-2 text-sm font-medium text-navy hover:text-navy"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Matter
@@ -620,8 +620,8 @@ export default function EditMatterPage() {
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-100">
-                  <FileText className="h-5 w-5 text-blue-700" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15">
+                  <FileText className="h-5 w-5 text-navy" />
                 </div>
 
                 <div>
@@ -629,7 +629,7 @@ export default function EditMatterPage() {
                     Edit Matter
                   </p>
 
-                  <h1 className="text-2xl font-bold text-slate-900">
+                  <h1 className="text-2xl font-bold text-navy">
                     {matter.referenceNumber}
                   </h1>
                 </div>
@@ -678,7 +678,7 @@ export default function EditMatterPage() {
           {/* Matter Information */}
           <section className="rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
             <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Matter Information
               </h2>
 
@@ -724,7 +724,7 @@ export default function EditMatterPage() {
                     setTitle(event.target.value)
                   }
                   placeholder="e.g. Sadiki RAF Claim"
-                  className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-navy outline-none transition placeholder:text-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
               </div>
 
@@ -747,7 +747,7 @@ export default function EditMatterPage() {
                     )
                   }
                   placeholder="Provide a description of the matter..."
-                  className="mt-2 w-full resize-y rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full resize-y rounded-lg border border-slate-300 px-4 py-3 text-sm text-navy outline-none transition placeholder:text-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
 
                 <p className="mt-1 text-xs text-slate-400">
@@ -773,7 +773,7 @@ export default function EditMatterPage() {
                       event.target.value
                     )
                   }
-                  className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-navy outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 >
                   <option value="">
                     Select practice area
@@ -797,7 +797,7 @@ export default function EditMatterPage() {
           {/* Client & Status */}
           <section className="rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
             <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Client & Status
               </h2>
 
@@ -831,7 +831,7 @@ export default function EditMatterPage() {
                     )
                   }
                   disabled={loadingClients}
-                  className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none disabled:bg-slate-100 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-navy outline-none disabled:bg-slate-100 focus:border-gold focus:ring-2 focus:ring-gold/30"
                 >
                   <option value="">
                     {loadingClients
@@ -880,7 +880,7 @@ export default function EditMatterPage() {
                       event.target.value
                     )
                   }
-                  className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-navy outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
                 >
                   {statuses.map(
                     (item) => (
@@ -915,7 +915,7 @@ export default function EditMatterPage() {
           {/* Matter Dates */}
           <section className="rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
             <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Matter Dates
               </h2>
             </div>
@@ -926,7 +926,7 @@ export default function EditMatterPage() {
                   Opened
                 </p>
 
-                <p className="mt-2 text-sm font-medium text-slate-900">
+                <p className="mt-2 text-sm font-medium text-navy">
                   {formatDate(
                     matter.openedAt
                   )}
@@ -938,7 +938,7 @@ export default function EditMatterPage() {
                   Closed
                 </p>
 
-                <p className="mt-2 text-sm font-medium text-slate-900">
+                <p className="mt-2 text-sm font-medium text-navy">
                   {formatDate(
                     matter.closedAt
                   )}
@@ -961,7 +961,7 @@ export default function EditMatterPage() {
               <button
                 type="submit"
                 disabled={saving || archiving}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {saving ? (
                   <>

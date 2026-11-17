@@ -1,4 +1,4 @@
-﻿import { notFound, redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 
 import { auth } from "@/auth";
@@ -74,7 +74,7 @@ function statusClasses(status: string) {
       return "bg-emerald-100 text-emerald-700";
 
     case "IN_PROGRESS":
-      return "bg-blue-100 text-blue-700";
+      return "bg-gold/15 text-navy";
 
     case "CANCELLED":
       return "bg-red-100 text-red-700";
@@ -96,7 +96,7 @@ function priorityClasses(priority: string) {
       return "bg-slate-100 text-slate-600";
 
     default:
-      return "bg-blue-100 text-blue-700";
+      return "bg-gold/15 text-navy";
   }
 }
 
@@ -405,7 +405,7 @@ export default async function TaskPage({
         <div className="mb-6">
           <Link
             href="/dashboard/tasks"
-            className="text-sm font-medium text-blue-600 hover:text-blue-800"
+            className="text-sm font-medium text-navy hover:text-navy"
           >
             ← Back to My Work
           </Link>
@@ -422,14 +422,14 @@ export default async function TaskPage({
 
           <div className="mt-2 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1 className="text-3xl font-bold text-navy">
                 {task.title}
               </h1>
 
               {task.matter && (
                 <Link
                   href={`/dashboard/matters/${task.matter.id}`}
-                  className="mt-2 inline-block text-sm font-medium text-blue-600 hover:text-blue-800"
+                  className="mt-2 inline-block text-sm font-medium text-navy hover:text-navy"
                 >
                   {task.matter.referenceNumber}{" "}
                   — {task.matter.title}
@@ -483,7 +483,7 @@ export default async function TaskPage({
 
             <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
 
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 Task Details
               </h2>
 
@@ -512,7 +512,7 @@ export default async function TaskPage({
                       Due Date
                     </p>
 
-                    <p className="mt-1 text-sm font-medium text-slate-900">
+                    <p className="mt-1 text-sm font-medium text-navy">
                       {formatDate(
                         task.dueDate
                       )}
@@ -544,7 +544,7 @@ export default async function TaskPage({
                   {canUpdateTask && (
                     <Link
                       href={`/dashboard/tasks/${task.id}/edit`}
-                      className="rounded-lg bg-slate-900 px-5 py-3 text-sm font-medium text-white hover:bg-slate-800"
+                      className="rounded-lg bg-navy px-5 py-3 text-sm font-medium text-white hover:bg-navy"
                     >
                       Edit Task
                     </Link>
@@ -599,7 +599,7 @@ export default async function TaskPage({
 
             <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
 
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 Assignment
               </h2>
 
@@ -614,7 +614,7 @@ export default async function TaskPage({
 
                   {task.assignedTo ? (
                     <div className="mt-2">
-                      <p className="font-medium text-slate-900">
+                      <p className="font-medium text-navy">
                         {task.assignedTo.name ||
                           "Unnamed user"}
                       </p>
@@ -643,7 +643,7 @@ export default async function TaskPage({
 
                   {task.delegatedBy ? (
                     <div className="mt-2">
-                      <p className="font-medium text-slate-900">
+                      <p className="font-medium text-navy">
                         {task.delegatedBy.name ||
                           "Unnamed user"}
                       </p>
@@ -672,7 +672,7 @@ export default async function TaskPage({
 
                   {task.delegatedOnBehalfOf ? (
                     <div className="mt-2">
-                      <p className="font-medium text-slate-900">
+                      <p className="font-medium text-navy">
                         {task
                           .delegatedOnBehalfOf
                           .name ||
@@ -708,13 +708,13 @@ export default async function TaskPage({
 
             <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
 
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 Created By
               </h2>
 
               <div className="mt-5">
 
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-navy">
                   {task.createdBy.name ||
                     "Unnamed user"}
                 </p>
@@ -734,7 +734,7 @@ export default async function TaskPage({
 
             <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
 
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-navy">
                 Dates
               </h2>
 

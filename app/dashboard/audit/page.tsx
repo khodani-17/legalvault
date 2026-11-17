@@ -70,7 +70,7 @@ function getActionClasses(action: string) {
 
     case "UPDATE":
     case "RESTORE":
-      return "bg-blue-100 text-blue-700";
+      return "bg-gold/15 text-navy";
 
     case "DELETE":
       return "bg-red-100 text-red-700";
@@ -310,12 +310,12 @@ export default async function AuditTrailPage({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-white">
                   <ShieldCheck className="h-6 w-6" />
                 </div>
 
                 <div>
-                  <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+                  <h1 className="text-3xl font-bold tracking-tight text-navy">
                     Audit Trail
                   </h1>
 
@@ -341,7 +341,7 @@ export default async function AuditTrailPage({
 
           <div className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-navy">
                 <Activity className="h-5 w-5" />
               </div>
 
@@ -350,7 +350,7 @@ export default async function AuditTrailPage({
                   Total Activity
                 </p>
 
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-navy">
                   {totalLogs}
                 </p>
               </div>
@@ -368,7 +368,7 @@ export default async function AuditTrailPage({
                   Current User
                 </p>
 
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-navy">
                   {session.user.name || session.user.email}
                 </p>
               </div>
@@ -386,7 +386,7 @@ export default async function AuditTrailPage({
                   Records Per Page
                 </p>
 
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-navy">
                   {PAGE_SIZE}
                 </p>
               </div>
@@ -400,7 +400,7 @@ export default async function AuditTrailPage({
           <div className="mb-4 flex items-center gap-2">
             <Filter className="h-5 w-5 text-slate-600" />
 
-            <h2 className="font-semibold text-slate-900">
+            <h2 className="font-semibold text-navy">
               Filter Activity
             </h2>
           </div>
@@ -424,7 +424,7 @@ export default async function AuditTrailPage({
                 type="text"
                 defaultValue={search}
                 placeholder="User, description, entity..."
-                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
             </div>
 
@@ -440,7 +440,7 @@ export default async function AuditTrailPage({
                 id="action"
                 name="action"
                 defaultValue={action}
-                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               >
                 <option value="">All Actions</option>
 
@@ -464,7 +464,7 @@ export default async function AuditTrailPage({
                 id="entityType"
                 name="entityType"
                 defaultValue={entityType}
-                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               >
                 <option value="">All Entities</option>
 
@@ -492,7 +492,7 @@ export default async function AuditTrailPage({
                 name="from"
                 type="date"
                 defaultValue={from}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
             </div>
 
@@ -509,14 +509,14 @@ export default async function AuditTrailPage({
                 name="to"
                 type="date"
                 defaultValue={to}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
             </div>
 
             <div className="flex items-end gap-2 md:col-span-2 lg:col-span-5">
               <button
                 type="submit"
-                className="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                className="rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-navy"
               >
                 Apply Filters
               </button>
@@ -536,7 +536,7 @@ export default async function AuditTrailPage({
 
           <div className="border-b border-slate-200 px-6 py-5">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Activity Log
               </h2>
 
@@ -558,7 +558,7 @@ export default async function AuditTrailPage({
             <div className="px-6 py-16 text-center">
               <ShieldCheck className="mx-auto h-12 w-12 text-slate-300" />
 
-              <h3 className="mt-4 text-lg font-semibold text-slate-900">
+              <h3 className="mt-4 text-lg font-semibold text-navy">
                 No audit activity found
               </h3>
 
@@ -609,7 +609,7 @@ export default async function AuditTrailPage({
                       {/* USER */}
                       <td className="px-6 py-4">
                         <div>
-                          <p className="text-sm font-semibold text-slate-900">
+                          <p className="text-sm font-semibold text-navy">
                             {log.user.name}
                           </p>
 
@@ -672,7 +672,7 @@ export default async function AuditTrailPage({
                       <td className="px-6 py-4">
 
                         <details className="group min-w-[180px]">
-                          <summary className="cursor-pointer list-none text-sm font-semibold text-blue-700 transition hover:text-blue-900">
+                          <summary className="cursor-pointer list-none text-sm font-semibold text-navy transition hover:text-navy">
                             <span className="group-open:hidden">
                               View Details
                             </span>
@@ -739,7 +739,7 @@ export default async function AuditTrailPage({
                                 </p>
 
                                 {log.metadata ? (
-                                  <pre className="mt-1 max-h-64 overflow-auto rounded-md bg-slate-900 p-3 text-[11px] leading-relaxed text-slate-100">
+                                  <pre className="mt-1 max-h-64 overflow-auto rounded-md bg-navy p-3 text-[11px] leading-relaxed text-slate-100">
                                     {JSON.stringify(
                                       log.metadata,
                                       null,

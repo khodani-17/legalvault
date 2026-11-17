@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { generateReferenceNumber } from "@/lib/reference-counter";
 import { createAuditLog } from "@/lib/audit";
 import { requirePermission } from "@/lib/permissions-server";
 
@@ -95,84 +96,38 @@ export async function POST(request: Request) {
     }
 
     // ----------------------------------------------------------
-    // 5. Generate client reference number
-    //
-    // Example:
-    // CL-2026-000001
-    // CL-2026-000002
+    // ----------------------------------------------------------
+    // 5. Generate reference and create client atomically
     // ----------------------------------------------------------
 
-    const currentYear =
-      new Date().getFullYear();
+    const client = await prisma.$transaction(
+      async (tx) => {
+        const referenceNumber =
+          await generateReferenceNumber(
+            tx,
+            user.firmId!,
+            "CLIENT",
+          );
 
-    const lastClient =
-      await prisma.client.findFirst({
-        where: {
-          firmId: user.firmId,
-          referenceNumber: {
-            startsWith:
-              `CL-${currentYear}-`,
+        return tx.client.create({
+          data: {
+            firmId: user.firmId!,
+            referenceNumber,
+            type: clientType,
+            name: name.trim(),
+            email: email?.trim() || null,
+            phone: phone?.trim() || null,
+            idNumber: idNumber?.trim() || null,
+            address: address?.trim() || null,
+            notes: notes?.trim() || null,
           },
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-        select: {
-          referenceNumber: true,
-        },
-      });
-
-    let nextNumber = 1;
-
-    if (lastClient?.referenceNumber) {
-      const parts =
-        lastClient.referenceNumber.split("-");
-
-      const lastNumber =
-        Number(parts[2]);
-
-      if (!Number.isNaN(lastNumber)) {
-        nextNumber =
-          lastNumber + 1;
-      }
-    }
-
-    const referenceNumber =
-      `CL-${currentYear}-${String(
-        nextNumber,
-      ).padStart(6, "0")}`;
-
-    // ----------------------------------------------------------
-    // 6. Create client
-    // ----------------------------------------------------------
-
-    const client =
-      await prisma.client.create({
-        data: {
-          firmId: user.firmId,
-
-          referenceNumber,
-
-          type: clientType,
-
-          name: name.trim(),
-
-          email:
-            email?.trim() || null,
-
-          phone:
-            phone?.trim() || null,
-
-          idNumber:
-            idNumber?.trim() || null,
-
-          address:
-            address?.trim() || null,
-
-          notes:
-            notes?.trim() || null,
-        },
-      });
+        });
+      },
+      {
+        maxWait: 10000,
+        timeout: 20000,
+      },
+    );
 
     // ----------------------------------------------------------
     // 7. Create audit log

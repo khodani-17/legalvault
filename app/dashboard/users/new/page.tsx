@@ -186,7 +186,7 @@ export default function NewUserPage() {
             Administration
           </p>
 
-          <h1 className="mt-2 text-3xl font-bold text-slate-900">
+          <h1 className="mt-2 text-3xl font-bold text-navy">
             Add User
           </h1>
 
@@ -212,7 +212,7 @@ export default function NewUserPage() {
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Account Information
             </h2>
 
@@ -356,7 +356,7 @@ export default function NewUserPage() {
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Access & Permissions
             </h2>
 
@@ -452,7 +452,7 @@ export default function NewUserPage() {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-xl bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60"
             >
               {saving
                 ? "Creating User..."

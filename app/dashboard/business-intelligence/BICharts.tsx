@@ -110,7 +110,7 @@ export default function BICharts({
         {/* Matter Status */}
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-5">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Matter Status
             </h2>
 
@@ -154,7 +154,7 @@ export default function BICharts({
         {/* Client Distribution */}
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-5">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="text-lg font-semibold text-navy">
               Client Distribution
             </h2>
 
@@ -200,7 +200,7 @@ export default function BICharts({
           <div className="mb-5">
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-slate-900">
+                <h2 className="text-lg font-semibold text-navy">
                   Firm Activity
                 </h2>
 
@@ -210,7 +210,7 @@ export default function BICharts({
                 </p>
               </div>
 
-              <div className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+              <div className="rounded-full bg-gold/10 px-3 py-1 text-xs font-medium text-navy">
                 6-Month Rolling
               </div>
             </div>
@@ -291,7 +291,7 @@ export default function BICharts({
       {/* Staff Performance */}
       <div>
         <div className="mb-4">
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-navy">
             Staff Performance &amp; Workload
           </h2>
 
@@ -305,7 +305,7 @@ export default function BICharts({
           {/* Staff workload */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="mb-5">
-              <h3 className="text-lg font-semibold text-slate-900">
+              <h3 className="text-lg font-semibold text-navy">
                 Staff Workload
               </h3>
 
@@ -382,7 +382,7 @@ export default function BICharts({
           {/* Priority workload */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="mb-5">
-              <h3 className="text-lg font-semibold text-slate-900">
+              <h3 className="text-lg font-semibold text-navy">
                 Priority Workload
               </h3>
 
@@ -452,7 +452,7 @@ export default function BICharts({
           {/* Deadline workload */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm xl:col-span-2">
             <div className="mb-5">
-              <h3 className="text-lg font-semibold text-slate-900">
+              <h3 className="text-lg font-semibold text-navy">
                 Staff Deadline Workload
               </h3>
 

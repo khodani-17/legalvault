@@ -92,7 +92,7 @@ export default function UploadVersionForm({
       {/* ================================================= */}
 
       <div>
-        <h2 className="text-xl font-bold text-slate-900">
+        <h2 className="text-xl font-bold text-navy">
           Upload New Version
         </h2>
 
@@ -106,12 +106,12 @@ export default function UploadVersionForm({
       {/* CURRENT VERSION */}
       {/* ================================================= */}
 
-      <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50 p-4">
-        <p className="text-sm font-medium text-blue-900">
+      <div className="mt-5 rounded-xl border border-gold/20 bg-gold/10 p-4">
+        <p className="text-sm font-medium text-navy">
           Current version
         </p>
 
-        <p className="mt-1 text-lg font-bold text-blue-700">
+        <p className="mt-1 text-lg font-bold text-navy">
           Version {currentVersion}
         </p>
       </div>
@@ -171,7 +171,7 @@ export default function UploadVersionForm({
 
           {file && (
             <div className="mt-3 rounded-lg bg-slate-50 p-3">
-              <p className="text-sm font-medium text-slate-900">
+              <p className="text-sm font-medium text-navy">
                 {file.name}
               </p>
 
@@ -203,7 +203,7 @@ export default function UploadVersionForm({
             disabled={uploading}
             rows={4}
             placeholder="Describe what changed in this version..."
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-50"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-navy outline-none placeholder:text-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:cursor-not-allowed disabled:bg-slate-50"
           />
         </div>
 
@@ -215,7 +215,7 @@ export default function UploadVersionForm({
           <button
             type="submit"
             disabled={uploading || !file}
-            className="rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
           >
             {uploading
               ? "Uploading..."

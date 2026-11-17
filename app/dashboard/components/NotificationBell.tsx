@@ -247,7 +247,7 @@ export default function NotificationBell() {
         <div className="absolute right-0 z-50 mt-2 w-96 max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
           <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">
+              <h2 className="text-sm font-semibold text-navy">
                 Notifications
               </h2>
 
@@ -360,13 +360,13 @@ export default function NotificationBell() {
                         className={`block h-2.5 w-2.5 rounded-full ${
                           notification.isRead
                             ? "bg-slate-300"
-                            : "bg-blue-600"
+                            : "bg-navy"
                         }`}
                       />
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-slate-900">
+                      <p className="text-sm font-semibold text-navy">
                         {notification.title}
                       </p>
 
@@ -389,7 +389,7 @@ export default function NotificationBell() {
                             notification.id,
                           )
                         }
-                        className="shrink-0 self-start rounded-md px-2 py-1 text-xs font-medium text-blue-700 hover:bg-blue-100"
+                        className="shrink-0 self-start rounded-md px-2 py-1 text-xs font-medium text-navy hover:bg-gold/15"
                       >
                         Read
                       </button>

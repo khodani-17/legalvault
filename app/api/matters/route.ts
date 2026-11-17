@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { createAuditLog } from "@/lib/audit";
 import { requirePermission } from "@/lib/permissions-server";
 import { canAccessAllFirmMatters } from "@/lib/matter-access";
+import { LEGAL_PRACTICE_AREAS } from "@/lib/legal-classifications";
 
 // =====================================================
 // GET /api/matters
@@ -68,6 +69,8 @@ export async function GET(request: Request) {
           id: true,
           referenceNumber: true,
           title: true,
+          practiceArea: true,
+          matterType: true,
           status: true,
           client: {
             select: {
@@ -206,6 +209,10 @@ export async function POST(
       body.practiceArea || "",
     ).trim();
 
+    const matterType = String(
+      body.matterType || "",
+    ).trim();
+
     const status = String(
       body.status || "OPEN",
     ).trim();
@@ -237,6 +244,29 @@ export async function POST(
     // --------------------------------------------------
     // 5. Validate matter status
     // --------------------------------------------------
+
+    if (
+      !practiceArea ||
+      !Object.prototype.hasOwnProperty.call(
+        LEGAL_PRACTICE_AREAS,
+        practiceArea,
+      )
+    ) {
+      return NextResponse.json(
+        { error: "Please select a valid practice area." },
+        { status: 400 },
+      );
+    }
+
+    if (
+      !matterType ||
+      !LEGAL_PRACTICE_AREAS[practiceArea].includes(matterType)
+    ) {
+      return NextResponse.json(
+        { error: "Please select a valid matter type." },
+        { status: 400 },
+      );
+    }
 
     const validStatuses = [
       "OPEN",
@@ -369,6 +399,7 @@ export async function POST(
                   description || null,
                 practiceArea:
                   practiceArea || null,
+                matterType: matterType || null,
                 status:
                   status as
                     | "OPEN"
@@ -444,6 +475,7 @@ export async function POST(
           matter.description,
         practiceArea:
           matter.practiceArea,
+        matterType: matter.matterType,
         status: matter.status,
         clientId: client.id,
         clientReferenceNumber:

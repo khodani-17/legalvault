@@ -75,7 +75,7 @@ function getTaskStatusClasses(status: string) {
       return "bg-green-100 text-green-700";
 
     case "IN_PROGRESS":
-      return "bg-blue-100 text-blue-700";
+      return "bg-gold/15 text-navy";
 
     case "PENDING":
       return "bg-yellow-100 text-yellow-700";
@@ -196,7 +196,7 @@ export default async function MatterPage({
         <div className="mb-6">
           <Link
             href="/dashboard/matters"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-blue-700"
+            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-navy"
           >
             ← Back to Matters
           </Link>
@@ -228,7 +228,7 @@ export default async function MatterPage({
 
                 </div>
 
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+                <h1 className="text-3xl font-bold tracking-tight text-navy">
                   {matter.title}
                 </h1>
 
@@ -279,7 +279,7 @@ export default async function MatterPage({
 
               <Link
                 href={`/dashboard/clients/${matter.client.id}`}
-                className="mt-2 block font-semibold text-slate-900 hover:text-blue-700"
+                className="mt-2 block font-semibold text-navy hover:text-navy"
               >
                 {matter.client.name}
               </Link>
@@ -296,7 +296,7 @@ export default async function MatterPage({
                 Practice Area
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {matter.practiceArea || "Not specified"}
               </p>
 
@@ -308,7 +308,7 @@ export default async function MatterPage({
                 Opened
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {formatDate(matter.openedAt)}
               </p>
 
@@ -320,7 +320,7 @@ export default async function MatterPage({
                 Closed
               </p>
 
-              <p className="mt-2 font-semibold text-slate-900">
+              <p className="mt-2 font-semibold text-navy">
                 {formatDate(matter.closedAt)}
               </p>
 
@@ -337,7 +337,7 @@ export default async function MatterPage({
 
           <div className="mb-4">
 
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-lg font-bold text-navy">
               Matter Description
             </h2>
 
@@ -389,7 +389,7 @@ export default async function MatterPage({
               Assigned Users
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-slate-900">
+            <p className="mt-2 text-3xl font-bold text-navy">
               {matter.users.length}
             </p>
 
@@ -401,7 +401,7 @@ export default async function MatterPage({
               Documents
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-slate-900">
+            <p className="mt-2 text-3xl font-bold text-navy">
               {matter.documents.length}
             </p>
 
@@ -413,7 +413,7 @@ export default async function MatterPage({
               Tasks
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-slate-900">
+            <p className="mt-2 text-3xl font-bold text-navy">
               {matter.tasks.length}
             </p>
 
@@ -425,7 +425,7 @@ export default async function MatterPage({
               Folders
             </p>
 
-            <p className="mt-2 text-3xl font-bold text-slate-900">
+            <p className="mt-2 text-3xl font-bold text-navy">
               {matter.folders.length}
             </p>
 
@@ -455,7 +455,7 @@ export default async function MatterPage({
 
                 <div>
 
-                  <h2 className="text-lg font-bold text-slate-900">
+                  <h2 className="text-lg font-bold text-navy">
                     Documents
                   </h2>
 
@@ -468,7 +468,7 @@ export default async function MatterPage({
                 {canUploadDocument && (
                   <Link
                     href={`/dashboard/documents/new?matterId=${matter.id}`}
-                    className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+                    className="rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white transition hover:bg-navy"
                   >
                     + Upload
                   </Link>
@@ -483,7 +483,7 @@ export default async function MatterPage({
                     📄
                   </div>
 
-                  <h3 className="mt-4 font-semibold text-slate-900">
+                  <h3 className="mt-4 font-semibold text-navy">
                     No documents
                   </h3>
 
@@ -494,7 +494,7 @@ export default async function MatterPage({
                   {canUploadDocument && (
                     <Link
                       href={`/dashboard/documents/new?matterId=${matter.id}`}
-                      className="mt-4 inline-flex rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
+                      className="mt-4 inline-flex rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-navy"
                     >
                       Upload Document
                     </Link>
@@ -514,7 +514,7 @@ export default async function MatterPage({
 
                       <div className="min-w-0">
 
-                        <p className="truncate font-semibold text-slate-900">
+                        <p className="truncate font-semibold text-navy">
                           {document.name}
                         </p>
 
@@ -547,7 +547,7 @@ export default async function MatterPage({
 
                 <div>
 
-                  <h2 className="text-lg font-bold text-slate-900">
+                  <h2 className="text-lg font-bold text-navy">
                     Tasks
                   </h2>
 
@@ -560,7 +560,7 @@ export default async function MatterPage({
                 {canCreateTask && (
                   <Link
                     href={`/dashboard/tasks/new?matterId=${matter.id}`}
-                    className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+                    className="rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white transition hover:bg-navy"
                   >
                     + Task
                   </Link>
@@ -575,7 +575,7 @@ export default async function MatterPage({
                     ✓
                   </div>
 
-                  <h3 className="mt-4 font-semibold text-slate-900">
+                  <h3 className="mt-4 font-semibold text-navy">
                     No tasks
                   </h3>
 
@@ -586,7 +586,7 @@ export default async function MatterPage({
                   {canCreateTask && (
                     <Link
                       href={`/dashboard/tasks/new?matterId=${matter.id}`}
-                      className="mt-4 inline-flex rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
+                      className="mt-4 inline-flex rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-navy"
                     >
                       Create Task
                     </Link>
@@ -608,7 +608,7 @@ export default async function MatterPage({
 
                         <div className="min-w-0">
 
-                          <p className="font-semibold text-slate-900">
+                          <p className="font-semibold text-navy">
                             {task.title}
                           </p>
 
@@ -649,7 +649,7 @@ export default async function MatterPage({
 
               <div className="mb-6">
 
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-navy">
                   Matter Folders
                 </h2>
 
@@ -691,7 +691,7 @@ export default async function MatterPage({
 
               <div className="mb-5">
 
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-navy">
                   Client
                 </h2>
 
@@ -703,7 +703,7 @@ export default async function MatterPage({
 
               <div className="rounded-xl bg-slate-50 p-4">
 
-                <p className="font-semibold text-slate-900">
+                <p className="font-semibold text-navy">
                   {matter.client.name}
                 </p>
 
@@ -727,7 +727,7 @@ export default async function MatterPage({
 
               <Link
                 href={`/dashboard/clients/${matter.client.id}`}
-                className="mt-4 block text-center text-sm font-semibold text-blue-700 hover:text-blue-900"
+                className="mt-4 block text-center text-sm font-semibold text-navy hover:text-navy"
               >
                 View Client →
               </Link>
@@ -740,7 +740,7 @@ export default async function MatterPage({
 
             <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
 
-              <h2 className="text-lg font-bold text-slate-900">
+              <h2 className="text-lg font-bold text-navy">
                 Matter Information
               </h2>
 

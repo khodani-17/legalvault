@@ -100,7 +100,7 @@ function getPriorityClass(priority: IntakePriority) {
     case "HIGH":
       return "bg-orange-100 text-orange-700 border-orange-200";
     case "MEDIUM":
-      return "bg-blue-100 text-blue-700 border-blue-200";
+      return "bg-gold/15 text-navy border-gold/30";
     case "LOW":
       return "bg-gray-100 text-gray-600 border-gray-200";
   }
@@ -121,7 +121,7 @@ function getStatusClass(status: IntakeStatus) {
     case "CLOSED":
       return "bg-gray-100 text-gray-600";
     default:
-      return "bg-blue-100 text-blue-700";
+      return "bg-gold/15 text-navy";
   }
 }
 
@@ -274,10 +274,10 @@ export default function IntakePage() {
                   Dashboard
                 </Link>
                 <span>/</span>
-                <span className="text-gray-900">Legal Intake</span>
+                <span className="text-navy">Legal Intake</span>
               </div>
 
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+              <h1 className="text-2xl font-bold tracking-tight text-navy">
                 Legal Intake Centre
               </h1>
 
@@ -312,7 +312,7 @@ export default function IntakePage() {
 
               <Link
                 href="/dashboard/intake/new"
-                className="inline-flex items-center justify-center rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-800"
+                className="inline-flex items-center justify-center rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy"
               >
                 <svg
                   className="mr-2 h-5 w-5"
@@ -343,12 +343,12 @@ export default function IntakePage() {
                 <p className="text-sm font-medium text-gray-500">
                   Total Intakes
                 </p>
-                <p className="mt-2 text-3xl font-bold text-gray-900">
+                <p className="mt-2 text-3xl font-bold text-navy">
                   {loading ? "—" : pagination.total}
                 </p>
               </div>
 
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gold/10 text-navy">
                 <svg
                   className="h-6 w-6"
                   fill="none"
@@ -372,7 +372,7 @@ export default function IntakePage() {
                 <p className="text-sm font-medium text-gray-500">
                   Conflict Checks
                 </p>
-                <p className="mt-2 text-3xl font-bold text-gray-900">
+                <p className="mt-2 text-3xl font-bold text-navy">
                   {loading
                     ? "—"
                     : intakes.filter(
@@ -407,7 +407,7 @@ export default function IntakePage() {
                 <p className="text-sm font-medium text-gray-500">
                   Needs Review
                 </p>
-                <p className="mt-2 text-3xl font-bold text-gray-900">
+                <p className="mt-2 text-3xl font-bold text-navy">
                   {loading
                     ? "—"
                     : intakes.filter(
@@ -444,7 +444,7 @@ export default function IntakePage() {
                 <p className="text-sm font-medium text-gray-500">
                   High Priority
                 </p>
-                <p className="mt-2 text-3xl font-bold text-gray-900">
+                <p className="mt-2 text-3xl font-bold text-navy">
                   {loading
                     ? "—"
                     : intakes.filter(
@@ -506,7 +506,7 @@ export default function IntakePage() {
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder="Search client name, email, phone..."
-                  className="w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                  className="w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-navy outline-none transition placeholder:text-gray-400 focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
                 />
               </div>
             </div>
@@ -523,7 +523,7 @@ export default function IntakePage() {
                 id="status"
                 value={status}
                 onChange={(event) => setStatus(event.target.value)}
-                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-navy outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
               >
                 <option value="">All statuses</option>
                 {Object.entries(statusLabels).map(([value, label]) => (
@@ -546,7 +546,7 @@ export default function IntakePage() {
                 id="priority"
                 value={priority}
                 onChange={(event) => setPriority(event.target.value)}
-                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-navy outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
               >
                 <option value="">All priorities</option>
                 <option value="URGENT">Urgent</option>
@@ -607,7 +607,7 @@ export default function IntakePage() {
           <div className="border-b border-gray-200 px-5 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-semibold text-gray-900">
+                <h2 className="font-semibold text-navy">
                   Legal Enquiries
                 </h2>
                 <p className="mt-1 text-sm text-gray-500">
@@ -653,7 +653,7 @@ export default function IntakePage() {
                 </svg>
               </div>
 
-              <h3 className="mt-4 text-lg font-semibold text-gray-900">
+              <h3 className="mt-4 text-lg font-semibold text-navy">
                 No legal intakes found
               </h3>
 
@@ -674,7 +674,7 @@ export default function IntakePage() {
               ) : (
                 <Link
                   href="/dashboard/intake/new"
-                  className="mt-5 inline-flex rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-800"
+                  className="mt-5 inline-flex rounded-lg bg-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy"
                 >
                   Create first intake
                 </Link>
@@ -722,7 +722,7 @@ export default function IntakePage() {
                       >
                         <td className="whitespace-nowrap px-5 py-4">
                           <div>
-                            <p className="font-semibold text-gray-900">
+                            <p className="font-semibold text-navy">
                               {intake.prospectiveClientName}
                             </p>
 
@@ -816,7 +816,7 @@ export default function IntakePage() {
                   <div key={intake.id} className="p-5">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <h3 className="font-semibold text-gray-900">
+                        <h3 className="font-semibold text-navy">
                           {intake.prospectiveClientName}
                         </h3>
 
@@ -932,10 +932,10 @@ export default function IntakePage() {
         </div>
 
         {/* Information panel */}
-        <div className="mt-6 rounded-xl border border-blue-100 bg-blue-50 p-5">
+        <div className="mt-6 rounded-xl border border-gold/20 bg-gold/10 p-5">
           <div className="flex items-start gap-3">
             <svg
-              className="mt-0.5 h-5 w-5 shrink-0 text-blue-600"
+              className="mt-0.5 h-5 w-5 shrink-0 text-navy"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -949,11 +949,11 @@ export default function IntakePage() {
             </svg>
 
             <div>
-              <h3 className="text-sm font-semibold text-blue-900">
+              <h3 className="text-sm font-semibold text-navy">
                 Conflict checking is an assisted review process
               </h3>
 
-              <p className="mt-1 text-sm leading-6 text-blue-800">
+              <p className="mt-1 text-sm leading-6 text-navy">
                 LegalVault identifies potential matches across the firm&apos;s
                 clients and matters. A potential match should be reviewed by
                 an authorised person before the prospective client is

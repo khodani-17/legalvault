@@ -2,6 +2,10 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  LEGAL_PRACTICE_AREAS,
+  PRACTICE_AREA_NAMES,
+} from "@/lib/legal-classifications";
 
 type Client = {
   id: string;
@@ -22,6 +26,7 @@ export default function NewMatterPage() {
     title: "",
     description: "",
     practiceArea: "",
+    matterType: "",
     status: "OPEN",
   });
 
@@ -115,7 +120,7 @@ export default function NewMatterPage() {
             Matter Management
           </p>
 
-          <h1 className="mt-1 text-3xl font-bold text-slate-900">
+          <h1 className="mt-1 text-3xl font-bold text-navy">
             Create Matter
           </h1>
 
@@ -152,7 +157,7 @@ export default function NewMatterPage() {
                   )
                 }
                 disabled={loadingClients}
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 disabled:bg-slate-100"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold disabled:bg-slate-100"
               >
                 <option value="">
                   {loadingClients
@@ -180,65 +185,56 @@ export default function NewMatterPage() {
 
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-700">
-                Practice Area
+                Practice Area *
               </label>
 
               <select
+                required
                 value={form.practiceArea}
                 onChange={(event) =>
-                  updateField(
-                    "practiceArea",
-                    event.target.value
-                  )
+                  setForm((current) => ({
+                    ...current,
+                    practiceArea: event.target.value,
+                    matterType: "",
+                  }))
                 }
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               >
-                <option value="">
-                  Select practice area
-                </option>
+                <option value="">Select practice area</option>
 
-                <option value="Civil Litigation">
-                  Civil Litigation
-                </option>
-
-                <option value="Criminal Law">
-                  Criminal Law
-                </option>
-
-                <option value="Family Law">
-                  Family Law
-                </option>
-
-                <option value="Commercial Law">
-                  Commercial Law
-                </option>
-
-                <option value="Labour Law">
-                  Labour Law
-                </option>
-
-                <option value="Property Law">
-                  Property Law
-                </option>
-
-                <option value="Mining Law">
-                  Mining Law
-                </option>
-
-                <option value="Tax Law">
-                  Tax Law
-                </option>
-
-                <option value="Personal Injury">
-                  Personal Injury
-                </option>
-
-                <option value="Other">
-                  Other
-                </option>
+                {PRACTICE_AREA_NAMES.map((area) => (
+                  <option key={area} value={area}>
+                    {area}
+                  </option>
+                ))}
               </select>
             </div>
 
+            <div>
+              <label className="mb-2 block text-sm font-medium text-slate-700">
+                Matter Type *
+              </label>
+
+              <select
+                required
+                value={form.matterType}
+                disabled={!form.practiceArea}
+                onChange={(event) =>
+                  updateField("matterType", event.target.value)
+                }
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold disabled:bg-slate-100"
+              >
+                <option value="">Select matter type</option>
+
+                {(LEGAL_PRACTICE_AREAS[form.practiceArea] || []).map(
+                  (type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-medium text-slate-700">
                 Matter Title *
@@ -254,7 +250,7 @@ export default function NewMatterPage() {
                   )
                 }
                 placeholder="e.g. Smith v ABC (Pty) Ltd"
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               />
             </div>
 
@@ -271,7 +267,7 @@ export default function NewMatterPage() {
                     event.target.value
                   )
                 }
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
               >
                 <option value="OPEN">
                   Open
@@ -310,7 +306,7 @@ export default function NewMatterPage() {
                 )
               }
               placeholder="Brief description of the legal matter..."
-              className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
+              className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-gold"
             />
           </div>
 
@@ -331,7 +327,7 @@ export default function NewMatterPage() {
                 loadingClients ||
                 clients.length === 0
               }
-              className="rounded-lg bg-slate-900 px-6 py-3 font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-navy px-6 py-3 font-medium text-white hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading
                 ? "Creating..."
